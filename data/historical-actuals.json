@@ -1,0 +1,6347 @@
+[
+  {
+    "fiuId": "YES_BANK_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 62363.5,
+    "auCount": 124727,
+    "dfCount": 277716,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "MOBIKWIK_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 95293.75,
+    "auCount": 381175,
+    "dfCount": 5962499,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "DEZERV_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 20453.5,
+    "auCount": 81814,
+    "dfCount": 5952479,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "fiulive@motilaloswal",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 40655.4,
+    "auCount": 67759,
+    "dfCount": 7500547,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "JFS_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 42887.5,
+    "auCount": 171550,
+    "dfCount": 2702822,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "Paisabazaar-FIU-LIVE",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 5252.5,
+    "auCount": 21010,
+    "dfCount": 129853,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "fiulive@onepercentclub",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 18819,
+    "auCount": 18819,
+    "dfCount": 1398328,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "poonawala-fincorp-limited",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 68146.5,
+    "auCount": 42866,
+    "dfCount": 47264,
+    "billingYield": 1.44
+  },
+  {
+    "fiuId": "fiulive@angelone",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 200,
+    "auCount": 200,
+    "dfCount": 15977,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "VASTU_HF_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 1689,
+    "auCount": 1310,
+    "dfCount": 2815,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "richman-fincap",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 5878.48,
+    "auCount": 6416,
+    "dfCount": 11769,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "fiulive@niyogin",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 11681,
+    "auCount": 51355,
+    "dfCount": 58405,
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "FINCORP-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 63680,
+    "auCount": 37538,
+    "dfCount": 63680,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "SNAPMINT_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 50639.4,
+    "auCount": 54528,
+    "dfCount": 72342,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "SI_CREVA_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 114060.15,
+    "auCount": 166677,
+    "dfCount": 216375,
+    "billingYield": 0.53
+  },
+  {
+    "fiuId": "sbilife-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 49.4,
+    "auCount": 33,
+    "dfCount": 38,
+    "billingYield": 1.3
+  },
+  {
+    "fiuId": "SBFC_PROD_FIUID",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 25956,
+    "auCount": 6388,
+    "dfCount": 8652,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "sayyam-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 14958,
+    "auCount": 14896,
+    "dfCount": 14958,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "SARVAGRAM_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 1368.75,
+    "auCount": 902,
+    "dfCount": 1095,
+    "billingYield": 1.25
+  },
+  {
+    "fiuId": "inprime-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 6114,
+    "auCount": 3308,
+    "dfCount": 6114,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "policybazaar-prod",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 40968,
+    "auCount": 9941,
+    "dfCount": 10242,
+    "billingYield": 4
+  },
+  {
+    "fiuId": "PiramalFinance-FIU",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 91580,
+    "auCount": 14268,
+    "dfCount": 22895,
+    "billingYield": 4
+  },
+  {
+    "fiuId": "OPTIMO_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 904.95,
+    "auCount": 737,
+    "dfCount": 1831,
+    "billingYield": 0.49
+  },
+  {
+    "fiuId": "NESFB_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 245874.75,
+    "auCount": 394345,
+    "dfCount": 467044,
+    "billingYield": 0.53
+  },
+  {
+    "fiuId": "snapmint",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 124,
+    "auCount": 231,
+    "dfCount": 248,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "MONEYVIEW_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 23085.6,
+    "auCount": 41409,
+    "dfCount": 44638,
+    "billingYield": 0.52
+  },
+  {
+    "fiuId": "fiulive@jiraaf",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 871,
+    "auCount": 871,
+    "dfCount": 871,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@crest",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 19874,
+    "auCount": 62,
+    "dfCount": 19874,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "KHATABOOK_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 15766.8,
+    "auCount": 14093,
+    "dfCount": 26278,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "kbnbfc-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 338348,
+    "auCount": 314703,
+    "dfCount": 338348,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@puneestock",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 194,
+    "auCount": 9,
+    "dfCount": 194,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@indiabulls",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 2494,
+    "auCount": 593,
+    "dfCount": 1247,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "ICICI-FIU",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 203261.7,
+    "auCount": 440433,
+    "dfCount": 787945,
+    "billingYield": 0.26
+  },
+  {
+    "fiuId": "HINDUJA_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 4675.3,
+    "auCount": 6053,
+    "dfCount": 6679,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "GROWW_NBT_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 157285.35,
+    "auCount": 174230,
+    "dfCount": 2292048,
+    "billingYield": 0.07
+  },
+  {
+    "fiuId": "fiulive@vridhihomefinance",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 1584.75,
+    "auCount": 1574,
+    "dfCount": 2113,
+    "billingYield": 0.75
+  },
+  {
+    "fiuId": "fiulive@orimadvisors",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 7593,
+    "auCount": 13,
+    "dfCount": 7593,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@upmovecapital",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 10908,
+    "auCount": 2949,
+    "dfCount": 3636,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@skfin",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 21302.8,
+    "auCount": 9399,
+    "dfCount": 11212,
+    "billingYield": 1.9
+  },
+  {
+    "fiuId": "fiulive@sigfyninvestment",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 5750,
+    "auCount": 575,
+    "dfCount": 26980,
+    "billingYield": 10
+  },
+  {
+    "fiuId": "fiulive@shreem",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 16500,
+    "auCount": 3300,
+    "dfCount": 171001,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@savefin",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 333,
+    "auCount": 81,
+    "dfCount": 111,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@save",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 1335,
+    "auCount": 316,
+    "dfCount": 445,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@sampathi",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 5026,
+    "auCount": 769,
+    "dfCount": 2513,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@rkbfinance",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 70324,
+    "auCount": 230128,
+    "dfCount": 281296,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "fiulive@respo",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 2415,
+    "auCount": 3153,
+    "dfCount": 3220,
+    "billingYield": 0.75
+  },
+  {
+    "fiuId": "fiulive@coinwise",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 109,
+    "auCount": 109,
+    "dfCount": 24458,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@paytmmoney",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 117,
+    "auCount": 117,
+    "dfCount": 6711,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@paymeindia",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 2406,
+    "auCount": 729,
+    "dfCount": 802,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@nobias",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 350,
+    "auCount": 50,
+    "dfCount": 2854,
+    "billingYield": 7
+  },
+  {
+    "fiuId": "fiulive@namdev",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 1224,
+    "auCount": 306,
+    "dfCount": 408,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "JOHNDEERE-FIU",
+    "month": "2026-04",
+    "billingModel": "",
+    "revenue": 1128,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "fiulive@nuinvestors",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 213420,
+    "auCount": 10671,
+    "dfCount": 703120,
+    "billingYield": 20
+  },
+  {
+    "fiuId": "fiulive@moneycontrol",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 160000,
+    "auCount": 87903,
+    "dfCount": 4448814,
+    "billingYield": 0.04
+  },
+  {
+    "fiuId": "fiulive@lenditt",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 18900,
+    "auCount": 12433,
+    "dfCount": 18900,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@kotaksec",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 2261,
+    "auCount": 2261,
+    "dfCount": 89080,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@knab",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 2556,
+    "auCount": 371,
+    "dfCount": 852,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@jupitermoney",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 303554,
+    "auCount": 303554,
+    "dfCount": 13091406,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@juliusbaer",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 240,
+    "auCount": 240,
+    "dfCount": 8432,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@indmoneysb",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 107726.3,
+    "auCount": 122907,
+    "dfCount": 1408666,
+    "billingYield": 0.08
+  },
+  {
+    "fiuId": "fiulive@hexawealth",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 690,
+    "auCount": 230,
+    "dfCount": 17762,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@hdfcsecurities",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 2769,
+    "auCount": 2769,
+    "dfCount": 102290,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@hdfclife",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 3732,
+    "auCount": 952,
+    "dfCount": 1244,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@goalteller",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 7247.1,
+    "auCount": 136,
+    "dfCount": 4263,
+    "billingYield": 1.7
+  },
+  {
+    "fiuId": "fiulive@fwfintech",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 21000,
+    "auCount": 2625,
+    "dfCount": 208449,
+    "billingYield": 8
+  },
+  {
+    "fiuId": "fiulive@fundsindia",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 16188,
+    "auCount": 8094,
+    "dfCount": 2601803,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@foldmoney",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 40194,
+    "auCount": 40194,
+    "dfCount": 2833356,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@finuture",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 14718,
+    "auCount": 2453,
+    "dfCount": 364093,
+    "billingYield": 6
+  },
+  {
+    "fiuId": "fiulive@fintoo",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 260,
+    "auCount": 26,
+    "dfCount": 58,
+    "billingYield": 10
+  },
+  {
+    "fiuId": "fiulive@exclusiveleasing",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 358.5,
+    "auCount": 164,
+    "dfCount": 239,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "fiulive@equirus",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 61,
+    "auCount": 61,
+    "dfCount": 3297,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@electronicafinance",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 541.5,
+    "auCount": 234,
+    "dfCount": 361,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "fiulive@easyhomefinance",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 10815,
+    "auCount": 1561,
+    "dfCount": 2163,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@dreamplug",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 1000000,
+    "auCount": 1803750,
+    "dfCount": 50048698,
+    "billingYield": 0.55
+  },
+  {
+    "fiuId": "fiulive@dmihf",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 9310,
+    "auCount": 1231,
+    "dfCount": 1862,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@dhan",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 30000,
+    "auCount": 38683,
+    "dfCount": 1939759,
+    "billingYield": 0.02
+  },
+  {
+    "fiuId": "fiulive@credright",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 5000,
+    "auCount": 310,
+    "dfCount": 1000,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@bajajfinservdirect",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 13080.25,
+    "auCount": 15676,
+    "dfCount": 67828,
+    "billingYield": 0.83
+  },
+  {
+    "fiuId": "fiulive@babalease",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 3994,
+    "auCount": 1639,
+    "dfCount": 1997,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@axissec",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 250000,
+    "auCount": 6569,
+    "dfCount": 204984,
+    "billingYield": 1.22
+  },
+  {
+    "fiuId": "fiulive@axisbank",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 2761580,
+    "auCount": 565395,
+    "dfCount": 25479700,
+    "billingYield": 4.88
+  },
+  {
+    "fiuId": "fiulive@apac",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 1778,
+    "auCount": 681,
+    "dfCount": 889,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@angeloneinv",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 53,
+    "auCount": 53,
+    "dfCount": 3743,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@adityabirlahf",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 4589.25,
+    "auCount": 4658,
+    "dfCount": 6119,
+    "billingYield": 0.75
+  },
+  {
+    "fiuId": "fiulive@5paisa",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 63,
+    "auCount": 38,
+    "dfCount": 42,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "finnable-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 20173,
+    "auCount": 13832,
+    "dfCount": 20173,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "earlysalary",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 2304,
+    "auCount": 4029,
+    "dfCount": 4608,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "decimus-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 920,
+    "auCount": 844,
+    "dfCount": 920,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "CREDITSAISON_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 209.7,
+    "auCount": 1329,
+    "dfCount": 1398,
+    "billingYield": 0.15
+  },
+  {
+    "fiuId": "BRANCH_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 4997.4,
+    "auCount": 5075,
+    "dfCount": 8329,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "BHANIX_FIU_PROD",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 11030.75,
+    "auCount": 14604,
+    "dfCount": 16848,
+    "billingYield": 0.65
+  },
+  {
+    "fiuId": "bfl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 211559.5,
+    "auCount": 313034,
+    "dfCount": 423119,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "dev_ramfincorp",
+    "month": "2026-04",
+    "billingModel": "",
+    "revenue": 365295,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "niapl-fiu",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 116718,
+    "auCount": 291795,
+    "dfCount": 912531,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "eimpl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 9821.4,
+    "auCount": 7753,
+    "dfCount": 49107,
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "sigfyn-fiu",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 8.8,
+    "auCount": 22,
+    "dfCount": 45,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "cmapl-fiu",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 91.2,
+    "auCount": 228,
+    "dfCount": 29784,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "dwaithapl-fiu",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 83.6,
+    "auCount": 209,
+    "dfCount": 18368,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "dynamicepl-fiu",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 112.4,
+    "auCount": 281,
+    "dfCount": 1275,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "chillarfpl-fiu",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 832.8,
+    "auCount": 2082,
+    "dfCount": 41713,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "arigamoney-fiu",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 20.4,
+    "auCount": 51,
+    "dfCount": 4538,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "plwealthpl-fiu",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 1.2,
+    "auCount": 3,
+    "dfCount": 5,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "wealthbeaconia-fiu",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 572.4,
+    "auCount": 1431,
+    "dfCount": 430981,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "utimf-fiu",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 384,
+    "auCount": 960,
+    "dfCount": 68817,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "networthtspl-fiu",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 19.6,
+    "auCount": 49,
+    "dfCount": 4597,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "eimplca-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 3960.2,
+    "auCount": 4517,
+    "dfCount": 19801,
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "balic-fiu",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 6304.5,
+    "auCount": 3563,
+    "dfCount": 4249,
+    "billingYield": 1.77
+  },
+  {
+    "fiuId": "neowealthmpl-fiu",
+    "month": "2026-04",
+    "billingModel": "Active User",
+    "revenue": 0.4,
+    "auCount": 1,
+    "dfCount": 1,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "mfppl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 6.4,
+    "auCount": 7,
+    "dfCount": 8,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "kasarcncpl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 772.8,
+    "auCount": 918,
+    "dfCount": 966,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "suburbanfipl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 911.2,
+    "auCount": 990,
+    "dfCount": 1139,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "choicemf-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 726.4,
+    "auCount": 32,
+    "dfCount": 908,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "trustassetmpl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 2001.6,
+    "auCount": 81,
+    "dfCount": 2502,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "bajajfsl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 123.1,
+    "auCount": 18,
+    "dfCount": 83,
+    "billingYield": 1.48
+  },
+  {
+    "fiuId": "epimoneypl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 417.9,
+    "auCount": 740,
+    "dfCount": 406,
+    "billingYield": 1.03
+  },
+  {
+    "fiuId": "cashpositivefpl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 0.8,
+    "auCount": 1,
+    "dfCount": 1,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "digambercl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 36,
+    "auCount": 76,
+    "dfCount": 45,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "1financep2ppl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 1899.1,
+    "auCount": 1592,
+    "dfCount": 1645,
+    "billingYield": 1.15
+  },
+  {
+    "fiuId": "grownetfpl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 155.2,
+    "auCount": 32,
+    "dfCount": 110,
+    "billingYield": 1.41
+  },
+  {
+    "fiuId": "narendrafcpl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 3804.8,
+    "auCount": 4490,
+    "dfCount": 2537,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "muthootml-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 41363.4,
+    "auCount": 88746,
+    "dfCount": 47520,
+    "billingYield": 0.87
+  },
+  {
+    "fiuId": "saloracap-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 12.4,
+    "auCount": 4,
+    "dfCount": 12,
+    "billingYield": 1.03
+  },
+  {
+    "fiuId": "absli-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 276,
+    "auCount": 178,
+    "dfCount": 184,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "alic-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 57,
+    "auCount": 30,
+    "dfCount": 38,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "talic-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 1455,
+    "auCount": 906,
+    "dfCount": 970,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "arthan-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 69,
+    "auCount": 45,
+    "dfCount": 46,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "solomoncap-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 13954.5,
+    "auCount": 8465,
+    "dfCount": 9303,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "rgfpl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 40.5,
+    "auCount": 4,
+    "dfCount": 27,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "tsfsl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 814.5,
+    "auCount": 491,
+    "dfCount": 543,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "ashikasbl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 240,
+    "auCount": 119,
+    "dfCount": 160,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "finaglefspl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 5125.5,
+    "auCount": 3165,
+    "dfCount": 3417,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "kotaklife-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 951,
+    "auCount": 579,
+    "dfCount": 634,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "creditwisecpl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 199.5,
+    "auCount": 132,
+    "dfCount": 133,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "vrindafl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 1570.5,
+    "auCount": 1008,
+    "dfCount": 1047,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "ramkrishna-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 28.5,
+    "auCount": 17,
+    "dfCount": 19,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "devmuni-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 7.5,
+    "auCount": 2,
+    "dfCount": 5,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "tradebookcspl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 16.5,
+    "auCount": 8,
+    "dfCount": 11,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "finzfpl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 1087.5,
+    "auCount": 710,
+    "dfCount": 725,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "lordkrishnafsl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 12,
+    "auCount": 8,
+    "dfCount": 8,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "1finance-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 324,
+    "auCount": 45,
+    "dfCount": 810,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "abc1-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 21534,
+    "auCount": 22009,
+    "dfCount": 86136,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "aliceblue-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 3410,
+    "auCount": 2929,
+    "dfCount": 3410,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "bhfl-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 18056,
+    "auCount": 8408,
+    "dfCount": 9028,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "chli-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 19.5,
+    "auCount": 9,
+    "dfCount": 13,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "maxlifeinsurance-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 6978,
+    "auCount": 3376,
+    "dfCount": 3489,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "navifs-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 459989,
+    "auCount": 283922,
+    "dfCount": 459989,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "singularitycredit-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 92,
+    "auCount": 46,
+    "dfCount": 46,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "ventura-fiu",
+    "month": "2026-04",
+    "billingModel": "Data Fetches",
+    "revenue": 116,
+    "auCount": 105,
+    "dfCount": 116,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "Unbilled Revenue",
+    "month": "2026-04",
+    "billingModel": "",
+    "revenue": null,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "YES_BANK_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 4650,
+    "auCount": 9300,
+    "dfCount": 25807,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "MOBIKWIK_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 84515.75,
+    "auCount": 338063,
+    "dfCount": 6028976,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "DEZERV_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 22407.25,
+    "auCount": 89629,
+    "dfCount": 5904038,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "fiulive@motilaloswal",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 45473.4,
+    "auCount": 75789,
+    "dfCount": 8635391,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "JFS_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 49445.25,
+    "auCount": 197781,
+    "dfCount": 3482129,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "Paisabazaar-FIU-LIVE",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 6468.25,
+    "auCount": 25873,
+    "dfCount": 123208,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "fiulive@onepercentclub",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 23678,
+    "auCount": 23678,
+    "dfCount": 2482429,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "poonawala-fincorp-limited",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 61915.5,
+    "auCount": 0,
+    "dfCount": 41277,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "fiulive@angelone",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 243,
+    "auCount": 243,
+    "dfCount": 17091,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "VASTU_HF_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 3774,
+    "auCount": 0,
+    "dfCount": 6290,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "richman-fincap",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 5765.48,
+    "auCount": 0,
+    "dfCount": 11543,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "fiulive@niyogin",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 12051.4,
+    "auCount": 0,
+    "dfCount": 60257,
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "FINCORP-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 65034,
+    "auCount": 0,
+    "dfCount": 65034,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "SNAPMINT_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 64239,
+    "auCount": 0,
+    "dfCount": 91770,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "SI_CREVA_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 136688.55,
+    "auCount": 0,
+    "dfCount": 252022,
+    "billingYield": 0.54
+  },
+  {
+    "fiuId": "sbilife-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 85.8,
+    "auCount": 0,
+    "dfCount": 66,
+    "billingYield": 1.3
+  },
+  {
+    "fiuId": "SBFC_PROD_FIUID",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 34575,
+    "auCount": 0,
+    "dfCount": 11525,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "sayyam-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 14629,
+    "auCount": 0,
+    "dfCount": 14629,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "SARVAGRAM_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 1305,
+    "auCount": 0,
+    "dfCount": 1044,
+    "billingYield": 1.25
+  },
+  {
+    "fiuId": "eimplca-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 5885.4,
+    "auCount": 6430,
+    "dfCount": 29427,
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "inprime-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 5634,
+    "auCount": 0,
+    "dfCount": 5634,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "policybazaar-prod",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 48728,
+    "auCount": 0,
+    "dfCount": 12182,
+    "billingYield": 4
+  },
+  {
+    "fiuId": "PiramalFinance-FIU",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 109992,
+    "auCount": 0,
+    "dfCount": 27498,
+    "billingYield": 4
+  },
+  {
+    "fiuId": "OPTIMO_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 1747.2,
+    "auCount": 0,
+    "dfCount": 7237,
+    "billingYield": 0.24
+  },
+  {
+    "fiuId": "NESFB_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 263077.65,
+    "auCount": 0,
+    "dfCount": 486831,
+    "billingYield": 0.54
+  },
+  {
+    "fiuId": "snapmint",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 100.5,
+    "auCount": 0,
+    "dfCount": 201,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "MONEYVIEW_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 30841.8,
+    "auCount": 0,
+    "dfCount": 58195,
+    "billingYield": 0.53
+  },
+  {
+    "fiuId": "fiulive@jiraaf",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 657,
+    "auCount": 0,
+    "dfCount": 657,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@crest",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 17027,
+    "auCount": 0,
+    "dfCount": 17027,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "KHATABOOK_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 17427.2,
+    "auCount": 0,
+    "dfCount": 90862,
+    "billingYield": 0.19
+  },
+  {
+    "fiuId": "kbnbfc-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 341160,
+    "auCount": 0,
+    "dfCount": 341160,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@puneestock",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 47,
+    "auCount": 0,
+    "dfCount": 47,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@indiabulls",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 3162,
+    "auCount": 0,
+    "dfCount": 1581,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "ICICI-FIU",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 207891.55,
+    "auCount": 0,
+    "dfCount": 765432,
+    "billingYield": 0.27
+  },
+  {
+    "fiuId": "HINDUJA_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 5064.5,
+    "auCount": 0,
+    "dfCount": 7235,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "GROWW_NBT_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 167183.05,
+    "auCount": 0,
+    "dfCount": 2346614,
+    "billingYield": 0.07
+  },
+  {
+    "fiuId": "fiulive@vridhihomefinance",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 1788.75,
+    "auCount": 0,
+    "dfCount": 2385,
+    "billingYield": 0.75
+  },
+  {
+    "fiuId": "fiulive@orimadvisors",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 14,
+    "auCount": 14,
+    "dfCount": 6171,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@upmovecapital",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 10353,
+    "auCount": 0,
+    "dfCount": 3451,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@skfin",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 22678.4,
+    "auCount": 0,
+    "dfCount": 11936,
+    "billingYield": 1.9
+  },
+  {
+    "fiuId": "fiulive@sigfyninvestment",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 3880,
+    "auCount": 388,
+    "dfCount": 17571,
+    "billingYield": 10
+  },
+  {
+    "fiuId": "fiulive@shreem",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 15955,
+    "auCount": 3191,
+    "dfCount": 166380,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@savefin",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 378,
+    "auCount": 0,
+    "dfCount": 126,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@save",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 1656,
+    "auCount": 0,
+    "dfCount": 552,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@satya",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 3,
+    "auCount": 0,
+    "dfCount": 1,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@sampathi",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 4568,
+    "auCount": 0,
+    "dfCount": 2284,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@rkbfinance",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 105056.75,
+    "auCount": 0,
+    "dfCount": 420227,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "fiulive@respo",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 2655.75,
+    "auCount": 0,
+    "dfCount": 3541,
+    "billingYield": 0.75
+  },
+  {
+    "fiuId": "fiulive@coinwise",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 138,
+    "auCount": 138,
+    "dfCount": 31182,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@paytmmoney",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 118,
+    "auCount": 118,
+    "dfCount": 6611,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@paymeindia",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 57,
+    "auCount": 0,
+    "dfCount": 19,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@nobias",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 301,
+    "auCount": 43,
+    "dfCount": 2641,
+    "billingYield": 7
+  },
+  {
+    "fiuId": "fiulive@namdev",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 939,
+    "auCount": 0,
+    "dfCount": 313,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "JOHNDEERE-FIU",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 144,
+    "auCount": 0,
+    "dfCount": 48,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@nuinvestors",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 288180,
+    "auCount": 14409,
+    "dfCount": 1045587,
+    "billingYield": 20
+  },
+  {
+    "fiuId": "fiulive@moneycontrol",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 160000,
+    "auCount": 0,
+    "dfCount": 4182626,
+    "billingYield": 0.04
+  },
+  {
+    "fiuId": "fiulive@lenditt",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 23911,
+    "auCount": 0,
+    "dfCount": 23911,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@kotaksec",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 2304,
+    "auCount": 2304,
+    "dfCount": 86357,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@knab",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 1203,
+    "auCount": 0,
+    "dfCount": 401,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@jupitermoney",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 292423,
+    "auCount": 292423,
+    "dfCount": 13379849,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@juliusbaer",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 234,
+    "auCount": 234,
+    "dfCount": 9078,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@indmoneysb",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 126842.43,
+    "auCount": 0,
+    "dfCount": 1475321,
+    "billingYield": 0.09
+  },
+  {
+    "fiuId": "fiulive@hexawealth",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 714,
+    "auCount": 238,
+    "dfCount": 15098,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@hdfcsecurities",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 2760,
+    "auCount": 2760,
+    "dfCount": 103530,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@hdfclife",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 3747,
+    "auCount": 0,
+    "dfCount": 1249,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@goalteller",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 4680.1,
+    "auCount": 0,
+    "dfCount": 2753,
+    "billingYield": 1.7
+  },
+  {
+    "fiuId": "fiulive@fwfintech",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 32904,
+    "auCount": 4113,
+    "dfCount": 523552,
+    "billingYield": 8
+  },
+  {
+    "fiuId": "fiulive@fundsindia",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 16574,
+    "auCount": 8287,
+    "dfCount": 2530147,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@foldmoney",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 41820,
+    "auCount": 41820,
+    "dfCount": 2904065,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@finuture",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 12852,
+    "auCount": 2142,
+    "dfCount": 334496,
+    "billingYield": 6
+  },
+  {
+    "fiuId": "fiulive@fintoo",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 330,
+    "auCount": 33,
+    "dfCount": 79,
+    "billingYield": 10
+  },
+  {
+    "fiuId": "fiulive@exclusiveleasing",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 325.5,
+    "auCount": 0,
+    "dfCount": 217,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "fiulive@equirus",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 59,
+    "auCount": 59,
+    "dfCount": 3245,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@electronicafinance",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 345,
+    "auCount": 0,
+    "dfCount": 230,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "fiulive@easyhomefinance",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 11415,
+    "auCount": 0,
+    "dfCount": 2283,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@dreamplug",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 1000000,
+    "auCount": 1736256,
+    "dfCount": 53368827,
+    "billingYield": 0.58
+  },
+  {
+    "fiuId": "fiulive@dmihf",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 10050,
+    "auCount": 0,
+    "dfCount": 2010,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@dhan",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 30000,
+    "auCount": 0,
+    "dfCount": 2113797,
+    "billingYield": 0.01
+  },
+  {
+    "fiuId": "fiulive@credright",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 570,
+    "auCount": 0,
+    "dfCount": 114,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@bajajfinservdirect",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 10329,
+    "auCount": 13597,
+    "dfCount": 85920,
+    "billingYield": 0.76
+  },
+  {
+    "fiuId": "fiulive@babalease",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 6806,
+    "auCount": 0,
+    "dfCount": 3403,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@axissec",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 250000,
+    "auCount": 0,
+    "dfCount": 207617,
+    "billingYield": 1.2
+  },
+  {
+    "fiuId": "fiulive@axiscapital",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 296,
+    "auCount": 296,
+    "dfCount": 12786,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@axisbank",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 2569316,
+    "auCount": 517329,
+    "dfCount": 24065908,
+    "billingYield": 4.97
+  },
+  {
+    "fiuId": "fiulive@apac",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 2708,
+    "auCount": 0,
+    "dfCount": 1354,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@angeloneinv",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 52,
+    "auCount": 52,
+    "dfCount": 3759,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@adityabirlahf",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 4149.75,
+    "auCount": 0,
+    "dfCount": 5533,
+    "billingYield": 0.75
+  },
+  {
+    "fiuId": "fiulive@5paisa",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 2461.5,
+    "auCount": 0,
+    "dfCount": 1641,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "finnable-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 22596,
+    "auCount": 0,
+    "dfCount": 22596,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "eimpl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 8838,
+    "auCount": 6953,
+    "dfCount": 44190,
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "earlysalary",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 11181.5,
+    "auCount": 0,
+    "dfCount": 22363,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "decimus-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 496,
+    "auCount": 0,
+    "dfCount": 496,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "CREDITSAISON_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 308.55,
+    "auCount": 0,
+    "dfCount": 2057,
+    "billingYield": 0.15
+  },
+  {
+    "fiuId": "BRANCH_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 1648.8,
+    "auCount": 0,
+    "dfCount": 2748,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "BHANIX_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 15134.75,
+    "auCount": 0,
+    "dfCount": 23132,
+    "billingYield": 0.65
+  },
+  {
+    "fiuId": "bfl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 147076,
+    "auCount": 0,
+    "dfCount": 294152,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "niapl-fiu",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 116828,
+    "auCount": 292070,
+    "dfCount": 966291,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "cmapl-fiu",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 110.4,
+    "auCount": 276,
+    "dfCount": 34707,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "dwaithapl-fiu",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 92.4,
+    "auCount": 231,
+    "dfCount": 25600,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "dynamicepl-fiu",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 126,
+    "auCount": 315,
+    "dfCount": 2292,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "chillarfpl-fiu",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 720,
+    "auCount": 1800,
+    "dfCount": 18117,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "arigamoney-fiu",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 155.2,
+    "auCount": 388,
+    "dfCount": 11710,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "plwealthpl-fiu",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 2.8,
+    "auCount": 7,
+    "dfCount": 22,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "wealthbeaconia-fiu",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 610,
+    "auCount": 1525,
+    "dfCount": 314140,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "utimf-fiu",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 714.4,
+    "auCount": 1786,
+    "dfCount": 214469,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "networthtspl-fiu",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 31.2,
+    "auCount": 78,
+    "dfCount": 7975,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "neowealthmpl-fiu",
+    "month": "2026-05",
+    "billingModel": "Active User",
+    "revenue": 1.6,
+    "auCount": 4,
+    "dfCount": 7,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "mfppl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 4.8,
+    "auCount": 0,
+    "dfCount": 6,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "kasarcncpl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 1290.4,
+    "auCount": 0,
+    "dfCount": 1613,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "suburbanfipl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 611.2,
+    "auCount": 0,
+    "dfCount": 764,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "choicemf-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 747.2,
+    "auCount": 0,
+    "dfCount": 934,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "trustassetmpl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 1956,
+    "auCount": 0,
+    "dfCount": 2445,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "cashpositivefpl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 6.4,
+    "auCount": 0,
+    "dfCount": 8,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "absli-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 251.35,
+    "auCount": 0,
+    "dfCount": 354,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "alic-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 46.15,
+    "auCount": 0,
+    "dfCount": 65,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "talic-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 867.66,
+    "auCount": 0,
+    "dfCount": 1222,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "arthan-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 35.5,
+    "auCount": 0,
+    "dfCount": 50,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "solomoncap-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 6694.91,
+    "auCount": 0,
+    "dfCount": 9429,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "tsfsl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 479.98,
+    "auCount": 0,
+    "dfCount": 676,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "ashikasbl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 226.5,
+    "auCount": 0,
+    "dfCount": 319,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "finaglefspl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 3724.13,
+    "auCount": 0,
+    "dfCount": 5245,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "kotaklife-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 558.09,
+    "auCount": 0,
+    "dfCount": 786,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "creditwisecpl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 1131.79,
+    "auCount": 0,
+    "dfCount": 1594,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "vrindafl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 545.31,
+    "auCount": 0,
+    "dfCount": 768,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "ramkrishna-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 17.75,
+    "auCount": 0,
+    "dfCount": 25,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "karnspl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 3.55,
+    "auCount": 0,
+    "dfCount": 5,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "tradebookcspl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 4.97,
+    "auCount": 0,
+    "dfCount": 7,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "finzfpl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 263.42,
+    "auCount": 0,
+    "dfCount": 371,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "lordkrishnafsl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 5.68,
+    "auCount": 0,
+    "dfCount": 8,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "1finance-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 500,
+    "auCount": 0,
+    "dfCount": 1250,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "abc1-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 25782,
+    "auCount": 0,
+    "dfCount": 103128,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "aliceblue-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 3971,
+    "auCount": 0,
+    "dfCount": 3971,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "bhfl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 18528,
+    "auCount": 0,
+    "dfCount": 9264,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "chli-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 12,
+    "auCount": 0,
+    "dfCount": 8,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "maxlifeinsurance-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 9054,
+    "auCount": 0,
+    "dfCount": 4527,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "navifs-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 385502,
+    "auCount": 0,
+    "dfCount": 385502,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "singularitycredit-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 112,
+    "auCount": 0,
+    "dfCount": 56,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "ventura-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 133,
+    "auCount": 0,
+    "dfCount": 133,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "waterfield-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 1,
+    "auCount": 0,
+    "dfCount": 1,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "ADITYA_BIRLA_CAPITAL_DIGITAL_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 47013.75,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "FINWIZARD_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 3552.75,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "JIOBLK_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 3745.25,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "MAS_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 6363.7,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "TAPSTART_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 1301.3,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "AEROFLEX_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 85841.7,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "APSIRE_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 11027.1,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "AXIS_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 7057.8,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "BNF_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 284.9,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "FINOVA_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 5933.2,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "PHFL_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 8393.7,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "JANASHA_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 128.8,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "KIFS_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 1470,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "RADIAN_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 9.8,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "SRNG_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 37.8,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "SURYODAY_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 1321.6,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "TRUSTLENDERS_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 385.7,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "VALLABHI_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 140,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "WCAPL_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 1153.6,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "MSTOCK_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 75069.4,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "balic-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 1827.25,
+    "auCount": 31,
+    "dfCount": 2588,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "bajajfsl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 9622.39,
+    "auCount": 0,
+    "dfCount": 13552,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "epimoneypl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 253.11,
+    "auCount": 0,
+    "dfCount": 340,
+    "billingYield": 0.74
+  },
+  {
+    "fiuId": "digambercl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 126.4,
+    "auCount": 0,
+    "dfCount": 158,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "1financep2ppl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 387.15,
+    "auCount": 0,
+    "dfCount": 545,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "grownetfpl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 67.45,
+    "auCount": 0,
+    "dfCount": 95,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "narendrafcpl-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 1792.13,
+    "auCount": 0,
+    "dfCount": 2524,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "muthootml-fiu",
+    "month": "2026-05",
+    "billingModel": "Data Fetches",
+    "revenue": 31657.6,
+    "auCount": 0,
+    "dfCount": 39572,
+    "billingYield": 0.8
+  },
+  {
+    "fiuId": "AKARA_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 2483,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "LT_FINANCE_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 26966.85,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "PAHAL_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 4732.95,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "ASHGROVE_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 3215.4,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "CAPFLOAT_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 11269.15,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "CHINMAY_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 20267.9,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "DSG_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 29892,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "FINODAYA_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 400.55,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "SBI_SECURITIES_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 17666.6,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "STFT_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 405.1,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "Unbilled Revenue - Ignosi",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": null,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "TAVAGA_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 13.25,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "FINNY_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 239,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "BAJAJ_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 7239,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "POCKETLY_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 1185.75,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "PRODIGEE_FIU_PROD",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 131.3,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "Total Revenue",
+    "month": "2026-05",
+    "billingModel": "",
+    "revenue": 8315257.03,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "fiulive@axisbank",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 2388540,
+    "auCount": 477708,
+    "dfCount": 23767901,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@dreamplug",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 1000000,
+    "auCount": 1816302,
+    "dfCount": 56335284,
+    "billingYield": 0.55
+  },
+  {
+    "fiuId": "fiulive@nuinvestors",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 363600,
+    "auCount": 18180,
+    "dfCount": 1404963,
+    "billingYield": 20
+  },
+  {
+    "fiuId": "fiulive@jupitermoney",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 280554,
+    "auCount": 280554,
+    "dfCount": 12199553,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@axissec",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 250000,
+    "auCount": 6616,
+    "dfCount": 196140,
+    "billingYield": 1.27
+  },
+  {
+    "fiuId": "fiulive@moneycontrol",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 160000,
+    "auCount": 66930,
+    "dfCount": 3417131,
+    "billingYield": 0.05
+  },
+  {
+    "fiuId": "fiulive@indmoneysb",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 136094.48,
+    "auCount": 152715,
+    "dfCount": 1518728,
+    "billingYield": 0.09
+  },
+  {
+    "fiuId": "fiulive@rkbfinance",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 98485.75,
+    "auCount": 320145,
+    "dfCount": 393943,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "fiulive@motilaloswal",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 49726.8,
+    "auCount": 82878,
+    "dfCount": 8018840,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "fiulive@foldmoney",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 43029,
+    "auCount": 43029,
+    "dfCount": 2928908,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@fwfintech",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 41192,
+    "auCount": 5149,
+    "dfCount": 1119113,
+    "billingYield": 8
+  },
+  {
+    "fiuId": "fiulive@dhan",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 30000,
+    "auCount": 42932,
+    "dfCount": 2215574,
+    "billingYield": 0.01
+  },
+  {
+    "fiuId": "fiulive@onepercentclub",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 29652,
+    "auCount": 29652,
+    "dfCount": 3423263,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@lenditt",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 27371,
+    "auCount": 17415,
+    "dfCount": 27371,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@skfin",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 22883.6,
+    "auCount": 9978,
+    "dfCount": 12044,
+    "billingYield": 1.9
+  },
+  {
+    "fiuId": "fiulive@shreem",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 16340,
+    "auCount": 3268,
+    "dfCount": 171592,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@fundsindia",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 14942,
+    "auCount": 7471,
+    "dfCount": 1568306,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@crest",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 14750,
+    "auCount": 66,
+    "dfCount": 14750,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@finuture",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 14178,
+    "auCount": 2363,
+    "dfCount": 342430,
+    "billingYield": 6
+  },
+  {
+    "fiuId": "fiulive@dmihf",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 11720,
+    "auCount": 1626,
+    "dfCount": 2344,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@upmovecapital",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 9690,
+    "auCount": 2624,
+    "dfCount": 3230,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@niyogin",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 8293.4,
+    "auCount": 35281,
+    "dfCount": 41467,
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "MOBIKWIK_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "",
+    "revenue": 179809.5,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "DEZERV_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "",
+    "revenue": 42860.75,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "Paisabazaar-FIU-LIVE",
+    "month": "2026-06",
+    "billingModel": "",
+    "revenue": 11720.75,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "YES_BANK_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 4664.5,
+    "auCount": 9329,
+    "dfCount": 26786,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "JFS_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "",
+    "revenue": 92332.75,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "fiulive@sampathi",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 7224,
+    "auCount": 1032,
+    "dfCount": 3612,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "niapl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 118058,
+    "auCount": 295145,
+    "dfCount": 960319,
+    "billingYield": 0.12
+  },
+  {
+    "fiuId": "eimpl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 9889.4,
+    "auCount": 8337,
+    "dfCount": 49447,
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "cmapl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 128.8,
+    "auCount": 322,
+    "dfCount": 38075,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "dwaithapl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 94.8,
+    "auCount": 237,
+    "dfCount": 13253,
+    "billingYield": 0.01
+  },
+  {
+    "fiuId": "dynamicepl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 71.2,
+    "auCount": 178,
+    "dfCount": 938,
+    "billingYield": 0.08
+  },
+  {
+    "fiuId": "arigamoney-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 136.8,
+    "auCount": 342,
+    "dfCount": 20115,
+    "billingYield": 0.01
+  },
+  {
+    "fiuId": "wealthbeaconia-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 619.2,
+    "auCount": 1548,
+    "dfCount": 324556,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "utimf-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 930,
+    "auCount": 2325,
+    "dfCount": 303760,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "eimplca-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 9670.8,
+    "auCount": 12079,
+    "dfCount": 48354,
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "plwealthpl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 3.2,
+    "auCount": 8,
+    "dfCount": 25,
+    "billingYield": 0.13
+  },
+  {
+    "fiuId": "networthtspl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 17.6,
+    "auCount": 44,
+    "dfCount": 14558,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@goalteller",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 6800,
+    "auCount": 107,
+    "dfCount": 4000,
+    "billingYield": 1.7
+  },
+  {
+    "fiuId": "fiulive@babalease",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 5696,
+    "auCount": 2366,
+    "dfCount": 2848,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "neowealthmpl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 0.8,
+    "auCount": 2,
+    "dfCount": 17,
+    "billingYield": 0.05
+  },
+  {
+    "fiuId": "ADITYA_BIRLA_CAPITAL_DIGITAL_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "",
+    "revenue": 15312,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "FINWIZARD_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "",
+    "revenue": 2071.75,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "JIOBLK_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "",
+    "revenue": 3103.5,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "ICICI-FIU",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 123975.5,
+    "auCount": 362124,
+    "dfCount": 498638,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "fiulive@bajajfinservdirect",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 5000,
+    "auCount": 4630,
+    "dfCount": 56310,
+    "billingYield": 0.09
+  },
+  {
+    "fiuId": "fiulive@indiabulls",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 4710,
+    "auCount": 863,
+    "dfCount": 2355,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "maxlifeinsurance-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 13298,
+    "auCount": 6304,
+    "dfCount": 6649,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "aliceblue-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 4890,
+    "auCount": 4314,
+    "dfCount": 4890,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "bhfl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 19028,
+    "auCount": 8917,
+    "dfCount": 9514,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "abc1-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 22473.75,
+    "auCount": 23398,
+    "dfCount": 89895,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "navifs-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 438730,
+    "auCount": 257783,
+    "dfCount": 438730,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "alic-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 95.24,
+    "auCount": 54,
+    "dfCount": 67,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "talic-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 2470.46,
+    "auCount": 1534,
+    "dfCount": 1738,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "balic-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1470.22,
+    "auCount": 957,
+    "dfCount": 1053,
+    "billingYield": 1.4
+  },
+  {
+    "fiuId": "dspam-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 2,
+    "auCount": 5,
+    "dfCount": 26,
+    "billingYield": 0.08
+  },
+  {
+    "fiuId": "arthan-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 7.11,
+    "auCount": 1,
+    "dfCount": 5,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "solomoncap-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 28548.16,
+    "auCount": 17003,
+    "dfCount": 20084,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "absli-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 616.9,
+    "auCount": 421,
+    "dfCount": 434,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "tsfsl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 649.6,
+    "auCount": 394,
+    "dfCount": 457,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "ashikasbl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 918.25,
+    "auCount": 494,
+    "dfCount": 646,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "finaglefspl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 7274.92,
+    "auCount": 4426,
+    "dfCount": 5118,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "kotaklife-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1502.46,
+    "auCount": 1000,
+    "dfCount": 1057,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "creditwisecpl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 342.57,
+    "auCount": 238,
+    "dfCount": 241,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "narendrafcpl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 4589.82,
+    "auCount": 2944,
+    "dfCount": 3229,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "vrindafl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1132.89,
+    "auCount": 743,
+    "dfCount": 797,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "ramkrishna-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 31.27,
+    "auCount": 20,
+    "dfCount": 22,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "muthootml-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 41152.77,
+    "auCount": 47454,
+    "dfCount": 50630,
+    "billingYield": 0.81
+  },
+  {
+    "fiuId": "grownetfpl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 165.05,
+    "auCount": 16,
+    "dfCount": 117,
+    "billingYield": 1.41
+  },
+  {
+    "fiuId": "epimoneypl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 494.62,
+    "auCount": 359,
+    "dfCount": 380,
+    "billingYield": 1.3
+  },
+  {
+    "fiuId": "finzfpl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 85.29,
+    "auCount": 60,
+    "dfCount": 60,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "1financep2ppl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 2377.75,
+    "auCount": 1625,
+    "dfCount": 1675,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "lordkrishnafsl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 710.72,
+    "auCount": 459,
+    "dfCount": 500,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "mfppl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1.58,
+    "auCount": 1,
+    "dfCount": 2,
+    "billingYield": 0.79
+  },
+  {
+    "fiuId": "kasarcncpl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 53.66,
+    "auCount": 66,
+    "dfCount": 68,
+    "billingYield": 0.79
+  },
+  {
+    "fiuId": "suburbanfipl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 64.71,
+    "auCount": 79,
+    "dfCount": 82,
+    "billingYield": 0.79
+  },
+  {
+    "fiuId": "choicemf-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 581.59,
+    "auCount": 34,
+    "dfCount": 737,
+    "billingYield": 0.79
+  },
+  {
+    "fiuId": "trustassetmpl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1022.72,
+    "auCount": 81,
+    "dfCount": 1296,
+    "billingYield": 0.79
+  },
+  {
+    "fiuId": "digambercl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 310.13,
+    "auCount": 276,
+    "dfCount": 393,
+    "billingYield": 0.79
+  },
+  {
+    "fiuId": "singularitycredit-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 88,
+    "auCount": 44,
+    "dfCount": 44,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "ventura-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 200,
+    "auCount": 184,
+    "dfCount": 200,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "1finance-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1093.6,
+    "auCount": 831,
+    "dfCount": 2734,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "bajajfsl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 22616.81,
+    "auCount": 11183,
+    "dfCount": 15913,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "cashpositivefpl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 0.79,
+    "auCount": 1,
+    "dfCount": 1,
+    "billingYield": 0.79
+  },
+  {
+    "fiuId": "tradebookcspl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 68.23,
+    "auCount": 40,
+    "dfCount": 48,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "chli-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 13.5,
+    "auCount": 7,
+    "dfCount": 9,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "karnspl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1269.34,
+    "auCount": 816,
+    "dfCount": 893,
+    "billingYield": 1.42
+  },
+  {
+    "fiuId": "waterfield-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1,
+    "auCount": 1,
+    "dfCount": 1,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@hdfclife",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 3492,
+    "auCount": 1042,
+    "dfCount": 1164,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "MONEYVIEW_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 22315.2,
+    "auCount": 34077,
+    "dfCount": 37202,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "GROWW_NBT_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 183796.8,
+    "auCount": 209016,
+    "dfCount": 2534166,
+    "billingYield": 0.07
+  },
+  {
+    "fiuId": "SARVAGRAM_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1866.25,
+    "auCount": 1231,
+    "dfCount": 1493,
+    "billingYield": 1.25
+  },
+  {
+    "fiuId": "NESFB_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 207504,
+    "auCount": 360994,
+    "dfCount": 418536,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "SI_CREVA_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 150351.3,
+    "auCount": 234651,
+    "dfCount": 265828,
+    "billingYield": 0.57
+  },
+  {
+    "fiuId": "HINDUJA_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 5855.5,
+    "auCount": 7383,
+    "dfCount": 8368,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "BHANIX_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 13508.5,
+    "auCount": 18040,
+    "dfCount": 20834,
+    "billingYield": 0.65
+  },
+  {
+    "fiuId": "BRANCH_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1370.4,
+    "auCount": 1575,
+    "dfCount": 2285,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "KHATABOOK_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 38396.1,
+    "auCount": 53337,
+    "dfCount": 183312,
+    "billingYield": 0.21
+  },
+  {
+    "fiuId": "PAHAL_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 131.8,
+    "auCount": 153,
+    "dfCount": 193,
+    "billingYield": 0.68
+  },
+  {
+    "fiuId": "CREDITSAISON_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 464.7,
+    "auCount": 2933,
+    "dfCount": 3098,
+    "billingYield": 0.15
+  },
+  {
+    "fiuId": "SNAPMINT_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 60461.1,
+    "auCount": 65630,
+    "dfCount": 86384,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "AKARA_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 27621,
+    "auCount": 9794,
+    "dfCount": 242151,
+    "billingYield": 0.11
+  },
+  {
+    "fiuId": "fiulive@apac",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 3140,
+    "auCount": 1227,
+    "dfCount": 1570,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@hdfcsecurities",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 2786,
+    "auCount": 2786,
+    "dfCount": 112361,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@5paisa",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 2560.5,
+    "auCount": 1510,
+    "dfCount": 1707,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "fiulive@kotaksec",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 2338,
+    "auCount": 2338,
+    "dfCount": 98555,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "decimus-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 243.2,
+    "auCount": 222,
+    "dfCount": 274,
+    "billingYield": 0.89
+  },
+  {
+    "fiuId": "kbnbfc-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 311267.4,
+    "auCount": 325615,
+    "dfCount": 348774,
+    "billingYield": 0.89
+  },
+  {
+    "fiuId": "finnable-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 23900.7,
+    "auCount": 20225,
+    "dfCount": 29591,
+    "billingYield": 0.81
+  },
+  {
+    "fiuId": "sayyam-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 13173,
+    "auCount": 13126,
+    "dfCount": 13176,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@adityabirlahf",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 2334,
+    "auCount": 2125,
+    "dfCount": 3112,
+    "billingYield": 0.75
+  },
+  {
+    "fiuId": "fiulive@credright",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 2310,
+    "auCount": 126,
+    "dfCount": 462,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@save",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1653,
+    "auCount": 397,
+    "dfCount": 551,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "PiramalFinance-FIU",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 166528,
+    "auCount": 30653,
+    "dfCount": 41632,
+    "billingYield": 4
+  },
+  {
+    "fiuId": "policybazaar-prod",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 50428,
+    "auCount": 12186,
+    "dfCount": 12607,
+    "billingYield": 4
+  },
+  {
+    "fiuId": "fiulive@vridhihomefinance",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1653,
+    "auCount": 1657,
+    "dfCount": 2204,
+    "billingYield": 0.75
+  },
+  {
+    "fiuId": "SBFC_PROD_FIUID",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 39762,
+    "auCount": 8893,
+    "dfCount": 13254,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@respo",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1645.5,
+    "auCount": 2130,
+    "dfCount": 2194,
+    "billingYield": 0.75
+  },
+  {
+    "fiuId": "fiulive@sigfyninvestment",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 1460,
+    "auCount": 146,
+    "dfCount": 11130,
+    "billingYield": 10
+  },
+  {
+    "fiuId": "fiulive@namdev",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1245,
+    "auCount": 329,
+    "dfCount": 415,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@easyhomefinance",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1165,
+    "auCount": 149,
+    "dfCount": 233,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@knab",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 870,
+    "auCount": 164,
+    "dfCount": 290,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@hexawealth",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 738,
+    "auCount": 246,
+    "dfCount": 14699,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@jiraaf",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 620,
+    "auCount": 620,
+    "dfCount": 620,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@fintoo",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 460,
+    "auCount": 46,
+    "dfCount": 130,
+    "billingYield": 10
+  },
+  {
+    "fiuId": "fiulive@savefin",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 435,
+    "auCount": 102,
+    "dfCount": 145,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@axiscapital",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 291,
+    "auCount": 291,
+    "dfCount": 14349,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "sbilife-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 135.2,
+    "auCount": 97,
+    "dfCount": 104,
+    "billingYield": 1.3
+  },
+  {
+    "fiuId": "fiulive@juliusbaer",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 243,
+    "auCount": 243,
+    "dfCount": 10221,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@angelone",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 239,
+    "auCount": 239,
+    "dfCount": 15100,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@coinwise",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 238,
+    "auCount": 238,
+    "dfCount": 51736,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "earlysalary",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 3534.5,
+    "auCount": 6104,
+    "dfCount": 7069,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "fiulive@nobias",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 231,
+    "auCount": 33,
+    "dfCount": 1643,
+    "billingYield": 7
+  },
+  {
+    "fiuId": "fiulive@paymeindia",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 228,
+    "auCount": 67,
+    "dfCount": 76,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "poonawala-fincorp-limited",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 71937,
+    "auCount": 44052,
+    "dfCount": 47958,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "VASTU_HF_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 6619.2,
+    "auCount": 4794,
+    "dfCount": 11032,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "richman-fincap",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 4632.71,
+    "auCount": 5107,
+    "dfCount": 9272,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "fiulive@exclusiveleasing",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 123,
+    "auCount": 71,
+    "dfCount": 82,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "FINCORP-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 62987,
+    "auCount": 39583,
+    "dfCount": 63001,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "inprime-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 4340.05,
+    "auCount": 3652,
+    "dfCount": 5887,
+    "billingYield": 0.74
+  },
+  {
+    "fiuId": "OPTIMO_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1690,
+    "auCount": 794,
+    "dfCount": 6622,
+    "billingYield": 0.26
+  },
+  {
+    "fiuId": "fiulive@paytmmoney",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 119,
+    "auCount": 119,
+    "dfCount": 6301,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@equirus",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 58,
+    "auCount": 58,
+    "dfCount": 3249,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@angeloneinv",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 53,
+    "auCount": 53,
+    "dfCount": 3947,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "bfl-fiu",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 160516.5,
+    "auCount": 193384,
+    "dfCount": 321033,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "fiulive@puneestock",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 47,
+    "auCount": 3,
+    "dfCount": 47,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "JOHNDEERE-FIU",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 162,
+    "auCount": 26,
+    "dfCount": 54,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@orimadvisors",
+    "month": "2026-06",
+    "billingModel": "Active Users",
+    "revenue": 14,
+    "auCount": 14,
+    "dfCount": 4395,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@satya",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 6,
+    "auCount": 2,
+    "dfCount": 2,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "LT_FINANCE_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 43611.15,
+    "auCount": 51599,
+    "dfCount": 61499,
+    "billingYield": 0.71
+  },
+  {
+    "fiuId": "MAS_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 286.3,
+    "auCount": 331,
+    "dfCount": 421,
+    "billingYield": 0.68
+  },
+  {
+    "fiuId": "TAPSTART_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 232.4,
+    "auCount": 291,
+    "dfCount": 332,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "AEROFLEX_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 8622.6,
+    "auCount": 11436,
+    "dfCount": 12318,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "ASHGROVE_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 431.65,
+    "auCount": 486,
+    "dfCount": 751,
+    "billingYield": 0.57
+  },
+  {
+    "fiuId": "APSIRE_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 89.6,
+    "auCount": 30,
+    "dfCount": 128,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "AXIS_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 5142.6,
+    "auCount": 6648,
+    "dfCount": 8574,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "BAJAJ_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 16.8,
+    "auCount": 7,
+    "dfCount": 28,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "BNF_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 119.7,
+    "auCount": 142,
+    "dfCount": 172,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "CAPFLOAT_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 5990.6,
+    "auCount": 10969,
+    "dfCount": 11636,
+    "billingYield": 0.51
+  },
+  {
+    "fiuId": "CHINMAY_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 6211.4,
+    "auCount": 10462,
+    "dfCount": 14903,
+    "billingYield": 0.42
+  },
+  {
+    "fiuId": "DSG_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 10945.3,
+    "auCount": 14852,
+    "dfCount": 17650,
+    "billingYield": 0.62
+  },
+  {
+    "fiuId": "FINODAYA_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 139.25,
+    "auCount": 116,
+    "dfCount": 349,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "FINOVA_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 1118.6,
+    "auCount": 959,
+    "dfCount": 1598,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "PHFL_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 2706.9,
+    "auCount": 2752,
+    "dfCount": 3868,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "JANASHA_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 36.4,
+    "auCount": 44,
+    "dfCount": 52,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "KIFS_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 429.1,
+    "auCount": 428,
+    "dfCount": 613,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "POCKETLY_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 0.6,
+    "auCount": 1,
+    "dfCount": 1,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "PRODIGEE_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 153.4,
+    "auCount": 110,
+    "dfCount": 297,
+    "billingYield": 0.52
+  },
+  {
+    "fiuId": "RADIAN_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 8.4,
+    "auCount": 8,
+    "dfCount": 12,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "SBI_SECURITIES_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 3169.6,
+    "auCount": 3554,
+    "dfCount": 4528,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "SRNG_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 11.2,
+    "auCount": 9,
+    "dfCount": 16,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "STFT_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 46.9,
+    "auCount": 38,
+    "dfCount": 67,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "SURYODAY_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 823.2,
+    "auCount": 820,
+    "dfCount": 1176,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "TRUSTLENDERS_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 197.4,
+    "auCount": 238,
+    "dfCount": 282,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "VALLABHI_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 7.7,
+    "auCount": 5,
+    "dfCount": 11,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "WCAPL_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 373.1,
+    "auCount": 351,
+    "dfCount": 533,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "MSTOCK_FIU_PROD",
+    "month": "2026-06",
+    "billingModel": "Data Fetches",
+    "revenue": 12587.4,
+    "auCount": 10113,
+    "dfCount": 17985,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "Sub Total",
+    "month": "2026-06",
+    "billingModel": "",
+    "revenue": 347211,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "Revenue from Quarterly Billed FIUs ( For Apr & May 26)",
+    "month": "2026-06",
+    "billingModel": "",
+    "revenue": null,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "Gross Total",
+    "month": "2026-06",
+    "billingModel": "",
+    "revenue": 8226139.22,
+    "auCount": null,
+    "dfCount": null,
+    "billingYield": null
+  },
+  {
+    "fiuId": "fiulive@axisbank",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 2128685,
+    "auCount": 425737,
+    "dfCount": 21560887,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@dreamplug",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 1333000,
+    "auCount": 2071231,
+    "dfCount": 68769430,
+    "billingYield": 0.64
+  },
+  {
+    "fiuId": "fiulive@nuinvestors",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 472840,
+    "auCount": 23642,
+    "dfCount": 2128855,
+    "billingYield": 20
+  },
+  {
+    "fiuId": "abc1-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 28219.75,
+    "auCount": 24254,
+    "dfCount": 112879,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "fiulive@jupitermoney",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 272316,
+    "auCount": 272316,
+    "dfCount": 11562611,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "1finance-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 1719.6,
+    "auCount": 1216,
+    "dfCount": 4299,
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "fiulive@axissec",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 250000,
+    "auCount": 6139,
+    "dfCount": 237037,
+    "billingYield": 1.05
+  },
+  {
+    "fiuId": "fiulive@paytmmoneypfm",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 22638,
+    "auCount": 22638,
+    "dfCount": 2700464,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@moneycontrol",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 160000,
+    "auCount": 56570,
+    "dfCount": 3113580,
+    "billingYield": 0.05
+  },
+  {
+    "fiuId": "fiulive@indmoneysb",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 149706.9,
+    "auCount": 168373,
+    "dfCount": 1724321,
+    "billingYield": 0.09
+  },
+  {
+    "fiuId": "fiulive@rkbfinance",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 184898.25,
+    "auCount": 349956,
+    "dfCount": 739593,
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "fiulive@motilaloswal",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 52857.6,
+    "auCount": 88096,
+    "dfCount": 9565499,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "fiulive@foldmoney",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 44700,
+    "auCount": 44700,
+    "dfCount": 3121747,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@fwfintech",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 56696,
+    "auCount": 7087,
+    "dfCount": 1711564,
+    "billingYield": 8
+  },
+  {
+    "fiuId": "kbnbfc-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 299372.45,
+    "auCount": 313851,
+    "dfCount": 335381,
+    "billingYield": 0.89
+  },
+  {
+    "fiuId": "NESFB_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 248636.85,
+    "auCount": 431124,
+    "dfCount": 469152,
+    "billingYield": 0.53
+  },
+  {
+    "fiuId": "SI_CREVA_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 162005.85,
+    "auCount": 244130,
+    "dfCount": 276036,
+    "billingYield": 0.59
+  },
+  {
+    "fiuId": "AKARA_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 49866.7,
+    "auCount": 20281,
+    "dfCount": 390427,
+    "billingYield": 0.13
+  },
+  {
+    "fiuId": "fiulive@dhan",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 30000,
+    "auCount": 43970,
+    "dfCount": 2383803,
+    "billingYield": 0.01
+  },
+  {
+    "fiuId": "bfl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 170716,
+    "auCount": 205856,
+    "dfCount": 341432,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "ICICI-FIU",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 115721.05,
+    "auCount": 332946,
+    "dfCount": 439006,
+    "billingYield": 0.26
+  },
+  {
+    "fiuId": "ashikasbl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 481.1,
+    "auCount": 134,
+    "dfCount": 357,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "plwealthpl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 4.8,
+    "auCount": 12,
+    "dfCount": 37,
+    "billingYield": 0.13
+  },
+  {
+    "fiuId": "fiulive@onepercentclub",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 38037,
+    "auCount": 38037,
+    "dfCount": 4963677,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "KMBL-FIU-PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches & billing-01",
+    "revenue": 142270,
+    "auCount": 64466,
+    "dfCount": 339753,
+    "billingYield": 0.42
+  },
+  {
+    "fiuId": "neowealthmpl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "FINCORP-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 60066,
+    "auCount": 42161,
+    "dfCount": 60066,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "LT_FINANCE_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 51313.35,
+    "auCount": 64173,
+    "dfCount": 78717,
+    "billingYield": 0.65
+  },
+  {
+    "fiuId": "SNAPMINT_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 57193.5,
+    "auCount": 64005,
+    "dfCount": 81721,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "niapl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 106972.8,
+    "auCount": 267432,
+    "dfCount": 815727,
+    "billingYield": 0.13
+  },
+  {
+    "fiuId": "poonawala-fincorp-limited",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 76926,
+    "auCount": 46811,
+    "dfCount": 51284,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "MONEYVIEW_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 29764.4,
+    "auCount": 54224,
+    "dfCount": 58450,
+    "billingYield": 0.51
+  },
+  {
+    "fiuId": "finnable-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 16845.05,
+    "auCount": 11571,
+    "dfCount": 18594,
+    "billingYield": 0.91
+  },
+  {
+    "fiuId": "earlysalary",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 19188,
+    "auCount": 34201,
+    "dfCount": 38376,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "KHATABOOK_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 62537.9,
+    "auCount": 89857,
+    "dfCount": 316374,
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "GROWW_NBT_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 213276.6,
+    "auCount": 232079,
+    "dfCount": 3037698,
+    "billingYield": 0.07
+  },
+  {
+    "fiuId": "richman-fincap",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 5685.48,
+    "auCount": 6569,
+    "dfCount": 11426,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "solomoncap-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 14643.33,
+    "auCount": 9389,
+    "dfCount": 10866,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "SBFC_PROD_FIUID",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 29679,
+    "auCount": 6942,
+    "dfCount": 9893,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "eimplca-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 14530,
+    "auCount": 19094,
+    "dfCount": 72650,
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "DSG_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 22633.5,
+    "auCount": 29089,
+    "dfCount": 43749,
+    "billingYield": 0.52
+  },
+  {
+    "fiuId": "fiulive@lenditt",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 21907,
+    "auCount": 13663,
+    "dfCount": 21907,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "BHANIX_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 14387.2,
+    "auCount": 19661,
+    "dfCount": 22367,
+    "billingYield": 0.64
+  },
+  {
+    "fiuId": "fiulive@skfin",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 23187.6,
+    "auCount": 9974,
+    "dfCount": 12204,
+    "billingYield": 1.9
+  },
+  {
+    "fiuId": "sayyam-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 12749,
+    "auCount": 12676,
+    "dfCount": 12749,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "PiramalFinance-FIU",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 111412,
+    "auCount": 17654,
+    "dfCount": 27853,
+    "billingYield": 4
+  },
+  {
+    "fiuId": "MSTOCK_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 12853.4,
+    "auCount": 10915,
+    "dfCount": 18362,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "bajajfsl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 33500.68,
+    "auCount": 16995,
+    "dfCount": 24859,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "AXIS_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 11690.4,
+    "auCount": 14924,
+    "dfCount": 19484,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "HINDUJA_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 5698,
+    "auCount": 7113,
+    "dfCount": 8140,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "policybazaar-prod",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 55288,
+    "auCount": 13377,
+    "dfCount": 13822,
+    "billingYield": 4
+  },
+  {
+    "fiuId": "CAPFLOAT_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 7040.6,
+    "auCount": 13162,
+    "dfCount": 14054,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "fiulive@shreem",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 19800,
+    "auCount": 3960,
+    "dfCount": 203250,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@fundsindia",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 14164,
+    "auCount": 7082,
+    "dfCount": 1891463,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "YES_BANK_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 5708,
+    "auCount": 11416,
+    "dfCount": 37533,
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "muthootml-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 42595.28,
+    "auCount": 47308,
+    "dfCount": 54454,
+    "billingYield": 0.78
+  },
+  {
+    "fiuId": "inprime-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 5433.2,
+    "auCount": 4131,
+    "dfCount": 7417,
+    "billingYield": 0.73
+  },
+  {
+    "fiuId": "OPTIMO_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 2187.25,
+    "auCount": 1479,
+    "dfCount": 10794,
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "navifs-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 196444,
+    "auCount": 69369,
+    "dfCount": 196444,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "CHINMAY_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 6978.3,
+    "auCount": 12139,
+    "dfCount": 16924,
+    "billingYield": 0.41
+  },
+  {
+    "fiuId": "PHFL_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 3836,
+    "auCount": 3787,
+    "dfCount": 5480,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "narendrafcpl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 3125.15,
+    "auCount": 2107,
+    "dfCount": 2319,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "fiulive@crest",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 16902,
+    "auCount": 69,
+    "dfCount": 16902,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@finuture",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 17160,
+    "auCount": 2860,
+    "dfCount": 338631,
+    "billingYield": 6
+  },
+  {
+    "fiuId": "fiulive@dmihf",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 12095,
+    "auCount": 1712,
+    "dfCount": 2419,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "BNF_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 132.3,
+    "auCount": 170,
+    "dfCount": 189,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "eimpl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 9511,
+    "auCount": 8025,
+    "dfCount": 47555,
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "BRANCH_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 1287,
+    "auCount": 1410,
+    "dfCount": 2145,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "wealthbeaconia-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 717.2,
+    "auCount": 1793,
+    "dfCount": 391851,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "utimf-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 1123.2,
+    "auCount": 2808,
+    "dfCount": 435374,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@angelone",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 210,
+    "auCount": 210,
+    "dfCount": 15581,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "VASTU_HF_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 9029.6,
+    "auCount": 6675,
+    "dfCount": 15066,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "talic-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 491.88,
+    "auCount": 348,
+    "dfCount": 365,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "sigfyn-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": null,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "sbilife-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 114.4,
+    "auCount": 87,
+    "dfCount": 88,
+    "billingYield": 1.3
+  },
+  {
+    "fiuId": "SARVAGRAM_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 2393.75,
+    "auCount": 1547,
+    "dfCount": 1917,
+    "billingYield": 1.25
+  },
+  {
+    "fiuId": "cmapl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 142,
+    "auCount": 355,
+    "dfCount": 52180,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "dwaithapl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 98,
+    "auCount": 245,
+    "dfCount": 15114,
+    "billingYield": 0.01
+  },
+  {
+    "fiuId": "snapmint",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": null,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@bajajfinservdirect",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 1652,
+    "auCount": 1652,
+    "dfCount": 34611,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "maxlifeinsurance-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 7058,
+    "auCount": 3381,
+    "dfCount": 3529,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "arigamoney-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 136.4,
+    "auCount": 341,
+    "dfCount": 21278,
+    "billingYield": 0.01
+  },
+  {
+    "fiuId": "fiulive@upmovecapital",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 8511,
+    "auCount": 2133,
+    "dfCount": 2837,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "AEROFLEX_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 12611.9,
+    "auCount": 16477,
+    "dfCount": 18021,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "networthtspl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 17.2,
+    "auCount": 43,
+    "dfCount": 2925,
+    "billingYield": 0.01
+  },
+  {
+    "fiuId": "fiulive@niyogin",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 7775.2,
+    "auCount": 33958,
+    "dfCount": 38876,
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "fiulive@sampathi",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 8426,
+    "auCount": 949,
+    "dfCount": 4213,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "finaglefspl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 12368.53,
+    "auCount": 7316,
+    "dfCount": 9178,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "SBI_SECURITIES_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 3902.5,
+    "auCount": 4599,
+    "dfCount": 5575,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "SVATANTRAMHFC-FIU",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 10488,
+    "auCount": 2517,
+    "dfCount": 3496,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@goalteller",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 5805.5,
+    "auCount": 97,
+    "dfCount": 3415,
+    "billingYield": 1.7
+  },
+  {
+    "fiuId": "fiulive@babalease",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 7088,
+    "auCount": 2871,
+    "dfCount": 3544,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@indiabulls",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 5322,
+    "auCount": 886,
+    "dfCount": 2661,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "HIRANANDANI-FIU",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 6670,
+    "auCount": 2454,
+    "dfCount": 3335,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "trustassetmpl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "FINOVA_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 1498,
+    "auCount": 1286,
+    "dfCount": 2140,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "dynamicepl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 53.6,
+    "auCount": 134,
+    "dfCount": 579,
+    "billingYield": 0.09
+  },
+  {
+    "fiuId": "fiulive@hdfclife",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 2622,
+    "auCount": 817,
+    "dfCount": 874,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@apac",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 3688,
+    "auCount": 1448,
+    "dfCount": 1844,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@5paisa",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 1140,
+    "auCount": 687,
+    "dfCount": 760,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "fiulive@adityabirlahf",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 2370.75,
+    "auCount": 2092,
+    "dfCount": 3161,
+    "billingYield": 0.75
+  },
+  {
+    "fiuId": "fiulive@credright",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 18375,
+    "auCount": 1598,
+    "dfCount": 3675,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "KOTAK-FIU",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 14746,
+    "auCount": 12049,
+    "dfCount": 14746,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@vridhihomefinance",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@paytmmoney",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 127,
+    "auCount": 127,
+    "dfCount": 6969,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@save",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 1623,
+    "auCount": 375,
+    "dfCount": 541,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "kasarcncpl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 3.1,
+    "auCount": 4,
+    "dfCount": 4,
+    "billingYield": 0.78
+  },
+  {
+    "fiuId": "creditwisecpl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 192.71,
+    "auCount": 141,
+    "dfCount": 143,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "fiulive@respo",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 1011,
+    "auCount": 1324,
+    "dfCount": 1348,
+    "billingYield": 0.75
+  },
+  {
+    "fiuId": "fiulive@sigfyninvestment",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 1370,
+    "auCount": 137,
+    "dfCount": 10669,
+    "billingYield": 10
+  },
+  {
+    "fiuId": "JOHNDEERE-FIU",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 138,
+    "auCount": 31,
+    "dfCount": 46,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@namdev",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 1269,
+    "auCount": 329,
+    "dfCount": 423,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "choicemf-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 18.58,
+    "auCount": 2,
+    "dfCount": 24,
+    "billingYield": 0.77
+  },
+  {
+    "fiuId": "ASHGROVE_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 695.5,
+    "auCount": 705,
+    "dfCount": 1113,
+    "billingYield": 0.62
+  },
+  {
+    "fiuId": "fiulive@kotaksec",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 2387,
+    "auCount": 2387,
+    "dfCount": 108855,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@easyhomefinance",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 930,
+    "auCount": 110,
+    "dfCount": 186,
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@juliusbaer",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 246,
+    "auCount": 246,
+    "dfCount": 10756,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "kotaklife-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 824.75,
+    "auCount": 553,
+    "dfCount": 612,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "vrindafl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 307.26,
+    "auCount": 194,
+    "dfCount": 228,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "suburbanfipl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 448.28,
+    "auCount": 557,
+    "dfCount": 579,
+    "billingYield": 0.77
+  },
+  {
+    "fiuId": "fiulive@knab",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 1215,
+    "auCount": 194,
+    "dfCount": 405,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@hexawealth",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 687,
+    "auCount": 229,
+    "dfCount": 11361,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "tsfsl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 393.51,
+    "auCount": 279,
+    "dfCount": 292,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "fiulive@hdfcsecurities",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 2924,
+    "auCount": 2924,
+    "dfCount": 140849,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@jiraaf",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 661,
+    "auCount": 660,
+    "dfCount": 661,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "SURYODAY_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 19543.3,
+    "auCount": 15394,
+    "dfCount": 27919,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "fiulive@gbhansali",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "1financep2ppl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 1313.76,
+    "auCount": 958,
+    "dfCount": 977,
+    "billingYield": 1.34
+  },
+  {
+    "fiuId": "fiulive@fintoo",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 690,
+    "auCount": 69,
+    "dfCount": 262,
+    "billingYield": 10
+  },
+  {
+    "fiuId": "fiulive@savefin",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 501,
+    "auCount": 123,
+    "dfCount": 167,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@coinwise",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 314,
+    "auCount": 314,
+    "dfCount": 82093,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@nobias",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 210,
+    "auCount": 30,
+    "dfCount": 1258,
+    "billingYield": 7
+  },
+  {
+    "fiuId": "fiulive@paymeindia",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 192,
+    "auCount": 57,
+    "dfCount": 64,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "WCAPL_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 691.1,
+    "auCount": 944,
+    "dfCount": 1623,
+    "billingYield": 0.43
+  },
+  {
+    "fiuId": "MAS_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 368.2,
+    "auCount": 456,
+    "dfCount": 526,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "fiulive@equirus",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 63,
+    "auCount": 63,
+    "dfCount": 3510,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@exclusiveleasing",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@puneestock",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 46,
+    "auCount": 5,
+    "dfCount": 46,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@orimadvisors",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 19,
+    "auCount": 19,
+    "dfCount": 4499,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@satya",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 21,
+    "auCount": 7,
+    "dfCount": 7,
+    "billingYield": 3
+  },
+  {
+    "fiuId": "KIFS_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 578.2,
+    "auCount": 542,
+    "dfCount": 826,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "finzfpl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 16.17,
+    "auCount": 12,
+    "dfCount": 12,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "fiulive@indiainfoline",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "absli-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 314,
+    "auCount": 229,
+    "dfCount": 233,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "fiulive@fincare",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "epimoneypl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 240.65,
+    "auCount": 192,
+    "dfCount": 199,
+    "billingYield": 1.21
+  },
+  {
+    "fiuId": "fiulive@electronicafinance",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@ekagratalive",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@credavenue",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@axiscapital",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 292,
+    "auCount": 292,
+    "dfCount": 15890,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@cars24",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@angeloneinv",
+    "month": "2026-07",
+    "billingModel": "Active Users",
+    "revenue": 60,
+    "auCount": 60,
+    "dfCount": 4393,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "TAPSTART_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 324.8,
+    "auCount": 398,
+    "dfCount": 464,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "TRUSTLENDERS_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 151.9,
+    "auCount": 185,
+    "dfCount": 217,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "FINODAYA_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 141.55,
+    "auCount": 126,
+    "dfCount": 346,
+    "billingYield": 0.41
+  },
+  {
+    "fiuId": "PAHAL_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 267.3,
+    "auCount": 326,
+    "dfCount": 385,
+    "billingYield": 0.69
+  },
+  {
+    "fiuId": "AGRIM-FIU",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 300,
+    "auCount": 62,
+    "dfCount": 75,
+    "billingYield": 4
+  },
+  {
+    "fiuId": "digambercl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 360.79,
+    "auCount": 377,
+    "dfCount": 466,
+    "billingYield": 0.77
+  },
+  {
+    "fiuId": "ventura-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 107,
+    "auCount": 96,
+    "dfCount": 107,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "decimus-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 5187.4,
+    "auCount": 5000,
+    "dfCount": 5396,
+    "billingYield": 0.96
+  },
+  {
+    "fiuId": "CREDITSAISON_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 619.95,
+    "auCount": 4004,
+    "dfCount": 4133,
+    "billingYield": 0.15
+  },
+  {
+    "fiuId": "APSIRE_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 45.5,
+    "auCount": 17,
+    "dfCount": 65,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "STFT_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 64.4,
+    "auCount": 54,
+    "dfCount": 92,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "grownetfpl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 63.34,
+    "auCount": 9,
+    "dfCount": 47,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "bhfl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 10738,
+    "auCount": 5057,
+    "dfCount": 5369,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "JANASHA_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 35.7,
+    "auCount": 46,
+    "dfCount": 51,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "balic-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 1756.74,
+    "auCount": 1196,
+    "dfCount": 1332,
+    "billingYield": 1.32
+  },
+  {
+    "fiuId": "alic-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 52.56,
+    "auCount": 33,
+    "dfCount": 39,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "singularitycredit-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 30,
+    "auCount": 15,
+    "dfCount": 15,
+    "billingYield": 2
+  },
+  {
+    "fiuId": "arthan-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "aliceblue-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 3456,
+    "auCount": 3162,
+    "dfCount": 3456,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "ramkrishna-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 14.82,
+    "auCount": 10,
+    "dfCount": 11,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "RADIAN_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 39.9,
+    "auCount": 39,
+    "dfCount": 57,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "VALLABHI_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 14,
+    "auCount": 6,
+    "dfCount": 20,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "SRNG_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 29.4,
+    "auCount": 35,
+    "dfCount": 42,
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "chli-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 7.5,
+    "auCount": 3,
+    "dfCount": 5,
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "cashpositivefpl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "lordkrishnafsl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 1317.98,
+    "auCount": 887,
+    "dfCount": 978,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "tradebookcspl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 31,
+    "auCount": 22,
+    "dfCount": 23,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "dev_ramfincorp",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "mfppl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 26.32,
+    "auCount": 30,
+    "dfCount": 34,
+    "billingYield": 0.77
+  },
+  {
+    "fiuId": "karnspl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 10782.37,
+    "auCount": 7087,
+    "dfCount": 8001,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "waterfield-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 4,
+    "auCount": 4,
+    "dfCount": 4,
+    "billingYield": 1
+  },
+  {
+    "fiuId": "BAJAJ_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 7.8,
+    "auCount": 7,
+    "dfCount": 13,
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "dspam-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 1.2,
+    "auCount": 3,
+    "dfCount": 14,
+    "billingYield": 0.09
+  },
+  {
+    "fiuId": "rgfpl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 5.39,
+    "auCount": 2,
+    "dfCount": 4,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "POCKETLY_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 7,
+    "auCount": 11,
+    "dfCount": 15,
+    "billingYield": 0.47
+  },
+  {
+    "fiuId": "PRODIGEE_FIU_PROD",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 256.4,
+    "auCount": 161,
+    "dfCount": 537,
+    "billingYield": 0.48
+  },
+  {
+    "fiuId": "saloracap-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 5.39,
+    "auCount": 4,
+    "dfCount": 4,
+    "billingYield": 1.35
+  },
+  {
+    "fiuId": "sampathicpl-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingYield": 0
+  },
+  {
+    "fiuId": "devmuni-fiu",
+    "month": "2026-07",
+    "billingModel": "Data Fetches",
+    "revenue": 1827.38,
+    "auCount": 1292,
+    "dfCount": 1356,
+    "billingYield": 1.35
+  }
+]

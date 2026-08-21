@@ -1,0 +1,24 @@
+{
+  "name": "fiu-revenue-backend",
+  "version": "1.0.0",
+  "description": "FIU Revenue Estimator backend — FIU metadata + yield/CMGR config storage and monthly revenue computation.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^16.4.5",
+    "express": "^5.2.1",
+    "imapflow": "^1.7.1",
+    "mailparser": "^3.9.15",
+    "multer": "^2.2.0",
+    "xlsx": "^0.18.5"
+  }
+}

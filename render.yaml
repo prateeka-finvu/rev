@@ -1,0 +1,50 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+#
+# Deploy: push this repo to GitHub, then in the Render dashboard choose
+# "New +" -> "Blueprint" and point it at the repo. Render reads this file
+# and creates the web service (with its persistent disk) automatically —
+# see README.md's "Deploying to Render" section for the full walkthrough,
+# including which environment variables to fill in and why.
+services:
+  - type: web
+    name: fiu-revenue-estimator
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    disk:
+      # Persists data/*.json (FIU Metadata, Yield & CMGR, Historical
+      # Actuals, the projection snapshot) across restarts and redeploys —
+      # without this, every deploy would reset the app back to whatever's
+      # checked into the repo. lib/store.js seeds this disk from the
+      # repo's bundled data/ folder on its very first boot, then leaves it
+      # alone (see the comment above seedDataDirIfNeeded in lib/store.js).
+      name: fiu-revenue-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DATA_DIR
+        value: /var/data
+      # Everything below is a secret/credential — sync: false means Render
+      # will prompt for each one in the dashboard instead of expecting a
+      # value in this file (so nothing sensitive ends up committed to the
+      # repo). Required: APP_PASSWORD, SESSION_SECRET. Everything else is
+      # optional — leave one blank in the dashboard to run with that
+      # feature disabled, same as leaving it unset in .env locally.
+      - key: APP_PASSWORD
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ANTHROPIC_MODEL
+        sync: false
+      - key: GMAIL_USER
+        sync: false
+      - key: GMAIL_APP_PASSWORD
+        sync: false
+      - key: METABASE_EMAIL_SUBJECT
+        sync: false
+      - key: EMAIL_CHECK_CACHE_MINUTES
+        sync: false

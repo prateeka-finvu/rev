@@ -1,0 +1,4376 @@
+[
+  {
+    "fiuId": "fiulive@axisbank",
+    "legalName": "Axis Bank",
+    "tspName": "Finfactor",
+    "licenseType": "Bank",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": true
+  },
+  {
+    "fiuId": "fiulive@dreamplug",
+    "legalName": "Dreamplug Advisory Solutions",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": true
+  },
+  {
+    "fiuId": "navifs-fiu",
+    "legalName": "Navi Finserv Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": true
+  },
+  {
+    "fiuId": "fiulive@nuinvestors",
+    "legalName": "",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": true
+  },
+  {
+    "fiuId": "kbnbfc-fiu",
+    "legalName": "Krazybee Services Private Limited",
+    "tspName": "Digitap",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": true
+  },
+  {
+    "fiuId": "NESFB_FIU_PROD",
+    "legalName": "slice small finance bank",
+    "tspName": "Ignosis",
+    "licenseType": "Bank",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": true
+  },
+  {
+    "fiuId": "fiulive@jupitermoney",
+    "legalName": "Amica Investment Advisers Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": true
+  },
+  {
+    "fiuId": "KMBL-FIU-PROD",
+    "legalName": "Kotak Mahindra Bank",
+    "tspName": "In-house",
+    "licenseType": "Bank",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": true
+  },
+  {
+    "fiuId": "SI_CREVA_FIU_PROD",
+    "legalName": "Si Creva",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": true
+  },
+  {
+    "fiuId": "GROWW_NBT_FIU_PROD",
+    "legalName": "GROWW INVEST TECH PRIVATE LIMITED",
+    "tspName": "Ignosis",
+    "licenseType": "Stock broker",
+    "useCase": "PFM",
+    "billingModel": "Data Fetch",
+    "topTen": true
+  },
+  {
+    "fiuId": "bfl-fiu",
+    "legalName": "Bajaj Finance Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": true
+  },
+  {
+    "fiuId": "fiulive@axissec",
+    "legalName": "Axis Securities Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Stock broker",
+    "useCase": "PFM",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@rkbfinance",
+    "legalName": "RAM FINCORP",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": true
+  },
+  {
+    "fiuId": "fiulive@indmoneysb",
+    "legalName": "INDmoney Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@moneycontrol",
+    "legalName": "Moneycontrol.Dot Com India Limited",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Fix Billing",
+    "topTen": false
+  },
+  {
+    "fiuId": "ICICI-FIU",
+    "legalName": "ICICI Bank",
+    "tspName": "Perfios",
+    "licenseType": "Bank",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": true
+  },
+  {
+    "fiuId": "PiramalFinance-FIU",
+    "legalName": "Piramal Finance",
+    "tspName": "Perfios",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "KHATABOOK_FIU_PROD",
+    "legalName": "ADJ Utility Apps Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": true
+  },
+  {
+    "fiuId": "poonawala-fincorp-limited",
+    "legalName": "poonawala-fincorp-limited",
+    "tspName": "Finbox",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "SURYODAY_FIU_PROD",
+    "legalName": "Suryoday",
+    "tspName": "Ignosis",
+    "licenseType": "Bank",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "niapl-fiu",
+    "legalName": "Navi Investment Advisory",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "AKARA_FIU_PROD",
+    "legalName": "Akara",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "LT_FINANCE_FIU_PROD",
+    "legalName": "L&T Finance Holdings Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "muthootml-fiu",
+    "legalName": "Muthoot Microfin Ltd",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@fwfintech",
+    "legalName": "FW Fintech",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@motilaloswal",
+    "legalName": "Motilal Oswal Financial Services",
+    "tspName": "Finfactor",
+    "licenseType": "Stock broker",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": true
+  },
+  {
+    "fiuId": "policybazaar-prod",
+    "legalName": "Policybazaar",
+    "tspName": "Nishkaiv",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "SNAPMINT_FIU_PROD",
+    "legalName": "Snapmint Financial Services Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@foldmoney",
+    "legalName": "Fold Money",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": true
+  },
+  {
+    "fiuId": "fiulive@onepercentclub",
+    "legalName": "One Percent Club",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "bajajfsl-fiu",
+    "legalName": "Bajaj Financial Securities Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "SBFC_PROD_FIUID",
+    "legalName": "SBFC Finance Limited",
+    "tspName": "Lentra",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@credright",
+    "legalName": "Credright Finance Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "MONEYVIEW_FIU_PROD",
+    "legalName": "Whizdm Finance Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@finuture",
+    "legalName": "Finuture Technologies Pvt Limited",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@dhan",
+    "legalName": "Moneylicious Securities",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "finnable-fiu",
+    "legalName": "Finnable Credit Pvt Limited",
+    "tspName": "Digitap",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "DSG_FIU_PROD",
+    "legalName": "DSG Investments Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@paytmmoneypfm",
+    "legalName": "Paytm Money Limited",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": true
+  },
+  {
+    "fiuId": "fiulive@skfin",
+    "legalName": "SK finance limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "FINCORP-fiu",
+    "legalName": "U. Y. FINCORP LIMITED",
+    "tspName": "Digitap",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "abc1-fiu",
+    "legalName": "Aditya Birla Capital Digital Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "AEROFLEX_FIU_PROD",
+    "legalName": "Aeroflex Finance Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "YES_BANK_FIU_PROD",
+    "legalName": "Yes Bank Limited",
+    "tspName": "Ignosis",
+    "licenseType": "Bank",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@shreem",
+    "legalName": "Shreem Datatech",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@crest",
+    "legalName": "Crest",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "BHANIX_FIU_PROD",
+    "legalName": "Bhanix Finance and Investment Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@fundsindia",
+    "legalName": "FundsIndia",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "MSTOCK_FIU_PROD",
+    "legalName": "Mirae Asset Capital Markets (India) Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@lenditt",
+    "legalName": "Chinmay Finlease Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "earlysalary",
+    "legalName": "Fibe",
+    "tspName": "Setu",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@babalease",
+    "legalName": "Baba Lease",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@dmihf",
+    "legalName": "DMI Housing Finance",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@venus",
+    "legalName": "Venus Barter Pvt. Ltd.",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "finaglefspl-fiu",
+    "legalName": "Finagle Financial Services Pvt Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "SVATANTRAMHFC-FIU",
+    "legalName": "Svatantra Micro Housing Finance Corporation",
+    "tspName": "CRIF",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "AXIS_FIU_PROD",
+    "legalName": "Axis Bank Limited",
+    "tspName": "Ignosis",
+    "licenseType": "Bank",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@niyogin",
+    "legalName": "Niyogin Fintech",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "sayyam-fiu",
+    "legalName": "Sayyam Investments Private Limited",
+    "tspName": "Digitap",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "VASTU_HF_FIU_PROD",
+    "legalName": "Vastu Housing Finance",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@upmovecapital",
+    "legalName": "Upmove Capital Pvt Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "bhfl-fiu",
+    "legalName": "Bajaj Housing Finance Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "inprime-fiu",
+    "legalName": "InPrime Finserv",
+    "tspName": "Digitap",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "KOTAK-FIU",
+    "legalName": "KOTAK MAHINDRA PRIME LIMITED",
+    "tspName": "Perfios",
+    "licenseType": "Bank",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "maxlifeinsurance-fiu",
+    "legalName": "Axis Max Life Insurance Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "HIRANANDANI-FIU",
+    "legalName": "HIRANANDANI FINANCIAL SERVICES PRIVATE LIMITED",
+    "tspName": "CRIF",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "CHINMAY_FIU_PROD",
+    "legalName": "Chinmay Finlease Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "CAPFLOAT_FIU_PROD",
+    "legalName": "Capfloat Financial Services Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "richman-fincap",
+    "legalName": "RICHMAN FIN CAP Limited",
+    "tspName": "Setu",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "HINDUJA_FIU_PROD",
+    "legalName": "Hinduja",
+    "tspName": "Ignosis",
+    "licenseType": "P2P",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@sampathi",
+    "legalName": "Sampathi Credits Pvt Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Insurance",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "decimus-fiu",
+    "legalName": "DECIMUS FINANCIAL LIMITED",
+    "tspName": "Digitap",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "lordkrishnafsl-fiu",
+    "legalName": "Lord Krishna Financial Services Limited",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "narendrafcpl-fiu",
+    "legalName": "Narendra Finance Co Pvt Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "PHFL_FIU_PROD",
+    "legalName": "Grihum Housing Finance Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@apac",
+    "legalName": "APAC Financial Services Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "CAPRIGLOBALCAPITAL-FIU",
+    "legalName": "Capriglobal Capital",
+    "tspName": "CRIF",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "CAPRIGLOBALHOUSING-FIU",
+    "legalName": "Capriglobal Housing",
+    "tspName": "CRIF",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "SBI_SECURITIES_FIU_PROD",
+    "legalName": "SBICAP Securities Limited",
+    "tspName": "Ignosis",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@hdfclife",
+    "legalName": "HDFC Life Insurance",
+    "tspName": "Finfactor",
+    "licenseType": "Insurance",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@indiabulls",
+    "legalName": "Sammaan Capital Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "aliceblue-fiu",
+    "legalName": "Alice Blue Financial Services",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@hdfcsecurities",
+    "legalName": "HDFC SECURITIES Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "OPTIMO_FIU_PROD",
+    "legalName": "Nipun Projects and Finance Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "SARVAGRAM_FIU_PROD",
+    "legalName": "Sarvagram",
+    "tspName": "Ignosis",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@kotaksec",
+    "legalName": "Kotak Securities",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "BAJAJ_FIU_PROD",
+    "legalName": "Bajaj Finance Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "CREDITSAISON_FIU_PROD",
+    "legalName": "Kisetsu Saison Finance (India) Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@adityabirlahf",
+    "legalName": "Aditya Birla Housing Finance",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "1financep2ppl-fiu",
+    "legalName": "1 Finance P2P Pvt Ltd",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "FINOVA_FIU_PROD",
+    "legalName": "Finova Capital Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "ashikasbl-fiu",
+    "legalName": "Ashika Stock Broking Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@save",
+    "legalName": "SAVE Housing Finance Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@famli",
+    "legalName": "Famli Technology Product Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@namdev",
+    "legalName": "Namdev Finvest",
+    "tspName": "Finfactor",
+    "licenseType": "",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@sigfyninvestment",
+    "legalName": "Sigfyn Investment Advisors",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "finzfpl-fiu",
+    "legalName": "FinZ Finance Pvt. Ltd.",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "1finance-fiu",
+    "legalName": "1 Finance Private Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "utimf-fiu",
+    "legalName": "UTI Mutual Fund",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "BRANCH_FIU_PROD",
+    "legalName": "Branch International Financial Services Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "RIA",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "balic-fiu",
+    "legalName": "Bajaj Allianz Life Insurance",
+    "tspName": "Finarkein",
+    "licenseType": "Stock Broker",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@knab",
+    "legalName": "KNAB finance",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@bajajfinservdirect",
+    "legalName": "Bajaj Finserv Direct",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "ASHGROVE_FIU_PROD",
+    "legalName": "Ash Grove Capital Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "KIFS_FIU_PROD",
+    "legalName": "kifs",
+    "tspName": "Ignosis",
+    "licenseType": "AMC",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "wealthbeaconia-fiu",
+    "legalName": "Cettlx Services Private Limited",
+    "tspName": "Finarkein",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@easyhomefinance",
+    "legalName": "Easy Home Finance",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@jiraaf",
+    "legalName": "Jiraaf Platform Pvt Limited.",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "kotaklife-fiu",
+    "legalName": "Kotak Mahindra Life Insurance Co Limited",
+    "tspName": "Finarkein",
+    "licenseType": "Insurance",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "talic-fiu",
+    "legalName": "Tata AIA Life Insurance",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "digambercl-fiu",
+    "legalName": "Digamber Capfin Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "saloracap-fiu",
+    "legalName": "Salora Capital Ltd",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@hexawealth",
+    "legalName": "HEXAWEALTH",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@fintoo",
+    "legalName": "Financial Hospital(FINTOO)",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "PRODIGEE_FIU_PROD",
+    "legalName": "Prodigee Finance Limited",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "PAHAL_FIU_PROD",
+    "legalName": "Pahal Financial Services Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "suburbanfipl-fiu",
+    "legalName": "Suburban Finance and Investment Pvt Ltd",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@savefin",
+    "legalName": "SAVE FINANCIAL SERVICES",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "tsfsl-fiu",
+    "legalName": "TradeSmart Fintech Securities Limited",
+    "tspName": "Finarkein",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "AGRIM-FIU",
+    "legalName": "Agrim Housing Finance",
+    "tspName": "CRIF",
+    "licenseType": "Uncategorised",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "karnspl-fiu",
+    "legalName": "Karn Securities Pvt Ltd",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "RADIAN_FIU_PROD",
+    "legalName": "Radian Finserv Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "absli-fiu",
+    "legalName": "Aditya Birla Sun Life Insurance",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "WCAPL_FIU_PROD",
+    "legalName": "Western Capital Advisors Pvt Ltd",
+    "tspName": "Ignosis",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@coinwise",
+    "legalName": "Coinwise Research Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@puneestock",
+    "legalName": "Pune E Stock Broking",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "MAS_PROD",
+    "legalName": "MAS",
+    "tspName": "Ignosis",
+    "licenseType": "RIA",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@axiscapital",
+    "legalName": "Axis Capital Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "BNF_FIU_PROD",
+    "legalName": "Business Nextgen Finance Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "FINODAYA_FIU_PROD",
+    "legalName": "Finodaya Capital Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "TAPSTART_FIU_PROD",
+    "legalName": "Tapstart Capital Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@juliusbaer",
+    "legalName": "JULIUS BAER",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@angelone",
+    "legalName": "Angel One Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "creditwisecpl-fiu",
+    "legalName": "Credit Wise Capital Pvt Limited",
+    "tspName": "Finarkein",
+    "licenseType": "RIA",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "solomoncap-fiu",
+    "legalName": "Solomon Capital Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "cmapl-fiu",
+    "legalName": "Cusp Money Advisors Pvt Ltd",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "epimoneypl-fiu",
+    "legalName": "Epimoney Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "mfppl-fiu",
+    "legalName": "Mukut Finvest Properties Pvt Limited",
+    "tspName": "Finarkein",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "arigamoney-fiu",
+    "legalName": "Arigamoney India Pvt Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@nobias",
+    "legalName": "NOBIAS Analyst",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "TRUSTLENDERS_FIU_PROD",
+    "legalName": "Trustlenders Capital Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@paymeindia",
+    "legalName": "PayMe India",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@paytmmoney",
+    "legalName": "Paytm Money",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "STFT_FIU_PROD",
+    "legalName": "STFT Finance Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "ventura-fiu",
+    "legalName": "Ventura Securities Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "alic-fiu",
+    "legalName": "Bandhan Life Insurance",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@goalteller",
+    "legalName": "Finteller Advisors",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@handauncle",
+    "legalName": "Hijli Investment Advisors Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "sbilife-fiu",
+    "legalName": "SBI Life Insurance Co. Limited",
+    "tspName": "Finarkein",
+    "licenseType": "Insurance",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "JOHNDEERE-FIU",
+    "legalName": "JOHN DEERE FINANCIAL INDIA PVT Limited",
+    "tspName": "CRIF",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "choicemf-fiu",
+    "legalName": "Choice Mutual Fund",
+    "tspName": "",
+    "licenseType": "AMC",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "grownetfpl-fiu",
+    "legalName": "Grownet Finance Pvt Limited",
+    "tspName": "Finarkein",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@equirus",
+    "legalName": "Equirus Wealth",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "APSIRE_FIU_PROD",
+    "legalName": "Apsire Finance Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@angeloneinv",
+    "legalName": "Angel One Investments",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "devmuni-fiu",
+    "legalName": "Devmuni Leasing and Finance Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "dwaithapl-fiu",
+    "legalName": "Dwaith Advisory Pvt Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@respo",
+    "legalName": "Respo Financial Capital Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "singularitycredit-fiu",
+    "legalName": "Singularity Creditworld Pvt. Limited.",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "SRNG_FIU_PROD",
+    "legalName": "",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "JANASHA_FIU_PROD",
+    "legalName": "JANASHA FINANCE PRIVATE LIMITED",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@satya",
+    "legalName": "SATYA MICRO HOUSING FINANCE PVT Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@orimadvisors",
+    "legalName": "Orim Advisors",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "tradebookcspl-fiu",
+    "legalName": "TRADEBOOK CONSULTANCY SERVICES PVT LTD",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "networthtspl-fiu",
+    "legalName": "Networth Tracker Solutions Pvt Ltd",
+    "tspName": "",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "rgfpl-fiu",
+    "legalName": "R. G. Finlease Pvt Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "ramkrishna-fiu",
+    "legalName": "Ramkrishna Pure Finance Pvt Ltd",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "VALLABHI_FIU_PROD",
+    "legalName": "Vallabhi Capital Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "dynamicepl-fiu",
+    "legalName": "Dynamic Equities Pvt Ltd",
+    "tspName": "",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "plwealthpl-fiu",
+    "legalName": "PL Wealth Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "dspam-fiu",
+    "legalName": "DSP Asset Managers Pvt Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@hdfc",
+    "legalName": "HDFC Bank Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Bank",
+    "useCase": "PFM",
+    "billingModel": "Unbilled",
+    "topTen": true
+  },
+  {
+    "fiuId": "DEZERV_FIU_PROD",
+    "legalName": "DEZERV",
+    "tspName": "Ignosis",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "JFS_FIU_PROD",
+    "legalName": "Jio Financial Services Limited",
+    "tspName": "Ignosis",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": true
+  },
+  {
+    "fiuId": "JIOBLK_FIU_PROD",
+    "legalName": "Jio BlackRock Investment Advisors Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "MOBIKWIK_FIU_PROD",
+    "legalName": "Mobikwik",
+    "tspName": "Ignosis",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@canarabank",
+    "legalName": "Canara Bank",
+    "tspName": "Finfactor",
+    "licenseType": "Bank",
+    "useCase": "PFM",
+    "billingModel": "Fix Billing",
+    "topTen": false
+  },
+  {
+    "fiuId": "ADITYA_BIRLA_CAPITAL_DIGITAL_FIU_PROD",
+    "legalName": "Aditya Birla Capital Digital",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "AUBank-FIU",
+    "legalName": "AU Small Finance Bank Limited",
+    "tspName": "Perfios",
+    "licenseType": "Bank",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@valueresearch",
+    "legalName": "Independent Advisors Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@motilalresearch",
+    "legalName": "Motilal Oswal Research 360",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "Safebox_FIU_prod",
+    "legalName": "BeyondCo Technologies Private Limited (Safebox)",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SOLOMON_FIU_PROD",
+    "legalName": "Solomon Capital Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@finofin",
+    "legalName": "Finofin Insurance & Advisory",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@finny",
+    "legalName": "ThinkFinny Tech Labs Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "OIA-RIA-FIU-260421",
+    "legalName": "Opulent Investment Adviser Private Limited",
+    "tspName": "",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "DMI_FIU_PROD",
+    "legalName": "DMI Finance Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "chillarfintech-fiu",
+    "legalName": "",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@stackfin",
+    "legalName": "Stackfin Technologiy Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "HDFC-FIU",
+    "legalName": "HDFC Bank",
+    "tspName": "Perfios",
+    "licenseType": "Bank",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": true
+  },
+  {
+    "fiuId": "fiulive@invsify",
+    "legalName": "Invsify Technologies Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Insurance",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "FINWIZARD_FIU_PROD",
+    "legalName": "Finwizard Technology Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "Insurance",
+    "useCase": "Uncategorised",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@sharekhanemp",
+    "legalName": "Sharekhan Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "eimplca-fiu",
+    "legalName": "Essential Investment Managers Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@scripbox",
+    "legalName": "Scripbox Wealth Managers Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@axissecurities",
+    "legalName": "Axis Securities Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "Paisabazaar-FIU-LIVE",
+    "legalName": "Paisabazaar.com",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "PFM",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@fourdegree",
+    "legalName": "Four Degree Water",
+    "tspName": "Finfactor",
+    "licenseType": "",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "eimpl-fiu",
+    "legalName": "Essential Investment Managers",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unique Users",
+    "topTen": false
+  },
+  {
+    "fiuId": "Coracle-fiu",
+    "legalName": "Coracle Capital Consulting and Corporate Services Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "ZET-RIA-FIU-260703",
+    "legalName": "Zenara Technologies Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@dezerv",
+    "legalName": "Dezerv Investments",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@iiflcapital",
+    "legalName": "IIFL Capital",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@twigg",
+    "legalName": "Twigg",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "USL-STCKBR-FIU-260519",
+    "legalName": "Upstox Securities Private Limited",
+    "tspName": "",
+    "licenseType": "HFC",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@nyvo",
+    "legalName": "Nyvo Technology Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@onebanc",
+    "legalName": "Onebanc Technologies Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@emkayglobal",
+    "legalName": "Emkay Global",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "Khosya-fiu",
+    "legalName": "Khosya Finlease Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "STL-RIA-FIU-260608",
+    "legalName": "Sixdis Technologies Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@airpaymoney",
+    "legalName": "Airpay Money Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@oceanfinvest",
+    "legalName": "inXits",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@plnrinvestment",
+    "legalName": "PLNR Investment Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "PNB-FIU",
+    "legalName": "Punjab National Bank",
+    "tspName": "Perfios",
+    "licenseType": "Bank",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@mirae",
+    "legalName": "Mirae Asset Capital Markets (India) Pvt. Ltd.",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SHRIRAM_FIU_PROD",
+    "legalName": "Shriram Finance Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@indianbankpfm",
+    "legalName": "Indian Bank",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "DACPL_NP_001",
+    "legalName": "Dev Aashish Capitals Private Limited",
+    "tspName": "Novel Patterns",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fynro-fiu",
+    "legalName": "Fynro Advisory Services Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "FNJ-RIA-FIU-260616",
+    "legalName": "Finanjo Ventures Pvt Ltd",
+    "tspName": "",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "dev-xpressloans",
+    "legalName": "Comero Leasing and Financials Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@pooja",
+    "legalName": "Pooja Finstock International Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@5paisarm",
+    "legalName": "5 Paisa Capital Ltd",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@neowealth",
+    "legalName": "Neo Wealth",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "dev-sashienterprises",
+    "legalName": "Sashi Enterprises Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "moneylicious-dhan",
+    "legalName": "Dhan",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@krishnarath",
+    "legalName": "Mr. Krishna Rath",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@swastik",
+    "legalName": "Swastik Finance Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@idbicapital",
+    "legalName": "IDBI Capital",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "stock-fiu-prod",
+    "legalName": "South Asian Stocks Ltd",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@pocketful",
+    "legalName": "Pocketful Fintech Capital",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "dev_salarynow",
+    "legalName": "Zed Leafin Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@decimus",
+    "legalName": "Decimus Financial",
+    "tspName": "Finfactor",
+    "licenseType": "HFC",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "ASFL_NP_001",
+    "legalName": "AU Bank",
+    "tspName": "Novel Patterns",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "dev-incred",
+    "legalName": "",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@etmoney",
+    "legalName": "Banayantree Services Limited",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "kbspl-fiu",
+    "legalName": "Krazybee Services Pvt Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "TycoonCredit-fiu",
+    "legalName": "Tycoon Credit and Portfolios Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@equall",
+    "legalName": "EQUALL",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "WITCL_NP_001",
+    "legalName": "Weekline Investment And Trading Company Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "CITRA-fiu",
+    "legalName": "Phocket Infotech Private Limited (CITRA FINANCIALS PRIVATE LIMITED)",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "hdbfs-fiu",
+    "legalName": "HDB Financial Services Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "FYR-STCKB-FIU-260603",
+    "legalName": "Fyers Securities",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@satsai",
+    "legalName": "Satsai Finlease Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@indusindsec",
+    "legalName": "IndusInd Securities Limited",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@phonepewealth",
+    "legalName": "Phonepe Wealth",
+    "tspName": "Finfactor",
+    "licenseType": "HFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@systematix",
+    "legalName": "Systematix Shares and Stocks",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@equiruswealth",
+    "legalName": "Equirus Wealth Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "kisetsuSaison-FIU",
+    "legalName": "",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "WEA-RIA-FIU-260612",
+    "legalName": "Tatvartha WealthNest AI Pvt Ltd",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "Sawalsha-fiu",
+    "legalName": "Sawalsha Leasing and Finance Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "CHB-STCKBR-FIU-260515",
+    "legalName": "Choice Equity Broking",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@spheeti",
+    "legalName": "Spheeti Fintech Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@gridkey",
+    "legalName": "Gridkey Technologies",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@bajajfinancial",
+    "legalName": "Bajaj Financial Securities Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "indusindcfdteam-fiu",
+    "legalName": "Religare Broking Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "raghavifl-fiu",
+    "legalName": "Raghavi Finance Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "JUNOON-FIU",
+    "legalName": "Junooncapital",
+    "tspName": "CRIF",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@equirussecurities",
+    "legalName": "Equirus Securities",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@qode",
+    "legalName": "Qode Invest",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@tara",
+    "legalName": "Tara Capital Partners India Pvt Ltd",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@antique",
+    "legalName": "Antique Stock Broking Limited",
+    "tspName": "Finfactor",
+    "licenseType": "",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@stallion",
+    "legalName": "Stallion Asset Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "UGROCapital-FIU",
+    "legalName": "U GRO Capital",
+    "tspName": "Perfios",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "TATA_CAPITAL_FIU_PROD",
+    "legalName": "",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "MBF-NBFC-FIU-060526",
+    "legalName": "MoneyBoxx Finance Limited",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@ambitfinvest",
+    "legalName": "Ambit Finvest",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@fincart",
+    "legalName": "Fincart Finvest Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@finvasiasecurities",
+    "legalName": "Finvasia Securities Pvt Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "IND-FIU-NBFC-260515",
+    "legalName": "Indel Money Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@arhamshare",
+    "legalName": "Arham Share Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "IND-PVB-FIU-260709",
+    "legalName": "",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@anandrathi",
+    "legalName": "Anand Rathi Share and Stock Brokers Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@jcwealth",
+    "legalName": "Jupiter Capital Wealth Management Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "FEDERAL_PROD_FIUID",
+    "legalName": "THE FEDERAL BANK LIMITED",
+    "tspName": "Lentra",
+    "licenseType": "Bank",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "earlysalarypl-fiu",
+    "legalName": "EarlySalary Services Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "UBI-FIU",
+    "legalName": "Union Bank of India",
+    "tspName": "Perfios",
+    "licenseType": "Bank",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@aaritya",
+    "legalName": "Aaritya Broking Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@swastika",
+    "legalName": "Swastika Investmart",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@liquide",
+    "legalName": "Fluid Fincap Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@dyota",
+    "legalName": "Dyota Solutions",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "DSI-NBFC-FIU-260610",
+    "legalName": "D S Integrated Finsec Pvt Ltd",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "GDLLEASING",
+    "legalName": "G D L LEASING AND FINANCE LIMITED",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SCPL_NP_001",
+    "legalName": "Satisfaction Commercial Private Limited",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SHRIRAM-FIU",
+    "legalName": "Shri Ram Finance Corporation Pvt. Limited.",
+    "tspName": "CRIF",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "TCPL_NP_001",
+    "legalName": "Tyger Capital Private Limited",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "KAABIL-FIU",
+    "legalName": "Kaabil Finance Private Limited",
+    "tspName": "Perfios",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "JUB-NBFC-FIU-260514",
+    "legalName": "Jublee Dealers Private Limited",
+    "tspName": "",
+    "licenseType": "Insurance",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@quantmutual",
+    "legalName": "",
+    "tspName": "Finfactor",
+    "licenseType": "Bank",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@fusion",
+    "legalName": "Fusion Finance Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SGR_NP_001",
+    "legalName": "Sewa Grih Rin Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@indothai",
+    "legalName": "Indo Thai Securities",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@mintcap",
+    "legalName": "Mintcap Broker Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "ROI-STCKB-FIU-260609",
+    "legalName": "Roi Net Securities Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "EQU-RIA-FIU-260525",
+    "legalName": "Equentis Wealth Advisory Services Ltd",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "sparkcapl-fiu",
+    "legalName": "Spark Capital Advisors (India) Pvt Ltd",
+    "tspName": "",
+    "licenseType": "Insurance",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@nothernarc",
+    "legalName": "Northern Arc Capital Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "STP-RIA-FIU-260803",
+    "legalName": "",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@credifin",
+    "legalName": "Credifin Limited",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "PFM",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "TDV-RIA-FIU-260608",
+    "legalName": "TREND REVERSAL RESEARCH AND INVESTMENT ADVISORS PRIVATE LIMITED",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@loksuvidha",
+    "legalName": "Lok Suvidha Finance",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "iiflsec-fiu",
+    "legalName": "IIFL Capital Services Ltd",
+    "tspName": "",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "flexiloans",
+    "legalName": "Flexiloans",
+    "tspName": "Setu",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@nirmalbang",
+    "legalName": "Nirmal bang Securities",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@gopi",
+    "legalName": "Gopi Securities Pvt. Ltd",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "JFF-NBFC-FIU-260602",
+    "legalName": "JMJ Fintech Limited",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "KLFPL_NP_001",
+    "legalName": "Kisga Leasing & Finance Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@greenportfolio",
+    "legalName": "Green Portfolio Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@lfcsecurities",
+    "legalName": "L.F.C Securities Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@finverse",
+    "legalName": "Finverse Platform Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Stock broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@iiflsamasta",
+    "legalName": "IIFL Samasta",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@cholamandalam",
+    "legalName": "CholaMandalam",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "finwiser_sandbox_fiu",
+    "legalName": "Chandrachuda Sarma Yemmanuru Proprietor Finwiser",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "TRANSWARRANTY-NBFC-FIU",
+    "legalName": "Transwarranty Limited",
+    "tspName": "CRIF",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "VFF-HFC-FIU-260512",
+    "legalName": "Vridhi Finserv Home Finance Limited",
+    "tspName": "",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@seedsfincap",
+    "legalName": "Seeds Fincap",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@bajajautocredit",
+    "legalName": "Bajaj Auto Credit Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "HFCPL_NP_001",
+    "legalName": "Harvinder Finance Company Pvt Limited",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "PHD-RIA-FIU-260615",
+    "legalName": "Partha Harshal Deshpande",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "indiafirstlicl-fiu",
+    "legalName": "IndiaFirst Life Insurance Co Ltd",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "ACM-STCKBR-FIU-260511",
+    "legalName": "Arihant Capital Markets Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "MAH-NBFC-FIU-260512",
+    "legalName": "Mahautkarsh Securities and Finance Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "AUXILO-FIU",
+    "legalName": "AUXILO FINSERVE PRIVATE LIMITED",
+    "tspName": "Perfios",
+    "licenseType": "Stock Broker",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SIBLFIU",
+    "legalName": "The South Indian Bank Limited",
+    "tspName": "Nishkaiv",
+    "licenseType": "Bank",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@usfb",
+    "legalName": "Utkarsh Small Finance Bank Ltd",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@rudowealth",
+    "legalName": "Rudo Wealth Investment",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "WTS-RIA-FIU-260703",
+    "legalName": "Worthos Technologies Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "OWP-PM-FIU-260721",
+    "legalName": "Optima Wealth Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@apollo",
+    "legalName": "Apollo Finvest",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@techfino",
+    "legalName": "techfino capital",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SAARATHIFINANCE-FIU",
+    "legalName": "Saarathi Finance",
+    "tspName": "CRIF",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "VEL-NBFC-FIU-260602",
+    "legalName": "Velicham Finance Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SIB-PVB-FIU-260520",
+    "legalName": "Junoon Capital Services Pvt Ltd",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SPHEETI-FIU",
+    "legalName": "Spheeti Fintech",
+    "tspName": "CRIF",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "ICC-NBFC-FIU-260522",
+    "legalName": "IREP Credit Capital Private Limited",
+    "tspName": "",
+    "licenseType": "RIA",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "DFI-NBFC-FIU-260504",
+    "legalName": "Digner Finlease and Investment Pvt Ltd",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "cholamandalam-fiu-prod",
+    "legalName": "Cholamandalam Investment and Finance Company Limited",
+    "tspName": "",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@msfincap",
+    "legalName": "MS Fincap Pvt Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "NAM-NBFC-FIU-260511",
+    "legalName": "Naman Commodities Pvt Ltd",
+    "tspName": "",
+    "licenseType": "Insurance",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@mukutfinvest",
+    "legalName": "Mukut Finvest",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "UNNATTI-fiu",
+    "legalName": "Unnati Finserv Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@finideas",
+    "legalName": "Finideas Investment Advisor Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "BFL-NBFC-FIU-260616",
+    "legalName": "Barota Finance Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@ikigai",
+    "legalName": "Ikigai Asset Manager",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "k2vs-insurance-fiu",
+    "legalName": "K2VS Insurance Marketing",
+    "tspName": "Unacores",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "NAMDEV-FIU",
+    "legalName": "Namdev Finvest Private Limited",
+    "tspName": "Perfios",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "CRISSFIN_FIU_PROD",
+    "legalName": "Criss Financial Limited",
+    "tspName": "Ignosis",
+    "licenseType": "",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "Trickleflood-fiu",
+    "legalName": "Trickle Flood Technologies Pvt. Limited.",
+    "tspName": "Digitap",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "AIP-RIA-FIU-260520",
+    "legalName": "ACUITY INSIGHTS PRIVATE LIMITED",
+    "tspName": "",
+    "licenseType": "RIA",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@torusfinmarkets",
+    "legalName": "Torus Financial Markets",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "RELIGAREBROKING-fiu",
+    "legalName": "Wealth Beacon Investment Advisors Private Limited",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@vistaar",
+    "legalName": "Vistaar Financial Services",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "KSF-NBFC-FIU-260702",
+    "legalName": "",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SDTPL_NP_001",
+    "legalName": "Shivdurga Trading Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SHF-NBFC-FIU-260609",
+    "legalName": "SHIVAKARI FINANCE PRIVATE LIMITED",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "EASYHOMEFINANCE-FIU",
+    "legalName": "Easy Home Finance Limited",
+    "tspName": "Perfios",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "BIZLOAN-FIU",
+    "legalName": "Bizloan Pvt Limited",
+    "tspName": "CRIF",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@goldline",
+    "legalName": "Goldline Finance",
+    "tspName": "Finfactor",
+    "licenseType": "AMC",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@jainam",
+    "legalName": "Jainam Broking Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "ACM-NBFC-FIU-260604",
+    "legalName": "",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@meghdoot",
+    "legalName": "Meghdoot Mercantile Pvt Limited",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "WAQTFINANCE-FIU",
+    "legalName": "Waqt Finance Private Limited",
+    "tspName": "Perfios",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@aanfinance",
+    "legalName": "AAN Finance",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@money2me",
+    "legalName": "Money2Me Finance Pvt Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "southindia-finvest",
+    "legalName": "SOUTHINDIA FINVEST PRIVATE LIMITED",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "irage-broking",
+    "legalName": "IRAGE BROKING SERVICES LLP",
+    "tspName": "Setu",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@zebu",
+    "legalName": "Zebu Share and Wealth",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "AKME_FIU_PROD",
+    "legalName": "Akme Fintrade (India) Limited",
+    "tspName": "Ignosis",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@goodskill",
+    "legalName": "Goodskill Securities & Services Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "AYU-NBFC-FIU-260724",
+    "legalName": "",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@rohitprofin",
+    "legalName": "Rohit Profin Securities Private Ltd",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "JAIRAJ",
+    "legalName": "JAIRAJ FINVEST PRIVATE LIMITED",
+    "tspName": "Unacores",
+    "licenseType": "Uncategorised",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "KSL-STCKB-FIU-260623",
+    "legalName": "KOTAK SECURITIES LIMITED",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "cettlx-services",
+    "legalName": "Criss Financial Limited",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@agffinlease",
+    "legalName": "AGF Finlease (India) Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "hero-housing",
+    "legalName": "Hero Housing Finance Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@dhansafalfin",
+    "legalName": "",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "cboi-dlp-fiu",
+    "legalName": "Central Bank of India",
+    "tspName": "Lentra",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "finnovate-financial",
+    "legalName": "Finnovate Financial Services Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "PCI-NBFC-FIU-260605",
+    "legalName": "Prakash Chemtex India Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "KUH-NBFC-FIU-260526",
+    "legalName": "KUHOO FINANCE PRIVATE LIMITED",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "FINTREE-LIVE",
+    "legalName": "FINTREE-LIVE",
+    "tspName": "Unacores",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "larktfl-fiu",
+    "legalName": "Lark Trading and Finance Ltd",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "lendingkart",
+    "legalName": "Lendingkart Finance Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@adichitragupta",
+    "legalName": "Adi Chitragupta Finance Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "CEN-NBFC-FIU-260429",
+    "legalName": "Censeo Capital Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "MICROGREENHOUSINGFINANCE-FIU",
+    "legalName": "Micro Green Housing Finance Private Limited",
+    "tspName": "Perfios",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@jacinth",
+    "legalName": "Jacinth Finvest Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@marcellus",
+    "legalName": "Marcellus Investment Managers Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "P2P",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "RAR-fiu",
+    "legalName": "RAR FINCARE LIMITED",
+    "tspName": "Digitap",
+    "licenseType": "AMC",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "varashakti-fiu-prod",
+    "legalName": "Varashakti Housing Finance Private Limited",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "VIKASMONEY-FIU",
+    "legalName": "Vikas Money Limited",
+    "tspName": "CRIF",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "sbi-fiu",
+    "legalName": "STATE BANK OF INDIA",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "dev-maxemocapital",
+    "legalName": "MaxemoCapital",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SAN-NBFC-FIU-260528",
+    "legalName": "Sankalp Capital Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@mdfcfinanciers",
+    "legalName": "MDFC Financiers",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "Marathon-fiu",
+    "legalName": "Marathon Finlease Private Limited",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "MAS-RIA-FIU-260423",
+    "legalName": "MODULOR ADVISORY SERVICES",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "AFL-NBFC-FIU-260603",
+    "legalName": "Apollo Finvest (India) Ltd",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "PRO-NBFC-FIU-260710",
+    "legalName": "Prodigee Finance Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@avantifinance",
+    "legalName": "Avanti Finance",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "PRANAMYA",
+    "legalName": "Hrushikesh Kale",
+    "tspName": "Unacores",
+    "licenseType": "Uncategorised",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "BAZAARI-FIU",
+    "legalName": "Bazaari finance",
+    "tspName": "CRIF",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SHR-RIA-FIU-260528",
+    "legalName": "Shreem Datatech Solutions Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "beryl",
+    "legalName": "Beryl Securities Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "ABHIYAN_FIU_PROD",
+    "legalName": "Abhiyan Capital Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "iciciprudential-fiu",
+    "legalName": "ICICI Prudential Life Insurance",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "NWM-STCKB-FIU-260627",
+    "legalName": "",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "UCOB-FIU",
+    "legalName": "UCO Bank",
+    "tspName": "Perfios",
+    "licenseType": "Insurance",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "CHARBHUJA",
+    "legalName": "Charbhuja Finvest Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "icicilgicl-fiu",
+    "legalName": "ICICI LOMBARD General Insurance Company Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@cdlfinancial",
+    "legalName": "CDL Financial Services",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "MPF-NBFC-FIU-260529",
+    "legalName": "M/s Premium Finlease Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "KotakMahindraBank-FIU",
+    "legalName": "Kotak Mahindra Bank",
+    "tspName": "Perfios",
+    "licenseType": "Bank",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "FUNDSMAMA-FIU",
+    "legalName": "FUNDSMAMA",
+    "tspName": "CRIF",
+    "licenseType": "Insurance",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "FEXPRIME-fiu",
+    "legalName": "FEXPRIME FINANCE PRIVATE LIMITED",
+    "tspName": "Digitap",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@supreme",
+    "legalName": "Supreme Housing Finance",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@comfortfincap",
+    "legalName": "Comfort Fincap Limited",
+    "tspName": "Finfactor",
+    "licenseType": "",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@indusind",
+    "legalName": "",
+    "tspName": "Finfactor",
+    "licenseType": "Bank",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "FWC-NBFC-FIU-260525",
+    "legalName": "Flat White Capital Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@coversure",
+    "legalName": "Coversure",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "FEEONLYRIA_FIU_PROD",
+    "legalName": "FEE ONLY INVESTMENT ADVISORS LLP",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@finlease",
+    "legalName": "",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "LLF-NBFC-FIU-260602",
+    "legalName": "Lionlender Finance Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "myfi-fiu",
+    "legalName": "MyFi Fintech Advisory Services Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@enorme",
+    "legalName": "Enorme Capital",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SpheetiFintech-fiu",
+    "legalName": "Spheeti Fintech Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "NPPL_004",
+    "legalName": "ART Housing Finance (India) Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "NFP-NBFC-FIU-260603",
+    "legalName": "Nirantara Finaccess Private",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@dmifinanceltd",
+    "legalName": "DMI Finance",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "RAJ-NBFC-FIU-260626",
+    "legalName": "Rajvir Securities and Finance Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "JNC-NBFC-FIU-260617",
+    "legalName": "Junoon Capital Services Pvt Ltd",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@keertana",
+    "legalName": "Keertana Finserv",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "CTPL_NP_001",
+    "legalName": "Sampati Securities Limited",
+    "tspName": "",
+    "licenseType": "Uncategorised",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "Barwala-fiu",
+    "legalName": "Barwala Leasing and Finance (P) Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@saloracapital",
+    "legalName": "Salora Capital Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@punjabreliable",
+    "legalName": "Punjab Reliable Investments Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "BSD_NP_001",
+    "legalName": "Baid Stock Broking Services Private Limited",
+    "tspName": "",
+    "licenseType": "Uncategorised",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "LORDKRISHNA",
+    "legalName": "LORDKRISHNA",
+    "tspName": "Unacores",
+    "licenseType": "Uncategorised",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@djt",
+    "legalName": "DJT Micro Finance Pvt Ltd",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "CFL-NBFC-FIU-260625",
+    "legalName": "Cashtree Finance Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "Meet-fiu",
+    "legalName": "Meet Finance Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "ARY-NBFC-FIU-260723",
+    "legalName": "",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "TJFC_FIU_prod",
+    "legalName": "TJ Financial Consultancy & investment (P) Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@pinkcity",
+    "legalName": "Pink City Fincap Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "ACM-NBFC-FIU-260627",
+    "legalName": "Avinash Capital Markets Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "PFP-NBFC-FIU-260713",
+    "legalName": "",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@midlandmicrofin",
+    "legalName": "Midland Microfin Limited",
+    "tspName": "",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "indian-bank-fiu",
+    "legalName": "INDIAN BANK",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "MFS-NBFC-FIU-260515",
+    "legalName": "Magnet Financial Services Pvt Ltd",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "DGF-STCKB-FIU-260709",
+    "legalName": "Daily Gong Financial Services Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SUBURBAN_FIU_PROD",
+    "legalName": "Suburban Finance and Investment Private Limited",
+    "tspName": "Ignosis",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@diamondhands",
+    "legalName": "021 Trade",
+    "tspName": "Finfactor",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "PAISALO",
+    "legalName": "PAISALO Digital Limited",
+    "tspName": "CRIF",
+    "licenseType": "Stock Broker",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "STATUSFINANCE-FIU",
+    "legalName": "STATUS LEASING & FINANCE LIMITED",
+    "tspName": "Perfios",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "WOODCAPITAL-FIU",
+    "legalName": "Wood Capital",
+    "tspName": "CRIF",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "rk-global",
+    "legalName": "R K Global Shares & Securities Limited",
+    "tspName": "Setu",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@easebuzz",
+    "legalName": "Easebuzz Private Limited",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "HFP-NBFC-FIU-260615",
+    "legalName": "HIM FINCAP PRIVATE LIMITED",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "FDP-NBFC-FIU-260608",
+    "legalName": "FDPL Finance Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "MPA-NBFC-FIU-260608",
+    "legalName": "MPA Investment Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "KarnatakaBank",
+    "legalName": "Karnataka Bank Limited",
+    "tspName": "Perfios",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "shriramfcpl-fiu",
+    "legalName": "Shri Ram Finance Corporation Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "MONEYPLUS_FIU",
+    "legalName": "Moneyplus Financial Services",
+    "tspName": "CRIF",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "Antworks-fiu",
+    "legalName": "Antworks P2P Financing Private Limited",
+    "tspName": "",
+    "licenseType": "Insurance",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "FEXPRIM-FIU",
+    "legalName": "FEXPRIME FINANCE P Limited",
+    "tspName": "CRIF",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "refynetpl-fiu",
+    "legalName": "Refyne Finance Pvt. Ltd.",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "LAN-NBFC-FIU-260525",
+    "legalName": "LAN Finance Private Limited",
+    "tspName": "",
+    "licenseType": "Insurance",
+    "useCase": "Uncategorised",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "muni-broking",
+    "legalName": "MUNI BROKING HOUSE LIMITED",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "VALUELINE_FIU_PROD",
+    "legalName": "Valueline Securities Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SID-FININD-FIU-260617",
+    "legalName": "Small Industries Development Bank of India",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "arthan-fiu",
+    "legalName": "Arthan Finance Pvt Limited",
+    "tspName": "Finarkein",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  },
+  {
+    "fiuId": "GLLFL-fiu",
+    "legalName": "Golden Legend Leasing & Finance Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SOF-NBFC-FIU-260512",
+    "legalName": "SPOTON FINTECH PRIVATE LIMITED",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@metafin",
+    "legalName": "Metafin Cleantech Finance",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "fiulive@choice",
+    "legalName": "choice finserv",
+    "tspName": "Finfactor",
+    "licenseType": "RIA",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "MFP-NBFC-FIU-260427",
+    "legalName": "Money Flow Portfolio Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "YAD-RIA-FIU-260703",
+    "legalName": "",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "MPF-NBFC-FIU-260629",
+    "legalName": "Money Plus Financial Services Ltd",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "RFP-NBFC-FIU-260617",
+    "legalName": "Rupitol Finance Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "EDG-NBFCP-FIU-260422",
+    "legalName": "Edgro Finance Private Limited",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "TEN-NBFC-FIU-260429",
+    "legalName": "TenMark Capital Pvt Ltd",
+    "tspName": "",
+    "licenseType": "NBFC",
+    "useCase": "Lending",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "URB-NBFC-FIU-260512",
+    "legalName": "HYTONE MERCHANTS PVT. LTD",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "SaiRoshni-fiu",
+    "legalName": "Sai Roshni Capital Private Limited",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "LIF-NBFC-FIU-260724",
+    "legalName": "",
+    "tspName": "",
+    "licenseType": "",
+    "useCase": "",
+    "billingModel": "Unbilled",
+    "topTen": false
+  },
+  {
+    "fiuId": "KMBL-FIU-PROD (PFM)",
+    "legalName": "Kotak Mahindra Bank",
+    "tspName": "In-house",
+    "licenseType": "Bank",
+    "useCase": "PFM",
+    "billingModel": "Data Fetch",
+    "topTen": false
+  }
+]

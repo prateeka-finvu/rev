@@ -1,0 +1,2092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FIU Revenue Estimator</title>
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<style>
+  :root{
+    color-scheme: light;
+    --surface-1:      #fcfcfb;
+    --surface-2:      #ffffff;
+    --page:           #f9f9f7;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --grid:           #e1e0d9;
+    --baseline:       #c3c2b7;
+    --border:         rgba(11,11,11,0.10);
+    --series-1:       #2a78d6;
+    --series-1-100:   #cde2fb;
+    --series-1-450:   #2a78d6;
+    --series-2:       #eb6834;
+    --series-2-100:   #fbdccb;
+    --good:           #0ca30c;
+    --critical:       #d03b3b;
+    --warning:        #fab219;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:where(:not([data-theme="light"])){
+      color-scheme: dark;
+      --surface-1:      #1a1a19;
+      --surface-2:      #201f1e;
+      --page:           #0d0d0d;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #898781;
+      --grid:           #2c2c2a;
+      --baseline:       #383835;
+      --border:         rgba(255,255,255,0.10);
+      --series-1:       #3987e5;
+      --series-1-100:   #184f95;
+      --series-1-450:   #3987e5;
+      --series-2:       #d95926;
+      --series-2-100:   #6b3216;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --surface-1:      #1a1a19;
+    --surface-2:      #201f1e;
+    --page:           #0d0d0d;
+    --text-primary:   #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #898781;
+    --grid:           #2c2c2a;
+    --baseline:       #383835;
+    --border:         rgba(255,255,255,0.10);
+    --series-1:       #3987e5;
+    --series-1-100:   #184f95;
+    --series-1-450:   #3987e5;
+    --series-2:       #d95926;
+    --series-2-100:   #6b3216;
+  }
+  *{ box-sizing: border-box; }
+  body{ margin:0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--page); color: var(--text-primary); }
+  .wrap{ max-width: 1340px; margin: 0 auto; padding: 32px 20px 64px; }
+  header{ margin-bottom: 20px; display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  h1{ font-size: 22px; margin: 0 0 4px; }
+  .sub{ color: var(--text-secondary); font-size: 14px; margin:0; max-width:70ch; }
+  .theme-toggle{ border:1px solid var(--border); background: var(--surface-2); color: var(--text-secondary); border-radius:8px; padding:6px 10px; font-size:12px; cursor:pointer; }
+  .header-actions{ display:flex; gap:8px; align-items:center; flex-shrink:0; }
+  .brand{ display:flex; align-items:center; gap:14px; }
+  .brand-logo{ height:38px; width:auto; flex-shrink:0; }
+
+  .tabs{ display:flex; gap:6px; margin-bottom:20px; border-bottom:1px solid var(--border); }
+  .tab-btn{ font-family:inherit; font-size:13.5px; font-weight:600; padding:10px 16px; border:none; background:transparent; color:var(--text-secondary); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; }
+  .tab-btn.active{ color: var(--series-1); border-bottom-color: var(--series-1); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  .card{ background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+  .card h2{ font-size:15px; margin:0 0 4px; }
+  .card .hint{ font-size: 12.5px; color: var(--text-muted); margin: 0 0 14px; line-height:1.5; }
+
+  /* Monthly Revenue tab: input (the counts upload + date/FY/SUC fields) lives
+     in a sticky side panel, separate from the data sections in the main
+     column — keeps the controls in view while scrolling through results,
+     instead of them being just another card in the same scrolling flow. */
+  .revenue-layout{ display:flex; align-items:flex-start; gap:20px; }
+  .side-panel{ flex: 0 0 300px; width:300px; position:sticky; top:20px; max-height:calc(100vh - 40px); overflow-y:auto; }
+  .side-panel .field{ width:100%; margin-bottom:12px; }
+  .side-panel .field select, .side-panel .field input{ width:100%; }
+  .side-panel .upload-box{ width:100%; margin-bottom:12px; }
+  .side-panel #emailSourceRow{ align-items:center; margin-bottom:10px; flex-wrap:wrap; }
+  .revenue-main{ flex:1; min-width:0; }
+  @media (max-width: 900px){
+    .revenue-layout{ flex-direction:column; }
+    .side-panel{ position:static; width:100%; flex:1 1 auto; max-height:none; }
+  }
+
+  .row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .field{ display:flex; flex-direction:column; gap:4px; }
+  .field label{ font-size:12px; color: var(--text-secondary); font-weight:600; }
+  select, input[type=text], input[type=number], input[type=date], input[type=file]{
+    font-family: inherit; font-size: 13px; padding:7px 9px;
+    border-radius: 7px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text-primary);
+  }
+  .btn-primary, .btn-secondary, .btn-danger{
+    font-family: inherit; font-size: 13px; font-weight:600; cursor:pointer;
+    padding: 8px 14px; border-radius: 8px; border:1px solid transparent;
+  }
+  .btn-primary{ background: var(--series-1); color:#fff; }
+  .btn-secondary{ background: transparent; color: var(--text-secondary); border-color: var(--border); }
+  .btn-danger{ background: transparent; color: var(--critical); border-color: rgba(208,59,59,0.35); }
+  .btn-primary:disabled{ opacity:.45; cursor:not-allowed; }
+  .btn-small{ padding:4px 9px; font-size:12px; }
+
+  .upload-box{ border: 1.5px dashed var(--baseline); border-radius: 10px; padding: 16px; text-align:center; background: var(--surface-2); }
+  .upload-box input[type=file]{ display:none; }
+  .upload-box label.btn{ display:inline-block; cursor:pointer; background: var(--series-1); color:#fff; font-size:13px; font-weight:600; padding: 8px 14px; border-radius: 8px; margin-top: 8px; }
+  .upload-box .fname{ margin-top:8px; font-size:12.5px; color: var(--text-secondary); word-break: break-all; }
+
+  .stat-row{ display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; }
+  @media (max-width: 760px){ .stat-row{ grid-template-columns: repeat(2, 1fr); } }
+  .stat-tile{ background: var(--surface-1); border:1px solid var(--border); border-radius: 12px; padding: 16px; }
+  .stat-tile .label{ font-size:12px; color: var(--text-muted); margin-bottom:6px; }
+  .stat-tile .value{ font-size: 20px; font-weight:700; font-variant-numeric: proportional-nums; }
+  .stat-tile .value small{ font-size:12px; font-weight:500; color: var(--text-secondary); }
+
+  table{ width:100%; border-collapse: collapse; font-size: 12.5px; }
+  thead th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.02em; color: var(--text-muted); font-weight:600; padding: 7px 8px; border-bottom: 1px solid var(--baseline); white-space:nowrap; position: sticky; top:0; background: var(--surface-1); }
+  thead th.num, tbody td.num{ text-align:right; font-variant-numeric: tabular-nums; }
+  tbody td{ padding: 7px 8px; border-bottom: 1px solid var(--grid); white-space:nowrap; }
+  tbody tr:hover{ background: rgba(127,127,127,0.06); }
+  tbody tr.warn td{ color: var(--critical); }
+  tfoot td{ padding: 8px; font-weight:700; border-top: 1.5px solid var(--baseline); }
+  .badge{ display:inline-block; font-size:11px; font-weight:600; padding:2px 8px; border-radius: 999px; background: var(--series-1-100); color: var(--series-1-450); }
+  .badge.critical{ background: rgba(208,59,59,0.14); color: var(--critical); }
+  .badge.suc-legend{ background: rgba(250,178,25,0.22); color: #8a5b00; }
+  .badge.actual-legend{ background: rgba(10,163,10,0.18); color: #0d6b0d; }
+  :root[data-theme="dark"] .badge.suc-legend{ color: #f0c667; }
+  :root[data-theme="dark"] .badge.actual-legend{ color: #4fd44f; }
+  td.suc-cell{ background: rgba(250,178,25,0.14); }
+  td.actual-cell{ background: rgba(10,163,10,0.10); }
+  @media (prefers-color-scheme: dark){
+    :root:where(:not([data-theme="light"])) .badge.suc-legend{ color: #f0c667; }
+    :root:where(:not([data-theme="light"])) .badge.actual-legend{ color: #4fd44f; }
+  }
+  .table-scroll{ overflow-x:auto; max-height:70vh; overflow-y:auto; border:1px solid var(--border); border-radius:8px; }
+  .empty-state{ text-align:center; padding: 30px 10px; color: var(--text-muted); font-size:13px; }
+  .footer-note{ font-size:11.5px; color: var(--text-muted); margin-top: 28px; line-height:1.6; }
+  code{ background: var(--surface-2); border:1px solid var(--border); padding: 1px 5px; border-radius:4px; font-size: 90%; }
+  input.cell-input{ width:100%; min-width:80px; font-size:12.5px; padding:3px 5px; }
+  .status-msg{ font-size:12.5px; margin-top:10px; }
+  .status-msg.ok{ color: var(--good); }
+  .status-msg.err{ color: var(--critical); }
+  .dt-title{ font-size:13.5px; margin:0 0 8px; }
+  .table-search{ width:100%; max-width:320px; display:block; margin-bottom:8px; }
+  th.sortable{ cursor:pointer; user-select:none; }
+  th.sortable:hover{ color: var(--text-secondary); }
+
+  /* ---------- Projected vs Actual chart ---------- */
+  .chart-legend{ display:flex; gap:18px; flex-wrap:wrap; margin:2px 0 10px; }
+  .chart-legend .item{ display:flex; align-items:center; gap:7px; font-size:12.5px; color: var(--text-secondary); }
+  .chart-legend .swatch{ width:16px; height:2px; border-radius:2px; flex:none; }
+  .chart-wrap{ position:relative; }
+  .chart-tooltip{
+    position:absolute; pointer-events:none; z-index:5; opacity:0; transition:opacity .08s ease;
+    background: var(--surface-2); border:1px solid var(--border); border-radius:8px;
+    padding:8px 10px; font-size:12px; box-shadow:0 4px 14px rgba(0,0,0,0.18); white-space:nowrap;
+  }
+  .chart-tooltip .tt-month{ font-weight:700; color: var(--text-primary); margin-bottom:4px; }
+  .chart-tooltip .tt-row{ display:flex; align-items:center; gap:6px; }
+  .chart-tooltip .tt-row + .tt-row{ margin-top:3px; }
+  .chart-tooltip .tt-key{ width:12px; height:2px; border-radius:2px; flex:none; }
+  .chart-tooltip .tt-val{ font-weight:700; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+  .chart-tooltip .tt-label{ color: var(--text-secondary); }
+  .snapshot-meta{ font-size:12px; color: var(--text-muted); margin-top:8px; }
+
+  /* ---------- Chat widget ---------- */
+  #chatToggle{
+    position: fixed; right: 22px; bottom: 22px; z-index: 40;
+    width: 52px; height: 52px; border-radius: 50%; border: none;
+    background: var(--series-1); color: #fff; font-size: 22px; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    display:flex; align-items:center; justify-content:center;
+  }
+  #chatPanel{
+    position: fixed; right: 22px; bottom: 86px; z-index: 40;
+    width: 360px; max-width: calc(100vw - 32px); height: 480px; max-height: calc(100vh - 130px);
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.28);
+    display: none; flex-direction: column; overflow: hidden;
+  }
+  #chatPanel.open{ display: flex; }
+  #chatPanel .chat-head{ padding: 12px 14px; border-bottom: 1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+  #chatPanel .chat-head h3{ margin:0; font-size:13.5px; }
+  #chatPanel .chat-head button{ border:none; background:transparent; color: var(--text-muted); font-size:16px; cursor:pointer; line-height:1; padding:2px 4px; }
+  #chatMessages{ flex:1; overflow-y:auto; padding: 12px 14px; display:flex; flex-direction:column; gap:10px; }
+  .chat-msg{ font-size:13px; line-height:1.5; padding:8px 10px; border-radius:10px; max-width:88%; white-space:pre-wrap; word-break:break-word; }
+  .chat-msg.user{ align-self:flex-end; background: var(--series-1); color:#fff; border-bottom-right-radius:3px; }
+  .chat-msg.assistant{ align-self:flex-start; background: var(--surface-2); border:1px solid var(--border); color: var(--text-primary); border-bottom-left-radius:3px; }
+  .chat-msg.system-note{ align-self:center; background:transparent; color: var(--text-muted); font-size:11.5px; text-align:center; max-width:100%; }
+  .chat-msg.error{ align-self:flex-start; background: rgba(208,59,59,0.10); color: var(--critical); border:1px solid rgba(208,59,59,0.3); }
+  #chatForm{ display:flex; gap:8px; padding: 10px; border-top: 1px solid var(--border); }
+  #chatInput{ flex:1; font-family:inherit; font-size:13px; padding:8px 10px; border-radius:8px; border:1px solid var(--border); background: var(--surface-2); color: var(--text-primary); resize:none; }
+  #chatSend{ align-self:flex-end; }
+  .chat-typing{ align-self:flex-start; color: var(--text-muted); font-size:12.5px; padding:2px 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <img src="/assets/finvu-logo.png" alt="Finvu" class="brand-logo" />
+      <div>
+        <h1>FIU Revenue Estimator</h1>
+        <p class="sub">FIU metadata and yield/CMGR are maintained here as configs. Each month, upload just the AU/DF counts — the tool joins them with the configs to compute current-month revenue and projects revenue for every remaining month of the FY using CMGR.</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="theme-toggle" id="logoutBtn" type="button">Log out</button>
+      <button class="theme-toggle" id="themeToggle" type="button">Dark mode</button>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="revenue">Monthly Revenue</button>
+    <button class="tab-btn" data-tab="metadata">FIU Metadata</button>
+    <button class="tab-btn" data-tab="yieldcmgr">Yield &amp; CMGR</button>
+  </div>
+
+  <!-- ===================== Monthly Revenue tab ===================== -->
+  <div class="tab-panel active" id="tab-revenue">
+   <div class="revenue-layout">
+    <aside class="side-panel card" id="dataSourcePanel">
+      <h2>Upload this month's counts</h2>
+      <p class="hint">One file with just <code>FIU ID</code>, <code>active_users</code>, and <code>successful_data_fetches</code> — no yield, no billing model, no metadata. Those are looked up from the FIU Metadata and Yield &amp; CMGR configs (other tabs) by FIU ID.</p>
+      <div class="row" id="emailSourceRow">
+        <button class="btn-secondary btn-small" id="checkEmailBtn" type="button">Check email now</button>
+        <span class="status-msg" id="emailSourceStatus"></span>
+      </div>
+      <div class="upload-box">
+        <label class="btn" for="countsFile">Choose counts file</label>
+        <input type="file" id="countsFile" accept=".xlsx,.xls,.csv" />
+        <div class="fname" id="countsFname">No file selected</div>
+        <button class="btn-secondary btn-small" id="useEmailDataBtn" type="button" style="display:none; margin-top:6px;">Use auto-pulled email data instead</button>
+      </div>
+      <div class="field">
+        <label for="asOfDate">As-of date</label>
+        <input type="date" id="asOfDate" />
+      </div>
+      <div class="field">
+        <label for="fyStartMonth">FY start month</label>
+        <select id="fyStartMonth">
+          <option value="4" selected>April</option>
+          <option value="1">January</option>
+          <option value="7">July</option>
+          <option value="10">October</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="sucStartDate" title="From this month onward, FIUs with both SUC Cliff CMGR and SUC Yield configured switch to SUC Yield x Data Fetch volume. The first 3 months (SUC Cliff) grow at SUC Cliff CMGR; every month after that (SUC Recovery) grows at SUC Recovery CMGR (or the regular CMGR if that's left blank), while SUC Yield stays the same throughout.">SUC Start Date</label>
+        <select id="sucStartDate">
+          <option value="" selected>None (regular Yield/CMGR)</option>
+          <option value="2026-10">Oct 2026</option>
+          <option value="2026-11">Nov 2026</option>
+          <option value="2026-12">Dec 2026</option>
+          <option value="2027-01">Jan 2027</option>
+          <option value="2027-02">Feb 2027</option>
+          <option value="2027-03">Mar 2027</option>
+        </select>
+      </div>
+      <p class="hint" style="margin:10px 0 0;">Results update automatically as soon as a file is chosen, and again whenever you change any of the fields above — no button to press.</p>
+      <p class="hint" style="margin:6px 0 0;">Leave <strong>SUC Start Date</strong> on "None" to use each FIU's regular Yield/CMGR for the whole FY (as before). Pick a month to switch a SUC-configured FIU's revenue — from that month onward — to <strong>SUC Yield × expected Data Fetch volume</strong> instead, regardless of its regular billing model. The SUC period itself splits into two quarters: the first 3 months (<strong>SUC Cliff</strong>) grow at <strong>SUC Cliff CMGR</strong>, then every month after that (<strong>SUC Recovery</strong>) grows at <strong>SUC Recovery CMGR</strong> (falling back to the FIU's regular CMGR if that's left blank) — SUC Yield doesn't change between the two, only the growth rate does. FIUs missing SUC Cliff CMGR or SUC Yield, or with no usable DF count, stay on their regular Yield/CMGR the whole FY, and that's called out in the results rather than left silent. Months governed by SUC values are highlighted <span class="badge suc-legend">like this</span> (hover a cell to see whether it's Cliff or Recovery), and seeded historical actuals (Apr–Jul) are highlighted <span class="badge actual-legend">like this</span>, in the Annual tables.</p>
+      <div class="status-msg" id="computeStatus"></div>
+    </aside>
+
+    <div class="revenue-main">
+    <section class="card">
+      <h2>1. Projected vs Actual Revenue</h2>
+      <p class="hint">A one-time snapshot of the FY revenue projection with SUC switched off (regular Yield/CMGR only), frozen as a baseline — compare it against actual revenue as it's recorded in Historical Actuals over the rest of the year. Saving a new snapshot overwrites the previous one.</p>
+      <div class="row">
+        <button class="btn-primary btn-small" id="saveSnapshotBtn" type="button">Save projection snapshot as of today</button>
+        <span class="status-msg" id="snapshotStatus"></span>
+      </div>
+      <div class="snapshot-meta" id="snapshotMeta"></div>
+      <div class="chart-legend" id="forecastLegend"></div>
+      <div class="chart-wrap" id="forecastChartWrap">
+        <div id="forecastChart"></div>
+        <div class="chart-tooltip" id="forecastTooltip"></div>
+      </div>
+      <h3 class="dt-title" style="margin-top:18px;">Month-wise figures</h3>
+      <div id="forecastTable"></div>
+    </section>
+
+    <section class="card" id="monthlyCard" style="display:none;">
+      <h2>2. Monthly results</h2>
+      <div class="stat-row" id="statRow"></div>
+      <div style="font-size:12px; color:var(--text-muted); margin-top:10px;" id="statNote"></div>
+
+      <h3 class="dt-title" style="margin-top:22px;">Monthly revenue details</h3>
+      <div id="monthlyRevenueTable"></div>
+
+      <h3 class="dt-title" style="margin-top:24px;">Monthly AU count</h3>
+      <p class="hint" style="margin-top:-6px;">FIUs billed on Active/Unique Users, with this month's raw AU count.</p>
+      <div id="monthlyAuTable"></div>
+
+      <h3 class="dt-title" style="margin-top:24px;">Monthly DF count</h3>
+      <p class="hint" style="margin-top:-6px;">FIUs billed on Data Fetch/Fix Billing, with this month's raw month-to-date DF count (before full-month projection).</p>
+      <div id="monthlyDfTable"></div>
+    </section>
+
+    <section class="card" id="annualCard" style="display:none;">
+      <h2>3. Annual results</h2>
+      <div class="stat-row" id="fyStatRow"></div>
+      <div class="row" style="margin-top:16px;">
+        <button class="btn-secondary" id="exportCsv" type="button">Export FY grid as CSV</button>
+      </div>
+
+      <h3 class="dt-title" style="margin-top:22px;">Annual revenue details</h3>
+      <div id="annualRevenueTable"></div>
+
+      <h3 class="dt-title" style="margin-top:24px;">Annual AU count</h3>
+      <p class="hint" style="margin-top:-6px;">Projected AU count per month (grown by CMGR from this month's baseline) for FIUs billed on Active/Unique Users.</p>
+      <div id="annualAuTable"></div>
+
+      <h3 class="dt-title" style="margin-top:24px;">Annual DF count</h3>
+      <p class="hint" style="margin-top:-6px;">Projected full-month DF count per month (grown by CMGR from this month's baseline) for FIUs billed on Data Fetch/Fix Billing.</p>
+      <div id="annualDfTable"></div>
+    </section>
+
+    <section class="card" id="unbilledCard" style="display:none;">
+      <h2>4. Unbilled FIUs</h2>
+      <p class="hint">FIUs whose billing model is blank, "Not billed"/"Unbilled", or otherwise unrecognized — excluded from revenue above, but shown here with their raw AU/DF counts so nothing billable-looking silently disappears.</p>
+      <div class="stat-row" id="unbilledStatRow"></div>
+      <div id="unbilledTable" style="margin-top:14px;"></div>
+    </section>
+
+    <section class="card" id="groupTspCard" style="display:none;">
+      <h2>5. By TSP</h2>
+      <p class="hint">Revenue, AU count, and DF count rolled up by TSP (from the FIU Metadata config), as a full FY grid. A blank TSP is bucketed as "(Unspecified)" rather than dropped.</p>
+
+      <h3 class="dt-title" style="margin-top:22px;">By TSP — Revenue</h3>
+      <div id="groupTspRevenue"></div>
+
+      <h3 class="dt-title" style="margin-top:24px;">By TSP — AU count</h3>
+      <div id="groupTspAu"></div>
+
+      <h3 class="dt-title" style="margin-top:24px;">By TSP — DF count</h3>
+      <div id="groupTspDf"></div>
+    </section>
+
+    <section class="card" id="groupUseCaseCard" style="display:none;">
+      <h2>6. By Use-case</h2>
+      <p class="hint">Revenue, AU count, and DF count rolled up by Use-case (from the FIU Metadata config), as a full FY grid. A blank Use-case is bucketed as "(Unspecified)" rather than dropped.</p>
+
+      <h3 class="dt-title" style="margin-top:22px;">By Use-case — Revenue</h3>
+      <div id="groupUseCaseRevenue"></div>
+
+      <h3 class="dt-title" style="margin-top:24px;">By Use-case — AU count</h3>
+      <div id="groupUseCaseAu"></div>
+
+      <h3 class="dt-title" style="margin-top:24px;">By Use-case — DF count</h3>
+      <div id="groupUseCaseDf"></div>
+    </section>
+
+    <section class="card" id="groupLicenseCard" style="display:none;">
+      <h2>7. By License Type</h2>
+      <p class="hint">Revenue, AU count, and DF count rolled up by License Type (from the FIU Metadata config), as a full FY grid. A blank License Type is bucketed as "(Unspecified)" rather than dropped.</p>
+
+      <h3 class="dt-title" style="margin-top:22px;">By License Type — Revenue</h3>
+      <div id="groupLicenseRevenue"></div>
+
+      <h3 class="dt-title" style="margin-top:24px;">By License Type — AU count</h3>
+      <div id="groupLicenseAu"></div>
+
+      <h3 class="dt-title" style="margin-top:24px;">By License Type — DF count</h3>
+      <div id="groupLicenseDf"></div>
+    </section>
+
+    <section class="card" id="topTenLendingCard" style="display:none;">
+      <h2>8. Top 10 - Lending</h2>
+      <p class="hint">FY revenue and Data Fetch count for the FIUs flagged <strong>Top 10 = Yes</strong> in the FIU Metadata config with Use-case "Lending". Set the flag on the FIU Metadata tab.</p>
+
+      <h3 class="dt-title" style="margin-top:22px;">Top 10 Lending — Revenue</h3>
+      <div id="topTenLendingRevenueTable"></div>
+
+      <h3 class="dt-title" style="margin-top:24px;">Top 10 Lending — DF count</h3>
+      <div id="topTenLendingDfTable"></div>
+    </section>
+
+    <section class="card" id="topTenPfmCard" style="display:none;">
+      <h2>9. Top 10 - PFM</h2>
+      <p class="hint">FY revenue, AU count, and Data Fetch count for the FIUs flagged <strong>Top 10 = Yes</strong> in the FIU Metadata config with Use-case "PFM". Set the flag on the FIU Metadata tab.</p>
+
+      <h3 class="dt-title" style="margin-top:22px;">Top 10 PFM — Revenue</h3>
+      <div id="topTenPfmRevenueTable"></div>
+
+      <h3 class="dt-title" style="margin-top:24px;">Top 10 PFM — AU count</h3>
+      <div id="topTenPfmAuTable"></div>
+
+      <h3 class="dt-title" style="margin-top:24px;">Top 10 PFM — DF count</h3>
+      <div id="topTenPfmDfTable"></div>
+    </section>
+
+    <section class="card" id="dfYieldCard" style="display:none;">
+      <h2>10. DF Yield Analysis</h2>
+      <p class="hint"><strong>DF Yield = Total Revenue &divide; Total DF Count</strong> for the scope and month shown. Revenue only counts months that are actually billed (same rule as everywhere else); DF Count includes every FIU that reported a DF count that month, regardless of billing model — the same broad population as the DF count tables above. That means DF Yield reflects revenue earned across the whole Data Fetch footprint, not just the FIUs currently billing on it, so it can differ noticeably from any single FIU's configured Yield. A scope with no DF volume that month shows "—" rather than a divide-by-zero.</p>
+
+      <h3 class="dt-title" style="margin-top:22px;" id="dfYieldCurrentHeading">Current Month — Overall</h3>
+      <div class="stat-row" id="dfYieldCurrentOverall"></div>
+      <h3 class="dt-title" style="margin-top:20px;" id="dfYieldCurrentUcHeading">Current Month — By Use-case</h3>
+      <div id="dfYieldCurrentByUseCase"></div>
+      <h3 class="dt-title" style="margin-top:24px;" id="dfYieldCurrentTspHeading">Current Month — By TSP</h3>
+      <div id="dfYieldCurrentByTsp"></div>
+
+      <h3 class="dt-title" style="margin-top:30px;" id="dfYieldOctHeading">Oct 2026 — Overall</h3>
+      <div class="stat-row" id="dfYieldOctOverall"></div>
+      <h3 class="dt-title" style="margin-top:20px;">Oct 2026 — By Use-case</h3>
+      <div id="dfYieldOctByUseCase"></div>
+      <h3 class="dt-title" style="margin-top:24px;">Oct 2026 — By TSP</h3>
+      <div id="dfYieldOctByTsp"></div>
+
+      <h3 class="dt-title" style="margin-top:30px;" id="dfYieldMarHeading">Mar 2027 — Overall</h3>
+      <div class="stat-row" id="dfYieldMarOverall"></div>
+      <h3 class="dt-title" style="margin-top:20px;">Mar 2027 — By Use-case</h3>
+      <div id="dfYieldMarByUseCase"></div>
+      <h3 class="dt-title" style="margin-top:24px;">Mar 2027 — By TSP</h3>
+      <div id="dfYieldMarByTsp"></div>
+
+      <h3 class="dt-title" style="margin-top:30px;">By TSP — Current Month vs Oct 2026 vs Mar 2027</h3>
+      <p class="hint" style="margin-top:-6px;">Each TSP's DF Yield compared across the three periods above, side by side.</p>
+      <div id="dfYieldTspByPeriod"></div>
+    </section>
+    </div>
+   </div>
+  </div>
+
+  <!-- ===================== FIU Metadata tab ===================== -->
+  <div class="tab-panel" id="tab-metadata">
+    <section class="card">
+      <h2>FIU Metadata config</h2>
+      <p class="hint">Legal name, TSP, License Type, Use-case, and Billing Model per FIU — maintained here once instead of in every monthly upload. Import from a Master-Data-style file to bulk-seed, or add/edit rows by hand.</p>
+      <div class="row">
+        <div class="upload-box" style="flex:1; min-width:220px;">
+          <label class="btn" for="seedFile">Import / update from Master Data file</label>
+          <input type="file" id="seedFile" accept=".xlsx,.xls,.csv" />
+          <div class="fname" id="seedFname">Seeds both this config and Yield &amp; CMGR at once</div>
+        </div>
+        <button class="btn-secondary" id="addMetaRowBtn" type="button">+ Add FIU</button>
+        <input type="text" id="metaSearch" placeholder="Filter by FIU ID or name…" style="min-width:220px;" />
+      </div>
+      <div class="status-msg" id="seedStatus"></div>
+    </section>
+    <section class="card">
+      <div class="table-scroll">
+        <table id="metaTable">
+          <thead><tr>
+            <th>FIU ID</th><th>Legal Name</th><th>TSP</th><th>License Type</th><th>Use-case</th><th>Billing Model</th><th>Top 10</th><th></th>
+          </tr></thead>
+          <tbody id="metaTableBody"></tbody>
+        </table>
+      </div>
+      <div class="empty-state" id="metaEmptyState" style="display:none;">No FIU metadata yet — import a file or add one manually.</div>
+    </section>
+  </div>
+
+  <!-- ===================== Yield & CMGR tab ===================== -->
+  <div class="tab-panel" id="tab-yieldcmgr">
+    <section class="card">
+      <h2>Yield &amp; CMGR config</h2>
+      <p class="hint">Current yield and expected compound monthly growth rate (CMGR) per FIU, used for the current month and to project every remaining month of the FY. CMGR is a decimal — enter 0.05 for 5% monthly growth, or 0 for flat/no growth. <strong>SUC Cliff CMGR</strong>, <strong>SUC Recovery CMGR</strong>, and <strong>SUC Yield</strong> only come into effect once a SUC Start Date is set on the Monthly Revenue tab: SUC Cliff CMGR drives growth for the first 3 months of the SUC period, SUC Recovery CMGR drives growth for every SUC month after that (falls back to the regular CMGR above if left blank), and SUC Yield applies throughout the whole SUC period.</p>
+      <div class="row">
+        <button class="btn-secondary" id="addYcRowBtn" type="button">+ Add FIU</button>
+        <input type="text" id="ycSearch" placeholder="Filter by FIU ID…" style="min-width:220px;" />
+      </div>
+    </section>
+    <section class="card">
+      <div class="table-scroll">
+        <table id="ycTable">
+          <thead><tr><th>FIU ID</th><th class="num">Yield</th><th class="num">CMGR</th><th class="num">SUC Cliff CMGR</th><th class="num">SUC Recovery CMGR</th><th class="num">SUC Yield</th><th></th></tr></thead>
+          <tbody id="ycTableBody"></tbody>
+        </table>
+      </div>
+      <div class="empty-state" id="ycEmptyState" style="display:none;">No yield/CMGR entries yet — import from the FIU Metadata tab or add one manually.</div>
+    </section>
+  </div>
+
+  <p class="footer-note">
+    <strong>How revenue is computed</strong> — "Active Users"/"Unique Users" (same billing model) use the AU count as-is for the current month; "Data Fetch"/"Fix Billing" treat the DF count as a month-to-date total and project it to a full month using the as-of date (day-of-month &divide; days in that month). Every subsequent month in the FY grows that baseline usage figure by <code>(1 + CMGR)</code> compounded, with yield held constant. Revenue = usage &times; yield for every month. FIUs with a billing model that isn't recognized, or missing from a config, are shown separately rather than guessed.
+  </p>
+</div>
+
+<button id="chatToggle" type="button" title="Ask about your data" aria-label="Open chat">&#128172;</button>
+<div id="chatPanel">
+  <div class="chat-head">
+    <h3>Ask about your data</h3>
+    <button id="chatClose" type="button" aria-label="Close chat">&times;</button>
+  </div>
+  <div id="chatMessages"></div>
+  <form id="chatForm">
+    <textarea id="chatInput" rows="1" placeholder="e.g. Which TSP has the highest DF Yield this month?"></textarea>
+    <button id="chatSend" class="btn-primary btn-small" type="submit">Send</button>
+  </form>
+</div>
+
+<script>
+(function(){
+  const API = '';
+
+  // Thin wrapper around fetch() for every call to this app's own API — if
+  // the session has expired (or never existed), the server answers with a
+  // plain 401 (see requireAuth in server.js) and this sends the browser
+  // straight back to the login page instead of letting the 401 surface as
+  // a confusing "Not logged in" error inline in whatever panel happened to
+  // be fetching at the time. The unresolved promise after redirecting is
+  // deliberate — the page is navigating away, so nothing downstream should
+  // keep running against a response that was never really answered.
+  async function apiFetch(url, opts){
+    const res = await fetch(url, opts);
+    if (res.status === 401) {
+      window.location.href = '/login?expired=1';
+      return new Promise(() => {});
+    }
+    return res;
+  }
+
+  const logoutBtn = document.getElementById('logoutBtn');
+  logoutBtn.addEventListener('click', async function(){
+    try { await apiFetch(API + '/api/logout', { method: 'POST' }); } catch (err) { /* logging out anyway */ }
+    window.location.href = '/login';
+  });
+
+  // ---------- tabs ----------
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // ---------- theme ----------
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle.addEventListener('click', function(){
+    const cur = document.documentElement.getAttribute('data-theme');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    themeToggle.textContent = next === 'dark' ? 'Light mode' : 'Dark mode';
+    // The forecast chart bakes resolved colors into SVG attributes rather
+    // than referencing CSS variables live, so it needs an explicit re-render
+    // on theme change — everything else here is styled via CSS classes and
+    // updates automatically.
+    if (typeof renderForecastChartFromCache === 'function') renderForecastChartFromCache();
+  });
+
+  function fmt(n, decimals){
+    if (n === undefined || n === null || isNaN(n)) return '—';
+    return n.toLocaleString('en-IN', { maximumFractionDigits: decimals != null ? decimals : 2, minimumFractionDigits: 0 });
+  }
+  function fmtCurrency(n){
+    if (n === undefined || n === null || isNaN(n)) return '—';
+    return '₹' + n.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+  }
+  // DF Yield is a per-Data-Fetch rate (Revenue ÷ DF Count), typically well
+  // under ₹1 — fmtCurrency's 0-decimal rounding would show "₹0" for most of
+  // them, so this keeps more precision.
+  function fmtYield(n){
+    if (n === undefined || n === null || isNaN(n)) return '—';
+    return '₹' + n.toLocaleString('en-IN', { maximumFractionDigits: 4, minimumFractionDigits: 2 });
+  }
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  // Contribution % columns — a row/group's share of the current month's
+  // total for that metric. null covers both "no value this row" and "total
+  // is zero" (avoids a divide-by-zero reading as 0.0%).
+  function fmtPct(v){
+    if (v === null || v === undefined || isNaN(v)) return '—';
+    return v.toFixed(1) + '%';
+  }
+
+  // ================= FIU Metadata tab =================
+  let metaRows = [];
+  const metaBody = document.getElementById('metaTableBody');
+  const metaEmpty = document.getElementById('metaEmptyState');
+
+  async function loadMeta(){
+    const res = await apiFetch(API + '/api/fiu-metadata');
+    metaRows = await res.json();
+    renderMeta();
+  }
+
+  function renderMeta(){
+    const q = document.getElementById('metaSearch').value.trim().toLowerCase();
+    const filtered = q ? metaRows.filter(r =>
+      (r.fiuId||'').toLowerCase().includes(q) || (r.legalName||'').toLowerCase().includes(q)) : metaRows;
+    metaEmpty.style.display = filtered.length ? 'none' : 'block';
+    metaBody.innerHTML = filtered.map(r => metaRowHtml(r)).join('');
+  }
+
+  function metaRowHtml(r, editing){
+    const id = 'meta-' + btoa(unescape(encodeURIComponent(r.fiuId))).replace(/=/g,'');
+    if (editing){
+      return '<tr data-id="'+esc(r.fiuId)+'">' +
+        '<td>'+esc(r.fiuId)+'</td>' +
+        '<td><input class="cell-input" data-f="legalName" value="'+esc(r.legalName)+'"></td>' +
+        '<td><input class="cell-input" data-f="tspName" value="'+esc(r.tspName)+'"></td>' +
+        '<td><input class="cell-input" data-f="licenseType" value="'+esc(r.licenseType)+'"></td>' +
+        '<td><input class="cell-input" data-f="useCase" value="'+esc(r.useCase)+'"></td>' +
+        '<td><input class="cell-input" data-f="billingModel" value="'+esc(r.billingModel)+'"></td>' +
+        '<td><select class="cell-input" data-f="topTen"><option value="false"'+(!r.topTen?' selected':'')+'>No</option><option value="true"'+(r.topTen?' selected':'')+'>Yes</option></select></td>' +
+        '<td class="row" style="gap:4px;"><button class="btn-primary btn-small" data-act="save-meta">Save</button><button class="btn-secondary btn-small" data-act="cancel-meta">Cancel</button></td>' +
+      '</tr>';
+    }
+    return '<tr data-id="'+esc(r.fiuId)+'">' +
+      '<td>'+esc(r.fiuId)+'</td><td>'+esc(r.legalName)+'</td><td>'+esc(r.tspName)+'</td><td>'+esc(r.licenseType)+'</td><td>'+esc(r.useCase)+'</td><td>'+esc(r.billingModel)+'</td><td>'+(r.topTen?'Yes':'No')+'</td>' +
+      '<td class="row" style="gap:4px;"><button class="btn-secondary btn-small" data-act="edit-meta">Edit</button><button class="btn-danger btn-small" data-act="delete-meta">Delete</button></td>' +
+    '</tr>';
+  }
+
+  metaBody.addEventListener('click', async function(e){
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const tr = btn.closest('tr');
+    const fiuId = tr.getAttribute('data-id');
+    const row = metaRows.find(r => r.fiuId === fiuId);
+    if (btn.dataset.act === 'edit-meta'){
+      tr.outerHTML = metaRowHtml(row, true);
+    } else if (btn.dataset.act === 'cancel-meta'){
+      renderMeta();
+    } else if (btn.dataset.act === 'save-meta'){
+      const updated = { fiuId };
+      tr.querySelectorAll('input[data-f]').forEach(inp => updated[inp.dataset.f] = inp.value);
+      tr.querySelectorAll('select[data-f]').forEach(sel => updated[sel.dataset.f] = sel.value === 'true');
+      const res = await apiFetch(API + '/api/fiu-metadata/' + encodeURIComponent(fiuId), {
+        method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(updated)
+      });
+      if (res.ok) await loadMeta(); else alert('Failed to save');
+    } else if (btn.dataset.act === 'delete-meta'){
+      if (!confirm('Delete metadata for ' + fiuId + '?')) return;
+      await apiFetch(API + '/api/fiu-metadata/' + encodeURIComponent(fiuId), { method: 'DELETE' });
+      await loadMeta();
+    }
+  });
+
+  document.getElementById('metaSearch').addEventListener('input', renderMeta);
+
+  document.getElementById('addMetaRowBtn').addEventListener('click', function(){
+    const fiuId = prompt('New FIU ID:');
+    if (!fiuId || !fiuId.trim()) return;
+    if (metaRows.some(r => r.fiuId.toLowerCase() === fiuId.trim().toLowerCase())){
+      alert('That FIU ID already exists — use Edit instead.'); return;
+    }
+    const blank = { fiuId: fiuId.trim(), legalName:'', tspName:'', licenseType:'', useCase:'', billingModel:'', topTen:false };
+    metaRows.unshift(blank);
+    metaBody.insertAdjacentHTML('afterbegin', metaRowHtml(blank, true));
+  });
+
+  const seedFile = document.getElementById('seedFile');
+  const seedStatus = document.getElementById('seedStatus');
+  seedFile.addEventListener('change', async function(){
+    const file = seedFile.files[0];
+    if (!file) return;
+    document.getElementById('seedFname').textContent = file.name;
+    seedStatus.textContent = 'Importing…'; seedStatus.className = 'status-msg';
+    const fd = new FormData(); fd.append('file', file);
+    try{
+      const res = await apiFetch(API + '/api/seed-from-master-data', { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Import failed');
+      seedStatus.className = 'status-msg ok';
+      seedStatus.textContent = 'Used sheet "'+data.sheetUsed+'" (ignored: '+(data.ignoredSheets.join(', ')||'none')+'). ' +
+        'FIU Metadata: '+data.metadata.created+' created, '+data.metadata.updated+' updated. ' +
+        'Yield & CMGR: '+data.yieldCmgr.created+' created, '+data.yieldCmgr.updated+' updated.';
+      await loadMeta();
+      await loadYc();
+    } catch(err){
+      seedStatus.className = 'status-msg err';
+      seedStatus.textContent = err.message;
+    }
+    seedFile.value = '';
+  });
+
+  // ================= Yield & CMGR tab =================
+  let ycRows = [];
+  const ycBody = document.getElementById('ycTableBody');
+  const ycEmpty = document.getElementById('ycEmptyState');
+
+  async function loadYc(){
+    const res = await apiFetch(API + '/api/yield-cmgr');
+    ycRows = await res.json();
+    renderYc();
+  }
+
+  function renderYc(){
+    const q = document.getElementById('ycSearch').value.trim().toLowerCase();
+    const filtered = q ? ycRows.filter(r => (r.fiuId||'').toLowerCase().includes(q)) : ycRows;
+    ycEmpty.style.display = filtered.length ? 'none' : 'block';
+    ycBody.innerHTML = filtered.map(r => ycRowHtml(r)).join('');
+  }
+
+  function ycRowHtml(r, editing){
+    if (editing){
+      return '<tr data-id="'+esc(r.fiuId)+'">' +
+        '<td>'+esc(r.fiuId)+'</td>' +
+        '<td class="num"><input class="cell-input" data-f="yield" type="number" step="any" value="'+esc(r.yield)+'"></td>' +
+        '<td class="num"><input class="cell-input" data-f="cmgr" type="number" step="any" value="'+esc(r.cmgr)+'"></td>' +
+        '<td class="num"><input class="cell-input" data-f="sucCliffCmgr" type="number" step="any" value="'+esc(r.sucCliffCmgr)+'"></td>' +
+        '<td class="num"><input class="cell-input" data-f="sucRecoveryCmgr" type="number" step="any" value="'+esc(r.sucRecoveryCmgr)+'"></td>' +
+        '<td class="num"><input class="cell-input" data-f="sucYield" type="number" step="any" value="'+esc(r.sucYield)+'"></td>' +
+        '<td class="row" style="gap:4px;"><button class="btn-primary btn-small" data-act="save-yc">Save</button><button class="btn-secondary btn-small" data-act="cancel-yc">Cancel</button></td>' +
+      '</tr>';
+    }
+    return '<tr data-id="'+esc(r.fiuId)+'">' +
+      '<td>'+esc(r.fiuId)+'</td><td class="num">'+fmt(r.yield,2)+'</td><td class="num">'+fmt(r.cmgr,2)+'</td>' +
+      '<td class="num">'+fmt(r.sucCliffCmgr,2)+'</td><td class="num">'+fmt(r.sucRecoveryCmgr,2)+'</td><td class="num">'+fmt(r.sucYield,2)+'</td>' +
+      '<td class="row" style="gap:4px;"><button class="btn-secondary btn-small" data-act="edit-yc">Edit</button><button class="btn-danger btn-small" data-act="delete-yc">Delete</button></td>' +
+    '</tr>';
+  }
+
+  ycBody.addEventListener('click', async function(e){
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const tr = btn.closest('tr');
+    const fiuId = tr.getAttribute('data-id');
+    const row = ycRows.find(r => r.fiuId === fiuId);
+    if (btn.dataset.act === 'edit-yc'){
+      tr.outerHTML = ycRowHtml(row, true);
+    } else if (btn.dataset.act === 'cancel-yc'){
+      renderYc();
+    } else if (btn.dataset.act === 'save-yc'){
+      const updated = { fiuId };
+      tr.querySelectorAll('input[data-f]').forEach(inp => updated[inp.dataset.f] = parseFloat(inp.value));
+      const res = await apiFetch(API + '/api/yield-cmgr/' + encodeURIComponent(fiuId), {
+        method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(updated)
+      });
+      if (res.ok) await loadYc(); else alert('Failed to save');
+    } else if (btn.dataset.act === 'delete-yc'){
+      if (!confirm('Delete yield/CMGR for ' + fiuId + '?')) return;
+      await apiFetch(API + '/api/yield-cmgr/' + encodeURIComponent(fiuId), { method: 'DELETE' });
+      await loadYc();
+    }
+  });
+
+  document.getElementById('ycSearch').addEventListener('input', renderYc);
+
+  document.getElementById('addYcRowBtn').addEventListener('click', function(){
+    const fiuId = prompt('FIU ID:');
+    if (!fiuId || !fiuId.trim()) return;
+    if (ycRows.some(r => r.fiuId.toLowerCase() === fiuId.trim().toLowerCase())){
+      alert('That FIU ID already exists — use Edit instead.'); return;
+    }
+    const blank = { fiuId: fiuId.trim(), yield:'', cmgr:'' };
+    ycRows.unshift(blank);
+    ycBody.insertAdjacentHTML('afterbegin', ycRowHtml(blank, true));
+  });
+
+  // ================= Monthly Revenue tab =================
+  const countsFile = document.getElementById('countsFile');
+  const countsFname = document.getElementById('countsFname');
+  const computeStatus = document.getElementById('computeStatus');
+  const asOfDateInput = document.getElementById('asOfDate');
+  const emailSourceStatus = document.getElementById('emailSourceStatus');
+  const checkEmailBtn = document.getElementById('checkEmailBtn');
+  const useEmailDataBtn = document.getElementById('useEmailDataBtn');
+
+  (function initDate(){
+    const d = new Date();
+    asOfDateInput.value = d.toISOString().slice(0,10);
+  })();
+
+  let selectedCountsFile = null;
+  let computeInFlight = false;
+  let computeQueued = false;
+
+  // Which source drives the Monthly Revenue view: 'email' (auto-pulled from
+  // the latest matching Metabase email, refreshed on load and whenever the
+  // date/FY-start/SUC fields change) or 'file' (a manually chosen file
+  // overrides the email source until "Use auto-pulled email data instead" or
+  // a page refresh switches back). Starts on 'email' — that's what makes a
+  // plain page refresh show the latest counts with no manual step.
+  let countsSource = 'email';
+
+  let lastResult = null;
+  const sucStartDateInput = document.getElementById('sucStartDate');
+  const fyStartMonthInput = document.getElementById('fyStartMonth');
+
+  // No "Compute revenue" button — this runs automatically on file choice and
+  // on every field change below. Guarded against overlapping requests: if a
+  // change comes in while one is already in flight, we queue exactly one
+  // follow-up run (not one per change) so a burst of edits settles on the
+  // latest values instead of racing.
+  async function runCompute(){
+    if (!selectedCountsFile) return;
+    if (computeInFlight) { computeQueued = true; return; }
+    computeInFlight = true;
+    computeStatus.className = 'status-msg';
+    computeStatus.textContent = 'Computing…';
+    const fd = new FormData();
+    fd.append('file', selectedCountsFile);
+    fd.append('asOfDate', asOfDateInput.value);
+    fd.append('fyStartMonth', fyStartMonthInput.value);
+    fd.append('sucStartDate', sucStartDateInput.value);
+    try{
+      const res = await apiFetch(API + '/api/compute', { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Compute failed');
+      lastResult = data;
+      renderResults(data);
+      computeStatus.className = 'status-msg ok';
+      let msg = 'Used sheet "'+data.sheetUsed+'" as of '+data.asOfDate+'.';
+      if (data.unmatchedCounts.length) msg += ' ' + data.unmatchedCounts.length + ' FIU(s) in the upload have no FIU Metadata config entry — add them in the FIU Metadata tab.';
+      if (data.unmatchedMeta.length) msg += ' ' + data.unmatchedMeta.length + ' FIU(s) in your configs had no counts in this upload.';
+      computeStatus.textContent = msg;
+    } catch(err){
+      computeStatus.className = 'status-msg err';
+      computeStatus.textContent = err.message;
+    }
+    computeInFlight = false;
+    if (computeQueued) { computeQueued = false; runCompute(); }
+  }
+
+  // Formats a JS Date (or an ISO string) as a short, readable local
+  // timestamp for the "auto-pulled from email" status line.
+  function fmtEmailTimestamp(v){
+    if (!v) return '';
+    const d = new Date(v);
+    if (isNaN(d.getTime())) return '';
+    return d.toLocaleString(undefined, { month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit' });
+  }
+
+  // Mirrors runCompute() above but pulls counts from the latest matching
+  // Metabase email instead of a manually chosen file — see
+  // POST /api/compute-from-email in server.js. force=true bypasses the
+  // server's short-lived cache (used by the "Check email now" button so it
+  // always does a live IMAP check rather than possibly reusing a result
+  // from a few minutes ago).
+  async function runComputeFromEmail(force){
+    if (computeInFlight) { computeQueued = true; return; }
+    computeInFlight = true;
+    computeStatus.className = 'status-msg';
+    computeStatus.textContent = 'Checking email…';
+    emailSourceStatus.className = 'status-msg';
+    emailSourceStatus.textContent = 'Checking for the latest counts email…';
+    checkEmailBtn.disabled = true;
+    try{
+      const res = await apiFetch(API + '/api/compute-from-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          asOfDate: asOfDateInput.value,
+          fyStartMonth: fyStartMonthInput.value,
+          sucStartDate: sucStartDateInput.value,
+          force: !!force
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Could not auto-pull counts from email');
+      lastResult = data;
+      renderResults(data);
+      computeStatus.className = 'status-msg ok';
+      let msg = 'Used sheet "'+data.sheetUsed+'" as of '+data.asOfDate+' (auto-pulled from email).';
+      if (data.unmatchedCounts.length) msg += ' ' + data.unmatchedCounts.length + ' FIU(s) in the email file have no FIU Metadata config entry — add them in the FIU Metadata tab.';
+      if (data.unmatchedMeta.length) msg += ' ' + data.unmatchedMeta.length + ' FIU(s) in your configs had no counts in this file.';
+      computeStatus.textContent = msg;
+      const src = data.emailSource || {};
+      emailSourceStatus.className = 'status-msg ok';
+      emailSourceStatus.textContent = 'Auto-pulled "' + src.filename + '" from email "' + src.subject + '"' + (src.date ? ' received ' + fmtEmailTimestamp(src.date) : '') + (src.fromCache ? ' (cached — click "Check email now" to force a fresh check)' : '') + '.';
+    } catch(err){
+      computeStatus.className = 'status-msg err';
+      computeStatus.textContent = err.message;
+      emailSourceStatus.className = 'status-msg err';
+      emailSourceStatus.textContent = err.message;
+    }
+    checkEmailBtn.disabled = false;
+    computeInFlight = false;
+    if (computeQueued) { computeQueued = false; triggerCompute(); }
+  }
+
+  // Dispatches to whichever source currently drives the view — used by the
+  // as-of date / FY start month / SUC Start Date change handlers below so
+  // they don't need to know which source is active.
+  function triggerCompute(){
+    if (countsSource === 'file') runCompute();
+    else runComputeFromEmail(false);
+  }
+
+  countsFile.addEventListener('change', function(){
+    selectedCountsFile = countsFile.files[0] || null;
+    countsFname.textContent = selectedCountsFile ? selectedCountsFile.name : 'No file selected';
+    if (selectedCountsFile){
+      countsSource = 'file';
+      useEmailDataBtn.style.display = 'inline-block';
+      runCompute();
+    }
+  });
+
+  checkEmailBtn.addEventListener('click', function(){
+    countsSource = 'email';
+    useEmailDataBtn.style.display = 'none';
+    selectedCountsFile = null;
+    countsFile.value = '';
+    countsFname.textContent = 'No file selected';
+    runComputeFromEmail(true);
+  });
+
+  useEmailDataBtn.addEventListener('click', function(){
+    countsSource = 'email';
+    useEmailDataBtn.style.display = 'none';
+    selectedCountsFile = null;
+    countsFile.value = '';
+    countsFname.textContent = 'No file selected';
+    runComputeFromEmail(false);
+  });
+
+  [asOfDateInput, sucStartDateInput, fyStartMonthInput].forEach(el => {
+    el.addEventListener('change', function(){
+      triggerCompute();
+    });
+  });
+
+  // ================= Projected vs Actual Revenue (section 1) =================
+  // A "projection snapshot" is a one-time, frozen no-SUC FY revenue curve,
+  // saved via POST /api/projection-snapshot (server always forces SUC off
+  // for this, regardless of the SUC Start Date selected above). It's
+  // compared against Actual revenue, pulled live from Historical Actuals via
+  // GET /api/revenue-actuals using the *snapshot's own* as-of date/FY start
+  // month — so the two series always line up on the same 12 FY months, even
+  // if the live form's fields above have since changed.
+  const saveSnapshotBtn = document.getElementById('saveSnapshotBtn');
+  const snapshotStatus = document.getElementById('snapshotStatus');
+  const snapshotMeta = document.getElementById('snapshotMeta');
+  let forecastCache = null; // { months, projected, actual, snapshot }
+  let forecastMoveHandler = null;
+  let forecastLeaveHandler = null;
+
+  function fmtCompactCurrency(n){
+    if (n === undefined || n === null || isNaN(n)) return '—';
+    const abs = Math.abs(n);
+    const sign = n < 0 ? '-' : '';
+    if (abs >= 1e7) return sign + '₹' + (abs/1e7).toLocaleString('en-IN', {maximumFractionDigits:2}) + 'Cr';
+    if (abs >= 1e5) return sign + '₹' + (abs/1e5).toLocaleString('en-IN', {maximumFractionDigits:2}) + 'L';
+    return fmtCurrency(n);
+  }
+  function compactMonthLabel(label){
+    const parts = String(label).split(' ');
+    return parts.length === 2 ? parts[0] + "'" + parts[1].slice(2) : label;
+  }
+  function niceAxisMax(v){
+    if (!v || v <= 0 || isNaN(v)) return 10;
+    const exp = Math.floor(Math.log10(v));
+    const base = Math.pow(10, exp);
+    const norm = v / base;
+    const niceNorm = norm <= 1 ? 1 : norm <= 2 ? 2 : norm <= 5 ? 5 : 10;
+    return niceNorm * base;
+  }
+
+  // Renders the SVG line chart + legend, and wires the shared crosshair /
+  // tooltip. `series`: [{ key, label, colorVar, data: [number|null, ...] }].
+  function renderForecastChart(containerId, months, series){
+    const container = document.getElementById(containerId);
+    const legendEl = document.getElementById('forecastLegend');
+    const tooltipEl = document.getElementById('forecastTooltip');
+    const wrap = document.getElementById('forecastChartWrap');
+    if (!container || !wrap) return;
+
+    const cs = getComputedStyle(document.documentElement);
+    const colorOf = v => cs.getPropertyValue(v).trim();
+    const gridColor = colorOf('--grid');
+    const axisColor = colorOf('--baseline');
+    const mutedColor = colorOf('--text-muted');
+    const inkColor = colorOf('--text-primary');
+    const surfaceColor = colorOf('--surface-1');
+
+    const W = 900, H = 320;
+    const padL = 66, padR = 16, padT = 16, padB = 34;
+    const plotW = W - padL - padR;
+    const plotH = H - padT - padB;
+    const n = months.length;
+    const xAt = i => padL + (n <= 1 ? 0 : (plotW * i) / (n - 1));
+
+    const allValues = series.reduce((acc, s) => acc.concat(s.data), [])
+      .filter(v => v !== null && v !== undefined && !isNaN(v));
+    const yMax = niceAxisMax(allValues.length ? Math.max.apply(null, allValues) : 0);
+    const yAt = v => padT + plotH - (plotH * (v / yMax));
+
+    let gridSvg = '';
+    const tickCount = 4;
+    for (let t = 0; t <= tickCount; t++){
+      const val = (yMax * t) / tickCount;
+      const y = yAt(val);
+      gridSvg += '<line x1="'+padL+'" y1="'+y+'" x2="'+(padL+plotW)+'" y2="'+y+'" stroke="'+gridColor+'" stroke-width="1" />';
+      gridSvg += '<text x="'+(padL-10)+'" y="'+(y+4)+'" text-anchor="end" font-size="11" fill="'+mutedColor+'">'+esc(fmtCompactCurrency(val))+'</text>';
+    }
+
+    let xLabelsSvg = '';
+    months.forEach((m, i) => {
+      xLabelsSvg += '<text x="'+xAt(i)+'" y="'+(H-10)+'" text-anchor="middle" font-size="11" fill="'+mutedColor+'">'+esc(compactMonthLabel(m.label))+'</text>';
+    });
+
+    let seriesSvg = '';
+    let legendHtml = '';
+    series.forEach(s => {
+      const color = colorOf(s.colorVar);
+      legendHtml += '<div class="item"><span class="swatch" style="background:'+color+';"></span><span>'+esc(s.label)+'</span></div>';
+
+      let d = '';
+      let drawing = false;
+      let lastIdx = -1;
+      s.data.forEach((v, i) => {
+        if (v === null || v === undefined || isNaN(v)) { drawing = false; return; }
+        const x = xAt(i), y = yAt(v);
+        d += (drawing ? ' L ' : ' M ') + x.toFixed(2) + ' ' + y.toFixed(2);
+        drawing = true;
+        lastIdx = i;
+      });
+      if (d) seriesSvg += '<path d="'+d+'" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />';
+
+      s.data.forEach((v, i) => {
+        if (v === null || v === undefined || isNaN(v)) return;
+        seriesSvg += '<circle cx="'+xAt(i).toFixed(2)+'" cy="'+yAt(v).toFixed(2)+'" r="4" fill="'+color+'" stroke="'+surfaceColor+'" stroke-width="2" />';
+      });
+
+      // Direct end-label — the one point per series most worth labeling
+      // without flooding the chart (see dataviz skill: label the endpoint).
+      if (lastIdx !== -1){
+        const x = xAt(lastIdx), y = yAt(s.data[lastIdx]);
+        const nearRightEdge = lastIdx >= n - 3;
+        const anchor = nearRightEdge ? 'end' : 'start';
+        const dx = nearRightEdge ? -8 : 8;
+        seriesSvg += '<text x="'+(x+dx)+'" y="'+(y-9)+'" text-anchor="'+anchor+'" font-size="11" font-weight="700" fill="'+inkColor+'">'+esc(fmtCompactCurrency(s.data[lastIdx]))+'</text>';
+      }
+    });
+
+    const svg = '<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="320" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Projected versus actual revenue by month">'
+      + gridSvg
+      + '<line x1="'+padL+'" y1="'+(padT+plotH)+'" x2="'+(padL+plotW)+'" y2="'+(padT+plotH)+'" stroke="'+axisColor+'" stroke-width="1" />'
+      + xLabelsSvg
+      + seriesSvg
+      + '<line id="forecastCrosshair" x1="'+padL+'" y1="'+padT+'" x2="'+padL+'" y2="'+(padT+plotH)+'" stroke="'+axisColor+'" stroke-width="1" stroke-dasharray="3,3" opacity="0" />'
+      + '</svg>';
+    container.innerHTML = svg;
+    legendEl.innerHTML = legendHtml;
+
+    const svgEl = container.querySelector('svg');
+    const crosshair = document.getElementById('forecastCrosshair');
+
+    function handleMove(evt){
+      const rect = svgEl.getBoundingClientRect();
+      if (!rect.width) return;
+      const scaleX = W / rect.width;
+      const localX = (evt.clientX - rect.left) * scaleX;
+      let idx = Math.round(((localX - padL) / plotW) * (n - 1));
+      idx = Math.max(0, Math.min(n - 1, idx));
+      const x = xAt(idx);
+      crosshair.setAttribute('x1', x);
+      crosshair.setAttribute('x2', x);
+      crosshair.setAttribute('opacity', '1');
+
+      let html = '<div class="tt-month">'+esc(months[idx].label)+'</div>';
+      series.forEach(s => {
+        const v = s.data[idx];
+        const color = colorOf(s.colorVar);
+        const valText = (v === null || v === undefined || isNaN(v)) ? 'No data yet' : fmtCurrency(v);
+        html += '<div class="tt-row"><span class="tt-key" style="background:'+color+';"></span><span class="tt-label">'+esc(s.label)+'</span><span class="tt-val">'+esc(valText)+'</span></div>';
+      });
+      tooltipEl.innerHTML = html;
+      tooltipEl.style.opacity = '1';
+
+      const wrapRect = wrap.getBoundingClientRect();
+      const px = (x / W) * rect.width;
+      let left = px + 14;
+      if (left + 190 > wrapRect.width) left = Math.max(0, px - 194);
+      tooltipEl.style.left = left + 'px';
+      tooltipEl.style.top = '6px';
+    }
+    function handleLeave(){
+      crosshair.setAttribute('opacity', '0');
+      tooltipEl.style.opacity = '0';
+    }
+    if (forecastMoveHandler) wrap.removeEventListener('mousemove', forecastMoveHandler);
+    if (forecastLeaveHandler) wrap.removeEventListener('mouseleave', forecastLeaveHandler);
+    forecastMoveHandler = handleMove;
+    forecastLeaveHandler = handleLeave;
+    wrap.addEventListener('mousemove', forecastMoveHandler);
+    wrap.addEventListener('mouseleave', forecastLeaveHandler);
+  }
+
+  function renderForecastChartFromCache(){
+    if (!forecastCache) return;
+    renderForecastChart('forecastChart', forecastCache.months, [
+      { key:'projected', label:'Projected (no SUC, saved '+forecastCache.snapshot.snapshotDate+')', colorVar:'--series-1', data: forecastCache.projected },
+      { key:'actual', label:'Actual (recorded)', colorVar:'--series-2', data: forecastCache.actual }
+    ]);
+  }
+
+  // Table view alongside the chart — same numbers, always reachable without
+  // hovering (see dataviz skill: a table view exists).
+  function renderForecastTable(){
+    if (!forecastCache){ document.getElementById('forecastTable').innerHTML = ''; return; }
+    const rows = forecastCache.months.map((m, i) => ({
+      label: m.label,
+      projected: forecastCache.projected[i],
+      actual: forecastCache.actual[i]
+    }));
+    renderDataTable({
+      containerId: 'forecastTable',
+      rows,
+      searchable: false,
+      emptyMessage: 'No data.',
+      maxHeight: '360px',
+      columns: [
+        { key:'label', label:'Month', value: r => r.label },
+        { key:'projected', label:'Projected (no SUC)', numeric:true, value:r=>r.projected, render:r=>fmtCurrency(r.projected) },
+        { key:'actual', label:'Actual', numeric:true, value:r=>r.actual, render:r=> (r.actual===null||r.actual===undefined) ? '—' : fmtCurrency(r.actual) },
+        { key:'variance', label:'Variance (Actual − Projected)', numeric:true,
+          value: r => (r.actual===null||r.actual===undefined) ? null : r.actual - r.projected,
+          render: r => {
+            if (r.actual===null||r.actual===undefined) return '—';
+            // Rounded to the rupee before the sign check — otherwise two
+            // months that are actually equal (a historical month's Actual
+            // and Projected are computed from the same source data via two
+            // independent code paths) can show a stray "-₹0"/"+₹0" from
+            // sub-rupee floating-point noise.
+            const diff = Math.round(r.actual - r.projected) || 0; // normalize -0
+            return (diff>0?'+':'') + fmtCurrency(diff);
+          }
+        },
+        { key:'variancePct', label:'Variance %', numeric:true,
+          value: r => (r.actual===null||r.actual===undefined||!r.projected) ? null : (r.actual-r.projected)/r.projected*100,
+          render: r => {
+            if (r.actual===null||r.actual===undefined||!r.projected) return '—';
+            const diff = Math.round(r.actual - r.projected) || 0; // normalize -0
+            const pct = (diff/r.projected)*100;
+            return (pct>0?'+':'') + pct.toFixed(1) + '%';
+          }
+        }
+      ]
+    });
+  }
+
+  async function loadForecastChart(){
+    const snapRes = await apiFetch(API + '/api/projection-snapshot');
+    const snapData = await snapRes.json();
+    const snapshot = snapData.snapshot;
+
+    if (!snapshot){
+      forecastCache = null;
+      document.getElementById('forecastLegend').innerHTML = '';
+      document.getElementById('forecastChart').innerHTML = '<div class="empty-state">No projection snapshot saved yet. Choose this month\'s counts file below, then click "Save projection snapshot as of today" above to create the baseline.</div>';
+      document.getElementById('forecastTable').innerHTML = '';
+      snapshotMeta.textContent = '';
+      return;
+    }
+
+    const q = new URLSearchParams({ asOfDate: snapshot.asOfDate, fyStartMonth: snapshot.fyStartMonth }).toString();
+    const actRes = await apiFetch(API + '/api/revenue-actuals?' + q);
+    const actData = await actRes.json();
+
+    forecastCache = {
+      months: snapshot.months,
+      projected: snapshot.totalsByMonth,
+      actual: actData.actualsByMonth,
+      snapshot
+    };
+    snapshotMeta.textContent = 'Snapshot taken ' + snapshot.snapshotDate + ', as of ' + snapshot.asOfDate + ' (SUC off). Actual is summed live from Historical Actuals each time this loads.';
+    renderForecastChartFromCache();
+    renderForecastTable();
+  }
+
+  saveSnapshotBtn.addEventListener('click', async function(){
+    if (!selectedCountsFile){
+      snapshotStatus.className = 'status-msg err';
+      snapshotStatus.textContent = 'Choose this month\'s counts file below first, then save a snapshot.';
+      return;
+    }
+    saveSnapshotBtn.disabled = true;
+    snapshotStatus.className = 'status-msg';
+    snapshotStatus.textContent = 'Saving snapshot…';
+    const fd = new FormData();
+    fd.append('file', selectedCountsFile);
+    fd.append('asOfDate', asOfDateInput.value);
+    fd.append('fyStartMonth', fyStartMonthInput.value);
+    try{
+      const res = await apiFetch(API + '/api/projection-snapshot', { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to save snapshot');
+      snapshotStatus.className = 'status-msg ok';
+      snapshotStatus.textContent = 'Snapshot saved as of ' + data.asOfDate + '.';
+      await loadForecastChart();
+    } catch(err){
+      snapshotStatus.className = 'status-msg err';
+      snapshotStatus.textContent = err.message;
+    }
+    saveSnapshotBtn.disabled = false;
+  });
+
+  function tile(label, value){
+    return '<div class="stat-tile"><div class="label">'+label+'</div><div class="value">'+value+'</div></div>';
+  }
+
+  // Generic sortable + searchable data table. Fully owns `config.containerId`'s
+  // innerHTML. Click a header to sort by that column (again to flip direction);
+  // the search box filters rows by substring match across each column's raw
+  // value. Re-invoked fresh on every compute, so sort/search state resets per
+  // upload — that's intentional (new data, new starting view).
+  //
+  // config: {
+  //   containerId, rows,
+  //   columns: [{ key, label, numeric, value(row) -> raw value, render(row) -> HTML, searchable }],
+  //   defaultSortKey, defaultSortDir ('asc'|'desc'),
+  //   searchable (default true), searchPlaceholder, emptyMessage, maxHeight,
+  //   rowClass(row) -> extra <tr> class,
+  //   footer(rows) -> <tr>...</tr> HTML for a fixed tfoot (always computed
+  //     from the full, unfiltered row set — a "Total" row shouldn't change
+  //     just because someone typed into the search box),
+  //   customSorts: { key: row => value } for a default sort that isn't tied
+  //     to a visible column
+  // }
+  function renderDataTable(config){
+    const container = document.getElementById(config.containerId);
+    if (!container) return;
+    const state = { sortKey: config.defaultSortKey || null, sortDir: config.defaultSortDir || 'desc', search: '' };
+
+    function sortValueFn(key){
+      const col = config.columns.find(c => c.key === key);
+      if (col) return col.value;
+      if (config.customSorts && config.customSorts[key]) return config.customSorts[key];
+      return null;
+    }
+
+    function computeRows(){
+      let rows = config.rows;
+      if (state.search){
+        const q = state.search.toLowerCase();
+        rows = rows.filter(r => config.columns.some(c => {
+          if (c.searchable === false) return false;
+          const v = c.value ? c.value(r) : r[c.key];
+          return String(v == null ? '' : v).toLowerCase().includes(q);
+        }));
+      }
+      if (state.sortKey){
+        const valFn = sortValueFn(state.sortKey);
+        if (valFn){
+          rows = rows.slice().sort((a,b) => {
+            const av = valFn(a), bv = valFn(b);
+            const aNil = av===null || av===undefined || (typeof av==='number' && isNaN(av));
+            const bNil = bv===null || bv===undefined || (typeof bv==='number' && isNaN(bv));
+            if (aNil && bNil) return 0;
+            if (aNil) return 1; // blanks/missing sort last regardless of direction
+            if (bNil) return -1;
+            let cmp;
+            if (typeof av === 'number' && typeof bv === 'number') cmp = av - bv;
+            else cmp = String(av).localeCompare(String(bv), undefined, { numeric:true, sensitivity:'base' });
+            return state.sortDir === 'asc' ? cmp : -cmp;
+          });
+        }
+      }
+      return rows;
+    }
+
+    function renderHead(){
+      return config.columns.map(c => {
+        const active = state.sortKey === c.key;
+        const arrow = active ? (state.sortDir === 'asc' ? ' ▲' : ' ▼') : '';
+        return '<th class="'+(c.numeric?'num ':'')+'sortable" data-key="'+esc(c.key)+'" title="Sort by '+esc(c.label)+'">'+esc(c.label)+arrow+'</th>';
+      }).join('');
+    }
+    function renderBody(rows){
+      if (!rows.length) return '<tr><td colspan="'+config.columns.length+'" style="text-align:center; color:var(--text-muted); padding:16px; white-space:normal;">'+(config.emptyMessage||'No matching rows.')+'</td></tr>';
+      return rows.map(r => {
+        const cls = config.rowClass ? config.rowClass(r) : '';
+        const cells = config.columns.map(c => {
+          const extra = c.cellClass ? c.cellClass(r) : '';
+          const tdClass = [c.numeric ? 'num' : '', extra].filter(Boolean).join(' ');
+          const titleText = c.cellTitle ? c.cellTitle(r) : '';
+          const titleAttr = titleText ? ' title="'+esc(titleText)+'"' : '';
+          return '<td'+(tdClass?' class="'+tdClass+'"':'')+titleAttr+'>'+(c.render ? c.render(r) : esc(c.value ? c.value(r) : r[c.key]))+'</td>';
+        }).join('');
+        return '<tr'+(cls?' class="'+cls+'"':'')+'>'+cells+'</tr>';
+      }).join('');
+    }
+
+    function wireSort(){
+      container.querySelectorAll('th.sortable').forEach(th => {
+        th.addEventListener('click', function(){
+          const key = th.dataset.key;
+          if (state.sortKey === key) state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc';
+          else { state.sortKey = key; const col = config.columns.find(c=>c.key===key); state.sortDir = (col && col.defaultDir) || 'desc'; }
+          updateBody();
+        });
+      });
+    }
+    function wireSearch(){
+      if (config.searchable === false) return;
+      const inp = container.querySelector('.table-search');
+      if (!inp) return;
+      inp.addEventListener('input', function(){ state.search = inp.value; updateBody(); });
+    }
+
+    function updateBody(){
+      const rows = computeRows();
+      const tbody = container.querySelector('tbody');
+      const theadRow = container.querySelector('thead tr');
+      const tfoot = container.querySelector('tfoot');
+      if (tbody) tbody.innerHTML = renderBody(rows);
+      if (theadRow) theadRow.innerHTML = renderHead();
+      if (tfoot && config.footer) tfoot.innerHTML = config.footer(config.rows);
+      wireSort(); // thead was replaced, headers need re-binding
+    }
+
+    function fullRender(){
+      const rows = computeRows();
+      container.innerHTML =
+        (config.searchable === false ? '' : '<input type="text" class="table-search" placeholder="Search '+esc(config.searchPlaceholder||'this table')+'…" />') +
+        '<div class="table-scroll" style="margin-top:8px;'+(config.maxHeight?(' max-height:'+config.maxHeight+';'):'')+'">' +
+          '<table><thead><tr>'+renderHead()+'</tr></thead><tbody>'+renderBody(rows)+'</tbody>' +
+          (config.footer ? '<tfoot>'+config.footer(config.rows)+'</tfoot>' : '') +
+          '</table>' +
+        '</div>';
+      wireSearch();
+      wireSort();
+    }
+
+    fullRender();
+  }
+
+  function renderResults(data){
+    document.getElementById('monthlyCard').style.display = 'block';
+    document.getElementById('annualCard').style.display = 'block';
+    const currentIndex = data.currentIndex || 0;
+    const current = data.months[currentIndex];
+    // "billed" = billed *this month specifically* — a row can be billed
+    // under its regular config one month and, once SUC kicks in, billed
+    // (or not) under the SUC Data-Fetch switch instead. Using the current
+    // month's own billable flag (rather than the row-level hasData) keeps
+    // this correct even if the as-of date itself falls on/after a SUC
+    // Start Date.
+    const billed = data.rows.filter(r => r.monthly[currentIndex] && r.monthly[currentIndex].billable);
+    // AU/DF table rows: "AU" stays limited to FIUs currently classified as
+    // Active/Unique Users. "DF" now includes every FIU that reported a DF
+    // count at all — not just ones billed on Data Fetch — since SUC can put
+    // any FIU's Data Fetch volume in play, and it's useful to see regardless.
+    // A notBillable FIU is still included if sucApplicable is true (e.g.
+    // fiulive@hdfc, HDFC-FIU) — still "Unbilled" on record, but genuinely
+    // billing DF-driven revenue once SUC kicks in, so it needs to show up
+    // here too rather than being silently dropped by that exclusion.
+    const auRows = data.rows.filter(r => r.usageType === 'au');
+    const dfRows = data.rows.filter(r => (!r.notBillable || r.sucApplicable) && r.dfCount !== null);
+
+    // A row's revenue for month i counts if that month is billable — this
+    // single flag from the backend already accounts for historical actuals
+    // (billable = hasActual), regular billing (billable = hasData), and the
+    // SUC Data-Fetch switch (billable = sucBillable) in one place.
+    const monthRevenue = (r, i) => {
+      const m = r.monthly[i];
+      return m.billable ? (m.revenue || 0) : 0;
+    };
+
+    // Once SUC is active for a row/month, its revenue is driven by Data
+    // Fetch volume regardless of its regular billing model — so the
+    // Unique-Users-vs-Data-Fetch split for the stat tiles needs to look at
+    // the month's actual driver (sucActive), not just the row's fixed
+    // usageType.
+    const effectiveType = (r, i) => {
+      const m = r.monthly[i];
+      if (m && m.sucActive) return 'df';
+      return r.usageType;
+    };
+
+    const currentTotal = billed.reduce((s,r) => s + r.monthly[currentIndex].revenue, 0);
+    const fyTotal = data.totalsByMonth.reduce((a,b) => a+b, 0);
+    const auRevenue = billed.filter(r=>effectiveType(r,currentIndex)==='au').reduce((s,r)=>s+r.monthly[currentIndex].revenue,0);
+    const dfRevenue = billed.filter(r=>effectiveType(r,currentIndex)==='df').reduce((s,r)=>s+r.monthly[currentIndex].revenue,0);
+    const auFyRevenue = data.rows.reduce((s,r) => s + r.monthly.reduce((a,m,i) => a + (effectiveType(r,i)==='au' ? monthRevenue(r,i) : 0), 0), 0);
+    const dfFyRevenue = data.rows.reduce((s,r) => s + r.monthly.reduce((a,m,i) => a + (effectiveType(r,i)==='df' ? monthRevenue(r,i) : 0), 0), 0);
+    const pastCount = data.months.filter(m => m.isPast).length;
+
+    // ---- Monthly stat row + note ----
+    document.getElementById('statRow').innerHTML = [
+      tile(current.label + ' revenue', fmtCurrency(currentTotal)),
+      tile('FIUs included', fmt(billed.length,0) + ' <small>of ' + fmt(data.rows.length,0) + '</small>'),
+      tile('Revenue from Unique Users (this month)', fmtCurrency(auRevenue)),
+      tile('Revenue from Data Fetch (this month)', fmtCurrency(dfRevenue)),
+    ].join('');
+
+    const excluded = data.rows.filter(r => r.notBillable);
+    const missing = data.rows.filter(r => !r.hasData && !r.notBillable);
+    const flaggedPeriod = billed.filter(r => r.billingPeriod);
+    const noteBits = [];
+    if (excluded.length) noteBits.push(excluded.length + ' unbilled (see section 4 below)');
+    if (missing.length) noteBits.push(missing.length + ' missing yield/CMGR config or usage data');
+    if (flaggedPeriod.length) noteBits.push(flaggedPeriod.length + ' billed FIU' + (flaggedPeriod.length===1?'':'s') + ' flagged Quarterly/Annual (badge below) — same monthly formula is applied, not prorated');
+    if (data.sucSummary && data.sucSummary.active){
+      noteBits.push('SUC Start Date ' + data.sucSummary.startLabel + ' active — ' + data.sucSummary.switchedCount + ' FIU' + (data.sucSummary.switchedCount===1?'':'s') + ' switch to SUC Yield × Data Fetch volume from that month onward (highlighted), regardless of their regular billing model' + (data.sucSummary.missingCount ? ', ' + data.sucSummary.missingCount + ' billed FIU' + (data.sucSummary.missingCount===1?'':'s') + ' missing SUC config kept on regular Yield/CMGR' : '') + (data.sucSummary.missingDfCount ? ', ' + data.sucSummary.missingDfCount + ' SUC-configured FIU' + (data.sucSummary.missingDfCount===1?'':'s') + ' have no DF count to switch onto (shown as missing config from that month)' : ''));
+    }
+    document.getElementById('statNote').textContent = noteBits.join(' · ');
+
+    // ---- Annual stat row ----
+    document.getElementById('fyStatRow').innerHTML = [
+      tile('FY total (' + data.months[0].label + '–' + data.months[data.months.length-1].label + ')', fmtCurrency(fyTotal)),
+      tile('Revenue from Unique Users (FY total)', fmtCurrency(auFyRevenue)),
+      tile('Revenue from Data Fetch (FY total)', fmtCurrency(dfFyRevenue)),
+      tile('Historical / projected months', pastCount + ' <small>historical, ' + (data.months.length-pastCount) + ' current+projected</small>'),
+    ].join('');
+
+    const periodBadge = r => r.billingPeriod ? ' <span class="badge" title="Same monthly formula applied — not prorated">'+esc(r.billingPeriod)+'</span>' : '';
+    const noDataBadge = '<span class="badge" title="No historical actual on record for this FIU/month">no data</span>';
+    const revenueCell = (r, i) => {
+      const m = r.monthly[i];
+      if (m.isActual) return m.hasActual ? fmtCurrency(m.revenue) : noDataBadge;
+      if (m.billable) return fmtCurrency(m.revenue);
+      return r.notBillable ? '<span class="badge">excluded</span>' : '<span class="badge critical">missing config</span>';
+    };
+    const usageCell = (r, i) => {
+      const m = r.monthly[i];
+      if (m.isActual) return (m.hasActual && !isNaN(m.usage)) ? fmt(m.usage,0) : noDataBadge;
+      return m.billable ? fmt(m.usage,0) : '<span class="badge critical">missing config</span>';
+    };
+    // Expected Data Fetch volume cell — shown for every FIU with a DF count
+    // regardless of billing model or billable status, since this is purely
+    // about visibility of the underlying metric (req: DF tables should show
+    // every FIU, not just Data-Fetch-billed ones).
+    const dfUsageCell = (r, i) => {
+      const m = r.monthly[i];
+      if (!m) return '<span class="badge critical">missing config</span>';
+      if (m.isActual) return (m.hasActual && !isNaN(m.dfUsage)) ? fmt(m.dfUsage,0) : noDataBadge;
+      return !isNaN(m.dfUsage) ? fmt(m.dfUsage,0) : '<span class="badge critical">missing config</span>';
+    };
+    const rowClass = r => (!r.notBillable && !r.monthly.some(m => m.billable)) ? 'warn' : '';
+    // Historical (actual) months are highlighted green, SUC-driven computed
+    // months amber — a cell is never both (isActual months never have
+    // sucActive set).
+    const cellHighlight = (r, i) => {
+      const m = r.monthly[i];
+      if (!m) return '';
+      if (m.isActual) return 'actual-cell';
+      if (m.billable && m.sucActive) return 'suc-cell';
+      return '';
+    };
+    // Tooltip distinguishing the two SUC quarters on hover — Cliff (first 3
+    // months, SUC Cliff CMGR) vs Recovery (SUC Recovery CMGR, or the FIU's
+    // regular CMGR if that's left blank; SUC Yield itself doesn't change
+    // between the two).
+    const cellTitle = (r, i) => {
+      const m = r.monthly[i];
+      if (!m || !m.billable || !m.sucActive) return '';
+      if (m.sucPhase === 'cliff') return 'SUC Cliff (month 1–3 of SUC) — usage grows at SUC Cliff CMGR';
+      return r.sucRecoveryCmgr != null
+        ? 'SUC Recovery (month 4+ of SUC) — usage grows at SUC Recovery CMGR; SUC Yield stays the same'
+        : 'SUC Recovery (month 4+ of SUC) — SUC Recovery CMGR not set, so usage reverts to the regular CMGR; SUC Yield stays the same';
+    };
+    // Numeric value for sorting/searching a given month column — honors the
+    // same isActual/hasActual-vs-billable gate as the cell renderers above,
+    // so a historical or SUC-driven column sorts by its actual figures
+    // instead of every row reading as "missing".
+    const monthRevenueValue = (r, i) => {
+      const m = r.monthly[i];
+      if (m.isActual) return m.hasActual ? m.revenue : null;
+      return m.billable ? m.revenue : null;
+    };
+    const monthUsageValue = (r, i) => {
+      const m = r.monthly[i];
+      if (m.isActual) return (m.hasActual && !isNaN(m.usage)) ? m.usage : null;
+      return m.billable ? m.usage : null;
+    };
+    const monthDfUsageValue = (r, i) => {
+      const m = r.monthly[i];
+      if (!m) return null;
+      if (m.isActual) return (m.hasActual && !isNaN(m.dfUsage)) ? m.dfUsage : null;
+      return !isNaN(m.dfUsage) ? m.dfUsage : null;
+    };
+
+    // ==================== 1) Monthly revenue details ====================
+    renderDataTable({
+      containerId: 'monthlyRevenueTable',
+      rows: data.rows,
+      rowClass,
+      defaultSortKey: 'currentRevenue',
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'FIU ID, legal name, billing model…',
+      emptyMessage: 'No FIUs matched between the upload and your configs.',
+      maxHeight: '420px',
+      columns: [
+        { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
+        { key:'legalName', label:'Legal Name', value: r=>r.legalName },
+        { key:'billingModel', label:'Billing Model', value: r=>r.billingModel, render: r => esc(r.billingModel||'—') + periodBadge(r) },
+        { key:'yieldValue', label:'Yield', numeric:true, value: r=>r.yieldValue, render: r=>fmt(r.yieldValue,2) },
+        { key:'cmgr', label:'CMGR', numeric:true, value: r=>r.cmgr, render: r=>fmt(r.cmgr,2) },
+        { key:'currentRevenue', label: current.label+' revenue', numeric:true, value: r => monthRevenueValue(r,currentIndex), render: r => revenueCell(r,currentIndex), cellClass: r => cellHighlight(r,currentIndex) },
+        { key:'contribution', label:'Contribution %', numeric:true,
+          value: r => { const v = monthRevenueValue(r,currentIndex); return (v===null || !currentTotal) ? null : (v/currentTotal)*100; },
+          render: r => { const v = monthRevenueValue(r,currentIndex); return fmtPct((v===null || !currentTotal) ? null : (v/currentTotal)*100); } },
+      ],
+      footer: () => '<tr><td colspan="5">Total</td><td class="num">'+fmtCurrency(currentTotal)+'</td><td class="num">'+(currentTotal?'100.0%':'—')+'</td></tr>'
+    });
+
+    // ==================== 2) Monthly AU count ====================
+    renderDataTable({
+      containerId: 'monthlyAuTable',
+      rows: auRows,
+      defaultSortKey: 'auCount',
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'FIU ID, legal name…',
+      emptyMessage: 'No FIUs billed on Active/Unique Users this month.',
+      maxHeight: '340px',
+      columns: [
+        { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
+        { key:'legalName', label:'Legal Name', value: r=>r.legalName },
+        { key:'billingModel', label:'Billing Model', value: r=>r.billingModel, render: r=>esc(r.billingModel||'—') },
+        { key:'auCount', label:'AU Count', numeric:true, value: r=>r.auCount, render: r=>fmt(r.auCount,0) },
+        { key:'contribution', label:'Contribution %', numeric:true,
+          value: r => { const t = auRows.reduce((s,x)=>s+(x.auCount||0),0); return (r.auCount==null || !t) ? null : (r.auCount/t)*100; },
+          render: r => { const t = auRows.reduce((s,x)=>s+(x.auCount||0),0); return fmtPct((r.auCount==null || !t) ? null : (r.auCount/t)*100); } },
+      ],
+      footer: rows => '<tr><td colspan="3">Total</td><td class="num">'+fmt(auRows.reduce((s,r)=>s+(r.auCount||0),0),0)+'</td><td class="num">'+(auRows.reduce((s,r)=>s+(r.auCount||0),0)?'100.0%':'—')+'</td></tr>'
+    });
+
+    // ==================== 3) Monthly DF count ====================
+    // Shows every FIU that reported a DF count this month, regardless of
+    // billing model — a Unique-User-billed FIU's DF volume matters once SUC
+    // kicks in, so it's visible here even while SUC isn't active yet.
+    renderDataTable({
+      containerId: 'monthlyDfTable',
+      rows: dfRows,
+      defaultSortKey: 'dfCount',
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'FIU ID, legal name…',
+      emptyMessage: 'No FIUs reported a Data Fetch count this month.',
+      maxHeight: '340px',
+      columns: [
+        { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
+        { key:'legalName', label:'Legal Name', value: r=>r.legalName },
+        { key:'billingModel', label:'Billing Model', value: r=>r.billingModel, render: r=>esc(r.billingModel||'—') },
+        { key:'dfCount', label:'DF Count (MTD)', numeric:true, value: r=>r.dfCount, render: r=>fmt(r.dfCount,0) },
+        { key:'contribution', label:'Contribution %', numeric:true,
+          value: r => { const t = dfRows.reduce((s,x)=>s+(x.dfCount||0),0); return (r.dfCount==null || !t) ? null : (r.dfCount/t)*100; },
+          render: r => { const t = dfRows.reduce((s,x)=>s+(x.dfCount||0),0); return fmtPct((r.dfCount==null || !t) ? null : (r.dfCount/t)*100); } },
+      ],
+      footer: rows => '<tr><td colspan="3">Total</td><td class="num">'+fmt(dfRows.reduce((s,r)=>s+(r.dfCount||0),0),0)+'</td><td class="num">'+(dfRows.reduce((s,r)=>s+(r.dfCount||0),0)?'100.0%':'—')+'</td></tr>'
+    });
+
+    // ==================== 4) Annual revenue details (FY grid) ====================
+    const monthRevenueCols = data.months.map((m,i) => ({
+      key:'m'+i, label:m.label, numeric:true,
+      value: r => monthRevenueValue(r,i),
+      render: r => revenueCell(r,i),
+      cellClass: r => cellHighlight(r,i),
+      cellTitle: r => cellTitle(r,i)
+    }));
+    renderDataTable({
+      containerId: 'annualRevenueTable',
+      rows: data.rows,
+      rowClass,
+      defaultSortKey: 'fyTotal',
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'FIU ID, legal name, billing model…',
+      emptyMessage: 'No FIUs matched between the upload and your configs.',
+      maxHeight: '460px',
+      columns: [
+        { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
+        { key:'legalName', label:'Legal Name', value: r=>r.legalName },
+        { key:'billingModel', label:'Billing Model', value: r=>r.billingModel, render: r => esc(r.billingModel||'—') + periodBadge(r) },
+        { key:'yieldValue', label:'Yield', numeric:true, value: r=>r.yieldValue, render: r=>fmt(r.yieldValue,2) },
+        { key:'cmgr', label:'CMGR', numeric:true, value: r=>r.cmgr, render: r=>fmt(r.cmgr,2) },
+        ...monthRevenueCols,
+        { key:'fyTotal', label:'FY Total', numeric:true,
+          value: r => r.monthly.reduce((a,m,i)=>a+monthRevenue(r,i),0),
+          render: r => fmtCurrency(r.monthly.reduce((a,m,i)=>a+monthRevenue(r,i),0)) },
+        { key:'contribution', label:'Contribution % (FY total)', numeric:true,
+          value: r => { const v = r.monthly.reduce((a,m,i)=>a+monthRevenue(r,i),0); return !fyTotal ? null : (v/fyTotal)*100; },
+          render: r => { const v = r.monthly.reduce((a,m,i)=>a+monthRevenue(r,i),0); return fmtPct(!fyTotal ? null : (v/fyTotal)*100); } },
+      ],
+      footer: () => '<tr><td colspan="5">Total</td>' + data.totalsByMonth.map(t=>'<td class="num">'+fmtCurrency(t)+'</td>').join('') + '<td class="num">'+fmtCurrency(fyTotal)+'</td><td class="num">'+(fyTotal?'100.0%':'—')+'</td></tr>'
+    });
+
+    // ==================== 5) Annual AU count (FY grid) ====================
+    const monthAuCols = data.months.map((m,i) => ({
+      key:'m'+i, label:m.label, numeric:true,
+      value: r => monthUsageValue(r,i),
+      render: r => usageCell(r,i),
+      cellClass: r => cellHighlight(r,i),
+      cellTitle: r => cellTitle(r,i)
+    }));
+    // Sums a month column across a row set, treating missing/NaN values as 0
+    // — used for the Total footer rows below (always the full dataset, not
+    // whatever's currently filtered by a search box).
+    const sumMonthValue = (rowsList, i, accessor) => rowsList.reduce((s, r) => {
+      const v = accessor(r, i);
+      return s + ((v === null || v === undefined || isNaN(v)) ? 0 : v);
+    }, 0);
+    const auFyValue = r => data.months.reduce((a,m,i) => a + (monthUsageValue(r,i) || 0), 0);
+    const auFyGrandTotal = auRows.reduce((s,r) => s + auFyValue(r), 0);
+    renderDataTable({
+      containerId: 'annualAuTable',
+      rows: auRows,
+      defaultSortKey: 'm'+currentIndex,
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'FIU ID, legal name…',
+      emptyMessage: 'No FIUs billed on Active/Unique Users.',
+      maxHeight: '340px',
+      columns: [
+        { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
+        { key:'legalName', label:'Legal Name', value: r=>r.legalName },
+        { key:'billingModel', label:'Billing Model', value: r=>r.billingModel, render: r=>esc(r.billingModel||'—') },
+        { key:'cmgr', label:'CMGR', numeric:true, value: r=>r.cmgr, render: r=>fmt(r.cmgr,2) },
+        ...monthAuCols,
+        { key:'contribution', label:'Contribution % (FY total)', numeric:true,
+          value: r => !auFyGrandTotal ? null : (auFyValue(r)/auFyGrandTotal)*100,
+          render: r => fmtPct(!auFyGrandTotal ? null : (auFyValue(r)/auFyGrandTotal)*100) },
+      ],
+      footer: () => '<tr><td colspan="4">Total</td>' + data.months.map((m,i)=>'<td class="num">'+fmt(sumMonthValue(auRows,i,monthUsageValue),0)+'</td>').join('') + '<td class="num">'+(auFyGrandTotal?'100.0%':'—')+'</td></tr>'
+    });
+
+    // ==================== 6) Annual DF count (FY grid) ====================
+    // Shows expected Data Fetch volume for every FIU with a DF count, not
+    // just ones currently billed on Data Fetch — a Unique-User-billed FIU's
+    // projected DF volume is what its revenue switches onto once SUC
+    // starts, so it's useful to see for the whole FY, not only from the
+    // switch month onward. Amber highlighting still marks months where that
+    // volume is actually driving billed (SUC) revenue.
+    const monthDfCols = data.months.map((m,i) => ({
+      key:'m'+i, label:m.label, numeric:true,
+      value: r => monthDfUsageValue(r,i),
+      render: r => dfUsageCell(r,i),
+      cellClass: r => cellHighlight(r,i),
+      cellTitle: r => cellTitle(r,i)
+    }));
+    const dfFyValue = r => data.months.reduce((a,m,i) => a + (monthDfUsageValue(r,i) || 0), 0);
+    const dfFyGrandTotal = dfRows.reduce((s,r) => s + dfFyValue(r), 0);
+    renderDataTable({
+      containerId: 'annualDfTable',
+      rows: dfRows,
+      defaultSortKey: 'm'+currentIndex,
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'FIU ID, legal name…',
+      emptyMessage: 'No FIUs reported a Data Fetch count.',
+      maxHeight: '340px',
+      columns: [
+        { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
+        { key:'legalName', label:'Legal Name', value: r=>r.legalName },
+        { key:'billingModel', label:'Billing Model', value: r=>r.billingModel, render: r=>esc(r.billingModel||'—') },
+        { key:'cmgr', label:'CMGR', numeric:true, value: r=>r.cmgr, render: r=>fmt(r.cmgr,2) },
+        ...monthDfCols,
+        { key:'contribution', label:'Contribution % (FY total)', numeric:true,
+          value: r => !dfFyGrandTotal ? null : (dfFyValue(r)/dfFyGrandTotal)*100,
+          render: r => fmtPct(!dfFyGrandTotal ? null : (dfFyValue(r)/dfFyGrandTotal)*100) },
+      ],
+      footer: () => '<tr><td colspan="4">Total</td>' + data.months.map((m,i)=>'<td class="num">'+fmt(sumMonthValue(dfRows,i,monthDfUsageValue),0)+'</td>').join('') + '<td class="num">'+(dfFyGrandTotal?'100.0%':'—')+'</td></tr>'
+    });
+
+    // ==================== 7) Top 10 - Lending / Top 10 - PFM ====================
+    // FIUs flagged Top 10 = Yes on the FIU Metadata tab, split by Use-case.
+    // Reuses the same month-column defs (monthRevenueCols/monthAuCols/
+    // monthDfCols) built above for the main Annual tables — they're generic
+    // functions of data.months, not tied to a particular row set.
+    const useCaseNorm = uc => String(uc||'').trim().toLowerCase();
+    const topTenLendingRows = data.rows.filter(r => r.topTen && useCaseNorm(r.useCase) === 'lending');
+    const topTenPfmRows = data.rows.filter(r => r.topTen && useCaseNorm(r.useCase) === 'pfm');
+
+    document.getElementById('topTenLendingCard').style.display = 'block';
+    renderDataTable({
+      containerId: 'topTenLendingRevenueTable',
+      rows: topTenLendingRows,
+      rowClass,
+      defaultSortKey: 'fyTotal',
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'FIU ID, legal name, billing model…',
+      emptyMessage: 'No FIUs are flagged Top 10 with Use-case "Lending".',
+      maxHeight: '360px',
+      columns: [
+        { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
+        { key:'legalName', label:'Legal Name', value: r=>r.legalName },
+        { key:'billingModel', label:'Billing Model', value: r=>r.billingModel, render: r => esc(r.billingModel||'—') + periodBadge(r) },
+        ...monthRevenueCols,
+        { key:'fyTotal', label:'FY Total', numeric:true,
+          value: r => r.monthly.reduce((a,m,i)=>a+monthRevenue(r,i),0),
+          render: r => fmtCurrency(r.monthly.reduce((a,m,i)=>a+monthRevenue(r,i),0)) },
+      ],
+      footer: () => {
+        const monthTotals = data.months.map((m,i) => sumMonthValue(topTenLendingRows,i,monthRevenueValue));
+        const grand = monthTotals.reduce((a,b)=>a+b,0);
+        return '<tr><td colspan="3">Total</td>' + monthTotals.map(t=>'<td class="num">'+fmtCurrency(t)+'</td>').join('') + '<td class="num">'+fmtCurrency(grand)+'</td></tr>';
+      }
+    });
+    renderDataTable({
+      containerId: 'topTenLendingDfTable',
+      rows: topTenLendingRows,
+      defaultSortKey: 'm'+currentIndex,
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'FIU ID, legal name…',
+      emptyMessage: 'No FIUs are flagged Top 10 with Use-case "Lending".',
+      maxHeight: '340px',
+      columns: [
+        { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
+        { key:'legalName', label:'Legal Name', value: r=>r.legalName },
+        { key:'billingModel', label:'Billing Model', value: r=>r.billingModel, render: r=>esc(r.billingModel||'—') },
+        ...monthDfCols,
+      ],
+      footer: () => '<tr><td colspan="3">Total</td>' + data.months.map((m,i)=>'<td class="num">'+fmt(sumMonthValue(topTenLendingRows,i,monthDfUsageValue),0)+'</td>').join('') + '</tr>'
+    });
+
+    document.getElementById('topTenPfmCard').style.display = 'block';
+    renderDataTable({
+      containerId: 'topTenPfmRevenueTable',
+      rows: topTenPfmRows,
+      rowClass,
+      defaultSortKey: 'fyTotal',
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'FIU ID, legal name, billing model…',
+      emptyMessage: 'No FIUs are flagged Top 10 with Use-case "PFM".',
+      maxHeight: '360px',
+      columns: [
+        { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
+        { key:'legalName', label:'Legal Name', value: r=>r.legalName },
+        { key:'billingModel', label:'Billing Model', value: r=>r.billingModel, render: r => esc(r.billingModel||'—') + periodBadge(r) },
+        ...monthRevenueCols,
+        { key:'fyTotal', label:'FY Total', numeric:true,
+          value: r => r.monthly.reduce((a,m,i)=>a+monthRevenue(r,i),0),
+          render: r => fmtCurrency(r.monthly.reduce((a,m,i)=>a+monthRevenue(r,i),0)) },
+      ],
+      footer: () => {
+        const monthTotals = data.months.map((m,i) => sumMonthValue(topTenPfmRows,i,monthRevenueValue));
+        const grand = monthTotals.reduce((a,b)=>a+b,0);
+        return '<tr><td colspan="3">Total</td>' + monthTotals.map(t=>'<td class="num">'+fmtCurrency(t)+'</td>').join('') + '<td class="num">'+fmtCurrency(grand)+'</td></tr>';
+      }
+    });
+    renderDataTable({
+      containerId: 'topTenPfmAuTable',
+      rows: topTenPfmRows,
+      defaultSortKey: 'm'+currentIndex,
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'FIU ID, legal name…',
+      emptyMessage: 'No FIUs are flagged Top 10 with Use-case "PFM".',
+      maxHeight: '340px',
+      columns: [
+        { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
+        { key:'legalName', label:'Legal Name', value: r=>r.legalName },
+        { key:'billingModel', label:'Billing Model', value: r=>r.billingModel, render: r=>esc(r.billingModel||'—') },
+        ...monthAuCols,
+      ],
+      footer: () => '<tr><td colspan="3">Total</td>' + data.months.map((m,i)=>'<td class="num">'+fmt(sumMonthValue(topTenPfmRows,i,monthUsageValue),0)+'</td>').join('') + '</tr>'
+    });
+    renderDataTable({
+      containerId: 'topTenPfmDfTable',
+      rows: topTenPfmRows,
+      defaultSortKey: 'm'+currentIndex,
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'FIU ID, legal name…',
+      emptyMessage: 'No FIUs are flagged Top 10 with Use-case "PFM".',
+      maxHeight: '340px',
+      columns: [
+        { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
+        { key:'legalName', label:'Legal Name', value: r=>r.legalName },
+        { key:'billingModel', label:'Billing Model', value: r=>r.billingModel, render: r=>esc(r.billingModel||'—') },
+        ...monthDfCols,
+      ],
+      footer: () => '<tr><td colspan="3">Total</td>' + data.months.map((m,i)=>'<td class="num">'+fmt(sumMonthValue(topTenPfmRows,i,monthDfUsageValue),0)+'</td>').join('') + '</tr>'
+    });
+
+    // ---- unbilled FIUs (excluded/unrecognized billing model) ----
+    renderUnbilled(data.unbilledSummary, data.rows.filter(r => r.notBillable));
+
+    // ---- grouped breakdowns: TSP / Use-case / License Type ----
+    // Each grouping has its own card with three tables (Revenue, AU count,
+    // DF count) — data.groupedByTsp/UseCase/License are each
+    // { revenue: [...], au: [...], df: [...] } from the backend.
+    document.getElementById('groupTspCard').style.display = 'block';
+    renderGroupTable('groupTspRevenue', 'TSP', data.groupedByTsp.revenue, data.months, currentIndex, 'revenue');
+    renderGroupTable('groupTspAu', 'TSP', data.groupedByTsp.au, data.months, currentIndex, 'count');
+    renderGroupTable('groupTspDf', 'TSP', data.groupedByTsp.df, data.months, currentIndex, 'count');
+
+    document.getElementById('groupUseCaseCard').style.display = 'block';
+    renderGroupTable('groupUseCaseRevenue', 'Use-case', data.groupedByUseCase.revenue, data.months, currentIndex, 'revenue');
+    renderGroupTable('groupUseCaseAu', 'Use-case', data.groupedByUseCase.au, data.months, currentIndex, 'count');
+    renderGroupTable('groupUseCaseDf', 'Use-case', data.groupedByUseCase.df, data.months, currentIndex, 'count');
+
+    document.getElementById('groupLicenseCard').style.display = 'block';
+    renderGroupTable('groupLicenseRevenue', 'License Type', data.groupedByLicense.revenue, data.months, currentIndex, 'revenue');
+    renderGroupTable('groupLicenseAu', 'License Type', data.groupedByLicense.au, data.months, currentIndex, 'count');
+    renderGroupTable('groupLicenseDf', 'License Type', data.groupedByLicense.df, data.months, currentIndex, 'count');
+
+    // ---- DF Yield Analysis ----
+    if (data.dfYieldAnalysis){
+      document.getElementById('dfYieldCard').style.display = 'block';
+      renderDfYieldAnalysis(data.dfYieldAnalysis);
+    }
+  }
+
+  // summary: { count, totalAuCount, totalDfCount }; rows: the notBillable rows
+  function renderUnbilled(summary, rows){
+    const card = document.getElementById('unbilledCard');
+    if (!summary || !summary.count){
+      card.style.display = 'none';
+      return;
+    }
+    card.style.display = 'block';
+    document.getElementById('unbilledStatRow').innerHTML = [
+      tile('Unbilled FIUs', fmt(summary.count,0)),
+      tile('Total AU count', fmt(summary.totalAuCount,0)),
+      tile('Total DF count', fmt(summary.totalDfCount,0)),
+    ].join('');
+    renderDataTable({
+      containerId: 'unbilledTable',
+      rows,
+      customSorts: { totalCount: r => (r.auCount||0)+(r.dfCount||0) },
+      defaultSortKey: 'totalCount',
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'FIU ID, legal name, billing model…',
+      emptyMessage: 'No unbilled FIUs.',
+      maxHeight: '340px',
+      columns: [
+        { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
+        { key:'legalName', label:'Legal Name', value: r=>r.legalName },
+        { key:'billingModel', label:'Billing Model', value: r=>r.billingModel, render: r=>esc(r.billingModel||'—') },
+        { key:'auCount', label:'AU Count', numeric:true, value: r=>r.auCount, render: r=>fmt(r.auCount,0) },
+        { key:'dfCount', label:'DF Count', numeric:true, value: r=>r.dfCount, render: r=>fmt(r.dfCount,0) },
+        { key:'auContribution', label:'AU Contribution %', numeric:true,
+          value: r => (r.auCount==null || !summary.totalAuCount) ? null : (r.auCount/summary.totalAuCount)*100,
+          render: r => fmtPct((r.auCount==null || !summary.totalAuCount) ? null : (r.auCount/summary.totalAuCount)*100) },
+        { key:'dfContribution', label:'DF Contribution %', numeric:true,
+          value: r => (r.dfCount==null || !summary.totalDfCount) ? null : (r.dfCount/summary.totalDfCount)*100,
+          render: r => fmtPct((r.dfCount==null || !summary.totalDfCount) ? null : (r.dfCount/summary.totalDfCount)*100) },
+      ],
+      footer: () => '<tr><td colspan="3">Total</td><td class="num">'+fmt(summary.totalAuCount,0)+'</td><td class="num">'+fmt(summary.totalDfCount,0)+'</td><td class="num">'+(summary.totalAuCount?'100.0%':'—')+'</td><td class="num">'+(summary.totalDfCount?'100.0%':'—')+'</td></tr>'
+    });
+  }
+
+  // groups: [{ label, fiuCount, monthly: [value,...] }]
+  // kind: 'revenue' (currency formatting, includes an FY Total column) or
+  // 'count' (plain-number formatting for AU/DF, no FY Total column — same
+  // convention as the per-FIU Annual AU/DF tables).
+  function renderGroupTable(containerId, dimensionLabel, groups, months, currentIndex, kind, opts){
+    opts = opts || {};
+    const container = document.getElementById(containerId);
+    const isRevenue = kind === 'revenue';
+    const fmtVal = isRevenue ? fmtCurrency : (v => fmt(v,0));
+    if (!groups || !groups.length){
+      container.innerHTML = '<div class="empty-state" style="padding:14px;">No FIUs to group.</div>';
+      return;
+    }
+    container.innerHTML = '<div id="'+containerId+'-dt"></div>';
+    const monthCols = months.map((m,i) => ({
+      key:'m'+i, label:m.label, numeric:true,
+      value: g => g.monthly[i],
+      render: g => fmtVal(g.monthly[i]),
+      cellClass: () => m.isPast ? 'actual-cell' : ''
+    }));
+    const totalsByMonth = months.map((mc,i) => groups.reduce((s,g)=>s+g.monthly[i],0));
+    const grandTotal = totalsByMonth.reduce((a,b)=>a+b,0);
+    const columns = [
+      { key:'label', label: dimensionLabel, value: g=>g.label },
+      { key:'fiuCount', label:'FIUs', numeric:true, value: g=>g.fiuCount, render: g=>fmt(g.fiuCount,0) },
+      ...monthCols,
+    ];
+    let footerCells = totalsByMonth.map(t=>'<td class="num">'+fmtVal(t)+'</td>').join('');
+    if (isRevenue){
+      columns.push({ key:'fyTotal', label:'FY Total', numeric:true, value: g=>g.monthly.reduce((a,b)=>a+b,0), render: g=>fmtVal(g.monthly.reduce((a,b)=>a+b,0)) });
+      footerCells += '<td class="num">'+fmtVal(grandTotal)+'</td>';
+    }
+    if (opts.contribution){
+      const curTotal = totalsByMonth[currentIndex || 0];
+      columns.push({
+        key: 'contribution', label: 'Contribution % (this month)', numeric: true,
+        value: g => !curTotal ? null : (g.monthly[currentIndex || 0] / curTotal) * 100,
+        render: g => fmtPct(!curTotal ? null : (g.monthly[currentIndex || 0] / curTotal) * 100)
+      });
+      footerCells += '<td class="num">'+(curTotal?'100.0%':'—')+'</td>';
+    }
+    renderDataTable({
+      containerId: containerId + '-dt',
+      rows: groups,
+      defaultSortKey: 'm'+(currentIndex||0),
+      defaultSortDir: 'desc',
+      searchPlaceholder: dimensionLabel.toLowerCase()+' name…',
+      emptyMessage: 'No FIUs to group.',
+      maxHeight: '280px',
+      columns,
+      footer: () => '<tr><td colspan="2">Total</td>' + footerCells + '</tr>'
+    });
+  }
+
+  // analysis: { periods, current, oct2026, mar2027, tspByPeriod } from the
+  // backend's dfYieldAnalysis (see server.js). Each of current/oct2026/
+  // mar2027 is { label, index, overall, byUseCase, byTsp }; index is -1 (and
+  // overall/byUseCase/byTsp are empty) if that calendar month falls outside
+  // the current fiscal year — handled here as an empty-state rather than a
+  // crash so an unusual FY Start Month doesn't break the page.
+  function renderDfYieldAnalysis(analysis){
+    ['Current','Oct','Mar'].forEach((prefix, i) => {
+      const period = [analysis.current, analysis.oct2026, analysis.mar2027][i];
+      const heading = document.getElementById('dfYield'+prefix+'Heading');
+      if (heading) heading.textContent = period.label + ' — Overall';
+      renderDfYieldOverallTile('dfYield'+prefix+'Overall', period);
+      renderDfYieldGroupTable('dfYield'+prefix+'ByUseCase', 'Use-case', period.byUseCase);
+      renderDfYieldGroupTable('dfYield'+prefix+'ByTsp', 'TSP', period.byTsp);
+    });
+    renderDfYieldTspByPeriod('dfYieldTspByPeriod', analysis.periods, analysis.tspByPeriod);
+  }
+
+  function renderDfYieldOverallTile(containerId, period){
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    if (period.index < 0 || !period.overall){
+      el.innerHTML = '<div class="empty-state" style="padding:14px;">'+esc(period.label)+' isn\'t part of the current fiscal year.</div>';
+      return;
+    }
+    const o = period.overall;
+    el.innerHTML = [
+      tile('Total Revenue', fmtCurrency(o.revenue)),
+      tile('Total DF Count', fmt(o.dfCount,0)),
+      tile('DF Yield', fmtYield(o.yield)),
+    ].join('');
+  }
+
+  // groups: [{ label, revenue, dfCount, yield }]
+  function renderDfYieldGroupTable(containerId, dimensionLabel, groups){
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    if (!groups || !groups.length){
+      el.innerHTML = '<div class="empty-state" style="padding:14px;">No data for this period.</div>';
+      return;
+    }
+    el.innerHTML = '<div id="'+containerId+'-dt"></div>';
+    renderDataTable({
+      containerId: containerId + '-dt',
+      rows: groups,
+      defaultSortKey: 'revenue',
+      defaultSortDir: 'desc',
+      searchPlaceholder: dimensionLabel.toLowerCase()+' name…',
+      emptyMessage: 'No data for this period.',
+      maxHeight: '280px',
+      columns: [
+        { key:'label', label: dimensionLabel, value: g=>g.label },
+        { key:'revenue', label:'Revenue', numeric:true, value: g=>g.revenue, render: g=>fmtCurrency(g.revenue) },
+        { key:'dfCount', label:'DF Count', numeric:true, value: g=>g.dfCount, render: g=>fmt(g.dfCount,0) },
+        { key:'yield', label:'DF Yield', numeric:true, value: g=>g.yield, render: g=>fmtYield(g.yield) },
+      ]
+    });
+  }
+
+  // periods: [{ key, label }, ...]; rows: [{ label, [period.key]: yield|null, ... }]
+  function renderDfYieldTspByPeriod(containerId, periods, rows){
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    if (!rows || !rows.length){
+      el.innerHTML = '<div class="empty-state" style="padding:14px;">No TSP data available.</div>';
+      return;
+    }
+    el.innerHTML = '<div id="'+containerId+'-dt"></div>';
+    const periodCols = periods.map(p => ({
+      key: p.key, label: p.label, numeric: true,
+      value: g => g[p.key],
+      render: g => fmtYield(g[p.key])
+    }));
+    renderDataTable({
+      containerId: containerId + '-dt',
+      rows,
+      defaultSortKey: periods[0] ? periods[0].key : 'label',
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'TSP name…',
+      emptyMessage: 'No TSP data available.',
+      maxHeight: '340px',
+      columns: [
+        { key:'label', label:'TSP', value: g=>g.label },
+        ...periodCols,
+      ]
+    });
+  }
+
+  document.getElementById('exportCsv').addEventListener('click', function(){
+    if (!lastResult) return;
+    const headers = ['FIU ID','Legal Name','Billing Model','Yield','CMGR', ...lastResult.months.map(m=>m.label), 'FY Total'];
+    const lines = [headers.join(',')];
+    lastResult.rows.forEach(r => {
+      const fyTotalRow = r.monthly.reduce((a,m,i) => {
+        const include = m.isActual ? m.hasActual : m.billable;
+        return a + (include ? (m.revenue || 0) : 0);
+      }, 0);
+      const monthVals = r.monthly.map(m => {
+        if (m.isActual) return m.hasActual ? m.revenue : 'no historical data';
+        return m.billable ? m.revenue : (r.notBillable ? 'excluded' : 'missing config');
+      });
+      lines.push([r.fiuId, r.legalName, r.billingModel, r.yieldValue, r.cmgr, ...monthVals, fyTotalRow]
+        .map(v => (v===undefined||v===null||(typeof v==='number'&&isNaN(v))) ? '' : v).join(','));
+    });
+    const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'fiu-revenue-fy-projection.csv';
+    a.click();
+  });
+
+  // ---------- chat ----------
+  const chatToggle = document.getElementById('chatToggle');
+  const chatPanel = document.getElementById('chatPanel');
+  const chatClose = document.getElementById('chatClose');
+  const chatMessages = document.getElementById('chatMessages');
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+  const chatSend = document.getElementById('chatSend');
+  let chatHistory = []; // [{role:'user'|'assistant', content:string}, ...] — client-side only, resent each turn
+  let chatOpened = false;
+
+  function addChatBubble(role, text){
+    const el = document.createElement('div');
+    el.className = 'chat-msg ' + role;
+    el.textContent = text;
+    chatMessages.appendChild(el);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return el;
+  }
+
+  chatToggle.addEventListener('click', function(){
+    chatPanel.classList.toggle('open');
+    if (chatPanel.classList.contains('open') && !chatOpened) {
+      chatOpened = true;
+      addChatBubble('system-note', 'Ask questions about the currently computed FY data — revenue, DF Yield, groupings, SUC status, and more. Answers come from the real Claude API and are based only on what\'s currently computed here.');
+      if (!lastResult) addChatBubble('system-note', 'Upload a counts file and compute revenue first — there\'s no data to ask about yet.');
+    }
+  });
+  chatClose.addEventListener('click', function(){ chatPanel.classList.remove('open'); });
+
+  chatInput.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      chatForm.requestSubmit();
+    }
+  });
+
+  chatForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const text = chatInput.value.trim();
+    if (!text) return;
+    if (!lastResult) {
+      addChatBubble('error', 'No computed data yet — upload a counts file and compute revenue first, then ask a question.');
+      return;
+    }
+    chatInput.value = '';
+    addChatBubble('user', text);
+    chatHistory.push({ role: 'user', content: text });
+    chatSend.disabled = true;
+    const typing = document.createElement('div');
+    typing.className = 'chat-typing';
+    typing.textContent = 'Thinking…';
+    chatMessages.appendChild(typing);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    try {
+      const res = await apiFetch(API + '/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: chatHistory, data: lastResult })
+      });
+      const body = await res.json();
+      typing.remove();
+      if (!res.ok) {
+        addChatBubble('error', body.error || ('Request failed (' + res.status + ')'));
+        chatHistory.pop(); // don't keep a question that never got an answer
+        return;
+      }
+      addChatBubble('assistant', body.reply || '(empty response)');
+      chatHistory.push({ role: 'assistant', content: body.reply || '' });
+    } catch (err) {
+      typing.remove();
+      addChatBubble('error', 'Could not reach the server: ' + err.message);
+      chatHistory.pop();
+    } finally {
+      chatSend.disabled = false;
+    }
+  });
+
+  // ---------- init ----------
+  loadMeta();
+  loadYc();
+  loadForecastChart();
+  // Auto-pull today's counts from the latest matching Metabase email on
+  // every page load — this is what makes a plain refresh show updated
+  // numbers with no manual upload step. Falls back to a clear status
+  // message (not a hard error) if email auto-pull isn't configured or no
+  // matching email is found yet; the manual "Choose counts file" picker
+  // still works either way.
+  runComputeFromEmail(false);
+})();
+</script>
+</body>
+</html>

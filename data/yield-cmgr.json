@@ -1,0 +1,3891 @@
+[
+  {
+    "fiuId": "fiulive@axisbank",
+    "yield": 5,
+    "cmgr": -0.0342,
+    "sucYield": 0.15,
+    "sucCliffCmgr": -0.0684,
+    "sucRecoveryCmgr": -0.0342
+  },
+  {
+    "fiuId": "fiulive@dreamplug",
+    "yield": 0.6435786254647599,
+    "cmgr": 0.0609,
+    "sucYield": 0.24,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "navifs-fiu",
+    "yield": 1,
+    "cmgr": -0.0234,
+    "sucYield": 2.03,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0234
+  },
+  {
+    "fiuId": "fiulive@nuinvestors",
+    "yield": 20,
+    "cmgr": 0.1,
+    "sucYield": 0.89,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "kbnbfc-fiu",
+    "yield": 0.8926338999525912,
+    "cmgr": 0.0153,
+    "sucYield": 1.36,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0153
+  },
+  {
+    "fiuId": "NESFB_FIU_PROD",
+    "yield": 0.529970777061592,
+    "cmgr": -0.0534,
+    "sucYield": 2.9,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0534
+  },
+  {
+    "fiuId": "fiulive@jupitermoney",
+    "yield": 1,
+    "cmgr": -0.0347,
+    "sucYield": 0.31,
+    "sucCliffCmgr": -0.0693,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "KMBL-FIU-PROD",
+    "yield": 0.418745382675061,
+    "cmgr": 0.1,
+    "sucYield": 1.75,
+    "sucCliffCmgr": 0.1,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "SI_CREVA_FIU_PROD",
+    "yield": 0.5869011650654262,
+    "cmgr": 0.1,
+    "sucYield": 1.53,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "GROWW_NBT_FIU_PROD",
+    "yield": 0.07020994187045586,
+    "cmgr": 0.0515,
+    "sucYield": 0.46,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "bfl-fiu",
+    "yield": 0.5,
+    "cmgr": 0.05,
+    "sucYield": 2.86,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.05
+  },
+  {
+    "fiuId": "fiulive@axissec",
+    "yield": 1.0546876647949477,
+    "cmgr": -0.0218,
+    "sucYield": 0.28,
+    "sucCliffCmgr": -0.0436,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@rkbfinance",
+    "yield": 0.25,
+    "cmgr": 0.1,
+    "sucYield": 1.65,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@indmoneysb",
+    "yield": 0.08682078336922185,
+    "cmgr": 0.0383,
+    "sucYield": 0.76,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@moneycontrol",
+    "yield": 0.0513877915454236,
+    "cmgr": -0.1236,
+    "sucYield": 0.56,
+    "sucCliffCmgr": -0.24719999999999998,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "ICICI-FIU",
+    "yield": 0.2635978779333312,
+    "cmgr": -0.2045,
+    "sucYield": 1.76,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.2045
+  },
+  {
+    "fiuId": "PiramalFinance-FIU",
+    "yield": 4,
+    "cmgr": 0.1,
+    "sucYield": 2.1,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "KHATABOOK_FIU_PROD",
+    "yield": 0.1976707946923578,
+    "cmgr": 0.1,
+    "sucYield": 1.88,
+    "sucCliffCmgr": -0.035,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "poonawala-fincorp-limited",
+    "yield": 1.5,
+    "cmgr": 0.0073,
+    "sucYield": 1.91,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0073
+  },
+  {
+    "fiuId": "SURYODAY_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": 0.1,
+    "sucYield": 4.76,
+    "sucCliffCmgr": 0.1,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "niapl-fiu",
+    "yield": 0.4,
+    "cmgr": 0.0259,
+    "sucYield": 0.52,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "AKARA_FIU_PROD",
+    "yield": 0.12772349248387022,
+    "cmgr": 0.1,
+    "sucYield": 0.63,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "LT_FINANCE_FIU_PROD",
+    "yield": 0.6518712603376653,
+    "cmgr": 0.1,
+    "sucYield": 3.14,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "muthootml-fiu",
+    "yield": 0.7822249972453814,
+    "cmgr": 0.0322,
+    "sucYield": 1.76,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0322
+  },
+  {
+    "fiuId": "fiulive@fwfintech",
+    "yield": 8,
+    "cmgr": 0.1,
+    "sucYield": 1.06,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@motilaloswal",
+    "yield": 0.6,
+    "cmgr": 0.034,
+    "sucYield": 0.5,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "policybazaar-prod",
+    "yield": 4,
+    "cmgr": 0.1,
+    "sucYield": 1.32,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "SNAPMINT_FIU_PROD",
+    "yield": 0.6998629483241762,
+    "cmgr": 0.0928,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0928
+  },
+  {
+    "fiuId": "fiulive@foldmoney",
+    "yield": 1,
+    "cmgr": 0.0167,
+    "sucYield": 0.72,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@onepercentclub",
+    "yield": 1,
+    "cmgr": 0.1,
+    "sucYield": 0.3,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "bajajfsl-fiu",
+    "yield": 1.347627820909932,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "SBFC_PROD_FIUID",
+    "yield": 3,
+    "cmgr": 0.1,
+    "sucYield": 2.9,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@credright",
+    "yield": 5,
+    "cmgr": -0.3203,
+    "sucYield": 0.16,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.3203
+  },
+  {
+    "fiuId": "MONEYVIEW_FIU_PROD",
+    "yield": 0.5092284003421728,
+    "cmgr": -0.0871,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0871
+  },
+  {
+    "fiuId": "fiulive@finuture",
+    "yield": 6,
+    "cmgr": -0.0302,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.0604,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@dhan",
+    "yield": 0.012584932563638858,
+    "cmgr": 0.0687,
+    "sucYield": 0.27,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "finnable-fiu",
+    "yield": 0.9059400882004948,
+    "cmgr": 0.1,
+    "sucYield": 2.95,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "DSG_FIU_PROD",
+    "yield": 0.5173489679764108,
+    "cmgr": 0.1,
+    "sucYield": 1.55,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@paytmmoneypfm",
+    "yield": 1,
+    "cmgr": 0.1,
+    "sucYield": 2.66,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@skfin",
+    "yield": 1.9,
+    "cmgr": 0.0364,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0364
+  },
+  {
+    "fiuId": "FINCORP-fiu",
+    "yield": 1,
+    "cmgr": -0.0053,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0053
+  },
+  {
+    "fiuId": "abc1-fiu",
+    "yield": 0.25,
+    "cmgr": 0.0216,
+    "sucYield": 0.42,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0216
+  },
+  {
+    "fiuId": "AEROFLEX_FIU_PROD",
+    "yield": 0.6998446257144443,
+    "cmgr": -0.2258,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.2258
+  },
+  {
+    "fiuId": "YES_BANK_FIU_PROD",
+    "yield": 0.5,
+    "cmgr": -0.6894,
+    "sucYield": 3.36,
+    "sucCliffCmgr": -1.3788999999999998,
+    "sucRecoveryCmgr": -0.6894
+  },
+  {
+    "fiuId": "fiulive@shreem",
+    "yield": 5,
+    "cmgr": 0.0017,
+    "sucYield": 2.79,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@crest",
+    "yield": 1,
+    "cmgr": -0.1385,
+    "sucYield": 0.4,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1385
+  },
+  {
+    "fiuId": "BHANIX_FIU_PROD",
+    "yield": 0.6432333348236241,
+    "cmgr": 0.1,
+    "sucYield": 1.69,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@fundsindia",
+    "yield": 2,
+    "cmgr": -0.2236,
+    "sucYield": 0.7,
+    "sucCliffCmgr": -0.4472,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "MSTOCK_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": -0.0221,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0221
+  },
+  {
+    "fiuId": "fiulive@lenditt",
+    "yield": 1,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "earlysalary",
+    "yield": 0.5,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@babalease",
+    "yield": 2,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@dmihf",
+    "yield": 5,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@venus",
+    "yield": 0.28189176820548023,
+    "cmgr": 0.1,
+    "sucYield": 1.71,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "finaglefspl-fiu",
+    "yield": 1.3476280235345393,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "SVATANTRAMHFC-FIU",
+    "yield": 3,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "AXIS_FIU_PROD",
+    "yield": 0.6,
+    "cmgr": 0.1,
+    "sucYield": 1.38,
+    "sucCliffCmgr": 0.1,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@niyogin",
+    "yield": 0.2,
+    "cmgr": -0.1574,
+    "sucYield": 0.47,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1574
+  },
+  {
+    "fiuId": "sayyam-fiu",
+    "yield": 1,
+    "cmgr": -0.0615,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0615
+  },
+  {
+    "fiuId": "VASTU_HF_FIU_PROD",
+    "yield": 0.5993362538165405,
+    "cmgr": 0.1,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@upmovecapital",
+    "yield": 3,
+    "cmgr": -0.0575,
+    "sucYield": 1.16,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0575
+  },
+  {
+    "fiuId": "bhfl-fiu",
+    "yield": 2,
+    "cmgr": 0.0266,
+    "sucYield": 3.88,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0266
+  },
+  {
+    "fiuId": "inprime-fiu",
+    "yield": 0.7325333692867737,
+    "cmgr": -0.0187,
+    "sucYield": 0.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0187
+  },
+  {
+    "fiuId": "KOTAK-FIU",
+    "yield": 1,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": 0.1,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "maxlifeinsurance-fiu",
+    "yield": 2,
+    "cmgr": 0.1,
+    "sucYield": 1.95,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "HIRANANDANI-FIU",
+    "yield": 2,
+    "cmgr": 0.0667,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0667
+  },
+  {
+    "fiuId": "CHINMAY_FIU_PROD",
+    "yield": 0.41233160009454023,
+    "cmgr": 0.0596,
+    "sucYield": 2.32,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0596
+  },
+  {
+    "fiuId": "CAPFLOAT_FIU_PROD",
+    "yield": 0.5009676960296001,
+    "cmgr": 0.1,
+    "sucYield": 1.66,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "richman-fincap",
+    "yield": 0.49759145807806754,
+    "cmgr": -0.1124,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1124
+  },
+  {
+    "fiuId": "HINDUJA_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@sampathi",
+    "yield": 2,
+    "cmgr": 0.1,
+    "sucYield": 0.93,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "decimus-fiu",
+    "yield": 0.9613417346182357,
+    "cmgr": -0.4543,
+    "sucYield": 2.36,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.4543
+  },
+  {
+    "fiuId": "lordkrishnafsl-fiu",
+    "yield": 1.3476278118609406,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "narendrafcpl-fiu",
+    "yield": 1.3476282880551962,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "PHFL_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": 0.1,
+    "sucYield": 4.65,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@apac",
+    "yield": 2,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "CAPRIGLOBALCAPITAL-FIU",
+    "yield": 2,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "CAPRIGLOBALHOUSING-FIU",
+    "yield": 2,
+    "cmgr": -0.207,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.207
+  },
+  {
+    "fiuId": "SBI_SECURITIES_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@hdfclife",
+    "yield": 3,
+    "cmgr": -0.0327,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.0654,
+    "sucRecoveryCmgr": -0.0327
+  },
+  {
+    "fiuId": "fiulive@indiabulls",
+    "yield": 2,
+    "cmgr": 0.1,
+    "sucYield": 3.26,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "aliceblue-fiu",
+    "yield": 1,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@hdfcsecurities",
+    "yield": 1,
+    "cmgr": 0.0481,
+    "sucYield": 0.66,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0481
+  },
+  {
+    "fiuId": "OPTIMO_FIU_PROD",
+    "yield": 0.20263572355012044,
+    "cmgr": 0.1,
+    "sucYield": 1.06,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "SARVAGRAM_FIU_PROD",
+    "yield": 1.248695878977569,
+    "cmgr": 0.1,
+    "sucYield": 2.91,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@kotaksec",
+    "yield": 1,
+    "cmgr": 0.0518,
+    "sucYield": 0.78,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0518
+  },
+  {
+    "fiuId": "BAJAJ_FIU_PROD",
+    "yield": 0.6,
+    "cmgr": 0,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "CREDITSAISON_FIU_PROD",
+    "yield": 0.15,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@adityabirlahf",
+    "yield": 0.75,
+    "cmgr": -0.2869,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.2869
+  },
+  {
+    "fiuId": "1financep2ppl-fiu",
+    "yield": 1.3446878198567043,
+    "cmgr": 0.0091,
+    "sucYield": 1.69,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0091
+  },
+  {
+    "fiuId": "FINOVA_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": -0.1046,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1046
+  },
+  {
+    "fiuId": "ashikasbl-fiu",
+    "yield": 1.3476190476190477,
+    "cmgr": 0.1,
+    "sucYield": 1.77,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@save",
+    "yield": 3,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@famli",
+    "yield": 0.5,
+    "cmgr": 0.1,
+    "sucYield": 0.72,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@namdev",
+    "yield": 3,
+    "cmgr": 0.0085,
+    "sucYield": 2.73,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0085
+  },
+  {
+    "fiuId": "fiulive@sigfyninvestment",
+    "yield": 10,
+    "cmgr": -0.3577,
+    "sucYield": 0.48,
+    "sucCliffCmgr": -0.7154,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "finzfpl-fiu",
+    "yield": 1.3475000000000001,
+    "cmgr": -0.7123,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.7123
+  },
+  {
+    "fiuId": "1finance-fiu",
+    "yield": 0.39999999999999997,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "utimf-fiu",
+    "yield": 0.4,
+    "cmgr": 0.1,
+    "sucYield": 0.15,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "BRANCH_FIU_PROD",
+    "yield": 0.6,
+    "cmgr": -0.4762,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.4762
+  },
+  {
+    "fiuId": "balic-fiu",
+    "yield": 0.39999999999999997,
+    "cmgr": -0.5022,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.5022
+  },
+  {
+    "fiuId": "fiulive@knab",
+    "yield": 3,
+    "cmgr": -0.4166,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.4166
+  },
+  {
+    "fiuId": "fiulive@bajajfinservdirect",
+    "yield": 0.04773049030654994,
+    "cmgr": -0.0889,
+    "sucYield": 0.3,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0889
+  },
+  {
+    "fiuId": "ASHGROVE_FIU_PROD",
+    "yield": 0.6248876909254266,
+    "cmgr": 0.0619,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0619
+  },
+  {
+    "fiuId": "KIFS_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "wealthbeaconia-fiu",
+    "yield": 0.4,
+    "cmgr": -0.1322,
+    "sucYield": 4.64,
+    "sucCliffCmgr": -0.2644,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@easyhomefinance",
+    "yield": 5,
+    "cmgr": -0.6718,
+    "sucYield": 1.49,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.6718
+  },
+  {
+    "fiuId": "fiulive@jiraaf",
+    "yield": 1,
+    "cmgr": -0.1563,
+    "sucYield": 0.08,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1563
+  },
+  {
+    "fiuId": "kotaklife-fiu",
+    "yield": 1.3476307189542485,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "talic-fiu",
+    "yield": 1.3476164383561644,
+    "cmgr": 0.1,
+    "sucYield": 1.77,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "digambercl-fiu",
+    "yield": 0.7742274678111588,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "saloracap-fiu",
+    "yield": 1.3475,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@hexawealth",
+    "yield": 3,
+    "cmgr": -0.0903,
+    "sucYield": 0.17,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0903
+  },
+  {
+    "fiuId": "fiulive@fintoo",
+    "yield": 10,
+    "cmgr": 0.1,
+    "sucYield": 2.81,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "PRODIGEE_FIU_PROD",
+    "yield": 0.4774674115456238,
+    "cmgr": 0.1,
+    "sucYield": 2.48,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "PAHAL_FIU_PROD",
+    "yield": 0.6942857142857143,
+    "cmgr": -0.1214,
+    "sucYield": 3.25,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1214
+  },
+  {
+    "fiuId": "suburbanfipl-fiu",
+    "yield": 0.7742314335060448,
+    "cmgr": -0.7317,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.7317
+  },
+  {
+    "fiuId": "fiulive@savefin",
+    "yield": 3,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "tsfsl-fiu",
+    "yield": 1.3476369863013697,
+    "cmgr": -0.0826,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0826
+  },
+  {
+    "fiuId": "AGRIM-FIU",
+    "yield": 4,
+    "cmgr": -0.2362,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.2362
+  },
+  {
+    "fiuId": "karnspl-fiu",
+    "yield": 1.3476277965254344,
+    "cmgr": 0,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "RADIAN_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "absli-fiu",
+    "yield": 1.3476394849785407,
+    "cmgr": 0.1,
+    "sucYield": 1.72,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "WCAPL_FIU_PROD",
+    "yield": 0.42581638940234134,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@coinwise",
+    "yield": 1,
+    "cmgr": 0.1,
+    "sucYield": 1.02,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@puneestock",
+    "yield": 1,
+    "cmgr": -0.5078,
+    "sucYield": 3.44,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.5078
+  },
+  {
+    "fiuId": "MAS_PROD",
+    "yield": 0.7,
+    "cmgr": 0.1,
+    "sucYield": 3.26,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@axiscapital",
+    "yield": 1,
+    "cmgr": 0,
+    "sucYield": 0.64,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "BNF_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "FINODAYA_FIU_PROD",
+    "yield": 0.4091040462427745,
+    "cmgr": 0.1,
+    "sucYield": 1.79,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "TAPSTART_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": 0,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@juliusbaer",
+    "yield": 1,
+    "cmgr": 0.1,
+    "sucYield": 0.64,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@angelone",
+    "yield": 1,
+    "cmgr": -0.0278,
+    "sucYield": 0.96,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0278
+  },
+  {
+    "fiuId": "creditwisecpl-fiu",
+    "yield": 1.3476223776223777,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "solomoncap-fiu",
+    "yield": 1.3476283821093318,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "cmapl-fiu",
+    "yield": 0.4,
+    "cmgr": 0.1,
+    "sucYield": 1.57,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "epimoneypl-fiu",
+    "yield": 1.2092964824120602,
+    "cmgr": -0.0325,
+    "sucYield": 2.01,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0325
+  },
+  {
+    "fiuId": "mfppl-fiu",
+    "yield": 0.7741176470588236,
+    "cmgr": -0.5,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -1,
+    "sucRecoveryCmgr": -0.5
+  },
+  {
+    "fiuId": "arigamoney-fiu",
+    "yield": 0.4,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@nobias",
+    "yield": 7,
+    "cmgr": -0.2413,
+    "sucYield": 0.47,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.2413
+  },
+  {
+    "fiuId": "TRUSTLENDERS_FIU_PROD",
+    "yield": 0.6999999999999998,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@paymeindia",
+    "yield": 3,
+    "cmgr": -0.6922,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.6922
+  },
+  {
+    "fiuId": "fiulive@paytmmoney",
+    "yield": 1,
+    "cmgr": -0.031,
+    "sucYield": 0.85,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.031
+  },
+  {
+    "fiuId": "STFT_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "ventura-fiu",
+    "yield": 1,
+    "cmgr": 0.1,
+    "sucYield": 1.86,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "alic-fiu",
+    "yield": 1.3476923076923077,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@goalteller",
+    "yield": 1.7,
+    "cmgr": -0.0313,
+    "sucYield": 2.15,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0313
+  },
+  {
+    "fiuId": "fiulive@handauncle",
+    "yield": 0.5,
+    "cmgr": 0.1,
+    "sucYield": 1.85,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "sbilife-fiu",
+    "yield": 1.3,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "JOHNDEERE-FIU",
+    "yield": 3,
+    "cmgr": -0.1279,
+    "sucYield": 3.6,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1279
+  },
+  {
+    "fiuId": "choicemf-fiu",
+    "yield": 0.7741666666666666,
+    "cmgr": -0.0991,
+    "sucYield": 2.04,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0991
+  },
+  {
+    "fiuId": "grownetfpl-fiu",
+    "yield": 1.3476595744680853,
+    "cmgr": 0.0313,
+    "sucYield": 4.74,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0313
+  },
+  {
+    "fiuId": "fiulive@equirus",
+    "yield": 1,
+    "cmgr": -0.0073,
+    "sucYield": 0.69,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0073
+  },
+  {
+    "fiuId": "APSIRE_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": -0.0793,
+    "sucYield": 4.24,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0793
+  },
+  {
+    "fiuId": "fiulive@angeloneinv",
+    "yield": 1,
+    "cmgr": 0.0269,
+    "sucYield": 0.88,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0269
+  },
+  {
+    "fiuId": "devmuni-fiu",
+    "yield": 1.3476253687315636,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "dwaithapl-fiu",
+    "yield": 0.4,
+    "cmgr": -0.1506,
+    "sucYield": 4.11,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1506
+  },
+  {
+    "fiuId": "fiulive@respo",
+    "yield": 0.75,
+    "cmgr": -0.1746,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1746
+  },
+  {
+    "fiuId": "singularitycredit-fiu",
+    "yield": 2,
+    "cmgr": -0.022,
+    "sucYield": 4.72,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.022
+  },
+  {
+    "fiuId": "SRNG_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "JANASHA_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@satya",
+    "yield": 3,
+    "cmgr": 0,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@orimadvisors",
+    "yield": 1,
+    "cmgr": -0.2392,
+    "sucYield": 0.34,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.2392
+  },
+  {
+    "fiuId": "tradebookcspl-fiu",
+    "yield": 1.3478260869565217,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "networthtspl-fiu",
+    "yield": 0.39999999999999997,
+    "cmgr": 0.1,
+    "sucYield": 2.63,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "rgfpl-fiu",
+    "yield": 1.3475,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "ramkrishna-fiu",
+    "yield": 1.3472727272727274,
+    "cmgr": 0.0761,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0761
+  },
+  {
+    "fiuId": "VALLABHI_FIU_PROD",
+    "yield": 0.7,
+    "cmgr": -0.3084,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.3084
+  },
+  {
+    "fiuId": "dynamicepl-fiu",
+    "yield": 0.4,
+    "cmgr": -0.1423,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1423
+  },
+  {
+    "fiuId": "plwealthpl-fiu",
+    "yield": 0.39999999999999997,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "dspam-fiu",
+    "yield": 0.39999999999999997,
+    "cmgr": 0,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@hdfc",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.26,
+    "sucCliffCmgr": 0.05,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "DEZERV_FIU_PROD",
+    "yield": 0,
+    "cmgr": -0.0971,
+    "sucYield": 0.54,
+    "sucCliffCmgr": -0.1941,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "JFS_FIU_PROD",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.46,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "JIOBLK_FIU_PROD",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.26,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "MOBIKWIK_FIU_PROD",
+    "yield": 0,
+    "cmgr": -0.0655,
+    "sucYield": 0.64,
+    "sucCliffCmgr": -0.1309,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@canarabank",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 2.27,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "ADITYA_BIRLA_CAPITAL_DIGITAL_FIU_PROD",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.87,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "AUBank-FIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.39,
+    "sucCliffCmgr": 0.1,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@valueresearch",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 2.93,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@motilalresearch",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.78,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "Safebox_FIU_prod",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 0.12,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "SOLOMON_FIU_PROD",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.69,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@finofin",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.02,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@finny",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.57,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "OIA-RIA-FIU-260421",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "DMI_FIU_PROD",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.68,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "chillarfintech-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.34,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@stackfin",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.68,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "HDFC-FIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.94,
+    "sucCliffCmgr": 0.1,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@invsify",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.1,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "FINWIZARD_FIU_PROD",
+    "yield": 0,
+    "cmgr": 0.0257,
+    "sucYield": 3.11,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0257
+  },
+  {
+    "fiuId": "fiulive@sharekhanemp",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.72,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "eimplca-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@scripbox",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.46,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@axissecurities",
+    "yield": 0,
+    "cmgr": 0.0534,
+    "sucYield": 0.61,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0534
+  },
+  {
+    "fiuId": "Paisabazaar-FIU-LIVE",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.34,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@fourdegree",
+    "yield": 0,
+    "cmgr": -0.0833,
+    "sucYield": 0.19,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0833
+  },
+  {
+    "fiuId": "eimpl-fiu",
+    "yield": 0,
+    "cmgr": 0.0035,
+    "sucYield": 3.55,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0035
+  },
+  {
+    "fiuId": "Coracle-fiu",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.91,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "ZET-RIA-FIU-260703",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@dezerv",
+    "yield": 0,
+    "cmgr": -0.0841,
+    "sucYield": 0.96,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0841
+  },
+  {
+    "fiuId": "fiulive@iiflcapital",
+    "yield": 0,
+    "cmgr": 0.0446,
+    "sucYield": 0.68,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0446
+  },
+  {
+    "fiuId": "fiulive@twigg",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.37,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "USL-STCKBR-FIU-260519",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@nyvo",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.84,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@onebanc",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 2.86,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@emkayglobal",
+    "yield": 0,
+    "cmgr": 0.0849,
+    "sucYield": 0.6,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0849
+  },
+  {
+    "fiuId": "Khosya-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.72,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "STL-RIA-FIU-260608",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.78,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@airpaymoney",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.76,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@oceanfinvest",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.65,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@plnrinvestment",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.47,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "PNB-FIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.6,
+    "sucCliffCmgr": 0.1,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@mirae",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.67,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "SHRIRAM_FIU_PROD",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 2.43,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@indianbankpfm",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.88,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "DACPL_NP_001",
+    "yield": 0,
+    "cmgr": -0.1622,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1622
+  },
+  {
+    "fiuId": "fynro-fiu",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 0.67,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "FNJ-RIA-FIU-260616",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 3.31,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "dev-xpressloans",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@pooja",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@5paisarm",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.3,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@neowealth",
+    "yield": 0,
+    "cmgr": 0.0296,
+    "sucYield": 0.67,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0296
+  },
+  {
+    "fiuId": "dev-sashienterprises",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "moneylicious-dhan",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@krishnarath",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.28,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@swastik",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.75,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@idbicapital",
+    "yield": 0,
+    "cmgr": -0.0206,
+    "sucYield": 0.72,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0206
+  },
+  {
+    "fiuId": "stock-fiu-prod",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@pocketful",
+    "yield": 0,
+    "cmgr": 0.0369,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0369
+  },
+  {
+    "fiuId": "dev_salarynow",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.78,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@decimus",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.13,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "ASFL_NP_001",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 2.79,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "dev-incred",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@etmoney",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.19,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "kbspl-fiu",
+    "yield": 0,
+    "cmgr": -0.1818,
+    "sucYield": 2.24,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1818
+  },
+  {
+    "fiuId": "TycoonCredit-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.97,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@equall",
+    "yield": 0,
+    "cmgr": -0.3073,
+    "sucYield": 1.91,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.3073
+  },
+  {
+    "fiuId": "WITCL_NP_001",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 3.29,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "CITRA-fiu",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "hdbfs-fiu",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 3.5,
+    "sucCliffCmgr": 0.21,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "FYR-STCKB-FIU-260603",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 3.24,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@satsai",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.65,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@indusindsec",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.42,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@phonepewealth",
+    "yield": 0,
+    "cmgr": 0.0157,
+    "sucYield": 0.86,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0157
+  },
+  {
+    "fiuId": "fiulive@systematix",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.49,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@equiruswealth",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.65,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "kisetsuSaison-FIU",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "WEA-RIA-FIU-260612",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "Sawalsha-fiu",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "CHB-STCKBR-FIU-260515",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.61,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@spheeti",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@gridkey",
+    "yield": 0,
+    "cmgr": -0.3393,
+    "sucYield": 4.08,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.3393
+  },
+  {
+    "fiuId": "fiulive@bajajfinancial",
+    "yield": 0,
+    "cmgr": -0.0313,
+    "sucYield": 0.68,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0313
+  },
+  {
+    "fiuId": "indusindcfdteam-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "raghavifl-fiu",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "JUNOON-FIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.27,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@equirussecurities",
+    "yield": 0,
+    "cmgr": -0.0436,
+    "sucYield": 0.78,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0436
+  },
+  {
+    "fiuId": "fiulive@qode",
+    "yield": 0,
+    "cmgr": -0.1293,
+    "sucYield": 4.29,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1293
+  },
+  {
+    "fiuId": "fiulive@tara",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.47,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@antique",
+    "yield": 0,
+    "cmgr": 0.0135,
+    "sucYield": 0.62,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0135
+  },
+  {
+    "fiuId": "fiulive@stallion",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.64,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "UGROCapital-FIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.34,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "TATA_CAPITAL_FIU_PROD",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "MBF-NBFC-FIU-060526",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@ambitfinvest",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.77,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@fincart",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@finvasiasecurities",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "IND-FIU-NBFC-260515",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@arhamshare",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.79,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "IND-PVB-FIU-260709",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@anandrathi",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 0.43,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@jcwealth",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "FEDERAL_PROD_FIUID",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.79,
+    "sucCliffCmgr": 0.1,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "earlysalarypl-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "UBI-FIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.2,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@aaritya",
+    "yield": 0,
+    "cmgr": -0.3537,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.3537
+  },
+  {
+    "fiuId": "fiulive@swastika",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@liquide",
+    "yield": 0,
+    "cmgr": -0.1835,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1835
+  },
+  {
+    "fiuId": "fiulive@dyota",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 2.6,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "DSI-NBFC-FIU-260610",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "GDLLEASING",
+    "yield": 0,
+    "cmgr": -0.081,
+    "sucYield": 0.45,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.081
+  },
+  {
+    "fiuId": "SCPL_NP_001",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "SHRIRAM-FIU",
+    "yield": 0,
+    "cmgr": 0.0103,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0103
+  },
+  {
+    "fiuId": "TCPL_NP_001",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 2.41,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "KAABIL-FIU",
+    "yield": 0,
+    "cmgr": 0.0184,
+    "sucYield": 3.17,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0184
+  },
+  {
+    "fiuId": "JUB-NBFC-FIU-260514",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@quantmutual",
+    "yield": 0,
+    "cmgr": -0.0009,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.0009,
+    "sucRecoveryCmgr": -0.0009
+  },
+  {
+    "fiuId": "fiulive@fusion",
+    "yield": 0,
+    "cmgr": 0.0718,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0718
+  },
+  {
+    "fiuId": "SGR_NP_001",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.15,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@indothai",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 0.55,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@mintcap",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.19,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "ROI-STCKB-FIU-260609",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "EQU-RIA-FIU-260525",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "sparkcapl-fiu",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@nothernarc",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.06,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "STP-RIA-FIU-260803",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@credifin",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.35,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "TDV-RIA-FIU-260608",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@loksuvidha",
+    "yield": 0,
+    "cmgr": 0.0637,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0637
+  },
+  {
+    "fiuId": "iiflsec-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "flexiloans",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@nirmalbang",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@gopi",
+    "yield": 0,
+    "cmgr": 0.0079,
+    "sucYield": 1.22,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0079
+  },
+  {
+    "fiuId": "JFF-NBFC-FIU-260602",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "KLFPL_NP_001",
+    "yield": 0,
+    "cmgr": -0.4884,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.4884
+  },
+  {
+    "fiuId": "fiulive@greenportfolio",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.67,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@lfcsecurities",
+    "yield": 0,
+    "cmgr": 0.0694,
+    "sucYield": 0.64,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0694
+  },
+  {
+    "fiuId": "fiulive@finverse",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@iiflsamasta",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.43,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@cholamandalam",
+    "yield": 0,
+    "cmgr": -0.0157,
+    "sucYield": 0.77,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0157
+  },
+  {
+    "fiuId": "finwiser_sandbox_fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "TRANSWARRANTY-NBFC-FIU",
+    "yield": 0,
+    "cmgr": 0.0142,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0142
+  },
+  {
+    "fiuId": "VFF-HFC-FIU-260512",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 3.26,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@seedsfincap",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.92,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@bajajautocredit",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "HFCPL_NP_001",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 3.34,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "PHD-RIA-FIU-260615",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "indiafirstlicl-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.09,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "ACM-STCKBR-FIU-260511",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.68,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "MAH-NBFC-FIU-260512",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.7,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "AUXILO-FIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "SIBLFIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": 0.1,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@usfb",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.59,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@rudowealth",
+    "yield": 0,
+    "cmgr": -0.8054,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.8054
+  },
+  {
+    "fiuId": "WTS-RIA-FIU-260703",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "OWP-PM-FIU-260721",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@apollo",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@techfino",
+    "yield": 0,
+    "cmgr": 0.0249,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0249
+  },
+  {
+    "fiuId": "SAARATHIFINANCE-FIU",
+    "yield": 0,
+    "cmgr": -0.3436,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.3436
+  },
+  {
+    "fiuId": "VEL-NBFC-FIU-260602",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.01,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "SIB-PVB-FIU-260520",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "SPHEETI-FIU",
+    "yield": 0,
+    "cmgr": -0.3141,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.3141
+  },
+  {
+    "fiuId": "ICC-NBFC-FIU-260522",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.73,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "DFI-NBFC-FIU-260504",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "cholamandalam-fiu-prod",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@msfincap",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "NAM-NBFC-FIU-260511",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@mukutfinvest",
+    "yield": 0,
+    "cmgr": 0.0298,
+    "sucYield": 1.59,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0298
+  },
+  {
+    "fiuId": "UNNATTI-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.71,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@finideas",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.75,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "BFL-NBFC-FIU-260616",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@ikigai",
+    "yield": 0,
+    "cmgr": 0.0798,
+    "sucYield": 0.62,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0798
+  },
+  {
+    "fiuId": "k2vs-insurance-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.11,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "NAMDEV-FIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "CRISSFIN_FIU_PROD",
+    "yield": 0,
+    "cmgr": 0.0281,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0281
+  },
+  {
+    "fiuId": "Trickleflood-fiu",
+    "yield": 0,
+    "cmgr": 0.01,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.01
+  },
+  {
+    "fiuId": "AIP-RIA-FIU-260520",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.66,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@torusfinmarkets",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.68,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "RELIGAREBROKING-fiu",
+    "yield": 0,
+    "cmgr": 0.0152,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0152
+  },
+  {
+    "fiuId": "fiulive@vistaar",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.63,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "KSF-NBFC-FIU-260702",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "SDTPL_NP_001",
+    "yield": 0,
+    "cmgr": -0.0767,
+    "sucYield": 1.63,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0767
+  },
+  {
+    "fiuId": "SHF-NBFC-FIU-260609",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.77,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "EASYHOMEFINANCE-FIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "BIZLOAN-FIU",
+    "yield": 0,
+    "cmgr": 0.0063,
+    "sucYield": 2.53,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0063
+  },
+  {
+    "fiuId": "fiulive@goldline",
+    "yield": 0,
+    "cmgr": -0.2215,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.2215
+  },
+  {
+    "fiuId": "fiulive@jainam",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "ACM-NBFC-FIU-260604",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@meghdoot",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.27,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "WAQTFINANCE-FIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.06,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@aanfinance",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.62,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@money2me",
+    "yield": 0,
+    "cmgr": 0.0127,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0127
+  },
+  {
+    "fiuId": "southindia-finvest",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.03,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "irage-broking",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@zebu",
+    "yield": 0,
+    "cmgr": -0.1251,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1251
+  },
+  {
+    "fiuId": "AKME_FIU_PROD",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@goodskill",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.66,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "AYU-NBFC-FIU-260724",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@rohitprofin",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.73,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "JAIRAJ",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.96,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "KSL-STCKB-FIU-260623",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "cettlx-services",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.18,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@agffinlease",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.67,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "hero-housing",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@dhansafalfin",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "cboi-dlp-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.37,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "finnovate-financial",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "PCI-NBFC-FIU-260605",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "KUH-NBFC-FIU-260526",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.67,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "FINTREE-LIVE",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "larktfl-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "lendingkart",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@adichitragupta",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.33,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "CEN-NBFC-FIU-260429",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "MICROGREENHOUSINGFINANCE-FIU",
+    "yield": 0,
+    "cmgr": -0.0142,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0142
+  },
+  {
+    "fiuId": "fiulive@jacinth",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@marcellus",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.22,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "RAR-fiu",
+    "yield": 0,
+    "cmgr": 0.0342,
+    "sucYield": 0.93,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0342
+  },
+  {
+    "fiuId": "varashakti-fiu-prod",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 2.42,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "VIKASMONEY-FIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "sbi-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "dev-maxemocapital",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "SAN-NBFC-FIU-260528",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@mdfcfinanciers",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.63,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "Marathon-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.48,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "MAS-RIA-FIU-260423",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.69,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "AFL-NBFC-FIU-260603",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 2.26,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "PRO-NBFC-FIU-260710",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@avantifinance",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.21,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "PRANAMYA",
+    "yield": 0,
+    "cmgr": -0.0385,
+    "sucYield": 0.63,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0385
+  },
+  {
+    "fiuId": "BAZAARI-FIU",
+    "yield": 0,
+    "cmgr": -0.0498,
+    "sucYield": 3.29,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0498
+  },
+  {
+    "fiuId": "SHR-RIA-FIU-260528",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.8,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "beryl",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.32,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "ABHIYAN_FIU_PROD",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "iciciprudential-fiu",
+    "yield": 0,
+    "cmgr": -0.0617,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0617
+  },
+  {
+    "fiuId": "NWM-STCKB-FIU-260627",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "UCOB-FIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.54,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "CHARBHUJA",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.32,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "icicilgicl-fiu",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@cdlfinancial",
+    "yield": 0,
+    "cmgr": -0.0919,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0919
+  },
+  {
+    "fiuId": "MPF-NBFC-FIU-260529",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.19,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "KotakMahindraBank-FIU",
+    "yield": 0,
+    "cmgr": -0.0465,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.04650000000000001,
+    "sucRecoveryCmgr": -0.0465
+  },
+  {
+    "fiuId": "FUNDSMAMA-FIU",
+    "yield": 0,
+    "cmgr": -0.2272,
+    "sucYield": 3.09,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.2272
+  },
+  {
+    "fiuId": "FEXPRIME-fiu",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@supreme",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@comfortfincap",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@indusind",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 0.47,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "FWC-NBFC-FIU-260525",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@coversure",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 2.63,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "FEEONLYRIA_FIU_PROD",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.5,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@finlease",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.83,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "LLF-NBFC-FIU-260602",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "myfi-fiu",
+    "yield": 0,
+    "cmgr": -0.3675,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.7351000000000001,
+    "sucRecoveryCmgr": -0.3675
+  },
+  {
+    "fiuId": "fiulive@enorme",
+    "yield": 0,
+    "cmgr": -0.264,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.264
+  },
+  {
+    "fiuId": "SpheetiFintech-fiu",
+    "yield": 0,
+    "cmgr": -0.7695,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.7695
+  },
+  {
+    "fiuId": "NPPL_004",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "NFP-NBFC-FIU-260603",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@dmifinanceltd",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "RAJ-NBFC-FIU-260626",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "JNC-NBFC-FIU-260617",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@keertana",
+    "yield": 0,
+    "cmgr": -0.262,
+    "sucYield": 3.38,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.262
+  },
+  {
+    "fiuId": "CTPL_NP_001",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.48,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "Barwala-fiu",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@saloracapital",
+    "yield": 0,
+    "cmgr": -0.5286,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.5286
+  },
+  {
+    "fiuId": "fiulive@punjabreliable",
+    "yield": 0,
+    "cmgr": -0.0392,
+    "sucYield": 1.59,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0392
+  },
+  {
+    "fiuId": "BSD_NP_001",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "LORDKRISHNA",
+    "yield": 0,
+    "cmgr": -0.5797,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.5797
+  },
+  {
+    "fiuId": "fiulive@djt",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "CFL-NBFC-FIU-260625",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "Meet-fiu",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 3.35,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "ARY-NBFC-FIU-260723",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "TJFC_FIU_prod",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@pinkcity",
+    "yield": 0,
+    "cmgr": -0.0537,
+    "sucYield": 2.9,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0537
+  },
+  {
+    "fiuId": "ACM-NBFC-FIU-260627",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "PFP-NBFC-FIU-260713",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "fiulive@midlandmicrofin",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.98,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "indian-bank-fiu",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "MFS-NBFC-FIU-260515",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "DGF-STCKB-FIU-260709",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "SUBURBAN_FIU_PROD",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@diamondhands",
+    "yield": 0,
+    "cmgr": -0.6712,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.6712
+  },
+  {
+    "fiuId": "PAISALO",
+    "yield": 0,
+    "cmgr": 0.003,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.003
+  },
+  {
+    "fiuId": "STATUSFINANCE-FIU",
+    "yield": 0,
+    "cmgr": -0.1124,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.1124
+  },
+  {
+    "fiuId": "WOODCAPITAL-FIU",
+    "yield": 0,
+    "cmgr": 0.0426,
+    "sucYield": 3.25,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.0426
+  },
+  {
+    "fiuId": "rk-global",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@easebuzz",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0.18,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "HFP-NBFC-FIU-260615",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "FDP-NBFC-FIU-260608",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "MPA-NBFC-FIU-260608",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "KarnatakaBank",
+    "yield": 0,
+    "cmgr": -0.4577,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.4577
+  },
+  {
+    "fiuId": "shriramfcpl-fiu",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "MONEYPLUS_FIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "Antworks-fiu",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "FEXPRIM-FIU",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 0,
+    "sucCliffCmgr": 0.05,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "refynetpl-fiu",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "LAN-NBFC-FIU-260525",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "muni-broking",
+    "yield": 0,
+    "cmgr": -0.0955,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.0955
+  },
+  {
+    "fiuId": "VALUELINE_FIU_PROD",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "SID-FININD-FIU-260617",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "arthan-fiu",
+    "yield": 0,
+    "cmgr": -0.6703,
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.6703
+  },
+  {
+    "fiuId": "GLLFL-fiu",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "SOF-NBFC-FIU-260512",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 3.35,
+    "sucCliffCmgr": 0,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@metafin",
+    "yield": 0,
+    "cmgr": 0.1,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0.1
+  },
+  {
+    "fiuId": "fiulive@choice",
+    "yield": 0,
+    "cmgr": -0.078,
+    "sucYield": 3.14,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": -0.078
+  },
+  {
+    "fiuId": "MFP-NBFC-FIU-260427",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "YAD-RIA-FIU-260703",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "MPF-NBFC-FIU-260629",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "RFP-NBFC-FIU-260617",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "EDG-NBFCP-FIU-260422",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "TEN-NBFC-FIU-260429",
+    "yield": 0,
+    "cmgr": 0,
+    "sucYield": 2.26,
+    "sucCliffCmgr": -0.13,
+    "sucRecoveryCmgr": 0
+  },
+  {
+    "fiuId": "URB-NBFC-FIU-260512",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "SaiRoshni-fiu",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "LIF-NBFC-FIU-260724",
+    "yield": 0,
+    "cmgr": ""
+  },
+  {
+    "fiuId": "HYTONE-FIU",
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "fiulive@vridhihomefinance",
+    "sucYield": 3.13,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "FEDFINASERV-FIU",
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "fiulive@5paisa",
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "Butterfly-fiu",
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "bank-of-maharashtra-fiu",
+    "sucYield": 1.73,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "vrindafl-fiu",
+    "sucYield": 4.8,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "DECI-NBFC-FIU-5",
+    "sucYield": 1.78,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "RLFL_NP_001",
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "kasarcncpl-fiu",
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "neowealthmpl-fiu",
+    "sucYield": 2.41,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "PFIL-fiu",
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "fiulive@finvasiafin",
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "trustassetmpl-fiu",
+    "sucYield": 2.1,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "fiulive@exclusiveleasing",
+    "sucYield": 3.17,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "fiulive@clearsharp",
+    "sucYield": 0.18,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "CHOICE_FIU_PROD",
+    "sucYield": 3.13,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "dev-navadhancapitalprivatelimited",
+    "sucYield": 3.07,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "fiulive@mgmfinanciers",
+    "sucYield": 2.75,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "fiulive@rtf",
+    "sucYield": 1.7,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "chli-fiu",
+    "sucYield": 3.35,
+    "sucCliffCmgr": -0.13
+  },
+  {
+    "fiuId": "NKFL_NP_001",
+    "sucYield": 3.35,
+    "sucCliffCmgr": 0
+  },
+  {
+    "fiuId": "SBN-NBFC-FIU-260602",
+    "sucYield": 1.09,
+    "sucCliffCmgr": 0
+  },
+  {
+    "fiuId": "fiulive@shriram",
+    "sucYield": 1.7,
+    "sucCliffCmgr": 0
+  },
+  {
+    "fiuId": "KHUSHHOUSING-FIU",
+    "sucYield": 3.35,
+    "sucCliffCmgr": -1.2441
+  },
+  {
+    "fiuId": "SURJIT-fiu",
+    "sucYield": 1.7,
+    "sucCliffCmgr": 0
+  },
+  {
+    "fiuId": "PHF-HFCD-FIU-260526",
+    "sucYield": 2.53,
+    "sucCliffCmgr": 0
+  },
+  {
+    "fiuId": "CGGBFIU0001",
+    "sucYield": 0.47,
+    "sucCliffCmgr": 0.05
+  },
+  {
+    "fiuId": "psb-bank-fiu",
+    "sucYield": 3.35,
+    "sucCliffCmgr": 0
+  },
+  {
+    "fiuId": "Orangecity-fiu",
+    "sucYield": 3.35,
+    "sucCliffCmgr": 0
+  },
+  {
+    "fiuId": "Invsify_FIU_prod",
+    "sucYield": 3.35,
+    "sucCliffCmgr": -1.8981000000000001
+  },
+  {
+    "fiuId": "cashpositivefpl-fiu",
+    "sucYield": 1.7,
+    "sucCliffCmgr": 0
+  },
+  {
+    "fiuId": "waterfield-fiu",
+    "sucYield": 3.35,
+    "sucCliffCmgr": 0
+  },
+  {
+    "fiuId": "POCKETLY_PROD",
+    "sucYield": 1.7,
+    "sucCliffCmgr": 0
+  },
+  {
+    "fiuId": "ICICI",
+    "sucYield": 0.17,
+    "sucCliffCmgr": 0
+  },
+  {
+    "fiuId": "BARB-FIU",
+    "sucYield": 0.17,
+    "sucCliffCmgr": 0
+  },
+  {
+    "fiuId": "SBI Cards",
+    "sucYield": 2
+  },
+  {
+    "fiuId": "KMBL-FIU-PROD (PFM)",
+    "sucYield": 1.75,
+    "sucCliffCmgr": 0
+  }
+]
