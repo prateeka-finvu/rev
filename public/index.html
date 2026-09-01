@@ -1402,14 +1402,6 @@
     }
     document.getElementById('statNote').textContent = noteBits.join(' · ');
 
-    // ---- Annual stat row ----
-    document.getElementById('fyStatRow').innerHTML = [
-      tile('FY total (' + data.months[0].label + '–' + data.months[data.months.length-1].label + ')', fmtCurrency(fyTotal)),
-      tile('Revenue from Unique Users (FY total)', fmtCurrency(auFyRevenue)),
-      tile('Revenue from Data Fetch (FY total)', fmtCurrency(dfFyRevenue)),
-      tile('Historical / projected months', pastCount + ' <small>historical, ' + (data.months.length-pastCount) + ' current+projected</small>'),
-    ].join('');
-
     const periodBadge = r => r.billingPeriod ? ' <span class="badge" title="Same monthly formula applied — not prorated">'+esc(r.billingPeriod)+'</span>' : '';
     const noDataBadge = '<span class="badge" title="No historical actual on record for this FIU/month">no data</span>';
     const revenueCell = (r, i) => {
@@ -1634,6 +1626,19 @@
     }));
     const dfFyValue = r => data.months.reduce((a,m,i) => a + (monthDfUsageValue(r,i) || 0), 0);
     const dfFyGrandTotal = dfRows.reduce((s,r) => s + dfFyValue(r), 0);
+
+    // ---- Annual stat row (built here, once AU/DF FY totals above are
+    // available — the container itself sits at the top of section 3 in the
+    // HTML, this just needs to run after auFyGrandTotal/dfFyGrandTotal exist) ----
+    document.getElementById('fyStatRow').innerHTML = [
+      tile('FY total (' + data.months[0].label + '–' + data.months[data.months.length-1].label + ')', fmtCurrency(fyTotal)),
+      tile('Revenue from Unique Users (FY total)', fmtCurrency(auFyRevenue)),
+      tile('Revenue from Data Fetch (FY total)', fmtCurrency(dfFyRevenue)),
+      tile('AU total (FY, Unique User-billed FIUs)', fmt(auFyGrandTotal,0)),
+      tile('DF total (FY, all FIUs with a DF count)', fmt(dfFyGrandTotal,0)),
+      tile('Historical / projected months', pastCount + ' <small>historical, ' + (data.months.length-pastCount) + ' current+projected</small>'),
+    ].join('');
+
     renderDataTable({
       containerId: 'annualDfTable',
       rows: dfRows,
