@@ -540,6 +540,34 @@ of this section) but need their own setup.
    snapshots) survives every redeploy; only what's in the repo itself
    (code, and the *starting* seed data) comes from Git.
 
+**Free tier, no card on file**: the card prompt you hit on the Blueprint flow
+comes from the persistent disk in `render.yaml`, not from Blueprints as
+such — disks are a paid-plan-only feature on Render no matter how the
+service gets created. Skip the disk and you can deploy manually for free:
+
+1. Push to GitHub (same as step 1 above).
+2. **New + → Web Service** (not Blueprint), and pick the repo.
+3. Build Command `npm install`, Start Command `npm start`, Instance Type
+   **Free**, Health Check Path `/healthz`.
+4. Add the same environment variables as the Blueprint list above
+   (`APP_PASSWORD`, `SESSION_SECRET`, and whichever optional ones you use)
+   under the service's **Environment** tab — but this time leave `DATA_DIR`
+   unset, so the app reads/writes `data/*.json` straight from the repo's
+   bundled folder inside the container instead of a disk that doesn't
+   exist on this plan.
+5. Deploy.
+
+The trade-off: any edits made through the app (FIU Metadata, Yield & CMGR,
+uploaded historical actuals, a saved projection snapshot) live only in
+that container's own filesystem. They survive the service sleeping and
+waking back up, but get reset to whatever's checked into the repo every
+time you push a new deploy. Free services also spin down after 15 minutes
+with no traffic and take roughly a minute to wake back up on the next
+visit. For a small internal tool that isn't redeployed often, that's
+usually fine; if the team will be actively editing FIU Metadata/Yield &
+CMGR day to day, the paid Starter plan + disk (the Blueprint path above)
+is worth it so those edits don't quietly disappear on the next `git push`.
+
 **Other hosts**: Railway and Fly.io work similarly (connect the repo, set
 the start command to `npm start`, add a persistent volume, set the same
 environment variables — skip `render.yaml`, which is Render-specific). A
