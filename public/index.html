@@ -229,8 +229,10 @@
 
   <div class="tabs">
     <button class="tab-btn active" data-tab="revenue">Monthly Revenue</button>
+    <button class="tab-btn" data-tab="charts">Charts</button>
     <button class="tab-btn" data-tab="metadata">FIU Metadata</button>
     <button class="tab-btn" data-tab="yieldcmgr">Yield &amp; CMGR</button>
+    <button class="tab-btn" data-tab="historical">Historical Actuals</button>
   </div>
 
   <!-- ===================== Monthly Revenue tab ===================== -->
@@ -250,7 +252,7 @@
         <button class="btn-secondary btn-small" id="useEmailDataBtn" type="button" style="display:none; margin-top:6px;">Use auto-pulled email data instead</button>
       </div>
       <div class="field">
-        <label for="asOfDate">As-of date</label>
+        <label for="asOfDate" title="Defaults to yesterday, not today — a daily counts export dated/generated today typically only has real data through end of the previous day (a one-day reporting lag). Change this if the file you're using doesn't have that lag (e.g. a manually pulled same-day report).">As-of date</label>
         <input type="date" id="asOfDate" />
       </div>
       <div class="field">
@@ -274,6 +276,10 @@
           <option value="2027-03">Mar 2027</option>
         </select>
       </div>
+      <div class="field" id="scenariosField" style="display:none;">
+        <label>What-if scenarios</label>
+        <div id="scenariosList"></div>
+      </div>
       <p class="hint" style="margin:10px 0 0;">Results update automatically as soon as a file is chosen, and again whenever you change any of the fields above — no button to press.</p>
       <p class="hint" style="margin:6px 0 0;">Leave <strong>SUC Start Date</strong> on "None" to use each FIU's regular Yield/CMGR for the whole FY (as before). Pick a month to switch a SUC-configured FIU's revenue — from that month onward — to <strong>SUC Yield × expected Data Fetch volume</strong> instead, regardless of its regular billing model. The SUC period itself splits into two quarters: the first 3 months (<strong>SUC Cliff</strong>) grow at <strong>SUC Cliff CMGR</strong>, then every month after that (<strong>SUC Recovery</strong>) grows at <strong>SUC Recovery CMGR</strong> (falling back to the FIU's regular CMGR if that's left blank) — SUC Yield doesn't change between the two, only the growth rate does. FIUs missing SUC Cliff CMGR or SUC Yield, or with no usable DF count, stay on their regular Yield/CMGR the whole FY, and that's called out in the results rather than left silent. Months governed by SUC values are highlighted <span class="badge suc-legend">like this</span> (hover a cell to see whether it's Cliff or Recovery), and seeded historical actuals (Apr–Jul) are highlighted <span class="badge actual-legend">like this</span>, in the Annual tables.</p>
       <div class="status-msg" id="computeStatus"></div>
@@ -282,17 +288,12 @@
     <div class="revenue-main">
     <section class="card">
       <h2>1. Projected vs Actual Revenue</h2>
-      <p class="hint">A one-time snapshot of the FY revenue projection with SUC switched off (regular Yield/CMGR only), frozen as a baseline — compare it against actual revenue as it's recorded in Historical Actuals over the rest of the year. Saving a new snapshot overwrites the previous one.</p>
+      <p class="hint">A one-time snapshot of the FY revenue projection with SUC switched off (regular Yield/CMGR only), frozen as a baseline — compare it against actual revenue as it's recorded in Historical Actuals over the rest of the year. Saving a new snapshot overwrites the previous one. The chart for this now lives on the <strong>Charts</strong> tab — the month-wise figures stay here.</p>
       <div class="row">
         <button class="btn-primary btn-small" id="saveSnapshotBtn" type="button">Save projection snapshot as of today</button>
         <span class="status-msg" id="snapshotStatus"></span>
       </div>
       <div class="snapshot-meta" id="snapshotMeta"></div>
-      <div class="chart-legend" id="forecastLegend"></div>
-      <div class="chart-wrap" id="forecastChartWrap">
-        <div id="forecastChart"></div>
-        <div class="chart-tooltip" id="forecastTooltip"></div>
-      </div>
       <h3 class="dt-title" style="margin-top:18px;">Month-wise figures</h3>
       <div id="forecastTable"></div>
     </section>
@@ -440,6 +441,49 @@
    </div>
   </div>
 
+  <!-- ===================== Charts tab ===================== -->
+  <div class="tab-panel" id="tab-charts">
+    <section class="card">
+      <h2>Projected vs Actual Revenue</h2>
+      <p class="hint">A one-time snapshot of the FY revenue projection with SUC switched off (regular Yield/CMGR only), compared against actual revenue as it's recorded in Historical Actuals. Save/refresh the snapshot and see the month-wise figures on the Monthly Revenue tab.</p>
+      <div class="chart-legend" id="forecastLegend"></div>
+      <div class="chart-wrap" id="forecastChartWrap">
+        <div id="forecastChart"></div>
+        <div class="chart-tooltip" id="forecastTooltip"></div>
+      </div>
+    </section>
+
+    <section class="card" id="revByUseCaseCard" style="display:none;">
+      <h2>Revenue by Use-case</h2>
+      <p class="hint">Total, Lending, and PFM revenue for each month (not cumulative), plus a running Cumulative Revenue total across the FY. All figures shown in crores (₹1,00,00,000). Uses whatever's currently computed on the Monthly Revenue tab — upload/refresh counts there to update this.</p>
+      <div class="chart-legend" id="revByUseCaseLegend"></div>
+      <div class="chart-wrap" id="revByUseCaseChartWrap">
+        <div id="revByUseCaseChart"></div>
+        <div class="chart-tooltip" id="revByUseCaseTooltip"></div>
+      </div>
+    </section>
+
+    <section class="card" id="dfByUseCaseCard" style="display:none;">
+      <h2>Data Fetch Count by Use-case</h2>
+      <p class="hint">Total, Lending, and PFM Data Fetch count for each month (not cumulative), plus a running Cumulative DF Count total across the FY. All figures shown in crores. Uses whatever's currently computed on the Monthly Revenue tab.</p>
+      <div class="chart-legend" id="dfByUseCaseLegend"></div>
+      <div class="chart-wrap" id="dfByUseCaseChartWrap">
+        <div id="dfByUseCaseChart"></div>
+        <div class="chart-tooltip" id="dfByUseCaseTooltip"></div>
+      </div>
+    </section>
+
+    <section class="card" id="splitPctCard" style="display:none;">
+      <h2>PFM vs Lending Split (%)</h2>
+      <p class="hint">Lending's and PFM's share of that month's total Revenue and total Data Fetch count, as a percentage — not cumulative, so the split can shift month to month (e.g. as SUC changes the mix). The two use-cases don't sum to 100%: other use-cases (Uncategorised, RIA, etc.) make up the rest.</p>
+      <div class="chart-legend" id="splitPctLegend"></div>
+      <div class="chart-wrap" id="splitPctChartWrap">
+        <div id="splitPctChart"></div>
+        <div class="chart-tooltip" id="splitPctTooltip"></div>
+      </div>
+    </section>
+  </div>
+
   <!-- ===================== FIU Metadata tab ===================== -->
   <div class="tab-panel" id="tab-metadata">
     <section class="card">
@@ -487,6 +531,41 @@
         </table>
       </div>
       <div class="empty-state" id="ycEmptyState" style="display:none;">No yield/CMGR entries yet — import from the FIU Metadata tab or add one manually.</div>
+    </section>
+  </div>
+
+  <!-- ===================== Historical Actuals tab ===================== -->
+  <div class="tab-panel" id="tab-historical">
+    <section class="card">
+      <h2>Add actuals for a month</h2>
+      <p class="hint">Once a month ends and you have its real, final Revenue and/or AU/DF counts, upload them here — that month then shows recorded actuals instead of a projection everywhere in the app (Monthly results as historical context, Annual results, By TSP/Use-case/License, and the Projected vs Actual chart), with no other steps needed. One file with <code>FIU ID</code>, and any of <code>Revenue</code>, <code>active_users</code>, <code>successful_data_fetches</code> — same loose column matching as the monthly counts upload. Uploading a month only ever touches that month's rows for the FIU IDs in the file; every other month and every other FIU is left exactly as it was, so this can't break existing data.</p>
+      <div class="row">
+        <div class="field" style="min-width:160px;">
+          <label for="histUploadMonth">Month</label>
+          <input type="month" id="histUploadMonth" />
+        </div>
+        <div class="upload-box" style="flex:1; min-width:220px;">
+          <label class="btn" for="histFile">Choose actuals file</label>
+          <input type="file" id="histFile" accept=".xlsx,.xls,.csv" />
+          <div class="fname" id="histFname">No file selected</div>
+        </div>
+      </div>
+      <div class="status-msg" id="histUploadStatus"></div>
+    </section>
+    <section class="card">
+      <h2>Recorded actuals</h2>
+      <div class="row">
+        <select id="histMonthFilter" style="min-width:160px;"></select>
+        <input type="text" id="histSearch" placeholder="Filter by FIU ID…" style="min-width:220px;" />
+        <button class="btn-secondary" id="addHistRowBtn" type="button">+ Add row</button>
+      </div>
+      <div class="table-scroll" style="margin-top:14px;">
+        <table id="histTable">
+          <thead><tr><th>FIU ID</th><th>Month</th><th class="num">Revenue</th><th class="num">AU count</th><th class="num">DF count</th><th>Billing Model</th><th class="num">Billing Yield</th><th></th></tr></thead>
+          <tbody id="histTableBody"></tbody>
+        </table>
+      </div>
+      <div class="empty-state" id="histEmptyState" style="display:none;">No historical actuals recorded yet — upload a file above or add a row manually.</div>
     </section>
   </div>
 
@@ -761,6 +840,155 @@
     ycBody.insertAdjacentHTML('afterbegin', ycRowHtml(blank, true));
   });
 
+  // ================= Historical Actuals tab =================
+  let histRows = [];
+  let histEditingKey = null;
+  const histBody = document.getElementById('histTableBody');
+  const histEmpty = document.getElementById('histEmptyState');
+  const histMonthFilter = document.getElementById('histMonthFilter');
+
+  function monthLabelFromKey(ym){
+    const m = /^(\d{4})-(\d{2})$/.exec(ym || '');
+    if (!m) return ym || '';
+    return new Date(Date.UTC(parseInt(m[1],10), parseInt(m[2],10)-1, 1)).toLocaleString('en-US', { month:'short', year:'numeric', timeZone:'UTC' });
+  }
+
+  function histRowKey(r){ return (r.fiuId||'').trim().toUpperCase() + '::' + (r.month||''); }
+
+  async function loadHist(){
+    const res = await apiFetch(API + '/api/historical-actuals');
+    histRows = await res.json();
+    populateHistMonthFilter();
+    renderHist();
+  }
+
+  function populateHistMonthFilter(){
+    const months = Array.from(new Set(histRows.map(r => r.month).filter(Boolean))).sort();
+    const current = histMonthFilter.value;
+    histMonthFilter.innerHTML = '<option value="">All months</option>' +
+      months.map(m => '<option value="'+esc(m)+'">'+esc(monthLabelFromKey(m))+'</option>').join('');
+    if (months.includes(current)) histMonthFilter.value = current;
+  }
+
+  function renderHist(){
+    const q = document.getElementById('histSearch').value.trim().toLowerCase();
+    const monthSel = histMonthFilter.value;
+    let filtered = histRows;
+    if (monthSel) filtered = filtered.filter(r => r.month === monthSel);
+    if (q) filtered = filtered.filter(r => (r.fiuId||'').toLowerCase().includes(q));
+    filtered = filtered.slice().sort((a,b) => (b.month||'').localeCompare(a.month||'') || (a.fiuId||'').localeCompare(b.fiuId||''));
+    histEmpty.style.display = filtered.length ? 'none' : 'block';
+    histBody.innerHTML = filtered.map(r => histRowHtml(r, histRowKey(r) === histEditingKey)).join('');
+  }
+
+  function histRowHtml(r, editing){
+    if (editing){
+      return '<tr data-key="'+esc(histRowKey(r))+'">' +
+        '<td>'+esc(r.fiuId)+'</td>' +
+        '<td>'+esc(r.month)+'</td>' +
+        '<td class="num"><input class="cell-input" data-f="revenue" type="number" step="any" value="'+esc(r.revenue)+'"></td>' +
+        '<td class="num"><input class="cell-input" data-f="auCount" type="number" step="any" value="'+esc(r.auCount)+'"></td>' +
+        '<td class="num"><input class="cell-input" data-f="dfCount" type="number" step="any" value="'+esc(r.dfCount)+'"></td>' +
+        '<td>'+esc(r.billingModel||'—')+'</td>' +
+        '<td class="num">'+fmt(r.billingYield,2)+'</td>' +
+        '<td class="row" style="gap:4px;"><button class="btn-primary btn-small" data-act="save-hist">Save</button><button class="btn-secondary btn-small" data-act="cancel-hist">Cancel</button></td>' +
+      '</tr>';
+    }
+    return '<tr data-key="'+esc(histRowKey(r))+'">' +
+      '<td>'+esc(r.fiuId)+'</td><td>'+esc(monthLabelFromKey(r.month))+'</td>' +
+      '<td class="num">'+fmtCurrency(r.revenue)+'</td><td class="num">'+fmt(r.auCount,0)+'</td><td class="num">'+fmt(r.dfCount,0)+'</td>' +
+      '<td>'+esc(r.billingModel||'—')+'</td><td class="num">'+fmt(r.billingYield,2)+'</td>' +
+      '<td class="row" style="gap:4px;"><button class="btn-secondary btn-small" data-act="edit-hist">Edit</button><button class="btn-danger btn-small" data-act="delete-hist">Delete</button></td>' +
+    '</tr>';
+  }
+
+  histBody.addEventListener('click', async function(e){
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const tr = btn.closest('tr');
+    const key = tr.getAttribute('data-key');
+    const row = histRows.find(r => histRowKey(r) === key);
+    if (!row) return;
+    if (btn.dataset.act === 'edit-hist'){
+      histEditingKey = key;
+      renderHist();
+    } else if (btn.dataset.act === 'cancel-hist'){
+      histEditingKey = null;
+      // A row added via "+ Add row" that's cancelled before its first Save
+      // only ever existed in the browser — drop it rather than leave a
+      // half-entered row with no server record behind it.
+      if (row._unsaved) histRows = histRows.filter(r => r !== row);
+      renderHist();
+    } else if (btn.dataset.act === 'save-hist'){
+      const updated = { fiuId: row.fiuId, month: row.month };
+      tr.querySelectorAll('input[data-f]').forEach(inp => { if (inp.value !== '') updated[inp.dataset.f] = parseFloat(inp.value); });
+      const res = await apiFetch(API + '/api/historical-actuals', {
+        method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(updated)
+      });
+      if (res.ok) { histEditingKey = null; await loadHist(); } else alert('Failed to save');
+    } else if (btn.dataset.act === 'delete-hist'){
+      if (!confirm('Delete the recorded actual for ' + row.fiuId + ' — ' + monthLabelFromKey(row.month) + '?')) return;
+      await apiFetch(API + '/api/historical-actuals/' + encodeURIComponent(row.fiuId) + '/' + encodeURIComponent(row.month), { method: 'DELETE' });
+      await loadHist();
+    }
+  });
+
+  document.getElementById('histSearch').addEventListener('input', renderHist);
+  histMonthFilter.addEventListener('change', renderHist);
+
+  document.getElementById('addHistRowBtn').addEventListener('click', function(){
+    const fiuId = prompt('FIU ID:');
+    if (!fiuId || !fiuId.trim()) return;
+    const defaultMonth = histMonthFilter.value || document.getElementById('histUploadMonth').value || '';
+    const month = prompt('Month (YYYY-MM):', defaultMonth);
+    if (!month || !/^\d{4}-\d{2}$/.test(month.trim())) { alert('Enter a valid month as YYYY-MM.'); return; }
+    const trimmedMonth = month.trim();
+    const trimmedFiuId = fiuId.trim();
+    if (histRows.some(r => r.fiuId.toLowerCase() === trimmedFiuId.toLowerCase() && r.month === trimmedMonth)){
+      alert('That FIU already has an actual recorded for ' + trimmedMonth + ' — use Edit instead.'); return;
+    }
+    const blank = { fiuId: trimmedFiuId, month: trimmedMonth, revenue:'', auCount:'', dfCount:'', _unsaved: true };
+    histRows.unshift(blank);
+    histEditingKey = histRowKey(blank);
+    histMonthFilter.value = ''; // make sure the new row isn't hidden by the current month filter
+    document.getElementById('histSearch').value = '';
+    populateHistMonthFilter();
+    renderHist();
+  });
+
+  const histFile = document.getElementById('histFile');
+  const histFname = document.getElementById('histFname');
+  const histUploadStatus = document.getElementById('histUploadStatus');
+  const histUploadMonth = document.getElementById('histUploadMonth');
+  histFile.addEventListener('change', async function(){
+    const file = histFile.files[0];
+    if (!file) return;
+    histFname.textContent = file.name;
+    const month = histUploadMonth.value;
+    if (!/^\d{4}-\d{2}$/.test(month)){
+      histUploadStatus.className = 'status-msg err';
+      histUploadStatus.textContent = 'Pick a month above before choosing a file.';
+      histFile.value = '';
+      return;
+    }
+    histUploadStatus.className = 'status-msg';
+    histUploadStatus.textContent = 'Uploading…';
+    const fd = new FormData(); fd.append('file', file); fd.append('month', month);
+    try{
+      const res = await apiFetch(API + '/api/historical-actuals/bulk', { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Upload failed');
+      histUploadStatus.className = 'status-msg ok';
+      histUploadStatus.textContent = 'Used sheet "'+data.sheetUsed+'" for '+monthLabelFromKey(data.month)+': '+data.created+' created, '+data.updated+' updated'+(data.skipped ? ', '+data.skipped+' row(s) skipped (no FIU ID or no usable Revenue/AU/DF value)' : '')+'.';
+      histMonthFilter.value = month;
+      await loadHist();
+    } catch(err){
+      histUploadStatus.className = 'status-msg err';
+      histUploadStatus.textContent = err.message;
+    }
+    histFile.value = '';
+  });
+
   // ================= Monthly Revenue tab =================
   const countsFile = document.getElementById('countsFile');
   const countsFname = document.getElementById('countsFname');
@@ -770,8 +998,14 @@
   const checkEmailBtn = document.getElementById('checkEmailBtn');
   const useEmailDataBtn = document.getElementById('useEmailDataBtn');
 
+  // Defaults to yesterday, not today — see defaultAsOfDate() in server.js
+  // for why (a daily counts export dated/generated "today" typically only
+  // has real data through end of the *previous* day — a one-day reporting
+  // lag confirmed against a real Metabase export on 2026-09-02). Always
+  // overridable here for a file that doesn't have that lag.
   (function initDate(){
     const d = new Date();
+    d.setUTCDate(d.getUTCDate() - 1);
     asOfDateInput.value = d.toISOString().slice(0,10);
   })();
 
@@ -791,6 +1025,46 @@
   const sucStartDateInput = document.getElementById('sucStartDate');
   const fyStartMonthInput = document.getElementById('fyStartMonth');
 
+  // ---- What-if scenarios ----
+  // Checkbox list built from GET /api/scenarios (see SCENARIO_DEFINITIONS in
+  // lib/compute.js) rather than hardcoded here, so a new scenario added
+  // server-side just shows up without a frontend change. Mix-and-match: any
+  // number of boxes can be checked at once, sent as a comma-separated list
+  // of keys. They only have a visible effect once a SUC Start Date is set
+  // above (all scenarios only change SUC-active months) — the hint text
+  // says so, but the boxes stay usable regardless so toggling them ahead of
+  // picking a SUC Start Date just works once one is picked.
+  const scenariosField = document.getElementById('scenariosField');
+  const scenariosList = document.getElementById('scenariosList');
+  function getSelectedScenarios(){
+    return Array.from(scenariosList.querySelectorAll('input[type=checkbox]:checked')).map(cb => cb.value).join(',');
+  }
+  (async function loadScenarioDefs(){
+    try{
+      const res = await apiFetch(API + '/api/scenarios');
+      const defs = await res.json();
+      if (!Array.isArray(defs) || !defs.length) return;
+      // The checkbox's width/flex are pinned inline (not just via the
+      // .checkbox-row class) because the side panel's global
+      // ".side-panel .field input{ width:100% }" rule otherwise stretches
+      // the checkbox itself to the full row width — inline styles win over
+      // that rule regardless of selector specificity, keeping the box a
+      // normal small square that lines up with the first line of its label.
+      scenariosList.innerHTML = defs.map(d =>
+        '<label class="checkbox-row" style="display:flex; align-items:flex-start; gap:8px; font-weight:400; margin:8px 0; cursor:pointer;" title="'+esc(d.description || '')+'">'+
+          '<input type="checkbox" value="'+esc(d.key)+'" style="width:16px; height:16px; flex:0 0 16px; margin:0; padding:0; accent-color: var(--series-1);" />'+
+          '<span style="line-height:1.4; padding-top:1px;">'+esc(d.label)+'</span>'+
+        '</label>'
+      ).join('') + '<p class="hint" style="margin:4px 0 0;">Only takes effect once a SUC Start Date is set above — these change how a FIU\'s revenue behaves from that month onward.</p>';
+      scenariosField.style.display = '';
+      scenariosList.querySelectorAll('input[type=checkbox]').forEach(cb => {
+        cb.addEventListener('change', function(){ triggerCompute(); });
+      });
+    } catch(err){
+      // Non-fatal — the app works fine without scenarios if this fails.
+    }
+  })();
+
   // No "Compute revenue" button — this runs automatically on file choice and
   // on every field change below. Guarded against overlapping requests: if a
   // change comes in while one is already in flight, we queue exactly one
@@ -807,6 +1081,7 @@
     fd.append('asOfDate', asOfDateInput.value);
     fd.append('fyStartMonth', fyStartMonthInput.value);
     fd.append('sucStartDate', sucStartDateInput.value);
+    fd.append('scenarios', getSelectedScenarios());
     try{
       const res = await apiFetch(API + '/api/compute', { method: 'POST', body: fd });
       const data = await res.json();
@@ -817,6 +1092,7 @@
       let msg = 'Used sheet "'+data.sheetUsed+'" as of '+data.asOfDate+'.';
       if (data.unmatchedCounts.length) msg += ' ' + data.unmatchedCounts.length + ' FIU(s) in the upload have no FIU Metadata config entry — add them in the FIU Metadata tab.';
       if (data.unmatchedMeta.length) msg += ' ' + data.unmatchedMeta.length + ' FIU(s) in your configs had no counts in this upload.';
+      if (data.scenariosApplied && data.scenariosApplied.length) msg += ' Scenario(s) active: ' + data.scenariosApplied.join(', ') + '.';
       computeStatus.textContent = msg;
     } catch(err){
       computeStatus.className = 'status-msg err';
@@ -857,6 +1133,7 @@
           asOfDate: asOfDateInput.value,
           fyStartMonth: fyStartMonthInput.value,
           sucStartDate: sucStartDateInput.value,
+          scenarios: getSelectedScenarios(),
           force: !!force
         })
       });
@@ -868,6 +1145,7 @@
       let msg = 'Used sheet "'+data.sheetUsed+'" as of '+data.asOfDate+' (auto-pulled from email).';
       if (data.unmatchedCounts.length) msg += ' ' + data.unmatchedCounts.length + ' FIU(s) in the email file have no FIU Metadata config entry — add them in the FIU Metadata tab.';
       if (data.unmatchedMeta.length) msg += ' ' + data.unmatchedMeta.length + ' FIU(s) in your configs had no counts in this file.';
+      if (data.scenariosApplied && data.scenariosApplied.length) msg += ' Scenario(s) active: ' + data.scenariosApplied.join(', ') + '.';
       computeStatus.textContent = msg;
       const src = data.emailSource || {};
       emailSourceStatus.className = 'status-msg ok';
@@ -937,8 +1215,6 @@
   const snapshotStatus = document.getElementById('snapshotStatus');
   const snapshotMeta = document.getElementById('snapshotMeta');
   let forecastCache = null; // { months, projected, actual, snapshot }
-  let forecastMoveHandler = null;
-  let forecastLeaveHandler = null;
 
   function fmtCompactCurrency(n){
     if (n === undefined || n === null || isNaN(n)) return '—';
@@ -947,6 +1223,16 @@
     if (abs >= 1e7) return sign + '₹' + (abs/1e7).toLocaleString('en-IN', {maximumFractionDigits:2}) + 'Cr';
     if (abs >= 1e5) return sign + '₹' + (abs/1e5).toLocaleString('en-IN', {maximumFractionDigits:2}) + 'L';
     return fmtCurrency(n);
+  }
+  // Same crore/lakh compaction as fmtCompactCurrency, but for a plain count
+  // (Data Fetch volume) rather than a rupee amount — no ₹ symbol.
+  function fmtCompactNumber(n){
+    if (n === undefined || n === null || isNaN(n)) return '—';
+    const abs = Math.abs(n);
+    const sign = n < 0 ? '-' : '';
+    if (abs >= 1e7) return sign + (abs/1e7).toLocaleString('en-IN', {maximumFractionDigits:2}) + ' Cr';
+    if (abs >= 1e5) return sign + (abs/1e5).toLocaleString('en-IN', {maximumFractionDigits:2}) + ' L';
+    return fmt(n, 0);
   }
   function compactMonthLabel(label){
     const parts = String(label).split(' ');
@@ -961,13 +1247,48 @@
     return niceNorm * base;
   }
 
-  // Renders the SVG line chart + legend, and wires the shared crosshair /
-  // tooltip. `series`: [{ key, label, colorVar, data: [number|null, ...] }].
-  function renderForecastChart(containerId, months, series){
+  // Renders an SVG line chart + legend, and wires a hover crosshair/tooltip
+  // — shared by every chart on the page (Projected vs Actual, and the three
+  // Charts-tab charts). `opts`:
+  //   containerId, legendId, tooltipId, wrapId — element ids for this chart
+  //     instance (each chart on the page needs its own set, so multiple
+  //     charts can coexist without clobbering each other's DOM/listeners).
+  //   months — the shared x-axis: [{ label, ... }, ...].
+  //   series — [{ key, label, colorVar, data: [number|null, ...], axis }].
+  //     `axis: 'right'` puts that series on its own right-hand y-scale
+  //     (see below); omit (or 'left') for the default left scale.
+  //   ariaLabel — accessible label for the <svg>.
+  //   axisFormat(v) — formats a left y-axis tick / end-of-line point label
+  //     (defaults to fmtCompactCurrency, matching the original chart here).
+  //   axisFormatRight(v) — formats the right y-axis's ticks/point labels
+  //     (defaults to axisFormat — same unit, just a different scale).
+  //   tooltipFormat(v) — formats a value in the hover tooltip (defaults to
+  //     fmtCurrency — fuller precision than the compacted axis labels).
+  // Per-instance hover-handler cleanup is stored on the wrap element itself
+  // (wrap.__lineChartMove/__lineChartLeave) rather than a shared module-level
+  // variable, so re-rendering one chart never leaks or drops another
+  // chart's listeners.
+  //
+  // Dual y-axis: a running/cumulative series plotted alongside the monthly
+  // figures it's built from lives on a scale an order of magnitude bigger,
+  // so a single shared axis stretches to fit it and flattens the monthly
+  // series into an unreadable sliver at the bottom (their end-labels
+  // crowd/overlap there too). Series marked `axis:'right'` get their own
+  // scale — same plot, two independent y-axes — so every series keeps a
+  // legible range. Gridlines are drawn once, at even fractions of the
+  // plot height; each axis's tick label is computed independently for
+  // that same fraction, so the two scales share gridlines without sharing
+  // units.
+  function renderLineChart(opts){
+    const { containerId, legendId, tooltipId, wrapId, months, series } = opts;
+    const axisFormat = opts.axisFormat || fmtCompactCurrency;
+    const axisFormatRight = opts.axisFormatRight || axisFormat;
+    const tooltipFormat = opts.tooltipFormat || fmtCurrency;
+    const ariaLabel = opts.ariaLabel || 'Chart';
     const container = document.getElementById(containerId);
-    const legendEl = document.getElementById('forecastLegend');
-    const tooltipEl = document.getElementById('forecastTooltip');
-    const wrap = document.getElementById('forecastChartWrap');
+    const legendEl = document.getElementById(legendId);
+    const tooltipEl = document.getElementById(tooltipId);
+    const wrap = document.getElementById(wrapId);
     if (!container || !wrap) return;
 
     const cs = getComputedStyle(document.documentElement);
@@ -978,25 +1299,38 @@
     const inkColor = colorOf('--text-primary');
     const surfaceColor = colorOf('--surface-1');
 
-    const W = 900, H = 320;
-    const padL = 66, padR = 16, padT = 16, padB = 34;
+    const hasRightAxis = series.some(s => s.axis === 'right');
+    const W = 900, H = 380;
+    const padL = 66, padR = hasRightAxis ? 70 : 16, padT = 16, padB = 34;
     const plotW = W - padL - padR;
     const plotH = H - padT - padB;
     const n = months.length;
     const xAt = i => padL + (n <= 1 ? 0 : (plotW * i) / (n - 1));
 
-    const allValues = series.reduce((acc, s) => acc.concat(s.data), [])
+    const valuesOf = list => list.reduce((acc, s) => acc.concat(s.data), [])
       .filter(v => v !== null && v !== undefined && !isNaN(v));
-    const yMax = niceAxisMax(allValues.length ? Math.max.apply(null, allValues) : 0);
-    const yAt = v => padT + plotH - (plotH * (v / yMax));
+    const leftSeries = series.filter(s => s.axis !== 'right');
+    const rightSeries = series.filter(s => s.axis === 'right');
+    const leftValues = valuesOf(leftSeries);
+    const rightValues = valuesOf(rightSeries);
+    const yMax = niceAxisMax(leftValues.length ? Math.max.apply(null, leftValues) : 0);
+    const yMaxRight = hasRightAxis ? niceAxisMax(rightValues.length ? Math.max.apply(null, rightValues) : 0) : null;
+    const yAtLeft = v => padT + plotH - (plotH * (v / yMax));
+    const yAtRight = v => padT + plotH - (plotH * (v / yMaxRight));
+    const yAt = (v, s) => (s && s.axis === 'right') ? yAtRight(v) : yAtLeft(v);
 
     let gridSvg = '';
     const tickCount = 4;
     for (let t = 0; t <= tickCount; t++){
-      const val = (yMax * t) / tickCount;
-      const y = yAt(val);
+      const frac = t / tickCount;
+      const y = padT + plotH - plotH * frac;
+      const val = yMax * frac;
       gridSvg += '<line x1="'+padL+'" y1="'+y+'" x2="'+(padL+plotW)+'" y2="'+y+'" stroke="'+gridColor+'" stroke-width="1" />';
-      gridSvg += '<text x="'+(padL-10)+'" y="'+(y+4)+'" text-anchor="end" font-size="11" fill="'+mutedColor+'">'+esc(fmtCompactCurrency(val))+'</text>';
+      gridSvg += '<text x="'+(padL-10)+'" y="'+(y+4)+'" text-anchor="end" font-size="11" fill="'+mutedColor+'">'+esc(axisFormat(val))+'</text>';
+      if (hasRightAxis){
+        const valRight = yMaxRight * frac;
+        gridSvg += '<text x="'+(padL+plotW+10)+'" y="'+(y+4)+'" text-anchor="start" font-size="11" fill="'+mutedColor+'">'+esc(axisFormatRight(valRight))+'</text>';
+      }
     }
 
     let xLabelsSvg = '';
@@ -1006,6 +1340,7 @@
 
     let seriesSvg = '';
     let legendHtml = '';
+    const endpointLabels = []; // collected here, then de-overlapped below — see LABEL_MIN_GAP
     series.forEach(s => {
       const color = colorOf(s.colorVar);
       legendHtml += '<div class="item"><span class="swatch" style="background:'+color+';"></span><span>'+esc(s.label)+'</span></div>';
@@ -1015,7 +1350,7 @@
       let lastIdx = -1;
       s.data.forEach((v, i) => {
         if (v === null || v === undefined || isNaN(v)) { drawing = false; return; }
-        const x = xAt(i), y = yAt(v);
+        const x = xAt(i), y = yAt(v, s);
         d += (drawing ? ' L ' : ' M ') + x.toFixed(2) + ' ' + y.toFixed(2);
         drawing = true;
         lastIdx = i;
@@ -1024,32 +1359,64 @@
 
       s.data.forEach((v, i) => {
         if (v === null || v === undefined || isNaN(v)) return;
-        seriesSvg += '<circle cx="'+xAt(i).toFixed(2)+'" cy="'+yAt(v).toFixed(2)+'" r="4" fill="'+color+'" stroke="'+surfaceColor+'" stroke-width="2" />';
+        seriesSvg += '<circle cx="'+xAt(i).toFixed(2)+'" cy="'+yAt(v, s).toFixed(2)+'" r="4" fill="'+color+'" stroke="'+surfaceColor+'" stroke-width="2" />';
       });
 
       // Direct end-label — the one point per series most worth labeling
       // without flooding the chart (see dataviz skill: label the endpoint).
+      // Collected rather than drawn immediately: with several series on one
+      // shared axis (e.g. a monthly figure plotted alongside its own
+      // running Cumulative total), multiple endpoints can land within a few
+      // pixels of each other, and their labels would otherwise overlap into
+      // illegible text — de-overlapped in one pass below, after every
+      // series' endpoint is known.
       if (lastIdx !== -1){
-        const x = xAt(lastIdx), y = yAt(s.data[lastIdx]);
+        const x = xAt(lastIdx), y = yAt(s.data[lastIdx], s);
         const nearRightEdge = lastIdx >= n - 3;
         const anchor = nearRightEdge ? 'end' : 'start';
         const dx = nearRightEdge ? -8 : 8;
-        seriesSvg += '<text x="'+(x+dx)+'" y="'+(y-9)+'" text-anchor="'+anchor+'" font-size="11" font-weight="700" fill="'+inkColor+'">'+esc(fmtCompactCurrency(s.data[lastIdx]))+'</text>';
+        const fmtForLabel = s.axis === 'right' ? axisFormatRight : axisFormat;
+        endpointLabels.push({ x, y, anchor, dx, text: fmtForLabel(s.data[lastIdx]) });
       }
     });
 
-    const svg = '<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="320" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Projected versus actual revenue by month">'
+    // Push down any end-label that landed within LABEL_MIN_GAP px of the
+    // previous one (sorted top to bottom, i.e. highest value first) — keeps
+    // every label readable instead of stacked on top of each other, at the
+    // cost of the label sitting slightly off its exact point when several
+    // series end at close values (still directly above/below the right
+    // point, just spaced out). Larger than the label's own line height (11px
+    // bold text) so pushed-apart labels don't still visually overlap.
+    const LABEL_MIN_GAP = 16;
+    endpointLabels.sort((a, b) => a.y - b.y);
+    for (let i = 1; i < endpointLabels.length; i++){
+      const prev = endpointLabels[i - 1], cur = endpointLabels[i];
+      if (cur.y - prev.y < LABEL_MIN_GAP) cur.y = prev.y + LABEL_MIN_GAP;
+    }
+    // Halo (a stroke in the card's own background color, painted behind the
+    // fill) so a label stays legible even where a line/point from another
+    // series passes directly behind it — two series that track close
+    // together (e.g. Total and PFM DF Count, when one use-case dominates)
+    // can otherwise have one series' line cut right through the other's
+    // end-label text.
+    endpointLabels.forEach(lbl => {
+      const tx = (lbl.x+lbl.dx), ty = (lbl.y-9);
+      seriesSvg += '<text x="'+tx+'" y="'+ty+'" text-anchor="'+lbl.anchor+'" font-size="11" font-weight="700" stroke="'+surfaceColor+'" stroke-width="4" stroke-linejoin="round" paint-order="stroke fill" fill="'+inkColor+'">'+esc(lbl.text)+'</text>';
+    });
+
+    const crosshairId = containerId + 'Crosshair';
+    const svg = '<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="'+H+'" preserveAspectRatio="xMidYMid meet" role="img" aria-label="'+esc(ariaLabel)+'">'
       + gridSvg
       + '<line x1="'+padL+'" y1="'+(padT+plotH)+'" x2="'+(padL+plotW)+'" y2="'+(padT+plotH)+'" stroke="'+axisColor+'" stroke-width="1" />'
       + xLabelsSvg
       + seriesSvg
-      + '<line id="forecastCrosshair" x1="'+padL+'" y1="'+padT+'" x2="'+padL+'" y2="'+(padT+plotH)+'" stroke="'+axisColor+'" stroke-width="1" stroke-dasharray="3,3" opacity="0" />'
+      + '<line id="'+crosshairId+'" x1="'+padL+'" y1="'+padT+'" x2="'+padL+'" y2="'+(padT+plotH)+'" stroke="'+axisColor+'" stroke-width="1" stroke-dasharray="3,3" opacity="0" />'
       + '</svg>';
     container.innerHTML = svg;
-    legendEl.innerHTML = legendHtml;
+    if (legendEl) legendEl.innerHTML = legendHtml;
 
     const svgEl = container.querySelector('svg');
-    const crosshair = document.getElementById('forecastCrosshair');
+    const crosshair = document.getElementById(crosshairId);
 
     function handleMove(evt){
       const rect = svgEl.getBoundingClientRect();
@@ -1067,37 +1434,44 @@
       series.forEach(s => {
         const v = s.data[idx];
         const color = colorOf(s.colorVar);
-        const valText = (v === null || v === undefined || isNaN(v)) ? 'No data yet' : fmtCurrency(v);
+        const valText = (v === null || v === undefined || isNaN(v)) ? 'No data yet' : tooltipFormat(v);
         html += '<div class="tt-row"><span class="tt-key" style="background:'+color+';"></span><span class="tt-label">'+esc(s.label)+'</span><span class="tt-val">'+esc(valText)+'</span></div>';
       });
-      tooltipEl.innerHTML = html;
-      tooltipEl.style.opacity = '1';
+      if (tooltipEl) {
+        tooltipEl.innerHTML = html;
+        tooltipEl.style.opacity = '1';
 
-      const wrapRect = wrap.getBoundingClientRect();
-      const px = (x / W) * rect.width;
-      let left = px + 14;
-      if (left + 190 > wrapRect.width) left = Math.max(0, px - 194);
-      tooltipEl.style.left = left + 'px';
-      tooltipEl.style.top = '6px';
+        const wrapRect = wrap.getBoundingClientRect();
+        const px = (x / W) * rect.width;
+        let left = px + 14;
+        if (left + 190 > wrapRect.width) left = Math.max(0, px - 194);
+        tooltipEl.style.left = left + 'px';
+        tooltipEl.style.top = '6px';
+      }
     }
     function handleLeave(){
       crosshair.setAttribute('opacity', '0');
-      tooltipEl.style.opacity = '0';
+      if (tooltipEl) tooltipEl.style.opacity = '0';
     }
-    if (forecastMoveHandler) wrap.removeEventListener('mousemove', forecastMoveHandler);
-    if (forecastLeaveHandler) wrap.removeEventListener('mouseleave', forecastLeaveHandler);
-    forecastMoveHandler = handleMove;
-    forecastLeaveHandler = handleLeave;
-    wrap.addEventListener('mousemove', forecastMoveHandler);
-    wrap.addEventListener('mouseleave', forecastLeaveHandler);
+    if (wrap.__lineChartMove) wrap.removeEventListener('mousemove', wrap.__lineChartMove);
+    if (wrap.__lineChartLeave) wrap.removeEventListener('mouseleave', wrap.__lineChartLeave);
+    wrap.__lineChartMove = handleMove;
+    wrap.__lineChartLeave = handleLeave;
+    wrap.addEventListener('mousemove', wrap.__lineChartMove);
+    wrap.addEventListener('mouseleave', wrap.__lineChartLeave);
   }
 
   function renderForecastChartFromCache(){
     if (!forecastCache) return;
-    renderForecastChart('forecastChart', forecastCache.months, [
-      { key:'projected', label:'Projected (no SUC, saved '+forecastCache.snapshot.snapshotDate+')', colorVar:'--series-1', data: forecastCache.projected },
-      { key:'actual', label:'Actual (recorded)', colorVar:'--series-2', data: forecastCache.actual }
-    ]);
+    renderLineChart({
+      containerId: 'forecastChart', legendId: 'forecastLegend', tooltipId: 'forecastTooltip', wrapId: 'forecastChartWrap',
+      months: forecastCache.months,
+      ariaLabel: 'Projected versus actual revenue by month',
+      series: [
+        { key:'projected', label:'Projected (no SUC, saved '+forecastCache.snapshot.snapshotDate+')', colorVar:'--series-1', data: forecastCache.projected },
+        { key:'actual', label:'Actual (recorded)', colorVar:'--series-2', data: forecastCache.actual }
+      ]
+    });
   }
 
   // Table view alongside the chart — same numbers, always reachable without
@@ -1796,6 +2170,113 @@
       document.getElementById('dfYieldCard').style.display = 'block';
       renderDfYieldAnalysis(data.dfYieldAnalysis);
     }
+
+    // ---- Charts tab ----
+    renderUseCaseCharts(data);
+  }
+
+  // Running (cumulative) total of a monthly array — out[i] = sum(arr[0..i]).
+  function runningTotal(arr){
+    let sum = 0;
+    return (arr || []).map(v => { sum += (v || 0); return sum; });
+  }
+  // Pulls one Use-case's monthly array out of a groupedByUseCase.revenue/df
+  // list (see groupByMetric in lib/compute.js) by label, case-insensitively
+  // — the label comes straight from the FIU Metadata Use-case field, so this
+  // is defensive against casing drift ("PFM" vs "pfm"). A Use-case with no
+  // group at all (no FIU currently classified that way) falls back to all
+  // zeros rather than nulls, so it still draws a flat line at 0 instead of
+  // leaving a gap.
+  function findGroupMonthly(groups, label, numMonths){
+    const g = (groups || []).find(x => String(x.label || '').trim().toLowerCase() === label);
+    return g ? g.monthly.slice() : new Array(numMonths).fill(0);
+  }
+  // Sums every group's monthly array together, month by month — used to get
+  // an overall total (e.g. Total DF Count) from groupedByUseCase.df, which
+  // only has per-Use-case buckets, not a top-level total the way revenue
+  // does (data.totalsByMonth).
+  function sumAllGroupsMonthly(groups, numMonths){
+    const out = new Array(numMonths).fill(0);
+    (groups || []).forEach(g => g.monthly.forEach((v, i) => { out[i] += (v || 0); }));
+    return out;
+  }
+
+  // Charts tab: three charts built entirely from the same /api/compute
+  // response the rest of renderResults already has — Revenue by Use-case,
+  // DF Count by Use-case (both: Total/Lending/PFM monthly + a running
+  // Cumulative total, see ask 2026-09-02), and the PFM-vs-Lending % split
+  // (each Use-case's share of that month's own Total, not cumulative — a
+  // shifting split is the point, e.g. as SUC changes the revenue mix).
+  function renderUseCaseCharts(data){
+    const months = data.months;
+    const numMonths = months.length;
+    const revGroups = data.groupedByUseCase && data.groupedByUseCase.revenue;
+    const dfGroups = data.groupedByUseCase && data.groupedByUseCase.df;
+
+    const totalRevenue = (data.totalsByMonth || []).slice();
+    const lendingRevenue = findGroupMonthly(revGroups, 'lending', numMonths);
+    const pfmRevenue = findGroupMonthly(revGroups, 'pfm', numMonths);
+    const cumulativeRevenue = runningTotal(totalRevenue);
+
+    const totalDf = sumAllGroupsMonthly(dfGroups, numMonths);
+    const lendingDf = findGroupMonthly(dfGroups, 'lending', numMonths);
+    const pfmDf = findGroupMonthly(dfGroups, 'pfm', numMonths);
+    const cumulativeDf = runningTotal(totalDf);
+
+    // Cumulative runs to roughly the FY total by March, an order of
+    // magnitude above any single month's Total/Lending/PFM figure — sharing
+    // one y-axis would stretch the scale to fit Cumulative and flatten the
+    // other three into an unreadable sliver near the bottom. Cumulative
+    // gets its own right-hand axis so every series keeps a legible range;
+    // see renderLineChart's dual-axis comment.
+    document.getElementById('revByUseCaseCard').style.display = 'block';
+    renderLineChart({
+      containerId: 'revByUseCaseChart', legendId: 'revByUseCaseLegend', tooltipId: 'revByUseCaseTooltip', wrapId: 'revByUseCaseChartWrap',
+      months, ariaLabel: 'Revenue by use-case, by month',
+      axisFormat: fmtCompactCurrency, axisFormatRight: fmtCompactCurrency, tooltipFormat: fmtCurrency,
+      series: [
+        { key:'total', label:'Total Revenue', colorVar:'--series-1', data: totalRevenue },
+        { key:'lending', label:'Lending Revenue', colorVar:'--series-2', data: lendingRevenue },
+        { key:'pfm', label:'PFM Revenue', colorVar:'--good', data: pfmRevenue },
+        { key:'cumulative', label:'Cumulative Revenue (right axis)', colorVar:'--warning', data: cumulativeRevenue, axis:'right' }
+      ]
+    });
+
+    document.getElementById('dfByUseCaseCard').style.display = 'block';
+    renderLineChart({
+      containerId: 'dfByUseCaseChart', legendId: 'dfByUseCaseLegend', tooltipId: 'dfByUseCaseTooltip', wrapId: 'dfByUseCaseChartWrap',
+      months, ariaLabel: 'Data Fetch count by use-case, by month',
+      axisFormat: fmtCompactNumber, axisFormatRight: fmtCompactNumber, tooltipFormat: v => fmt(v, 0),
+      series: [
+        { key:'total', label:'Total DF Count', colorVar:'--series-1', data: totalDf },
+        { key:'lending', label:'Lending DF Count', colorVar:'--series-2', data: lendingDf },
+        { key:'pfm', label:'PFM DF Count', colorVar:'--good', data: pfmDf },
+        { key:'cumulative', label:'Cumulative DF Count (right axis)', colorVar:'--warning', data: cumulativeDf, axis:'right' }
+      ]
+    });
+
+    // null (not 0) wherever that month's whole is 0 — a real 0% share reads
+    // very differently from "no revenue/DF at all yet this month", and null
+    // draws a gap instead of a misleading flat 0 on the % chart.
+    const pctOf = (part, whole) => part.map((v, i) => (whole[i] ? (v / whole[i] * 100) : null));
+    const lendingRevPct = pctOf(lendingRevenue, totalRevenue);
+    const pfmRevPct = pctOf(pfmRevenue, totalRevenue);
+    const lendingDfPct = pctOf(lendingDf, totalDf);
+    const pfmDfPct = pctOf(pfmDf, totalDf);
+
+    document.getElementById('splitPctCard').style.display = 'block';
+    renderLineChart({
+      containerId: 'splitPctChart', legendId: 'splitPctLegend', tooltipId: 'splitPctTooltip', wrapId: 'splitPctChartWrap',
+      months, ariaLabel: 'PFM versus Lending share of revenue and Data Fetch count, by month',
+      axisFormat: v => (v===null||v===undefined||isNaN(v)) ? '—' : v.toFixed(0)+'%',
+      tooltipFormat: fmtPct,
+      series: [
+        { key:'lendingRevPct', label:'Lending Revenue %', colorVar:'--series-2', data: lendingRevPct },
+        { key:'pfmRevPct', label:'PFM Revenue %', colorVar:'--good', data: pfmRevPct },
+        { key:'lendingDfPct', label:'Lending DF %', colorVar:'--series-1', data: lendingDfPct },
+        { key:'pfmDfPct', label:'PFM DF %', colorVar:'--warning', data: pfmDfPct }
+      ]
+    });
   }
 
   // summary: { count, totalAuCount, totalDfCount }; rows: the notBillable rows
@@ -2083,6 +2564,7 @@
   // ---------- init ----------
   loadMeta();
   loadYc();
+  loadHist();
   loadForecastChart();
   // Auto-pull today's counts from the latest matching Metabase email on
   // every page load — this is what makes a plain refresh show updated

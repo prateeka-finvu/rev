@@ -15,7 +15,7 @@ const cookieParser = require('cookie-parser');
 const store = require('./lib/store');
 const { parseWorkbook, findMasterDataSheet } = require('./lib/parseFile');
 const { buildColumnMap } = require('./lib/columns');
-const { computeRevenue, groupRevenue, groupAuUsage, groupDfUsage, dfYieldBreakdown, buildActualsByMonth, fyFullMonths, monthLabel, toNumber } = require('./lib/compute');
+const { computeRevenue, groupRevenue, groupAuUsage, groupDfUsage, dfYieldBreakdown, buildActualsByMonth, fyFullMonths, monthLabel, toNumber, SCENARIO_DEFINITIONS } = require('./lib/compute');
 const { askChat } = require('./lib/chat');
 const { fetchLatestCountsEmail, describeImapError } = require('./lib/mailIngest');
 
@@ -319,6 +319,122 @@ app.post('/api/yield-cmgr/bulk', (req, res) => {
   } catch (err) { res.status(400).json({ error: err.message }); }
 });
 
+// ---------- Historical Actuals ----------
+// Once a month ends, its real revenue/AU/DF figures get recorded here (one
+// row per FIU per month, keyed by histKey — see comment above) instead of
+// being computed/projected. Every place that already reads this table —
+// buildComputeResponse (both /api/compute and /api/compute-from-email),
+// /api/projection-snapshot, and /api/revenue-actuals for the Projected vs
+// Actual chart — reads it live via store.readAll on each request, so a row
+// added here shows up everywhere immediately with no other wiring needed.
+// billingModel/billingYield are stored for reference only (matching what
+// each FIU's config said at the time) — the actual usage/revenue figures
+// below always come from the row itself, never recomputed.
+const MONTH_RE = /^\d{4}-\d{2}$/;
+function toHistRow(r) {
+  const out = { fiuId: r.fiuId, month: String(r.month || '').trim() };
+  if (r.revenue !== undefined) out.revenue = r.revenue;
+  if (r.auCount !== undefined) out.auCount = r.auCount;
+  if (r.dfCount !== undefined) out.dfCount = r.dfCount;
+  if (r.billingModel !== undefined) out.billingModel = r.billingModel;
+  if (r.billingYield !== undefined) out.billingYield = r.billingYield;
+  return out;
+}
+
+app.get('/api/historical-actuals', (req, res) => {
+  res.json(store.readAll(HIST_TABLE));
+});
+
+// Single add/edit — body: { fiuId, month (YYYY-MM), revenue?, auCount?, dfCount?, billingModel?, billingYield? }.
+app.post('/api/historical-actuals', (req, res) => {
+  const fiuId = String(req.body && req.body.fiuId || '').trim();
+  const month = String(req.body && req.body.month || '').trim();
+  if (!fiuId) return res.status(400).json({ error: 'fiuId is required' });
+  if (!MONTH_RE.test(month)) return res.status(400).json({ error: 'month must be in YYYY-MM format' });
+  try {
+    const row = toHistRow({ ...req.body, fiuId, month });
+    store.upsertManyBy(HIST_TABLE, [row], histKey);
+    res.json(row);
+  } catch (err) { res.status(400).json({ error: err.message }); }
+});
+
+app.delete('/api/historical-actuals/:fiuId/:month', (req, res) => {
+  const key = store.normId(req.params.fiuId) + '::' + req.params.month;
+  const rows = store.readAll(HIST_TABLE);
+  const next = rows.filter(r => histKey(r) !== key);
+  if (next.length === rows.length) return res.status(404).json({ error: 'Not found' });
+  store.writeAll(HIST_TABLE, next);
+  res.json({ ok: true });
+});
+
+// Bulk upload for one month at a time — multipart `file` + form field
+// `month` (YYYY-MM). Same loose column matching as the monthly counts
+// upload (FIU ID + Revenue and/or AU/DF counts — see lib/columns.js), so
+// the same kind of export used for the monthly counts upload works here
+// too, just with a Revenue column added. Upserts by FIU ID + month only —
+// FIUs/months not present in this file are left completely untouched, so
+// uploading July's actuals can never affect June's, and re-uploading a
+// month to fix a mistake just overwrites that month's rows.
+app.post('/api/historical-actuals/bulk', upload.single('file'), (req, res) => {
+  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+  const month = String(req.body.month || '').trim();
+  if (!MONTH_RE.test(month)) {
+    return res.status(400).json({ error: 'Pick a valid month (YYYY-MM) before choosing a file.' });
+  }
+  let sheetNames, sheets;
+  try {
+    ({ sheetNames, sheets } = parseWorkbook(req.file.buffer));
+  } catch (err) {
+    return res.status(400).json({ error: 'Could not read file: ' + err.message });
+  }
+  const masterName = findMasterDataSheet(sheetNames) || sheetNames[0];
+  const rows = sheets[masterName];
+  if (!rows || !rows.length) return res.status(400).json({ error: 'No data rows found in the uploaded file' });
+
+  const colMap = buildColumnMap(rows[0], ['fiuId', 'revenue', 'activeUsers', 'dataFetches']);
+  if (!colMap.fiuId) return res.status(400).json({ error: 'Could not find an FIU ID column' });
+  if (!colMap.revenue && !colMap.activeUsers && !colMap.dataFetches) {
+    return res.status(400).json({ error: 'Could not find a Revenue, Active Users, or Data Fetch column — need at least one of these to record an actual.' });
+  }
+
+  const metadataById = new Map(store.readAll(META_TABLE).map(r => [store.normId(r.fiuId), r]));
+  const yieldCmgrById = new Map(store.readAll(YC_TABLE).map(r => [store.normId(r.fiuId), r]));
+
+  const incoming = [];
+  let skipped = 0;
+  rows.forEach(r => {
+    const fiuId = String(r[colMap.fiuId] || '').trim();
+    if (!fiuId) return;
+    const revenue = colMap.revenue ? toNumber(r[colMap.revenue]) : NaN;
+    const auCount = colMap.activeUsers ? toNumber(r[colMap.activeUsers]) : NaN;
+    const dfCount = colMap.dataFetches ? toNumber(r[colMap.dataFetches]) : NaN;
+    if (isNaN(revenue) && isNaN(auCount) && isNaN(dfCount)) { skipped++; return; }
+    const meta = metadataById.get(store.normId(fiuId));
+    const yc = yieldCmgrById.get(store.normId(fiuId));
+    incoming.push(toHistRow({
+      fiuId, month,
+      revenue: isNaN(revenue) ? undefined : revenue,
+      auCount: isNaN(auCount) ? undefined : auCount,
+      dfCount: isNaN(dfCount) ? undefined : dfCount,
+      billingModel: meta ? meta.billingModel : undefined,
+      billingYield: yc ? yc.yield : undefined
+    }));
+  });
+  if (!incoming.length) {
+    return res.status(400).json({ error: 'No usable rows found — every row was missing an FIU ID or all of Revenue/AU/DF.' });
+  }
+
+  const result = store.upsertManyBy(HIST_TABLE, incoming, histKey);
+  res.json({
+    sheetUsed: masterName,
+    ignoredSheets: sheetNames.filter(n => n !== masterName),
+    columnsFound: colMap,
+    month,
+    skipped,
+    ...result
+  });
+});
+
 // ---------- Convenience: seed both configs from a Master-Data-style file ----------
 // Accepts the same file shape used previously (a sheet named "Master Data"
 // with fiu_id, fiu_name, TSP, License, Use-case, Billing Model, a yield
@@ -384,8 +500,32 @@ app.post('/api/seed-from-master-data', upload.single('file'), (req, res) => {
 // CMGR / Historical Actuals configs, compute the FY revenue curve, and build
 // the TSP/Use-case/License rollups plus the DF Yield Analysis block. Kept as
 // one function so the two endpoints can never quietly drift apart.
-function buildComputeResponse(counts, { asOfDateStr, fyStartMonthStr, sucStartDateStr, sheetUsed, ignoredSheets }) {
-  const asOfDate = asOfDateStr ? new Date(asOfDateStr + 'T00:00:00Z') : new Date();
+// Default As-of Date, when the caller doesn't provide one — "yesterday"
+// (UTC), not today. Confirmed 2026-09-02, against a real Metabase MTD counts
+// export dated/generated today but whose successful_data_fetches figures
+// actually only reflect activity through end of the *previous* day (a
+// one-day reporting/ETL lag, standard for a daily batch export like this):
+// treating that file's As-of Date as today made projectMonthToDate divide
+// each FIU's MTD total by the full day-of-month (2 completed calendar
+// days), when the export itself only contains 1 day of real activity —
+// understating projected monthly volume by roughly half, which then
+// compounded through the whole SUC period. Re-running with As-of Date set
+// to yesterday (dividing by 1 day instead of 2) moved projected FY revenue
+// from ~₹13.6cr to ~₹22.6cr — matching an independent reference model's
+// ~₹22.2cr almost exactly, across ~150 unrelated FIUs (median ratio
+// exactly 1.00 once the lag is accounted for, vs. 0.51 without it). This
+// only changes the *default* shown in the As-of Date field — it's always
+// overridable (via the field itself, or the asOfDate form/JSON param) for
+// a file that doesn't have this lag.
+function defaultAsOfDate() {
+  const d = new Date();
+  d.setUTCDate(d.getUTCDate() - 1);
+  d.setUTCHours(0, 0, 0, 0);
+  return d;
+}
+
+function buildComputeResponse(counts, { asOfDateStr, fyStartMonthStr, sucStartDateStr, scenariosStr, sheetUsed, ignoredSheets }) {
+  const asOfDate = asOfDateStr ? new Date(asOfDateStr + 'T00:00:00Z') : defaultAsOfDate();
   const fyStartMonth = fyStartMonthStr ? parseInt(fyStartMonthStr, 10) : 4;
 
   // SUC Start Date — optional "YYYY-MM" string from the dropdown. From that
@@ -406,7 +546,20 @@ function buildComputeResponse(counts, { asOfDateStr, fyStartMonthStr, sucStartDa
   const yieldCmgrById = new Map(ycRows.map(r => [store.normId(r.fiuId), r]));
   const historicalByKey = new Map(histRows.map(r => [histKey(r), r]));
 
-  const result = computeRevenue(counts, metadataById, yieldCmgrById, asOfDate, fyStartMonth, sucStartDate, historicalByKey);
+  // What-if scenarios — a comma-separated list of SCENARIO_DEFINITIONS keys
+  // from the frontend's checkboxes (e.g. "lendingCmgrWorse,nonBankPfmZero"),
+  // any combination, in any order. An unrecognized key is silently ignored
+  // rather than rejected, so old/new frontend and backend builds never hard-
+  // fail on each other.
+  const scenarios = {};
+  if (scenariosStr) {
+    const known = new Set(SCENARIO_DEFINITIONS.map(s => s.key));
+    String(scenariosStr).split(',').map(s => s.trim()).filter(Boolean).forEach(key => {
+      if (known.has(key)) scenarios[key] = true;
+    });
+  }
+
+  const result = computeRevenue(counts, metadataById, yieldCmgrById, asOfDate, fyStartMonth, sucStartDate, historicalByKey, scenarios);
   // Each grouping (TSP / Use-case / License Type) rolls up three separate
   // per-month metrics — Revenue, AU count, and DF count — each with its own
   // row-inclusion rule (see groupRevenue/groupAuUsage/groupDfUsage).
@@ -474,6 +627,7 @@ function buildComputeResponse(counts, { asOfDateStr, fyStartMonthStr, sucStartDa
     sheetUsed,
     ignoredSheets,
     asOfDate: asOfDate.toISOString().slice(0, 10),
+    scenariosApplied: Object.keys(scenarios),
     ...result,
     groupedByTsp,
     groupedByUseCase,
@@ -498,6 +652,7 @@ app.post('/api/compute', upload.single('file'), (req, res) => {
       asOfDateStr: req.body.asOfDate,
       fyStartMonthStr: req.body.fyStartMonth,
       sucStartDateStr: req.body.sucStartDate,
+      scenariosStr: req.body.scenarios,
       sheetUsed: masterName,
       ignoredSheets: sheetNames.filter(n => n !== masterName)
     });
@@ -505,6 +660,13 @@ app.post('/api/compute', upload.single('file'), (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+});
+
+// Scenario definitions (key/label/description) for the frontend to render
+// its checkboxes from, so the two never drift apart — see
+// SCENARIO_DEFINITIONS in lib/compute.js.
+app.get('/api/scenarios', (req, res) => {
+  res.json(SCENARIO_DEFINITIONS);
 });
 
 // ---------- Auto-pull today's counts from a Metabase email ----------
@@ -570,6 +732,7 @@ app.post('/api/compute-from-email', async (req, res) => {
       asOfDateStr: req.body.asOfDate,
       fyStartMonthStr: req.body.fyStartMonth,
       sucStartDateStr: req.body.sucStartDate,
+      scenariosStr: req.body.scenarios,
       sheetUsed: masterName,
       ignoredSheets: sheetNames.filter(n => n !== masterName)
     });
@@ -608,7 +771,7 @@ app.post('/api/projection-snapshot', upload.single('file'), (req, res) => {
     return res.status(err.status || 400).json({ error: err.message });
   }
 
-  const asOfDate = req.body.asOfDate ? new Date(req.body.asOfDate + 'T00:00:00Z') : new Date();
+  const asOfDate = req.body.asOfDate ? new Date(req.body.asOfDate + 'T00:00:00Z') : defaultAsOfDate();
   const fyStartMonth = req.body.fyStartMonth ? parseInt(req.body.fyStartMonth, 10) : 4;
 
   const metaRows = store.readAll(META_TABLE);
@@ -644,7 +807,7 @@ app.get('/api/projection-snapshot', (req, res) => {
 // (and therefore which months even show up) stays consistent between the
 // projection snapshot and this series.
 app.get('/api/revenue-actuals', (req, res) => {
-  const asOfDate = req.query.asOfDate ? new Date(req.query.asOfDate + 'T00:00:00Z') : new Date();
+  const asOfDate = req.query.asOfDate ? new Date(req.query.asOfDate + 'T00:00:00Z') : defaultAsOfDate();
   const fyStartMonth = req.query.fyStartMonth ? parseInt(req.query.fyStartMonth, 10) : 4;
   const monthCols = fyFullMonths(asOfDate, fyStartMonth).map(m => ({ ...m, label: monthLabel(m.year, m.month) }));
   const histRows = store.readAll(HIST_TABLE);

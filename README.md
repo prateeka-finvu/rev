@@ -55,15 +55,17 @@ choice for a dataset of a few hundred FIUs maintained by a small team; swap
 support.
 
 **Historical actuals** (`data/historical-actuals.json`) — one row per FIU
-per month for months before your first monthly upload (currently Apr–Jul
-2026). This ships pre-loaded with the tool as part of its local data store —
-there's no upload step for it in the app; it's just there. See "Historical
-actuals (Apr–Jul 2026)" under Monthly workflow below. To refresh or extend
-it (e.g. once Aug 2026 needs to become historical too), replace
-`data/historical-actuals.json` directly, or ask for it to be regenerated
-from a source file — same upsert-by-FIU-and-month shape as today
-(`fiuId`, `month` as `YYYY-MM`, `billingModel`, `revenue`, `auCount`,
-`dfCount`, `billingYield`).
+per month for any month you've recorded real, final actuals for (currently
+Apr–Jul 2026, seeded with the app). See "Historical actuals" under Monthly
+workflow below. Add new months from the **Historical Actuals** tab once
+they end — upload a file with `FIU ID` and any of `Revenue`, `active_users`,
+`successful_data_fetches` for a chosen month, or add/edit/delete individual
+rows by hand. Uploading a month only ever touches that month's FIU rows —
+every other month and FIU is left untouched, so it's always safe to run.
+`billingModel`/`billingYield` on each row are captured from the FIU
+Metadata/Yield & CMGR configs at upload time, for reference only — they
+aren't used in any calculation, only the row's own `revenue`/`auCount`/
+`dfCount` are.
 
 Yield, CMGR, SUC Cliff CMGR, SUC Recovery CMGR, and SUC Yield are all
 displayed rounded to 2 decimal places throughout the Monthly Revenue tab and
@@ -77,10 +79,27 @@ rounded).
    from your live system (no yield, no billing model, no metadata needed).
 2. Upload that file in the **Monthly Revenue** tab's side panel (on the left
    — kept separate from, and sticky alongside, the results on the right) and
-   set the as-of date (the date the counts were pulled — defaults to today).
+   set the as-of date (the date the counts were actually pulled/finalized as
+   of — **defaults to yesterday, not today**; see the callout below for why —
+   change it if the file you're using doesn't have that lag).
    There's no "Compute" button — results appear as soon as a file is chosen,
    and recompute automatically whenever you change the as-of date, FY start
    month, or SUC Start Date.
+
+   > **Why "yesterday", not "today"?** (found 2026-09-02) A daily counts
+   > export is usually dated/generated today but only actually contains data
+   > through end of the *previous* day — a one-day reporting/ETL lag that's
+   > standard for a batch export like this. The as-of date drives the
+   > month-to-date → full-month Data Fetch projection (day-of-month ÷ days in
+   > that month) — if it's set to "today" but the file only has one real day
+   > of data, that projection divides by one extra day it shouldn't, roughly
+   > **halving** the projected month, which then compounds through every
+   > later SUC month. Confirmed against a real Metabase export: treating it
+   > as "today" understated projected FY revenue by ~39% (₹13.6cr vs. an
+   > independent reference model's ₹22.2cr); treating the same file as
+   > "yesterday" landed within ~2% of that reference (₹22.6cr). The default
+   > is just a starting point — always override it if a particular file's
+   > timing is different (e.g. a same-day manual pull with no lag).
 3. The tool joins the upload with both configs by FIU ID and computes:
    - **Current month revenue** — "Active Users"/"Unique Users" (same
      billing model) use the AU count as-is; "Data Fetch"/"Fix Billing"
@@ -130,6 +149,29 @@ rounded).
        Recovery, whether it's using SUC Recovery CMGR or falling back to
        the regular CMGR), in addition to the amber highlight marking it as
        SUC-governed.
+   - **What-if revenue scenarios** — optional, opt-in checkboxes ("What-if
+     scenarios" field, shown once a SUC Start Date is set) that adjust how
+     SUC-active months are computed, on top of everything above. Any
+     combination can be turned on together — they target disjoint FIU
+     populations, so there's no interaction to worry about between them:
+     - **Lending CMGR 1.5x worse during SUC Cliff** — for every
+       Lending-use-case FIU, during the SUC Cliff only (the first 3 months
+       of the SUC period), SUC Cliff CMGR is multiplied by 1.5 for that
+       month — a conservative de-growth measure. SUC Recovery is
+       deliberately left untouched: recovery is still assumed to happen at
+       the originally-anticipated pace, not accelerated. Pre-SUC months,
+       and FIUs SUC doesn't apply to, are untouched too.
+     - **Non-bank PFM FIUs → ₹0 post-SUC** — for every PFM-use-case FIU
+       whose License Type isn't Bank (the same population the 1/6 DF cut
+       above applies to), revenue is forced to ₹0 for every SUC-active
+       month — shown as an explicit ₹0, not a missing/"—" figure. Usage/DF
+       figures for those FIUs and months are still shown as normal; only
+       revenue is zeroed.
+     Checking a box re-runs the compute automatically, same as any other
+     field on this tab. The response's `scenariosApplied` field lists
+     whichever scenario keys were actually turned on for that compute, and
+     `GET /api/scenarios` returns the checkbox labels/descriptions — see API
+     reference below.
    - **One-off manual overrides** (hardcoded in `lib/compute.js`, not
      exposed in the UI — added on request, keep this list updated if more
      are added or these are removed):
@@ -147,7 +189,23 @@ rounded).
      - **fiulive@axisbank**: AU count fixed at 25,000 from Sep 2026 onward
        for any month Unique-User billing still applies (i.e. not
        SUC-active); DF count during the SUC period fixed at 10% of the
-       recorded July 2026 DF count, flat every SUC month.
+       recorded July 2026 DF count, flat every SUC month. (Revisited
+       2026-09-02 against a newer reference sheet with a different implied
+       Oct'26 figure — kept as-is on request.)
+     - **ICICI**, **SBI Cards**, **KMBL-FIU-PROD (PFM)**: all three are
+       newly onboarding in H2 with no real Data Fetch volume yet, so the
+       normal DF-baseline-compounding SUC math has nothing to grow from.
+       Each has a flat monthly revenue figure hardcoded for the SUC period
+       (from the Sep 2026 reference sheet) — ICICI ₹51,000/month and SBI
+       Cards ₹80,000/month, both flat Oct 2026 – Mar 2027; KMBL-FIU-PROD
+       (PFM) ₹13,79,669/month Oct–Dec 2026, then ₹2,29,945/month Jan–Mar
+       2027. This is a stand-in only: the moment one of these FIUs' *current
+       month* upload reports a real (nonzero) Data Fetch count, the flat
+       figure stops being used for that FIU — for good, not just that one
+       month — and it switches to the normal SUC computation (DF baseline ×
+       SUC Yield, Cliff/Recovery CMGR) off that real, growing baseline
+       instead. No manual step needed for that switch — it's re-evaluated
+       fresh from whatever counts were just uploaded, every time.
      - **fiulive@hdfc** and **HDFC-FIU**: both are "Unbilled" on the FIU
        Metadata tab, which normally excludes a FIU from SUC entirely (SUC
        only ever applies to an otherwise-billable FIU). For just these two,
@@ -167,19 +225,21 @@ rounded).
        SUC pricing applies to cut costs) — it then keeps compounding
        normally (Cliff/Recovery CMGR) from that reduced baseline, same
        one-time-cut pattern as the PFM/non-Bank 1/6 rule above.
-4. **Historical actuals (Apr–Jul 2026)** — the Annual tables show the full
-   fiscal year (Apr'26–Mar'27), not just the months from your upload
-   onward. Months before your as-of date are filled from the pre-loaded
-   `data/historical-actuals.json` store (no upload needed — it's bundled
-   with the app) and shown exactly as recorded — actual Revenue,
-   active_users, and successful_data_fetches, never recomputed or
-   compounded. They're highlighted green in every Annual table. A FIU with
-   no recorded actual for a given historical month shows a "no data" badge
-   there instead of a blank or a guessed 0. Historical revenue counts
-   toward FY totals and the TSP/Use-case/License
-   rollups even for a FIU that's currently unbilled or missing config —
-   real past revenue doesn't disappear just because today's config is
-   incomplete.
+4. **Historical actuals** — the Annual tables show the full fiscal year
+   (Apr'26–Mar'27), not just the months from your upload onward. Months
+   before your as-of date are filled from the **Historical Actuals** tab's
+   store and shown exactly as recorded — actual Revenue, active_users, and
+   successful_data_fetches, never recomputed or compounded. They're
+   highlighted green in every Annual table. A FIU with no recorded actual
+   for a given historical month shows a "no data" badge there instead of a
+   blank or a guessed 0. Historical revenue counts toward FY totals and the
+   TSP/Use-case/License rollups even for a FIU that's currently unbilled or
+   missing config — real past revenue doesn't disappear just because
+   today's config is incomplete. Once a month ends, add its real figures on
+   the **Historical Actuals** tab (upload a file, or add/edit rows by hand)
+   and it's picked up everywhere above automatically — no other step
+   needed. It ships pre-seeded through Jul 2026; extend it monthly from
+   there as each new month closes.
 5. FIUs whose billing model isn't recognized (blank, "Not billed",
    "Unbilled", or anything else unrecognized) are shown as excluded. FIUs
    missing a Yield & CMGR config entry, or with an unusable count, are shown
@@ -275,9 +335,11 @@ rounded).
 
 ## Projected vs Actual Revenue
 
-Section 1 of the Monthly Revenue tab's main content is a chart that tracks a
-frozen revenue forecast against what actually came in, month by month, for
-the whole FY.
+The **Projected vs Actual Revenue** card tracks a frozen revenue forecast
+against what actually came in, month by month, for the whole FY. The chart
+itself lives on the **Charts** tab; the snapshot controls and the month-wise
+figures table stay on the **Monthly Revenue** tab, right where they always
+were.
 
 - **Save projection snapshot as of today** — choose this month's counts file
   further down the page first, then click this button. It computes the FY
@@ -293,11 +355,56 @@ the whole FY.
   (Yield & CMGR tab's underlying data) for each FY month. A month with no
   historical rows yet shows as a gap in the line (not zero) — it fills in
   automatically once that month's actuals are recorded.
-- The chart shows both series as a line per month across the full FY, with a
-  hover tooltip (crosshair snaps to the nearest month) and a table underneath
-  with the exact numbers plus variance (Actual − Projected) and variance %.
+- The chart (on the Charts tab) shows both series as a line per month across
+  the full FY, with a hover tooltip (crosshair snaps to the nearest month)
+  and end-of-line value labels. The month-wise figures table (on the Monthly
+  Revenue tab, underneath the snapshot controls) has the exact numbers plus
+  variance (Actual − Projected) and variance %.
 - If no snapshot has been saved yet, the chart area explains that and points
   you at the button — nothing else on the page is blocked by it.
+
+## Charts tab
+
+The **Charts** tab collects every chart in the tool in one place, so the
+Monthly Revenue tab can stay focused on tables. It has four cards:
+
+1. **Projected vs Actual Revenue** — the chart described just above (the
+   snapshot button and the underlying month-wise table remain on the Monthly
+   Revenue tab).
+2. **Revenue by Use-case** — four series, all in ₹, labels shown in Cr/L:
+   - **Total Revenue** — that month's total revenue across all billed FIUs
+     (not cumulative).
+   - **Lending Revenue** / **PFM Revenue** — that month's revenue from FIUs
+     whose use-case rolls up to Lending / PFM respectively (same grouping as
+     the Use-case rollup tables elsewhere in the tool).
+   - **Cumulative Revenue** — a running total of Total Revenue from the
+     start of the FY through that month. By March this is roughly the whole
+     FY total, an order of magnitude above any single month's figure, so it
+     plots against its **own scale on the right-hand axis** — otherwise it
+     would stretch the shared axis and flatten the other three series into
+     an unreadable sliver near the bottom.
+3. **Data Fetch Count by Use-case** — the same structure as the revenue
+   chart, but for Data Fetch counts: **Total DF Count**, **Lending DF
+   Count**, **PFM DF Count** (all monthly, not cumulative, left axis), plus
+   **Cumulative DF Count** as a running total (right axis, same reasoning as
+   Cumulative Revenue above).
+4. **PFM vs Lending Split (%)** — four series showing, for each month, what
+   share of that month's revenue and DF count came from PFM vs Lending:
+   **Lending Revenue %**, **PFM Revenue %**, **Lending DF %**, **PFM DF %**
+   (one shared axis — all four are already the same 0-100% scale). Each pair
+   (Lending/PFM) should sum to ~100% of the billed total for that metric in
+   that month — the split is based on that month's own numbers, not a
+   cumulative-to-date share. A month shows a gap instead of 0% if the
+   underlying total for that metric is zero (avoids implying a real 0%
+   split when there was nothing to split).
+
+All charts on this tab share the same interaction as the Projected vs Actual
+chart: hover for an exact-value tooltip with a crosshair, and end-of-line
+value labels for every series. Labels are automatically nudged apart if two
+series' final values would otherwise land too close together, and every
+label has a subtle halo in the card's own background color so it stays
+readable even where a line (or another series tracking a near-identical
+value) passes directly behind it.
 
 ## Auto-pull counts from email
 
@@ -349,7 +456,7 @@ than failing outright. If nothing matches, the app shows a clear status
 message and falls back to whatever was last shown (or an empty state on a
 fresh server) — the manual upload path is unaffected either way.
 
-**Note on the "Projected vs Actual Revenue" snapshot button** (section 1):
+**Note on the "Projected vs Actual Revenue" snapshot button** (Monthly Revenue tab):
 **Save projection snapshot as of today** still requires a manually chosen
 file (it posts to `/api/projection-snapshot`, a separate endpoint from the
 auto-pull path) — if you're relying entirely on email auto-pull and never
@@ -590,11 +697,19 @@ that's where all of the app's configs and uploaded data live.
 - `POST /api/seed-from-master-data` — multipart `file`, seeds both configs
 - `POST /api/compute` — multipart `file` + form fields `asOfDate`
   (`YYYY-MM-DD`, defaults to today), `fyStartMonth` (`1`–`12`, defaults to
-  `4` for an April–March FY), and `sucStartDate` (`YYYY-MM`, optional)
-- `POST /api/compute-from-email` — JSON body `{ asOfDate?, fyStartMonth?, sucStartDate?, force? }` (same meaning/defaults as `/api/compute`'s form fields; `force: true` bypasses the email check cache). Finds the latest matching email over IMAP (see "Auto-pull counts from email" above), computes from its CSV attachment exactly like `/api/compute`, and adds an `emailSource: { subject, date, filename, fetchedAt, fromCache }` field to the response. `400` if `GMAIL_USER`/`GMAIL_APP_PASSWORD`/`METABASE_EMAIL_SUBJECT` aren't all set, `404` if nothing matched, `502` on an IMAP connection/auth failure.
+  `4` for an April–March FY), `sucStartDate` (`YYYY-MM`, optional), and
+  `scenarios` (comma-separated scenario keys, optional — see "What-if
+  revenue scenarios" above). The response includes `scenariosApplied`, the
+  list of keys actually recognized/turned on for that compute.
+- `POST /api/compute-from-email` — JSON body `{ asOfDate?, fyStartMonth?, sucStartDate?, scenarios?, force? }` (same meaning/defaults as `/api/compute`'s form fields — `scenarios` here is also a comma-separated string; `force: true` bypasses the email check cache). Finds the latest matching email over IMAP (see "Auto-pull counts from email" above), computes from its CSV attachment exactly like `/api/compute`, and adds an `emailSource: { subject, date, filename, fetchedAt, fromCache }` field to the response. `400` if `GMAIL_USER`/`GMAIL_APP_PASSWORD`/`METABASE_EMAIL_SUBJECT` aren't all set, `404` if nothing matched, `502` on an IMAP connection/auth failure.
+- `GET /api/scenarios` — returns `[{ key, label, description }, ...]`, the What-if scenario definitions the frontend builds its checkboxes from (see `SCENARIO_DEFINITIONS` in `lib/compute.js`).
 - `POST /api/projection-snapshot` — multipart `file` + form fields `asOfDate`, `fyStartMonth` (same defaults as `/api/compute`; SUC is always forced off). Saves and returns `{ snapshotDate, asOfDate, fyStartMonth, months, totalsByMonth }`, overwriting any previous snapshot. See "Projected vs Actual Revenue" above.
 - `GET /api/projection-snapshot` — returns `{ snapshot }`, or `{ snapshot: null }` if none has been saved yet.
 - `GET /api/revenue-actuals?asOfDate=&fyStartMonth=` — returns `{ months, actualsByMonth }`, summed live from Historical Actuals for each FY month (`null` for a month with no historical rows yet). Both query params are optional with the same defaults as `/api/compute`.
+- `GET /api/historical-actuals` — returns every recorded row: `[{ fiuId, month, revenue?, auCount?, dfCount?, billingModel?, billingYield? }, ...]`.
+- `POST /api/historical-actuals` — JSON body `{ fiuId, month, revenue?, auCount?, dfCount?, billingModel?, billingYield? }` (`month` as `YYYY-MM`). Upserts one row, keyed by `fiuId` + `month` together (not `fiuId` alone) — a FIU can have one row per month.
+- `DELETE /api/historical-actuals/:fiuId/:month` — removes one FIU's row for that month.
+- `POST /api/historical-actuals/bulk` — multipart `file` + form field `month` (`YYYY-MM`, required). Same loose column matching as `/api/compute` (`FIU ID`, plus any of `Revenue`/`active_users`/`successful_data_fetches`) — needs at least one of the three value columns. Upserts by `fiuId` + `month`; rows/months not in the file are untouched. `billingModel`/`billingYield` are auto-filled from the current FIU Metadata/Yield & CMGR configs, for reference only. Returns `{ sheetUsed, ignoredSheets, columnsFound, month, created, updated, total, skipped }`.
 - `POST /api/chat` — JSON body `{ messages: [{role, content}, ...], data: <a /api/compute response> }`. Returns `{ reply, model, usage }`, or `400`/`500` with `{ error }` (e.g. if `ANTHROPIC_API_KEY` isn't set on the server, or `data` is missing/empty). See "Chat with your data" above.
 - `POST /api/login` — JSON body `{ password, remember? }`. Sets the `session` cookie and returns `{ ok: true }` on a correct password; `401` for a wrong one, `429` if that IP has made too many attempts recently, `400` if `APP_PASSWORD` isn't set. See "Login / access control" above.
 - `POST /api/logout` — clears the `session` cookie, returns `{ ok: true }`.
