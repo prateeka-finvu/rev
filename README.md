@@ -227,19 +227,25 @@ rounded).
        one-time-cut pattern as the PFM/non-Bank 1/6 rule above.
 4. **Historical actuals** — the Annual tables show the full fiscal year
    (Apr'26–Mar'27), not just the months from your upload onward. Months
-   before your as-of date are filled from the **Historical Actuals** tab's
-   store and shown exactly as recorded — actual Revenue, active_users, and
-   successful_data_fetches, never recomputed or compounded. They're
-   highlighted green in every Annual table. A FIU with no recorded actual
-   for a given historical month shows a "no data" badge there instead of a
-   blank or a guessed 0. Historical revenue counts toward FY totals and the
-   TSP/Use-case/License rollups even for a FIU that's currently unbilled or
-   missing config — real past revenue doesn't disappear just because
-   today's config is incomplete. Once a month ends, add its real figures on
-   the **Historical Actuals** tab (upload a file, or add/edit rows by hand)
-   and it's picked up everywhere above automatically — no other step
-   needed. It ships pre-seeded through Jul 2026; extend it monthly from
-   there as each new month closes.
+   **before or equal to** your as-of date's month are filled from the
+   **Historical Actuals** tab's store, whenever a recorded actual exists for
+   that FIU/month, and shown exactly as recorded — actual Revenue,
+   active_users, and successful_data_fetches, never recomputed or
+   compounded. They're highlighted green in every Annual table. A FIU with
+   no recorded actual for a given historical month shows a "no data" badge
+   there instead of a blank or a guessed 0 — including the current month
+   itself, until you record one, in which case it's used immediately rather
+   than waiting for the as-of date to roll into the next month first (fixed
+   2026-09-02 — a recorded actual for the current month used to be silently
+   ignored in favor of a live projection from that month's uploaded counts,
+   until the as-of date moved past it). Historical revenue counts toward FY
+   totals and the TSP/Use-case/License rollups even for a FIU that's
+   currently unbilled or missing config — real past revenue doesn't
+   disappear just because today's config is incomplete. Once a month ends,
+   add its real figures on the **Historical Actuals** tab (upload a file, or
+   add/edit rows by hand) and it's picked up everywhere above automatically
+   — no other step needed. It ships pre-seeded through Jul 2026; extend it
+   monthly from there as each new month closes.
 5. FIUs whose billing model isn't recognized (blank, "Not billed",
    "Unbilled", or anything else unrecognized) are shown as excluded. FIUs
    missing a Yield & CMGR config entry, or with an unusable count, are shown
