@@ -100,6 +100,16 @@ rounded).
    > "yesterday" landed within ~2% of that reference (₹22.6cr). The default
    > is just a starting point — always override it if a particular file's
    > timing is different (e.g. a same-day manual pull with no lag).
+   >
+   > "Yesterday" is measured on the **India Standard Time (UTC+5:30)**
+   > calendar — the timezone the daily export and the business day it
+   > reports on both run on — not the server's own clock. Render runs the
+   > server on UTC, which is 5:30 behind IST, so for the tail end of each
+   > IST day (IST 00:00–05:29, i.e. UTC 18:30–23:59 the day before) the raw
+   > UTC calendar date is still a day behind the IST one. Computing
+   > "yesterday" from the server's UTC clock during that window showed a
+   > default one full day stale — e.g. still showing Sep 1 at 3am IST on
+   > Sep 3, instead of Sep 2 (fixed 2026-09-03).
 3. The tool joins the upload with both configs by FIU ID and computes:
    - **Current month revenue** — "Active Users"/"Unique Users" (same
      billing model) use the AU count as-is; "Data Fetch"/"Fix Billing"
@@ -250,9 +260,18 @@ rounded).
    "Unbilled", or anything else unrecognized) are shown as excluded. FIUs
    missing a Yield & CMGR config entry, or with an unusable count, are shown
    as missing config — never guessed.
-6. Any FIU in the upload with no FIU Metadata entry, and any FIU in your
-   configs with no counts in this month's upload, are called out separately
-   so gaps are visible instead of silently dropped.
+6. Any FIU in the upload with no FIU Metadata entry is called out
+   separately (and excluded — there's no config to compute it from). A FIU
+   in your configs with no counts in this month's upload is also called out
+   separately, but **still gets a row** in every Monthly/Annual table:
+   months with a recorded Historical Actual show that actual (same as any
+   other FIU), and months with no actual and no counts to project from show
+   "no data" rather than the FIU vanishing outright (fixed 2026-09-03 — a
+   FIU missing from just *this month's* counts upload — e.g. it had no live
+   activity this cycle, or simply wasn't in that particular export — used
+   to disappear from the Annual tables entirely, taking every past month's
+   real recorded revenue with it, until its next counts upload happened to
+   include it again).
 7. Results are split into two sections:
    - **Monthly results** — this month's revenue, AU count, and DF count,
      each in its own table. The revenue table covers every billed FIU; the

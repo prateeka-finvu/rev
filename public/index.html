@@ -1003,8 +1003,18 @@
   // has real data through end of the *previous* day — a one-day reporting
   // lag confirmed against a real Metabase export on 2026-09-02). Always
   // overridable here for a file that doesn't have that lag.
+  //
+  // "Yesterday" here means yesterday on the India Standard Time (UTC+5:30)
+  // calendar, matching defaultAsOfDate() server-side — not UTC, and not
+  // necessarily the viewing browser's own timezone/locale either, since the
+  // business day this reports on is fixed to IST regardless of who's
+  // looking at the page. Using raw UTC getters/setters here (as before)
+  // showed a default one full day stale during the tail end of each IST
+  // day (fixed 2026-09-03 — see the matching comment in server.js).
   (function initDate(){
-    const d = new Date();
+    const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000;
+    const nowIst = new Date(Date.now() + IST_OFFSET_MS);
+    const d = new Date(Date.UTC(nowIst.getUTCFullYear(), nowIst.getUTCMonth(), nowIst.getUTCDate()));
     d.setUTCDate(d.getUTCDate() - 1);
     asOfDateInput.value = d.toISOString().slice(0,10);
   })();

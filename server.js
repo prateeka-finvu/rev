@@ -517,11 +517,27 @@ app.post('/api/seed-from-master-data', upload.single('file'), (req, res) => {
 // only changes the *default* shown in the As-of Date field — it's always
 // overridable (via the field itself, or the asOfDate form/JSON param) for
 // a file that doesn't have this lag.
+//
+// "Yesterday" is measured on the India Standard Time (UTC+5:30) calendar —
+// the timezone the Metabase export and the business day it reports on both
+// run on — not the server's own clock. Render runs the server on UTC, and
+// IST is 5:30 ahead of it, so during the tail end of each IST day (IST
+// 00:00-05:29, which is UTC 18:30-23:59 the day before) the UTC calendar
+// date is still one day behind the IST one. Computing "yesterday" from the
+// server's raw UTC clock during that window silently produced a default
+// one full day older than intended (fixed 2026-09-03 — confirmed against a
+// real case where it was already Sep 3 in IST, Metabase had a Sep 2 pull,
+// but the field still defaulted to Sep 1). Shifting `now` by the IST offset
+// before reading its calendar date fields corrects this while still
+// returning a UTC-midnight-anchored Date, matching how every other
+// asOfDate consumer (computeRevenue, fyFullMonths, etc.) reads it via
+// getUTCFullYear/getUTCMonth/getUTCDate.
+const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000;
 function defaultAsOfDate() {
-  const d = new Date();
-  d.setUTCDate(d.getUTCDate() - 1);
-  d.setUTCHours(0, 0, 0, 0);
-  return d;
+  const nowIst = new Date(Date.now() + IST_OFFSET_MS);
+  const today = new Date(Date.UTC(nowIst.getUTCFullYear(), nowIst.getUTCMonth(), nowIst.getUTCDate()));
+  today.setUTCDate(today.getUTCDate() - 1);
+  return today;
 }
 
 function buildComputeResponse(counts, { asOfDateStr, fyStartMonthStr, sucStartDateStr, scenariosStr, sheetUsed, ignoredSheets }) {
