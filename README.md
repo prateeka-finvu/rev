@@ -164,13 +164,21 @@ rounded).
      SUC-active months are computed, on top of everything above. Any
      combination can be turned on together — they target disjoint FIU
      populations, so there's no interaction to worry about between them:
-     - **Lending CMGR 1.5x worse during SUC Cliff** — for every
-       Lending-use-case FIU, during the SUC Cliff only (the first 3 months
-       of the SUC period), SUC Cliff CMGR is multiplied by 1.5 for that
-       month — a conservative de-growth measure. SUC Recovery is
-       deliberately left untouched: recovery is still assumed to happen at
-       the originally-anticipated pace, not accelerated. Pre-SUC months,
-       and FIUs SUC doesn't apply to, are untouched too.
+     - **Lending DF volume falls 50% (not ~34%) during SUC Cliff** — for
+       every Lending-use-case FIU whose own SUC Cliff CMGR is already
+       negative, during the SUC Cliff only (the first 3 months of the SUC
+       period), that FIU's Cliff-phase monthly rate is replaced with a flat
+       **-20.63%/month** — the constant rate that compounds to exactly a
+       50% cumulative fall over 3 months, versus the ~34% fall a typical
+       -13%/month Cliff CMGR produces on its own (fixed 2026-09-03; this
+       used to multiply each FIU's own Cliff CMGR by 1.5, which for a
+       -13%/month baseline only worked out to a 47.8% fall, not 50%). A
+       Lending FIU whose Cliff CMGR is zero or positive is left completely
+       untouched — there's no sensible "worse" reading for a FIU that isn't
+       already degrading. SUC Recovery is deliberately left untouched
+       either way: recovery is still assumed to happen at the
+       originally-anticipated pace, not accelerated. Pre-SUC months, and
+       FIUs SUC doesn't apply to, are untouched too.
      - **Non-bank PFM FIUs → ₹0 post-SUC** — for every PFM-use-case FIU
        whose License Type isn't Bank (the same population the 1/6 DF cut
        above applies to), revenue is forced to ₹0 for every SUC-active
@@ -292,9 +300,16 @@ rounded).
      computed/projected figures from the current month onward), so you can
      see revenue and AU/DF counts trend across the whole year, not just
      from today forward. The Annual DF count table likewise shows expected
-     Data Fetch volume for every FIU with a DF count, all twelve months —
-     amber highlighting marks the months where that volume is actually
-     driving billed (SUC) revenue. Each of the three Annual tables has a
+     Data Fetch volume for every FIU with a DF count in **any** month of
+     the FY — including a FIU that's Unbilled on record, and including one
+     that isn't in *this specific month's* counts upload but has real
+     Historical Actuals or a live count in some other month — all twelve
+     months; amber highlighting marks the months where that volume is
+     actually driving billed (SUC) revenue. This table used to drop a FIU
+     entirely (from every month, not just the current one) whenever this
+     month's upload didn't happen to include it, or — separately — whenever
+     it was Unbilled and no SUC Start Date was set; both fixed 2026-09-03.
+     Each of the three Annual tables has a
      **Contribution % (FY total)** column — that FIU's share of the **full
      fiscal year's** total for that metric (revenue/AU/DF), not just the
      current month, so "—" means either no value at all that FY or the FY
@@ -364,42 +379,47 @@ rounded).
 
 ## Projected vs Actual Revenue
 
-The **Projected vs Actual Revenue** card tracks a frozen revenue forecast
+The **Projected vs Actual Revenue** card tracks the live revenue projection
 against what actually came in, month by month, for the whole FY. The chart
-itself lives on the **Charts** tab; the snapshot controls and the month-wise
-figures table stay on the **Monthly Revenue** tab, right where they always
-were.
+itself lives on the **Charts** tab; the month-wise figures table stays on
+the **Monthly Revenue** tab, right where it always was.
 
-- **Save projection snapshot as of today** — choose this month's counts file
-  further down the page first, then click this button. It computes the FY
-  revenue curve exactly like a normal compute, **except SUC is always forced
-  off** (regular Yield/CMGR only), regardless of whatever SUC Start Date is
-  selected in the live view — the snapshot is meant to be a stable baseline,
-  so it doesn't move if SUC billing later gets switched on. The result (one
-  total per FY month) is saved to `data/projection-snapshot.json`, stamped
-  with the date it was taken. There's one active snapshot at a time — saving
-  again overwrites the previous one.
-- **Actual** is not stored anywhere separately — it's summed live, every time
-  the chart loads, straight from whatever's in **Historical Actuals**
-  (Yield & CMGR tab's underlying data) for each FY month. A month with no
-  historical rows yet shows as a gap in the line (not zero) — it fills in
-  automatically once that month's actuals are recorded.
+- **Projected** is exactly the current compute result's FY total-by-month —
+  same counts file, as-of date, SUC Start Date, and what-if scenario(s) as
+  whatever's selected in the live view right now. It recomputes and
+  redraws automatically every time you change any of those (a new counts
+  file, the as-of date, SUC Start Date, or a scenario checkbox) — same as
+  every other chart on the Charts tab. The legend and the "Live as of …"
+  line above the month-wise table both spell out exactly what's currently
+  driving it, e.g. "SUC from Oct 2026, scenario: Lending DF volume falls
+  50% (not ~34%) during SUC Cliff", or "no SUC" with nothing selected.
+  - This used to be a manually-saved, frozen "snapshot" — a button you had
+    to click, which forced SUC off regardless of what was selected
+    elsewhere, and which could easily go stale for weeks since nothing
+    prompted you to refresh it. Fixed 2026-09-03: there's no button and no
+    stored snapshot anymore, it's just always current, matching every
+    other chart on the page.
+- **Actual** is not stored anywhere separately — it's summed live, every
+  time the chart refreshes, straight from whatever's in **Historical
+  Actuals** for each FY month. A month with no historical rows yet shows
+  as a gap in the line (not zero) — it fills in automatically once that
+  month's actuals are recorded.
 - The chart (on the Charts tab) shows both series as a line per month across
   the full FY, with a hover tooltip (crosshair snaps to the nearest month)
   and end-of-line value labels. The month-wise figures table (on the Monthly
-  Revenue tab, underneath the snapshot controls) has the exact numbers plus
-  variance (Actual − Projected) and variance %.
-- If no snapshot has been saved yet, the chart area explains that and points
-  you at the button — nothing else on the page is blocked by it.
+  Revenue tab) has the exact numbers plus variance (Actual − Projected) and
+  variance %.
+- Before the first compute of a session, the chart area just says to upload
+  a counts file on the Monthly Revenue tab — nothing else on the page is
+  blocked by it.
 
 ## Charts tab
 
 The **Charts** tab collects every chart in the tool in one place, so the
 Monthly Revenue tab can stay focused on tables. It has four cards:
 
-1. **Projected vs Actual Revenue** — the chart described just above (the
-   snapshot button and the underlying month-wise table remain on the Monthly
-   Revenue tab).
+1. **Projected vs Actual Revenue** — the chart described just above, live
+   (the underlying month-wise table remains on the Monthly Revenue tab).
 2. **Revenue by Use-case** — four series, all in ₹, labels shown in Cr/L:
    - **Total Revenue** — that month's total revenue across all billed FIUs
      (not cumulative).
@@ -485,13 +505,11 @@ than failing outright. If nothing matches, the app shows a clear status
 message and falls back to whatever was last shown (or an empty state on a
 fresh server) — the manual upload path is unaffected either way.
 
-**Note on the "Projected vs Actual Revenue" snapshot button** (Monthly Revenue tab):
-**Save projection snapshot as of today** still requires a manually chosen
-file (it posts to `/api/projection-snapshot`, a separate endpoint from the
-auto-pull path) — if you're relying entirely on email auto-pull and never
-choose a file by hand, that button will ask you to choose one first. Ask
-if you'd like the snapshot button wired up to the auto-pulled email data
-too.
+Note: the "Projected vs Actual Revenue" chart no longer needs a manually
+chosen file of its own — since 2026-09-03 it just tracks whatever the live
+compute result is (auto-pulled from email or manually uploaded, either
+one), same as every other chart on the page. See "Projected vs Actual
+Revenue" above.
 
 ## Seeding the configs quickly
 
@@ -741,8 +759,8 @@ that's where all of the app's configs and uploaded data live.
   list of keys actually recognized/turned on for that compute.
 - `POST /api/compute-from-email` — JSON body `{ asOfDate?, fyStartMonth?, sucStartDate?, scenarios?, force? }` (same meaning/defaults as `/api/compute`'s form fields — `scenarios` here is also a comma-separated string; `force: true` bypasses the email check cache). Finds the latest matching email over IMAP (see "Auto-pull counts from email" above), computes from its CSV attachment exactly like `/api/compute`, and adds an `emailSource: { subject, date, filename, fetchedAt, fromCache }` field to the response. `400` if `GMAIL_USER`/`GMAIL_APP_PASSWORD`/`METABASE_EMAIL_SUBJECT` aren't all set, `404` if nothing matched, `502` on an IMAP connection/auth failure.
 - `GET /api/scenarios` — returns `[{ key, label, description }, ...]`, the What-if scenario definitions the frontend builds its checkboxes from (see `SCENARIO_DEFINITIONS` in `lib/compute.js`).
-- `POST /api/projection-snapshot` — multipart `file` + form fields `asOfDate`, `fyStartMonth` (same defaults as `/api/compute`; SUC is always forced off). Saves and returns `{ snapshotDate, asOfDate, fyStartMonth, months, totalsByMonth }`, overwriting any previous snapshot. See "Projected vs Actual Revenue" above.
-- `GET /api/projection-snapshot` — returns `{ snapshot }`, or `{ snapshot: null }` if none has been saved yet.
+- `POST /api/projection-snapshot` — multipart `file` + form fields `asOfDate`, `fyStartMonth` (same defaults as `/api/compute`; SUC is always forced off). Saves and returns `{ snapshotDate, asOfDate, fyStartMonth, months, totalsByMonth }`, overwriting any previous snapshot. **No longer called by the UI as of 2026-09-03** — the "Projected vs Actual Revenue" chart now tracks the live compute result instead (see "Projected vs Actual Revenue" above). Left in the backend for API compatibility in case anything else depends on it.
+- `GET /api/projection-snapshot` — returns `{ snapshot }`, or `{ snapshot: null }` if none has been saved yet. Same status: no longer called by the UI, kept for compatibility.
 - `GET /api/revenue-actuals?asOfDate=&fyStartMonth=` — returns `{ months, actualsByMonth }`, summed live from Historical Actuals for each FY month (`null` for a month with no historical rows yet). Both query params are optional with the same defaults as `/api/compute`.
 - `GET /api/historical-actuals` — returns every recorded row: `[{ fiuId, month, revenue?, auCount?, dfCount?, billingModel?, billingYield? }, ...]`.
 - `POST /api/historical-actuals` — JSON body `{ fiuId, month, revenue?, auCount?, dfCount?, billingModel?, billingYield? }` (`month` as `YYYY-MM`). Upserts one row, keyed by `fiuId` + `month` together (not `fiuId` alone) — a FIU can have one row per month.

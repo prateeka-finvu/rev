@@ -288,11 +288,7 @@
     <div class="revenue-main">
     <section class="card">
       <h2>1. Projected vs Actual Revenue</h2>
-      <p class="hint">A one-time snapshot of the FY revenue projection with SUC switched off (regular Yield/CMGR only), frozen as a baseline — compare it against actual revenue as it's recorded in Historical Actuals over the rest of the year. Saving a new snapshot overwrites the previous one. The chart for this now lives on the <strong>Charts</strong> tab — the month-wise figures stay here.</p>
-      <div class="row">
-        <button class="btn-primary btn-small" id="saveSnapshotBtn" type="button">Save projection snapshot as of today</button>
-        <span class="status-msg" id="snapshotStatus"></span>
-      </div>
+      <p class="hint">The FY revenue projection — live, reflecting whatever SUC Start Date and what-if scenarios are currently selected — compared against actual revenue as it's recorded in Historical Actuals. Updates automatically every time you change a counts file, the as-of date, SUC Start Date, or a scenario. The chart for this lives on the <strong>Charts</strong> tab — the month-wise figures stay here.</p>
       <div class="snapshot-meta" id="snapshotMeta"></div>
       <h3 class="dt-title" style="margin-top:18px;">Month-wise figures</h3>
       <div id="forecastTable"></div>
@@ -330,7 +326,7 @@
       <div id="annualAuTable"></div>
 
       <h3 class="dt-title" style="margin-top:24px;">Annual DF count</h3>
-      <p class="hint" style="margin-top:-6px;">Projected full-month DF count per month (grown by CMGR from this month's baseline) for FIUs billed on Data Fetch/Fix Billing.</p>
+      <p class="hint" style="margin-top:-6px;">Projected full-month DF count per month (grown by CMGR from this month's baseline) for every FIU with a Data Fetch figure, regardless of billing model.</p>
       <div id="annualDfTable"></div>
     </section>
 
@@ -445,7 +441,7 @@
   <div class="tab-panel" id="tab-charts">
     <section class="card">
       <h2>Projected vs Actual Revenue</h2>
-      <p class="hint">A one-time snapshot of the FY revenue projection with SUC switched off (regular Yield/CMGR only), compared against actual revenue as it's recorded in Historical Actuals. Save/refresh the snapshot and see the month-wise figures on the Monthly Revenue tab.</p>
+      <p class="hint">The FY revenue projection — live, reflecting whatever SUC Start Date and what-if scenarios are currently selected on the Monthly Revenue tab — compared against actual revenue as it's recorded in Historical Actuals. See the month-wise figures on the Monthly Revenue tab.</p>
       <div class="chart-legend" id="forecastLegend"></div>
       <div class="chart-wrap" id="forecastChartWrap">
         <div id="forecastChart"></div>
@@ -1216,17 +1212,21 @@
   });
 
   // ================= Projected vs Actual Revenue (section 1) =================
-  // A "projection snapshot" is a one-time, frozen no-SUC FY revenue curve,
-  // saved via POST /api/projection-snapshot (server always forces SUC off
-  // for this, regardless of the SUC Start Date selected above). It's
-  // compared against Actual revenue, pulled live from Historical Actuals via
-  // GET /api/revenue-actuals using the *snapshot's own* as-of date/FY start
-  // month — so the two series always line up on the same 12 FY months, even
-  // if the live form's fields above have since changed.
-  const saveSnapshotBtn = document.getElementById('saveSnapshotBtn');
-  const snapshotStatus = document.getElementById('snapshotStatus');
+  // "Projected" tracks the live compute result — same SUC Start Date and
+  // what-if scenarios currently selected above, recomputed every time you
+  // change a counts file, the as-of date, SUC Start Date, or a scenario
+  // checkbox (see refreshForecastChart(), called from renderResults() on
+  // every compute). "Actual" is pulled live from Historical Actuals via GET
+  // /api/revenue-actuals using that same result's as-of date/FY start month,
+  // so the two series always line up on the same 12 FY months.
+  //
+  // This used to be a manually-saved, frozen "snapshot" (SUC forced off,
+  // refreshed only by clicking a button) that could sit stale for weeks and
+  // never reflected whatever scenario was actually selected — fixed
+  // 2026-09-03 to just track whatever's live, same as every other chart on
+  // this page.
   const snapshotMeta = document.getElementById('snapshotMeta');
-  let forecastCache = null; // { months, projected, actual, snapshot }
+  let forecastCache = null; // { months, projected, actual, label }
 
   function fmtCompactCurrency(n){
     if (n === undefined || n === null || isNaN(n)) return '—';
@@ -1480,7 +1480,7 @@
       months: forecastCache.months,
       ariaLabel: 'Projected versus actual revenue by month',
       series: [
-        { key:'projected', label:'Projected (no SUC, saved '+forecastCache.snapshot.snapshotDate+')', colorVar:'--series-1', data: forecastCache.projected },
+        { key:'projected', label:'Projected ('+forecastCache.label+')', colorVar:'--series-1', data: forecastCache.projected },
         { key:'actual', label:'Actual (recorded)', colorVar:'--series-2', data: forecastCache.actual }
       ]
     });
@@ -1503,7 +1503,7 @@
       maxHeight: '360px',
       columns: [
         { key:'label', label:'Month', value: r => r.label },
-        { key:'projected', label:'Projected (no SUC)', numeric:true, value:r=>r.projected, render:r=>fmtCurrency(r.projected) },
+        { key:'projected', label:'Projected', numeric:true, value:r=>r.projected, render:r=>fmtCurrency(r.projected) },
         { key:'actual', label:'Actual', numeric:true, value:r=>r.actual, render:r=> (r.actual===null||r.actual===undefined) ? '—' : fmtCurrency(r.actual) },
         { key:'variance', label:'Variance (Actual − Projected)', numeric:true,
           value: r => (r.actual===null||r.actual===undefined) ? null : r.actual - r.projected,
@@ -1531,61 +1531,48 @@
     });
   }
 
-  async function loadForecastChart(){
-    const snapRes = await apiFetch(API + '/api/projection-snapshot');
-    const snapData = await snapRes.json();
-    const snapshot = snapData.snapshot;
+  // Builds a short human-readable description of what's currently driving
+  // "Projected" — e.g. "no SUC", "SUC from Oct 2026", "SUC from Oct 2026,
+  // scenario: Lending CMGR 1.5x worse during SUC Cliff" — read straight off
+  // the live form fields, since this always runs right after a compute that
+  // used exactly these same values.
+  function forecastLabelFor(){
+    const sucSel = sucStartDateInput.options[sucStartDateInput.selectedIndex];
+    const sucLabel = sucStartDateInput.value ? 'SUC from ' + (sucSel ? sucSel.textContent : sucStartDateInput.value) : 'no SUC';
+    const activeLabels = Array.from(scenariosList.querySelectorAll('input[type=checkbox]:checked'))
+      .map(cb => cb.nextElementSibling ? cb.nextElementSibling.textContent : cb.value);
+    return sucLabel + (activeLabels.length ? ', scenario: ' + activeLabels.join(' + ') : '');
+  }
 
-    if (!snapshot){
+  // Refreshes the Projected vs Actual chart from a live /api/compute result
+  // — called from renderResults() after every compute, so it always
+  // reflects whatever counts file, as-of date, SUC Start Date, and what-if
+  // scenarios are currently selected. Pass null to show the empty state
+  // (used once at page load, before any compute has run yet).
+  async function refreshForecastChart(data){
+    if (!data || !data.months || !data.totalsByMonth){
       forecastCache = null;
       document.getElementById('forecastLegend').innerHTML = '';
-      document.getElementById('forecastChart').innerHTML = '<div class="empty-state">No projection snapshot saved yet. Choose this month\'s counts file below, then click "Save projection snapshot as of today" above to create the baseline.</div>';
+      document.getElementById('forecastChart').innerHTML = '<div class="empty-state">Upload a counts file on the Monthly Revenue tab to see this chart.</div>';
       document.getElementById('forecastTable').innerHTML = '';
-      snapshotMeta.textContent = '';
+      if (snapshotMeta) snapshotMeta.textContent = '';
       return;
     }
-
-    const q = new URLSearchParams({ asOfDate: snapshot.asOfDate, fyStartMonth: snapshot.fyStartMonth }).toString();
+    const q = new URLSearchParams({ asOfDate: data.asOfDate, fyStartMonth: fyStartMonthInput.value }).toString();
     const actRes = await apiFetch(API + '/api/revenue-actuals?' + q);
     const actData = await actRes.json();
 
+    const label = forecastLabelFor();
     forecastCache = {
-      months: snapshot.months,
-      projected: snapshot.totalsByMonth,
+      months: data.months,
+      projected: data.totalsByMonth,
       actual: actData.actualsByMonth,
-      snapshot
+      label
     };
-    snapshotMeta.textContent = 'Snapshot taken ' + snapshot.snapshotDate + ', as of ' + snapshot.asOfDate + ' (SUC off). Actual is summed live from Historical Actuals each time this loads.';
+    if (snapshotMeta) snapshotMeta.textContent = 'Live as of ' + data.asOfDate + ' (' + label + '). Actual is summed live from Historical Actuals each time this refreshes.';
     renderForecastChartFromCache();
     renderForecastTable();
   }
-
-  saveSnapshotBtn.addEventListener('click', async function(){
-    if (!selectedCountsFile){
-      snapshotStatus.className = 'status-msg err';
-      snapshotStatus.textContent = 'Choose this month\'s counts file below first, then save a snapshot.';
-      return;
-    }
-    saveSnapshotBtn.disabled = true;
-    snapshotStatus.className = 'status-msg';
-    snapshotStatus.textContent = 'Saving snapshot…';
-    const fd = new FormData();
-    fd.append('file', selectedCountsFile);
-    fd.append('asOfDate', asOfDateInput.value);
-    fd.append('fyStartMonth', fyStartMonthInput.value);
-    try{
-      const res = await apiFetch(API + '/api/projection-snapshot', { method: 'POST', body: fd });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to save snapshot');
-      snapshotStatus.className = 'status-msg ok';
-      snapshotStatus.textContent = 'Snapshot saved as of ' + data.asOfDate + '.';
-      await loadForecastChart();
-    } catch(err){
-      snapshotStatus.className = 'status-msg err';
-      snapshotStatus.textContent = err.message;
-    }
-    saveSnapshotBtn.disabled = false;
-  });
 
   function tile(label, value){
     return '<div class="stat-tile"><div class="label">'+label+'</div><div class="value">'+value+'</div></div>';
@@ -1730,15 +1717,29 @@
     // Start Date.
     const billed = data.rows.filter(r => r.monthly[currentIndex] && r.monthly[currentIndex].billable);
     // AU/DF table rows: "AU" stays limited to FIUs currently classified as
-    // Active/Unique Users. "DF" now includes every FIU that reported a DF
-    // count at all — not just ones billed on Data Fetch — since SUC can put
-    // any FIU's Data Fetch volume in play, and it's useful to see regardless.
-    // A notBillable FIU is still included if sucApplicable is true (e.g.
-    // fiulive@hdfc, HDFC-FIU) — still "Unbilled" on record, but genuinely
-    // billing DF-driven revenue once SUC kicks in, so it needs to show up
-    // here too rather than being silently dropped by that exclusion.
+    // Active/Unique Users. "DF" includes every FIU with a usable Data Fetch
+    // figure in *any* month of the FY, full stop — regardless of billing
+    // model, and regardless of whether SUC is active for it. This table is
+    // meant to answer "what's this FIU's Data Fetch volume across the
+    // year", which is a real, useful question for an Unbilled FIU too
+    // (fiulive@hdfc, HDFC-FIU, or any other Unbilled/unrecognized-model
+    // FIU) — SUC can put any FIU's DF volume in play, and it's worth
+    // seeing before that happens, not just once it does (confirmed
+    // 2026-09-03 — this table previously excluded a notBillable FIU unless
+    // sucApplicable was already true for it, which meant hdfc/HDFC-FIU
+    // dropped out of this table entirely whenever no SUC Start Date was
+    // set, contradicting this table's own stated purpose; they still get
+    // their own listing in the Unbilled FIUs section either way).
     const auRows = data.rows.filter(r => r.usageType === 'au');
-    const dfRows = data.rows.filter(r => (!r.notBillable || r.sucApplicable) && r.dfCount !== null);
+    // Checks *every* month of the row, not just this specific month's raw
+    // uploaded count (`r.dfCount`, which only reflects the current live
+    // upload) — a FIU missing from *this month's* counts file (but with
+    // real Historical Actuals on file for other months) used to disappear
+    // from this whole 12-month grid just because this one month's upload
+    // didn't include it, even though every individual month's cell already
+    // correctly reads historical data via monthDfUsageValue() below (fixed
+    // 2026-09-03).
+    const dfRows = data.rows.filter(r => r.monthly.some(m => m.dfUsage != null && !isNaN(m.dfUsage)));
 
     // A row's revenue for month i counts if that month is billable — this
     // single flag from the backend already accounts for historical actuals
@@ -2185,6 +2186,11 @@
 
     // ---- Charts tab ----
     renderUseCaseCharts(data);
+    // "Projected" in the Projected vs Actual chart now tracks this exact
+    // live result — see refreshForecastChart() — so it reflects whatever
+    // SUC Start Date / what-if scenarios are currently selected, same as
+    // every other chart above (fixed 2026-09-03).
+    refreshForecastChart(data);
   }
 
   // Running (cumulative) total of a monthly array — out[i] = sum(arr[0..i]).
@@ -2577,7 +2583,7 @@
   loadMeta();
   loadYc();
   loadHist();
-  loadForecastChart();
+  refreshForecastChart(null); // empty state until the first compute runs
   // Auto-pull today's counts from the latest matching Metabase email on
   // every page load — this is what makes a plain refresh show updated
   // numbers with no manual upload step. Falls back to a clear status
