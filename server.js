@@ -885,4 +885,11 @@ app.post('/api/chat', async (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log('FIU Revenue Estimator backend listening on port ' + PORT);
+  // Prints exactly where FIU Metadata / Yield & CMGR / Historical Actuals
+  // are actually being read from and written to for this run — worth
+  // checking after any update, since a value here that looks like it's
+  // pointing inside the app folder (rather than the home directory default,
+  // or an explicit persistent disk) means data won't survive the next
+  // update (fixed 2026-09-03 — see the DATA_DIR comment in lib/store.js).
+  console.log('Data directory: ' + store.DATA_DIR + (process.env.DATA_DIR ? ' (from DATA_DIR env var)' : ' (default)'));
 });

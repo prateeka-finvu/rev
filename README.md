@@ -309,6 +309,17 @@ rounded).
      entirely (from every month, not just the current one) whenever this
      month's upload didn't happen to include it, or — separately — whenever
      it was Unbilled and no SUC Start Date was set; both fixed 2026-09-03.
+     A third, related bug (also fixed 2026-09-03, ask: "not seeing
+     historical DF counts for fiulive@hdfc... after upload[ing] month wise
+     files"): even once a FIU's row showed up, a **historical month's**
+     AU/DF count cell used to only display if Revenue had *also* been
+     recorded for that same month — so an Unbilled FIU (which will never
+     have a Revenue figure, by definition) showed "no data" for every
+     historical month even when its DF count was recorded and on file. AU
+     and DF counts are now shown whenever they're on file, regardless of
+     whether Revenue was recorded for that month too — Revenue's own cell
+     is unaffected and still correctly shows "no data" when Revenue itself
+     wasn't recorded.
      Each of the three Annual tables has a
      **Contribution % (FY total)** column — that FIU's share of the **full
      fiscal year's** total for that metric (revenue/AU/DF), not just the
@@ -550,7 +561,22 @@ npm start
 ```
 
 Then open `http://localhost:3000` (or set `PORT=xxxx npm start` to use a
-different port). Data persists in `data/*.json` between restarts.
+different port).
+
+**Where your data actually lives:** by default the app stores FIU Metadata,
+Yield & CMGR, and Historical Actuals in a folder in your home directory —
+`~/.fiu-revenue-estimator-data` — not inside this app folder. The console
+prints the exact path on every startup ("Data directory: ..."), worth
+checking after any update. This is deliberate (fixed 2026-09-03): this app
+is normally updated by replacing the whole folder with a freshly delivered
+copy, and a fresh copy always carries its own bundled `data/` starter
+files — if the app read/wrote those bundled files directly, every update
+would silently overwrite whatever you'd entered since the last one. Storing
+real data outside the app folder means it survives every future update
+with no setup on your part — the very first time the app ever runs it
+copies the bundled starter data into that home-directory folder once, then
+never touches the app folder's `data/` again. Set `DATA_DIR` (see below) if
+you want your data stored somewhere else instead.
 
 To enable the chat feature (see below), set `ANTHROPIC_API_KEY` before
 starting the server — either inline:
@@ -715,21 +741,26 @@ service gets created. Skip the disk and you can deploy manually for free:
 4. Add the same environment variables as the Blueprint list above
    (`APP_PASSWORD`, `SESSION_SECRET`, and whichever optional ones you use)
    under the service's **Environment** tab — but this time leave `DATA_DIR`
-   unset, so the app reads/writes `data/*.json` straight from the repo's
-   bundled folder inside the container instead of a disk that doesn't
-   exist on this plan.
+   unset, since there's no disk on this plan for it to point at.
 5. Deploy.
 
-The trade-off: any edits made through the app (FIU Metadata, Yield & CMGR,
-uploaded historical actuals, a saved projection snapshot) live only in
-that container's own filesystem. They survive the service sleeping and
-waking back up, but get reset to whatever's checked into the repo every
-time you push a new deploy. Free services also spin down after 15 minutes
-with no traffic and take roughly a minute to wake back up on the next
-visit. For a small internal tool that isn't redeployed often, that's
-usually fine; if the team will be actively editing FIU Metadata/Yield &
-CMGR day to day, the paid Starter plan + disk (the Blueprint path above)
-is worth it so those edits don't quietly disappear on the next `git push`.
+The trade-off: on the free plan there is no disk at all, so wherever the
+app writes its data (by default, the home-directory folder described in
+"Running it locally" above — but on Render's free tier, home directory or
+not, it's still just a folder inside that container's own throwaway
+filesystem) it's gone the moment the container gets rebuilt. Edits made
+through the app (FIU Metadata, Yield & CMGR, uploaded historical actuals)
+survive the service sleeping and waking back up, but get wiped back to the
+repo's bundled starter data on every new deploy (fixed 2026-09-03: this
+used to also get wiped by every restart, not just every deploy, because the
+app used to default to reading/writing the bundled `data/` folder directly
+— now it at least survives restarts within the same deploy). Free services
+also spin down after 15 minutes with no traffic and take roughly a minute
+to wake back up on the next visit. For a small internal tool that isn't
+redeployed often, restart-level persistence might be enough; if the team is
+actively editing FIU Metadata/Yield & CMGR/Historical Actuals day to day,
+the paid Starter plan + disk (the Blueprint path above) is the only way
+those edits survive a deploy, not just a restart.
 
 **Other hosts**: Railway and Fly.io work similarly (connect the repo, set
 the start command to `npm start`, add a persistent volume, set the same
@@ -737,9 +768,10 @@ environment variables — skip `render.yaml`, which is Render-specific). A
 plain VPS (a small droplet/EC2 instance) needs `git clone`, `npm install`,
 a process manager like `pm2` or a `systemd` service, and nginx in front if
 you want a custom domain/TLS — set `DATA_DIR` to wherever you want the data
-to live on that machine's own disk (or leave it unset to use the repo's
-`data/` folder directly, which is safe on a VPS since nothing wipes that
-directory between runs the way a container redeploy would).
+to live on that machine's own disk, or leave it unset: the home-directory
+default (see "Running it locally" above) works fine on a VPS too, since
+nothing wipes that directory between deploys the way a from-scratch
+container rebuild would.
 
 Whichever host you use, back up `data/*.json` (or wherever `DATA_DIR`
 points) periodically — or point `lib/store.js` at a real database — since

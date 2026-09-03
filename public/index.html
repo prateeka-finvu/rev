@@ -1797,9 +1797,32 @@
       if (m.billable) return fmtCurrency(m.revenue);
       return r.notBillable ? '<span class="badge">excluded</span>' : '<span class="badge critical">missing config</span>';
     };
+    // A historical month's AU/DF count is its own field, independent of
+    // whether Revenue was also recorded for that month — an Unbilled FIU
+    // (fiulive@hdfc, HDFC-FIU, ...) will never have a revenue figure to
+    // record, but its DF count is still tracked and uploadable every month.
+    // These used to gate on m.hasActual (which is specifically "was Revenue
+    // recorded", from actualRevenue in lib/compute.js) before showing
+    // usage/dfUsage at all — so a month with a DF/AU count on file but no
+    // Revenue on file showed as "no data" instead of the real figure. Fixed
+    // 2026-09-03 (ask: "not seeing historical DF counts for fiulive@hdfc...
+    // after upload[ing] month wise files"): now gated on the usage/dfUsage
+    // value itself being present, exactly like the non-historical branch
+    // already did — Revenue's own cell (revenueCell/monthRevenueValue below)
+    // is unaffected and still correctly gates on hasActual, since Revenue
+    // specifically not being on file should still show as "no data" there.
+    //
+    // hasNum, not a bare !isNaN(): a genuinely missing usage/dfUsage comes
+    // back from the API as JSON `null` (NaN has no JSON form), and
+    // isNaN(null) is famously false in JS (null coerces to 0) — a bare
+    // !isNaN(m.dfUsage) would treat "missing" as present and hand fmt() a
+    // null, which silently renders a bare "—" instead of the intended
+    // "no data"/"missing config" badge (still not wrong, just less
+    // informative — caught and fixed in the same pass, 2026-09-03).
+    const hasNum = v => v != null && !isNaN(v);
     const usageCell = (r, i) => {
       const m = r.monthly[i];
-      if (m.isActual) return (m.hasActual && !isNaN(m.usage)) ? fmt(m.usage,0) : noDataBadge;
+      if (m.isActual) return hasNum(m.usage) ? fmt(m.usage,0) : noDataBadge;
       return m.billable ? fmt(m.usage,0) : '<span class="badge critical">missing config</span>';
     };
     // Expected Data Fetch volume cell — shown for every FIU with a DF count
@@ -1809,8 +1832,8 @@
     const dfUsageCell = (r, i) => {
       const m = r.monthly[i];
       if (!m) return '<span class="badge critical">missing config</span>';
-      if (m.isActual) return (m.hasActual && !isNaN(m.dfUsage)) ? fmt(m.dfUsage,0) : noDataBadge;
-      return !isNaN(m.dfUsage) ? fmt(m.dfUsage,0) : '<span class="badge critical">missing config</span>';
+      if (m.isActual) return hasNum(m.dfUsage) ? fmt(m.dfUsage,0) : noDataBadge;
+      return hasNum(m.dfUsage) ? fmt(m.dfUsage,0) : '<span class="badge critical">missing config</span>';
     };
     const rowClass = r => (!r.notBillable && !r.monthly.some(m => m.billable)) ? 'warn' : '';
     // Historical (actual) months are highlighted green, SUC-driven computed
@@ -1844,16 +1867,19 @@
       if (m.isActual) return m.hasActual ? m.revenue : null;
       return m.billable ? m.revenue : null;
     };
+    // Same fix as usageCell/dfUsageCell above (ask: 2026-09-03) — gated on
+    // the value itself being present (via hasNum, not a bare !isNaN() —
+    // see the comment above hasNum's definition), not on m.hasActual
+    // (Revenue-specific).
     const monthUsageValue = (r, i) => {
       const m = r.monthly[i];
-      if (m.isActual) return (m.hasActual && !isNaN(m.usage)) ? m.usage : null;
+      if (m.isActual) return hasNum(m.usage) ? m.usage : null;
       return m.billable ? m.usage : null;
     };
     const monthDfUsageValue = (r, i) => {
       const m = r.monthly[i];
       if (!m) return null;
-      if (m.isActual) return (m.hasActual && !isNaN(m.dfUsage)) ? m.dfUsage : null;
-      return !isNaN(m.dfUsage) ? m.dfUsage : null;
+      return hasNum(m.dfUsage) ? m.dfUsage : null;
     };
 
     // ==================== 1) Monthly revenue details ====================
