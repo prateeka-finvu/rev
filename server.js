@@ -239,15 +239,25 @@ function parseCountsUpload(fileBuffer) {
   return { sheetNames, masterName, counts };
 }
 
+// Every field is guarded with `!== undefined` — a caller that sends a
+// defined value (including '', an explicit clear from the FIU Metadata
+// tab's edit form, which always sends every field) still updates it, but a
+// caller that omits a field entirely doesn't blank it out via the upsert
+// merge. This matters most for /api/seed-from-master-data: a re-import
+// whose file doesn't have (or renames) a given column now leaves that
+// field alone instead of wiping every FIU's existing value to '' — same
+// protection topTen already had (see its own comment below); previously
+// applied inconsistently, letting a Master Data re-import with a missing/
+// renamed column (e.g. "Billing Model") silently blank that field for
+// every FIU in the file, dropping them out of revenue entirely (fixed
+// 2026-09-03).
 function toMetaRow(r) {
-  const out = {
-    fiuId: r.fiuId,
-    legalName: r.legalName || '',
-    tspName: r.tspName || '',
-    licenseType: r.licenseType || '',
-    useCase: r.useCase || '',
-    billingModel: r.billingModel || ''
-  };
+  const out = { fiuId: r.fiuId };
+  if (r.legalName !== undefined) out.legalName = r.legalName || '';
+  if (r.tspName !== undefined) out.tspName = r.tspName || '';
+  if (r.licenseType !== undefined) out.licenseType = r.licenseType || '';
+  if (r.useCase !== undefined) out.useCase = r.useCase || '';
+  if (r.billingModel !== undefined) out.billingModel = r.billingModel || '';
   // Only set topTen when the caller actually sent it — so a Master Data
   // re-import (which never sends this field) doesn't clobber an existing
   // Top 10 flag back to No via the upsert merge.
@@ -461,24 +471,35 @@ app.post('/api/seed-from-master-data', upload.single('file'), (req, res) => {
 
   const metaRows = [];
   const ycRows = [];
+  // Each field below is only included when its column was actually found
+  // in this file's header (colMap.X truthy) — a column missing from a
+  // particular export (renamed, dropped, wrong sheet layout) now leaves
+  // that field on every existing FIU untouched instead of blanking it via
+  // toMetaRow/toYcRow's upsert merge (fixed 2026-09-03 — see the comment
+  // on toMetaRow above). A column that IS present but blank for a specific
+  // row still writes '' for that row, same as before — that's the file
+  // explicitly saying "empty" for a column it does include.
   rows.forEach(r => {
     const fiuId = String(r[colMap.fiuId] || '').trim();
     if (!fiuId) return;
-    metaRows.push(toMetaRow({
-      fiuId,
-      legalName: colMap.legalName ? r[colMap.legalName] : '',
-      tspName: colMap.tspName ? r[colMap.tspName] : '',
-      licenseType: colMap.licenseType ? r[colMap.licenseType] : '',
-      useCase: colMap.useCase ? r[colMap.useCase] : '',
-      billingModel: colMap.billingModel ? r[colMap.billingModel] : ''
-    }));
-    const y = colMap.yieldValue ? toNumber(r[colMap.yieldValue]) : NaN;
-    const g = colMap.cmgr ? toNumber(r[colMap.cmgr]) : NaN;
-    ycRows.push(toYcRow({
-      fiuId,
-      yield: isNaN(y) ? '' : y,
-      cmgr: isNaN(g) ? '' : g
-    }));
+    const metaFields = { fiuId };
+    if (colMap.legalName) metaFields.legalName = r[colMap.legalName];
+    if (colMap.tspName) metaFields.tspName = r[colMap.tspName];
+    if (colMap.licenseType) metaFields.licenseType = r[colMap.licenseType];
+    if (colMap.useCase) metaFields.useCase = r[colMap.useCase];
+    if (colMap.billingModel) metaFields.billingModel = r[colMap.billingModel];
+    metaRows.push(toMetaRow(metaFields));
+
+    const ycFields = { fiuId };
+    if (colMap.yieldValue) {
+      const y = toNumber(r[colMap.yieldValue]);
+      ycFields.yield = isNaN(y) ? '' : y;
+    }
+    if (colMap.cmgr) {
+      const g = toNumber(r[colMap.cmgr]);
+      ycFields.cmgr = isNaN(g) ? '' : g;
+    }
+    ycRows.push(toYcRow(ycFields));
   });
 
   const metaResult = store.upsertMany(META_TABLE, metaRows);

@@ -1101,6 +1101,7 @@
       computeStatus.className = 'status-msg ok';
       let msg = 'Used sheet "'+data.sheetUsed+'" as of '+data.asOfDate+'.';
       if (data.unmatchedCounts.length) msg += ' ' + data.unmatchedCounts.length + ' FIU(s) in the upload have no FIU Metadata config entry — add them in the FIU Metadata tab.';
+      if (data.duplicateCounts && data.duplicateCounts.length) msg += ' ' + data.duplicateCounts.length + ' FIU(s) appeared more than once in the upload — only the first row for each was used.';
       if (data.unmatchedMeta.length) msg += ' ' + data.unmatchedMeta.length + ' FIU(s) in your configs had no counts in this upload.';
       if (data.scenariosApplied && data.scenariosApplied.length) msg += ' Scenario(s) active: ' + data.scenariosApplied.join(', ') + '.';
       computeStatus.textContent = msg;
@@ -1154,6 +1155,7 @@
       computeStatus.className = 'status-msg ok';
       let msg = 'Used sheet "'+data.sheetUsed+'" as of '+data.asOfDate+' (auto-pulled from email).';
       if (data.unmatchedCounts.length) msg += ' ' + data.unmatchedCounts.length + ' FIU(s) in the email file have no FIU Metadata config entry — add them in the FIU Metadata tab.';
+      if (data.duplicateCounts && data.duplicateCounts.length) msg += ' ' + data.duplicateCounts.length + ' FIU(s) appeared more than once in the file — only the first row for each was used.';
       if (data.unmatchedMeta.length) msg += ' ' + data.unmatchedMeta.length + ' FIU(s) in your configs had no counts in this file.';
       if (data.scenariosApplied && data.scenariosApplied.length) msg += ' Scenario(s) active: ' + data.scenariosApplied.join(', ') + '.';
       computeStatus.textContent = msg;

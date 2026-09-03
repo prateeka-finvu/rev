@@ -272,6 +272,10 @@ rounded).
    to disappear from the Annual tables entirely, taking every past month's
    real recorded revenue with it, until its next counts upload happened to
    include it again).
+   If the same FIU ID appears **more than once** in a counts upload (a real
+   risk in a hand-merged or re-exported file), only the first row for it is
+   used — the rest are called out separately too, rather than silently
+   double-counting that FIU's revenue into every total (fixed 2026-09-03).
 7. Results are split into two sections:
    - **Monthly results** — this month's revenue, AU count, and DF count,
      each in its own table. The revenue table covers every billed FIU; the
@@ -498,7 +502,16 @@ column), use **Import / update from Master Data file** on the FIU Metadata
 tab — it seeds *both* configs at once instead of retyping every row by hand.
 Only the "Master Data" sheet is read; any other sheets in that file are
 ignored. Re-running it later updates existing FIUs and adds new ones (an
-upsert, not a wipe).
+upsert, not a wipe) — and, as of the fix below, an upsert of *only the
+columns this particular file actually has*: a re-import whose file is
+missing (or renames) a column no longer blanks that field on every FIU it
+touches. It used to (fixed 2026-09-03) — e.g. re-importing a file with no
+Billing Model column would silently wipe every FIU's billing model to
+blank, dropping them out of revenue entirely, with nothing on screen to
+explain why numbers had changed. A column that's present but blank for a
+specific row still clears that field for that row — that's the file
+explicitly saying "empty" for a column it does include; it's only a
+missing/renamed column that's now left alone.
 
 **A note on one technical FIU ID covering more than one use-case**: both
 configs key rows by FIU ID, one row per ID. If a single technical FIU ID's
