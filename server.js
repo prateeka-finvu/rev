@@ -891,5 +891,13 @@ app.listen(PORT, () => {
   // pointing inside the app folder (rather than the home directory default,
   // or an explicit persistent disk) means data won't survive the next
   // update (fixed 2026-09-03 — see the DATA_DIR comment in lib/store.js).
-  console.log('Data directory: ' + store.DATA_DIR + (process.env.DATA_DIR ? ' (from DATA_DIR env var)' : ' (default)'));
+  // DATA_DIR_FELL_BACK (fixed 2026-09-08) means an explicit DATA_DIR was
+  // set but unusable (e.g. pointing at a disk that was never actually
+  // provisioned) and store.js fell back to the default rather than
+  // crashing — say so here instead of the misleading "(from DATA_DIR env
+  // var)" that process.env.DATA_DIR alone would imply in that case.
+  const dataDirSource = store.DATA_DIR_FELL_BACK
+    ? ' (DATA_DIR env var was set to "' + process.env.DATA_DIR + '" but unusable — see the WARNING above; fell back to the default)'
+    : (process.env.DATA_DIR ? ' (from DATA_DIR env var)' : ' (default)');
+  console.log('Data directory: ' + store.DATA_DIR + dataDirSource);
 });

@@ -719,6 +719,17 @@ of this section) but need their own setup.
      repo's bundled `data/` folder. See the comment on `DATA_DIR` in
      `.env.example` and on `seedDataDirIfNeeded` in `lib/store.js` for how
      that disk gets its starting data.
+     **Important**: `DATA_DIR=/var/data` only works if a real disk is
+     actually mounted at `/var/data` — which only happens on a plan that
+     supports persistent disks (the free tier does not, see below). If you
+     end up with `DATA_DIR=/var/data` set but no disk behind it — e.g. from
+     a Blueprint deploy on the free tier, or from copying this value over
+     manually — every deploy used to crash on startup with an `EACCES`
+     error trying to create that folder (fixed 2026-09-08: the app now
+     logs a clear warning and falls back to its normal default instead of
+     crashing, but if you see that warning in the logs, the real fix is
+     still to remove or correct `DATA_DIR` in the **Environment** tab, or
+     upgrade to a plan with a disk and actually attach one).
 5. **Deploy**. Render builds (`npm install`) and starts (`npm start`) the
    service, and gives you a public `https://fiu-revenue-estimator-xxxx.onrender.com`
    URL (renameable in the service's settings). Visiting it should land on
