@@ -933,4 +933,16 @@ app.listen(PORT, () => {
     ? ' (DATA_DIR env var was set to "' + process.env.DATA_DIR + '" but unusable — see the WARNING above; fell back to the default)'
     : (process.env.DATA_DIR ? ' (from DATA_DIR env var)' : ' (default)');
   console.log('Data directory: ' + store.DATA_DIR + dataDirSource);
+  // Says plainly, on every boot, whether the login gate is actually on —
+  // fixed 2026-09-09 (ask: "the auth functionality is not being triggered
+  // on Render"). Before this, the only way to tell APP_PASSWORD hadn't
+  // actually made it into the running process (e.g. left blank when the
+  // Render Blueprint was first set up, sync:false env vars prompt for a
+  // value but don't require one) was to notice its *absence* — nothing
+  // ever said out loud that the app was running wide open. This line
+  // removes the guessing: check the deploy's logs after any auth-related
+  // change and this says immediately whether it took effect.
+  console.log(AUTH_ENABLED
+    ? 'Login gate: ON (APP_PASSWORD is set)' + (process.env.SESSION_SECRET ? '' : ' — SESSION_SECRET is not set, see the WARNING above')
+    : 'Login gate: OFF — APP_PASSWORD is not set, this app is reachable by anyone with the URL. Set APP_PASSWORD in the environment (Render dashboard → this service → Environment tab) and redeploy to turn it on.');
 });

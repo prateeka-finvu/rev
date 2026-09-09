@@ -710,6 +710,18 @@ password once the app is reachable from the open internet. None of this
 applies to `/assets/*` (the logo/favicon) — those stay public so the login
 page itself can render its branding before anyone's logged in.
 
+**Not seeing the login screen on a deployment where you expect one?**
+(fixed 2026-09-09 — the only symptom used to be its own absence, nothing
+said so out loud) Every boot now logs one line saying exactly whether the
+gate is on: `Login gate: ON (APP_PASSWORD is set)` or `Login gate: OFF —
+APP_PASSWORD is not set, ...`. Check that line in the deploy's logs first —
+on Render, a Blueprint's `sync: false` env vars (see below) prompt for a
+value when the service is first created but don't require one, so it's easy
+to click past APP_PASSWORD/SESSION_SECRET blank and never notice. If the
+log says ON but you still aren't redirected to `/login`, that's a different
+problem (a stale cached page, or a redeploy that didn't actually pick up
+the latest code) rather than the env var.
+
 ## Deploying to Render
 
 This needs a host that runs a persistent Node process — GitHub Pages (static
