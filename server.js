@@ -410,7 +410,19 @@ app.post('/api/historical-actuals/bulk', upload.single('file'), (req, res) => {
   const metadataById = new Map(store.readAll(META_TABLE).map(r => [store.normId(r.fiuId), r]));
   const yieldCmgrById = new Map(store.readAll(YC_TABLE).map(r => [store.normId(r.fiuId), r]));
 
-  const incoming = [];
+  // A FIU ID appearing more than once in the same month's upload is a real,
+  // recurring shape in these exports (ask: 2026-09-09, "Aug revenue" gap of
+  // ~₹2.33L) — e.g. one row billed under Data Fetches and a second row for
+  // the same FIU billed under Active Users, both legitimately contributing
+  // revenue for that month. Every duplicate-fiuId row's Revenue/AU/DF is
+  // now summed into one record per FIU ID + month (per row, so a row that
+  // only has a DF count doesn't zero out a Revenue already summed in from an
+  // earlier row for the same FIU) instead of the old plain upsertManyBy
+  // behavior, where the *last* matching row silently overwrote every field
+  // from the earlier one(s) — quietly dropping whichever row lost that race,
+  // with no warning. mergedFiuIds below lists every FIU ID this happened
+  // for, so a merge is always visible instead of silent either way.
+  const byFiu = new Map(); // normId(fiuId) -> { fiuId, revenue, auCount, dfCount, billingModel, billingYield, rowCount }
   let skipped = 0;
   rows.forEach(r => {
     const fiuId = String(r[colMap.fiuId] || '').trim();
@@ -421,18 +433,38 @@ app.post('/api/historical-actuals/bulk', upload.single('file'), (req, res) => {
     if (isNaN(revenue) && isNaN(auCount) && isNaN(dfCount)) { skipped++; return; }
     const meta = metadataById.get(store.normId(fiuId));
     const yc = yieldCmgrById.get(store.normId(fiuId));
-    incoming.push(toHistRow({
-      fiuId, month,
-      revenue: isNaN(revenue) ? undefined : revenue,
-      auCount: isNaN(auCount) ? undefined : auCount,
-      dfCount: isNaN(dfCount) ? undefined : dfCount,
-      billingModel: meta ? meta.billingModel : undefined,
-      billingYield: yc ? yc.yield : undefined
-    }));
+    const key = store.normId(fiuId);
+    const existing = byFiu.get(key);
+    if (existing) {
+      if (!isNaN(revenue)) existing.revenue = (isNaN(existing.revenue) ? 0 : existing.revenue) + revenue;
+      if (!isNaN(auCount)) existing.auCount = (isNaN(existing.auCount) ? 0 : existing.auCount) + auCount;
+      if (!isNaN(dfCount)) existing.dfCount = (isNaN(existing.dfCount) ? 0 : existing.dfCount) + dfCount;
+      existing.rowCount++;
+    } else {
+      byFiu.set(key, {
+        fiuId, revenue, auCount, dfCount,
+        billingModel: meta ? meta.billingModel : undefined,
+        billingYield: yc ? yc.yield : undefined,
+        rowCount: 1
+      });
+    }
   });
-  if (!incoming.length) {
+  if (!byFiu.size) {
     return res.status(400).json({ error: 'No usable rows found — every row was missing an FIU ID or all of Revenue/AU/DF.' });
   }
+
+  const mergedFiuIds = [];
+  const incoming = Array.from(byFiu.values()).map(v => {
+    if (v.rowCount > 1) mergedFiuIds.push(v.fiuId);
+    return toHistRow({
+      fiuId: v.fiuId, month,
+      revenue: isNaN(v.revenue) ? undefined : v.revenue,
+      auCount: isNaN(v.auCount) ? undefined : v.auCount,
+      dfCount: isNaN(v.dfCount) ? undefined : v.dfCount,
+      billingModel: v.billingModel,
+      billingYield: v.billingYield
+    });
+  });
 
   const result = store.upsertManyBy(HIST_TABLE, incoming, histKey);
   res.json({
@@ -441,6 +473,7 @@ app.post('/api/historical-actuals/bulk', upload.single('file'), (req, res) => {
     columnsFound: colMap,
     month,
     skipped,
+    mergedFiuIds,
     ...result
   });
 });

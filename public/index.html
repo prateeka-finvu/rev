@@ -975,7 +975,7 @@
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Upload failed');
       histUploadStatus.className = 'status-msg ok';
-      histUploadStatus.textContent = 'Used sheet "'+data.sheetUsed+'" for '+monthLabelFromKey(data.month)+': '+data.created+' created, '+data.updated+' updated'+(data.skipped ? ', '+data.skipped+' row(s) skipped (no FIU ID or no usable Revenue/AU/DF value)' : '')+'.';
+      histUploadStatus.textContent = 'Used sheet "'+data.sheetUsed+'" for '+monthLabelFromKey(data.month)+': '+data.created+' created, '+data.updated+' updated'+(data.skipped ? ', '+data.skipped+' row(s) skipped (no FIU ID or no usable Revenue/AU/DF value)' : '')+(data.mergedFiuIds && data.mergedFiuIds.length ? ', '+data.mergedFiuIds.length+' FIU ID(s) appeared more than once and had their Revenue/AU/DF summed into one row: '+data.mergedFiuIds.join(', ') : '')+'.';
       histMonthFilter.value = month;
       await loadHist();
     } catch(err){

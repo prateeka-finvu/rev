@@ -115,10 +115,30 @@ rounded).
      billing model) use the AU count as-is; "Data Fetch"/"Fix Billing"
      project the DF count from a month-to-date total to a full month using
      the as-of date (day-of-month ÷ days in that month).
-   - **Every remaining month of the FY** — the current month's baseline
-     usage (AU as-is, or the already-projected full-month DF figure) is
-     grown by `(1 + CMGR)` compounded per month; yield is held constant.
-     Revenue = usage × yield for every month.
+   - **Every remaining month of the FY** — grown by `(1 + CMGR)` compounded
+     per month from an anchor baseline; yield is held constant. Revenue =
+     usage × yield for every month.
+
+     **The current month's own row always uses the live upload's baseline**
+     (AU as-is, or the already-projected full-month DF figure) — that
+     hasn't changed. But **what future months compound forward from is a
+     separate anchor** (fixed 2026-09-09 — ask: the "Projected vs Actual
+     Revenue" chart dipping sharply right after the last actual month, then
+     only gradually climbing back over the rest of the FY): it's the most
+     recent past month with a recorded Historical Actual, not the current
+     month's own baseline, whenever one exists. This matters because the
+     current month's counts upload is very often a month-to-date pull taken
+     partway through the month — Data Fetch counts already get the
+     day-of-month ÷ days-in-month treatment above, but Active/Unique User
+     counts never do (a partial user count doesn't scale linearly with days
+     elapsed the way DF volume roughly does), so a mid-month AU count is
+     used as-is for the current month's own display. Before this fix, that
+     same possibly-partial figure was also what every later month
+     compounded forward from — understating the whole rest of the FY off
+     one still-accumulating month, recovering only because CMGR growth from
+     a low base still grows, never because it was actually catching up to
+     the right number. Falls back to the live baseline when there's no past
+     actual to anchor on at all (e.g. a FIU's very first live month).
    - **SUC Start Date** (dropdown next to As-of date/FY start month, options
      Oct 2026 – Mar 2027, default "None") — from that month onward, any FIU
      with **both** SUC Cliff CMGR and SUC Yield set on the Yield & CMGR tab
@@ -264,6 +284,21 @@ rounded).
    add/edit rows by hand) and it's picked up everywhere above automatically
    — no other step needed. It ships pre-seeded through Jul 2026; extend it
    monthly from there as each new month closes.
+
+   **Duplicate FIU ID rows in one month's bulk upload** are summed, not
+   overwritten (fixed 2026-09-09 — ask: dashboard showed August revenue as
+   ₹85.4L against a source sheet total of ₹87.7L). Some monthly actuals
+   exports legitimately list the same FIU ID more than once in a single
+   file — e.g. one row billed under Data Fetches and a second row for the
+   same FIU billed under Active Users, both contributing real revenue for
+   that month. Before this fix, the bulk upload kept only the *last*
+   matching row for a given FIU ID + month (a plain upsert-by-key), so
+   every earlier row's Revenue/AU/DF for that FIU was silently dropped —
+   in this case losing about ₹2.33L across 4 FIUs with no warning at all.
+   Now every row sharing an FIU ID within one month's upload has its
+   Revenue/AU/DF counts summed into a single record, and the upload result
+   always lists which FIU ID(s) this happened for (shown in the status
+   message after uploading) so a merge is never silent either way.
 5. FIUs whose billing model isn't recognized (blank, "Not billed",
    "Unbilled", or anything else unrecognized) are shown as excluded. FIUs
    missing a Yield & CMGR config entry, or with an unusable count, are shown
