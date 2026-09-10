@@ -1,10 +1,11 @@
 const path = require('path');
 const os = require('os');
+const fs = require('fs');
+const dotenv = require('dotenv');
 
 // Loads ANTHROPIC_API_KEY / GMAIL_* / APP_PASSWORD / etc. from .env files,
 // if present — see .env.example for the full list. Two locations, checked
-// in this order (the first one to define a given variable wins — dotenv
-// never overrides a variable that's already set):
+// in this order (the first one to define a given variable wins):
 //   1. .env next to this file, inside the app folder — the original
 //      behavior, still useful for a one-off local override.
 //   2. ~/.fiu-revenue-estimator.env — a fixed home-directory location no
@@ -22,13 +23,45 @@ const os = require('os');
 // Both files are entirely optional — leave both absent to run with every
 // optional feature (chat, email auto-pull, login) disabled, same as
 // before. Safe to leave in unconditionally everywhere, including Render,
-// where real secrets come from the dashboard's Environment tab instead —
-// dotenv only fills variables that aren't already set, so it has nothing
-// to do there (and finds no files to load in the first place).
+// where real secrets come from the dashboard's Environment tab instead.
+//
+// Deliberately NOT just two `dotenv.config()` calls (fixed 2026-09-10,
+// same day as the file was introduced): dotenv only skips a variable that
+// is already present in process.env at all — it does NOT treat an empty
+// value as absent. .env.example ships every optional variable as a blank
+// placeholder line (e.g. `APP_PASSWORD=`), because that's the template
+// users are told to copy. Loading the local .env first with plain
+// dotenv.config() would set APP_PASSWORD to '' from that blank line, and
+// then the home-directory file's real value would be silently skipped —
+// "loaded" would still be true (the file exists, no read error) but the
+// value inside it would never take effect. Caught by a real test failure
+// on an actual deployment, not in review. So instead each file is parsed
+// (dotenv.parse — same parsing rules, but doesn't touch process.env) and
+// applied manually, treating a blank value as "not actually set" the same
+// way an absent line would be, regardless of which file it came from or
+// what order the files are checked in.
+const LOCAL_ENV_PATH = path.join(__dirname, '.env');
 const HOME_ENV_PATH = path.join(os.homedir(), '.fiu-revenue-estimator.env');
-require('dotenv').config();
-const homeEnvResult = require('dotenv').config({ path: HOME_ENV_PATH });
-const HOME_ENV_LOADED = !homeEnvResult.error;
+
+function loadEnvFile(filePath) {
+  if (!fs.existsSync(filePath)) return false;
+  let parsed;
+  try {
+    parsed = dotenv.parse(fs.readFileSync(filePath));
+  } catch (err) {
+    console.warn('WARNING: could not read/parse ' + filePath + ': ' + err.message);
+    return false;
+  }
+  Object.keys(parsed).forEach(key => {
+    const value = parsed[key];
+    if (value === '') return; // a blank line is a template placeholder, not a real value
+    if (!(key in process.env) || process.env[key] === '') process.env[key] = value;
+  });
+  return true;
+}
+
+const LOCAL_ENV_LOADED = loadEnvFile(LOCAL_ENV_PATH);
+const HOME_ENV_LOADED = loadEnvFile(HOME_ENV_PATH);
 
 const express = require('express');
 const cors = require('cors');

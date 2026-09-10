@@ -686,6 +686,18 @@ pattern as the "Data directory: ..." line above — worth checking after any
 update if something configured via `.env` (chat, email auto-pull, login)
 seems to have reset.
 
+A leftover blank line in the local `.env` (e.g. `APP_PASSWORD=` with
+nothing after the `=`, exactly what `.env.example` ships as a template)
+never blocks the home-directory file's real value for that same variable
+— a blank value is treated the same as the line being absent entirely, no
+matter which of the two files it's blank in. (This was a real bug in the
+first version of this fix, caught the same day by a genuine test failure:
+a local `.env` created earlier just to set `ANTHROPIC_API_KEY`, with every
+other variable left blank as shipped, silently prevented
+`~/.fiu-revenue-estimator.env`'s real `APP_PASSWORD` from ever taking
+effect, even though the startup log still said the home file was
+"(loaded)".)
+
 ## Chat with your data
 
 There's a floating chat button (bottom-right of the page, once you've

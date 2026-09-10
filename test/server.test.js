@@ -265,6 +265,43 @@ async function homeEnvSecretsFileSuite() {
         });
         assertEqual(res.status, 200, 'the password loaded from the home-env file should actually work for login');
       });
+
+      await testAsync('a blank placeholder line in the local .env does not block the home-env file\'s real value', async () => {
+        // Regression for a real deployment failure (fixed 2026-09-10, same
+        // day as the feature): .env.example ships every optional variable
+        // as a blank placeholder line, e.g. `APP_PASSWORD=`. A naive
+        // "dotenv.config() twice" implementation treats a key that's merely
+        // *present* (even blank) as already set, so a leftover blank line
+        // in the local .env — left over from following the "copy
+        // .env.example to .env" instructions for an unrelated variable like
+        // ANTHROPIC_API_KEY — silently blocked the home-env file's real
+        // APP_PASSWORD from ever taking effect. The fix treats a blank
+        // value the same as an absent line, regardless of which file (or
+        // which order) it came from. server.js resolves its local .env
+        // relative to its own folder (not the process cwd), so this test
+        // writes a real (temporary) .env next to server.js — backing up
+        // and restoring whatever (if anything) was already there.
+        const localEnvPath = path.join(__dirname, '..', '.env');
+        const hadLocalEnv = fs.existsSync(localEnvPath);
+        const localEnvBackup = hadLocalEnv ? fs.readFileSync(localEnvPath) : null;
+        try {
+          fs.writeFileSync(localEnvPath, 'APP_PASSWORD=\nSESSION_SECRET=\n');
+          fs.writeFileSync(path.join(fakeHome, '.fiu-revenue-estimator.env'),
+            'APP_PASSWORD=from-home-env\nSESSION_SECRET=also-from-home-env\n');
+          server = await startServer({ HOME: fakeHome, APP_PASSWORD: undefined, SESSION_SECRET: undefined });
+          const logs = server.getLogs();
+          assert(/Login gate: ON \(APP_PASSWORD is set\)/.test(logs),
+            'a blank APP_PASSWORD= line in the local .env should not block the home-env file\'s real value. Logs:\n' + logs);
+          const res = await fetch(server.baseUrl + '/api/login', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: 'from-home-env' })
+          });
+          assertEqual(res.status, 200, 'the home-env password should work even with a blank placeholder in the local .env');
+        } finally {
+          if (hadLocalEnv) fs.writeFileSync(localEnvPath, localEnvBackup);
+          else fs.rmSync(localEnvPath, { force: true });
+        }
+      });
     } finally {
       if (server) await server.stop();
       fs.rmSync(fakeHome, { recursive: true, force: true });
