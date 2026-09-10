@@ -1,14 +1,38 @@
-// Loads ANTHROPIC_API_KEY / ANTHROPIC_MODEL / PORT from a .env file next to
-// this file, if one exists — see .env.example. Silently does nothing if
-// there's no .env (e.g. when the real env vars are set another way, such as
-// a host's dashboard or an inline `FOO=bar npm start`), so this is safe to
-// leave in for every environment.
+const path = require('path');
+const os = require('os');
+
+// Loads ANTHROPIC_API_KEY / GMAIL_* / APP_PASSWORD / etc. from .env files,
+// if present — see .env.example for the full list. Two locations, checked
+// in this order (the first one to define a given variable wins — dotenv
+// never overrides a variable that's already set):
+//   1. .env next to this file, inside the app folder — the original
+//      behavior, still useful for a one-off local override.
+//   2. ~/.fiu-revenue-estimator.env — a fixed home-directory location no
+//      zip extraction or git pull ever touches (fixed 2026-09-10 — ask:
+//      "I do not have to edit the .env file every time"). This app is
+//      normally updated by replacing the whole app folder with a freshly
+//      delivered copy, and a fresh copy's .env is always blank — so any
+//      secret that only lived in the old folder's .env (GMAIL_USER/
+//      GMAIL_APP_PASSWORD/METABASE_EMAIL_SUBJECT for the email auto-pull,
+//      APP_PASSWORD/SESSION_SECRET for login, ANTHROPIC_API_KEY for chat)
+//      had to be re-entered into a brand new .env after every single
+//      update. Put real values in this file once, in your home directory,
+//      and every future update just keeps working — same fix, same
+//      reasoning, as DATA_DIR's home-directory default in lib/store.js.
+// Both files are entirely optional — leave both absent to run with every
+// optional feature (chat, email auto-pull, login) disabled, same as
+// before. Safe to leave in unconditionally everywhere, including Render,
+// where real secrets come from the dashboard's Environment tab instead —
+// dotenv only fills variables that aren't already set, so it has nothing
+// to do there (and finds no files to load in the first place).
+const HOME_ENV_PATH = path.join(os.homedir(), '.fiu-revenue-estimator.env');
 require('dotenv').config();
+const homeEnvResult = require('dotenv').config({ path: HOME_ENV_PATH });
+const HOME_ENV_LOADED = !homeEnvResult.error;
 
 const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
-const path = require('path');
 const crypto = require('crypto');
 const cookieParser = require('cookie-parser');
 
@@ -944,6 +968,16 @@ app.listen(PORT, () => {
     ? ' (DATA_DIR env var was set to "' + process.env.DATA_DIR + '" but unusable — see the WARNING above; fell back to the default)'
     : (process.env.DATA_DIR ? ' (from DATA_DIR env var)' : ' (default)');
   console.log('Data directory: ' + store.DATA_DIR + dataDirSource);
+  // Says plainly, on every boot, whether the durable home-directory secrets
+  // file was found — fixed 2026-09-10 (ask: "Fix this so I do not have to
+  // edit the .env file every time"). Put GMAIL_USER / GMAIL_APP_PASSWORD /
+  // METABASE_EMAIL_SUBJECT / APP_PASSWORD / SESSION_SECRET / ANTHROPIC_API_KEY
+  // in this file once and every future update (a fresh app-folder .env every
+  // time) keeps working without re-entering anything — see the comment at
+  // the top of this file for the full priority order.
+  console.log(HOME_ENV_LOADED
+    ? 'Secrets file: ' + HOME_ENV_PATH + ' (loaded)'
+    : 'Secrets file: ' + HOME_ENV_PATH + ' (not found — create it to configure email auto-pull, login, or chat without editing .env inside the app folder; see README.md)');
   // Says plainly, on every boot, whether the login gate is actually on —
   // fixed 2026-09-09 (ask: "the auth functionality is not being triggered
   // on Render"). Before this, the only way to tell APP_PASSWORD hadn't

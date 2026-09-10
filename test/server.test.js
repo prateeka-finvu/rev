@@ -41,6 +41,12 @@ function startServer(envOverrides) {
       ANTHROPIC_API_KEY: '', GMAIL_USER: '', GMAIL_APP_PASSWORD: '',
       APP_PASSWORD: '', SESSION_SECRET: ''
     }, envOverrides || {});
+    // An envOverrides value of `undefined` means "actually unset this",
+    // not "set it to the string 'undefined'" — used by the home-env-file
+    // suite below, which needs APP_PASSWORD to be genuinely absent from
+    // the child's environment (not merely ''), since dotenv only fills in
+    // a variable that isn't already present at all.
+    Object.keys(env).forEach(k => { if (env[k] === undefined) delete env[k]; });
     const proc = spawn('node', [SERVER_PATH], { env, stdio: ['ignore', 'pipe', 'pipe'] });
     let logs = '';
     let settled = false;
@@ -224,11 +230,54 @@ async function historicalActualsDuplicateSuite() {
   });
 }
 
+async function homeEnvSecretsFileSuite() {
+  await suite('Durable ~/.fiu-revenue-estimator.env secrets file (fixed 2026-09-10)', async () => {
+    // The app folder's own .env gets wiped on every update (fresh zip
+    // extraction) — the exact issue behind the ask "Fix this so I do not
+    // have to edit the .env file every time". The fix: also load a second
+    // dotenv file from a fixed home-directory location that no update ever
+    // touches. Uses a fake HOME so this never reads/writes the real one.
+    const fakeHome = fs.mkdtempSync(path.join(os.tmpdir(), 'rev-test-home-'));
+    let server;
+    try {
+      await testAsync('no home-env file: logs "not found", login gate stays off', async () => {
+        server = await startServer({ HOME: fakeHome, APP_PASSWORD: undefined, SESSION_SECRET: undefined });
+        const logs = server.getLogs();
+        assert(logs.includes('Secrets file: ' + path.join(fakeHome, '.fiu-revenue-estimator.env') + ' (not found'),
+          'expected the "not found" secrets-file log line. Logs:\n' + logs);
+        assert(/Login gate: OFF/.test(logs), 'no APP_PASSWORD anywhere -> gate should be off');
+        await server.stop();
+        server = null;
+      });
+
+      await testAsync('APP_PASSWORD set only in the home-env file still turns the login gate on', async () => {
+        fs.writeFileSync(path.join(fakeHome, '.fiu-revenue-estimator.env'),
+          'APP_PASSWORD=from-home-env\nSESSION_SECRET=also-from-home-env\n');
+        server = await startServer({ HOME: fakeHome, APP_PASSWORD: undefined, SESSION_SECRET: undefined });
+        const logs = server.getLogs();
+        assert(logs.includes('Secrets file: ' + path.join(fakeHome, '.fiu-revenue-estimator.env') + ' (loaded)'),
+          'expected the "(loaded)" secrets-file log line. Logs:\n' + logs);
+        assert(/Login gate: ON \(APP_PASSWORD is set\)/.test(logs),
+          'a password that only exists in the home-env file should still enable the gate. Logs:\n' + logs);
+        const res = await fetch(server.baseUrl + '/api/login', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: 'from-home-env' })
+        });
+        assertEqual(res.status, 200, 'the password loaded from the home-env file should actually work for login');
+      });
+    } finally {
+      if (server) await server.stop();
+      fs.rmSync(fakeHome, { recursive: true, force: true });
+    }
+  });
+}
+
 async function main() {
   await loginGateOffSuite();
   await loginGateOnSuite();
   await dataDirFallbackSuite();
   await historicalActualsDuplicateSuite();
+  await homeEnvSecretsFileSuite();
 }
 
 module.exports = main();

@@ -550,7 +550,9 @@ check.
    [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
    — a 16-character password scoped to this one use, separate from the
    account's real password.
-3. In `.env` (copy `.env.example` if you haven't already), set:
+3. In `~/.fiu-revenue-estimator.env` (copy `.env.example` there if you
+   haven't already — see "Running it locally" below for why this is the
+   home-directory file and not the local `.env` next to `server.js`), set:
    - `GMAIL_USER` — the Gmail address the Metabase email arrives at.
    - `GMAIL_APP_PASSWORD` — the App Password from step 2.
    - `METABASE_EMAIL_SUBJECT` — text that must appear in the subject line,
@@ -660,6 +662,30 @@ If there's no `.env` file, nothing changes — the server just falls back to
 whatever's already in the environment (or runs with chat disabled, if
 neither is set).
 
+**Put your real values in `~/.fiu-revenue-estimator.env` instead, not the
+local `.env` file** (fixed 2026-09-10 — ask: "Fix this so I do not have to
+edit the .env file every time"). This app is normally updated by replacing
+this whole folder with a freshly delivered copy, and a fresh copy's `.env`
+is always blank — so `ANTHROPIC_API_KEY`, `GMAIL_USER`/`GMAIL_APP_PASSWORD`/
+`METABASE_EMAIL_SUBJECT`, and `APP_PASSWORD`/`SESSION_SECRET` all had to be
+re-typed into a brand new `.env` after every single update. Same fix, same
+reasoning, as `DATA_DIR`'s home-directory default above: the server also
+loads a second, optional dotenv file from a fixed home-directory location —
+`~/.fiu-revenue-estimator.env` — that no update ever touches. A variable
+set in the local `.env` still wins if both define it (handy for a one-off
+override), but for everyday use just create the home-directory file once:
+
+```
+cp .env.example ~/.fiu-revenue-estimator.env
+# then edit ~/.fiu-revenue-estimator.env and fill in your real values
+```
+
+and every future update keeps working with no re-entry. The console prints
+whether it found this file on every startup ("Secrets file: ..."), same
+pattern as the "Data directory: ..." line above — worth checking after any
+update if something configured via `.env` (chat, email auto-pull, login)
+seems to have reset.
+
 ## Chat with your data
 
 There's a floating chat button (bottom-right of the page, once you've
@@ -709,7 +735,11 @@ value in `.env`. This matters most once the app is running somewhere public
 (see "Deploying to Render" below) — without it, anyone with the URL could
 view or edit real FIU revenue configs.
 
-**Setup**: set two values in `.env`:
+**Setup**: set two values in `~/.fiu-revenue-estimator.env` (see "Running
+it locally" above for why this home-directory file, rather than the local
+`.env` next to `server.js`, is where these should actually live — unless
+you're deploying to Render, where these instead go in the dashboard's
+Environment tab, see "Deploying to Render" below):
 
 - `APP_PASSWORD` — the shared password. Leaving this unset disables the
   login gate entirely (no login screen, everything open) — that's the
@@ -870,9 +900,10 @@ handling, SUC Cliff/Recovery, every per-FIU override, the what-if
 scenarios; runs in well under a second) and `test/server.test.js`
 (integration tests that spawn `server.js` as a real child process against
 a throwaway `DATA_DIR` and talk to it over HTTP — the login gate, startup
-logging, the DATA_DIR-fallback crash fix, and the Historical Actuals
-duplicate-row-upload handling; a few seconds total), then prints one
-combined pass/fail summary and exits non-zero if anything failed.
+logging, the DATA_DIR-fallback crash fix, the Historical Actuals
+duplicate-row-upload handling, and the `~/.fiu-revenue-estimator.env`
+durable secrets file; a few seconds total), then prints one combined
+pass/fail summary and exits non-zero if anything failed.
 
 Every suite is tied to either a specific piece of documented business
 logic or an actual bug this app has shipped and fixed, called out by date
