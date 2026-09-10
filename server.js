@@ -35,33 +35,56 @@ const dotenv = require('dotenv');
 // then the home-directory file's real value would be silently skipped —
 // "loaded" would still be true (the file exists, no read error) but the
 // value inside it would never take effect. Caught by a real test failure
-// on an actual deployment, not in review. So instead each file is parsed
-// (dotenv.parse — same parsing rules, but doesn't touch process.env) and
-// applied manually, treating a blank value as "not actually set" the same
-// way an absent line would be, regardless of which file it came from or
-// what order the files are checked in.
+// on an actual deployment, not in review.
+//
+// The fix isn't simply "treat any blank process.env value as fillable",
+// either — a same-day second regression from that first attempt: it made
+// a *real* environment variable that some real system had deliberately
+// set to '' (a Render dashboard field left blank on purpose, or — same
+// failure mode — this test suite's own child-process env overrides that
+// intentionally blank APP_PASSWORD/SESSION_SECRET to keep tests isolated
+// from whatever real secrets happen to be sitting in this machine's local
+// .env) get silently overwritten by file contents, since a real local
+// .env this developer's machine also happened to have lying around then
+// bled its real APP_PASSWORD into tests that expected the login gate to
+// stay off. So: a blank value *inside one of these two files* never
+// blocks the other file's real value (that's the actual fix), but a
+// variable that was already present in the real process environment
+// *before either file is read* — from any source, blank or not — is left
+// alone. Only a variable genuinely absent from the real environment gets
+// filled in from these files at all.
 const LOCAL_ENV_PATH = path.join(__dirname, '.env');
 const HOME_ENV_PATH = path.join(os.homedir(), '.fiu-revenue-estimator.env');
+const REAL_ENV_KEYS = new Set(Object.keys(process.env)); // snapshot BEFORE either file is read
 
-function loadEnvFile(filePath) {
-  if (!fs.existsSync(filePath)) return false;
-  let parsed;
+function parseEnvFile(filePath) {
+  if (!fs.existsSync(filePath)) return { found: false, values: {} };
   try {
-    parsed = dotenv.parse(fs.readFileSync(filePath));
+    return { found: true, values: dotenv.parse(fs.readFileSync(filePath)) };
   } catch (err) {
     console.warn('WARNING: could not read/parse ' + filePath + ': ' + err.message);
-    return false;
+    return { found: false, values: {} };
   }
-  Object.keys(parsed).forEach(key => {
-    const value = parsed[key];
-    if (value === '') return; // a blank line is a template placeholder, not a real value
-    if (!(key in process.env) || process.env[key] === '') process.env[key] = value;
-  });
-  return true;
 }
 
-const LOCAL_ENV_LOADED = loadEnvFile(LOCAL_ENV_PATH);
-const HOME_ENV_LOADED = loadEnvFile(HOME_ENV_PATH);
+const localEnvFile = parseEnvFile(LOCAL_ENV_PATH);
+const homeEnvFile = parseEnvFile(HOME_ENV_PATH);
+const LOCAL_ENV_LOADED = localEnvFile.found;
+const HOME_ENV_LOADED = homeEnvFile.found;
+
+// Merge the two files first (home, then local so local's real values take
+// priority — a blank value in either one is skipped, never applied), then
+// apply the merged result to process.env only for keys that weren't
+// already present in the real environment snapshotted above.
+const mergedEnvFileValues = {};
+[homeEnvFile.values, localEnvFile.values].forEach(values => {
+  Object.keys(values).forEach(key => {
+    if (values[key] !== '') mergedEnvFileValues[key] = values[key];
+  });
+});
+Object.keys(mergedEnvFileValues).forEach(key => {
+  if (!REAL_ENV_KEYS.has(key)) process.env[key] = mergedEnvFileValues[key];
+});
 
 const express = require('express');
 const cors = require('cors');

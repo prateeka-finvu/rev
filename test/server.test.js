@@ -237,10 +237,27 @@ async function homeEnvSecretsFileSuite() {
     // have to edit the .env file every time". The fix: also load a second
     // dotenv file from a fixed home-directory location that no update ever
     // touches. Uses a fake HOME so this never reads/writes the real one.
+    //
+    // server.js resolves its local .env relative to its own folder
+    // (__dirname), not the process cwd — so every test below that expects
+    // to see only the home-env file's values needs the *real* local .env
+    // (if this machine happens to have one, e.g. for ANTHROPIC_API_KEY) out
+    // of the way for the duration, since a real, non-blank APP_PASSWORD
+    // sitting there would otherwise win and make these tests' outcomes
+    // depend on whatever happens to be on the developer's own machine —
+    // exactly the kind of environment-dependent failure that showed up as
+    // a real report (some tests failing only on a machine with a real
+    // local .env already configured, never in a clean checkout). Backed up
+    // and restored around the whole suite, once, rather than per-test.
+    const localEnvPath = path.join(__dirname, '..', '.env');
+    const hadLocalEnv = fs.existsSync(localEnvPath);
+    const localEnvBackup = hadLocalEnv ? fs.readFileSync(localEnvPath) : null;
+    if (hadLocalEnv) fs.rmSync(localEnvPath);
+
     const fakeHome = fs.mkdtempSync(path.join(os.tmpdir(), 'rev-test-home-'));
     let server;
     try {
-      await testAsync('no home-env file: logs "not found", login gate stays off', async () => {
+      await testAsync('no home-env file, no local .env: logs "not found", login gate stays off', async () => {
         server = await startServer({ HOME: fakeHome, APP_PASSWORD: undefined, SESSION_SECRET: undefined });
         const logs = server.getLogs();
         assert(logs.includes('Secrets file: ' + path.join(fakeHome, '.fiu-revenue-estimator.env') + ' (not found'),
@@ -264,6 +281,8 @@ async function homeEnvSecretsFileSuite() {
           body: JSON.stringify({ password: 'from-home-env' })
         });
         assertEqual(res.status, 200, 'the password loaded from the home-env file should actually work for login');
+        await server.stop();
+        server = null;
       });
 
       await testAsync('a blank placeholder line in the local .env does not block the home-env file\'s real value', async () => {
@@ -277,15 +296,9 @@ async function homeEnvSecretsFileSuite() {
         // ANTHROPIC_API_KEY — silently blocked the home-env file's real
         // APP_PASSWORD from ever taking effect. The fix treats a blank
         // value the same as an absent line, regardless of which file (or
-        // which order) it came from. server.js resolves its local .env
-        // relative to its own folder (not the process cwd), so this test
-        // writes a real (temporary) .env next to server.js — backing up
-        // and restoring whatever (if anything) was already there.
-        const localEnvPath = path.join(__dirname, '..', '.env');
-        const hadLocalEnv = fs.existsSync(localEnvPath);
-        const localEnvBackup = hadLocalEnv ? fs.readFileSync(localEnvPath) : null;
+        // which order) it came from.
+        fs.writeFileSync(localEnvPath, 'APP_PASSWORD=\nSESSION_SECRET=\n');
         try {
-          fs.writeFileSync(localEnvPath, 'APP_PASSWORD=\nSESSION_SECRET=\n');
           fs.writeFileSync(path.join(fakeHome, '.fiu-revenue-estimator.env'),
             'APP_PASSWORD=from-home-env\nSESSION_SECRET=also-from-home-env\n');
           server = await startServer({ HOME: fakeHome, APP_PASSWORD: undefined, SESSION_SECRET: undefined });
@@ -298,13 +311,43 @@ async function homeEnvSecretsFileSuite() {
           });
           assertEqual(res.status, 200, 'the home-env password should work even with a blank placeholder in the local .env');
         } finally {
-          if (hadLocalEnv) fs.writeFileSync(localEnvPath, localEnvBackup);
-          else fs.rmSync(localEnvPath, { force: true });
+          fs.rmSync(localEnvPath, { force: true });
         }
+      });
+
+      await testAsync('a real, non-blank local .env is left alone by these files (does not leak into other tests)', async () => {
+        // Companion to the above: a *real* value already present in the
+        // process environment before either file is read (this test
+        // simulates that the same way startServer's own hermetic defaults
+        // do, by passing APP_PASSWORD explicitly rather than deleting it)
+        // must never be overwritten by file contents — otherwise a stray
+        // local .env with real credentials would silently override every
+        // other test in this whole suite file that expects the login gate
+        // to stay off by default. This is the fix for the second
+        // same-day regression: the first attempt at "blank shouldn't
+        // block" went too far and let *any* blank process.env value
+        // (including these hermetic test defaults) be filled in from
+        // whatever real local .env happened to exist on disk.
+        fs.writeFileSync(path.join(fakeHome, '.fiu-revenue-estimator.env'), 'APP_PASSWORD=from-home-env\n');
+        server = await startServer({ HOME: fakeHome, APP_PASSWORD: 'explicitly-set-in-real-env' });
+        const logs = server.getLogs();
+        assert(/Login gate: ON \(APP_PASSWORD is set\)/.test(logs), 'a real env var should still enable the gate. Logs:\n' + logs);
+        const res = await fetch(server.baseUrl + '/api/login', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: 'explicitly-set-in-real-env' })
+        });
+        assertEqual(res.status, 200, 'the real env var\'s value must win over the home-env file, not get overwritten by it');
+        const wrongRes = await fetch(server.baseUrl + '/api/login', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: 'from-home-env' })
+        });
+        assertEqual(wrongRes.status, 401, 'the home-env file\'s value must NOT have silently replaced the real env var');
       });
     } finally {
       if (server) await server.stop();
       fs.rmSync(fakeHome, { recursive: true, force: true });
+      fs.rmSync(localEnvPath, { force: true });
+      if (hadLocalEnv) fs.writeFileSync(localEnvPath, localEnvBackup);
     }
   });
 }

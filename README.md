@@ -689,14 +689,21 @@ seems to have reset.
 A leftover blank line in the local `.env` (e.g. `APP_PASSWORD=` with
 nothing after the `=`, exactly what `.env.example` ships as a template)
 never blocks the home-directory file's real value for that same variable
-— a blank value is treated the same as the line being absent entirely, no
-matter which of the two files it's blank in. (This was a real bug in the
-first version of this fix, caught the same day by a genuine test failure:
-a local `.env` created earlier just to set `ANTHROPIC_API_KEY`, with every
-other variable left blank as shipped, silently prevented
+— a blank value inside either of these two files is treated the same as
+the line being absent entirely. (This was a real bug in the first version
+of this fix, caught the same day by a genuine test failure: a local
+`.env` created earlier just to set `ANTHROPIC_API_KEY`, with every other
+variable left blank as shipped, silently prevented
 `~/.fiu-revenue-estimator.env`'s real `APP_PASSWORD` from ever taking
 effect, even though the startup log still said the home file was
-"(loaded)".)
+"(loaded)".) This only applies to values coming from these two files,
+though — a variable that's already set in the real process environment
+before either file is read (an actual host/platform env var, or one
+exported in your shell) always wins over both files, blank or not, and is
+never silently overwritten by file contents. That second distinction was
+itself a same-day follow-up fix: the first attempt at "blank doesn't
+block" was too broad and let a stray real `.env` on one machine leak its
+real password into situations that expected no password to be set at all.
 
 ## Chat with your data
 
