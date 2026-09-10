@@ -139,6 +139,18 @@ rounded).
      a low base still grows, never because it was actually catching up to
      the right number. Falls back to the live baseline when there's no past
      actual to anchor on at all (e.g. a FIU's very first live month).
+
+     That same fix introduced its own regression, also now fixed
+     (2026-09-10 — ask: "annual revenue ... way higher than it should be"
+     once a SUC Start Date was set): the SUC-period one-time Data Fetch
+     volume cuts below (the PFM/non-Bank ÷6 rule, HDFC's 43% cut) were only
+     being applied to the current month's *displayed* figure, not to the
+     new forward-compounding anchor — so the cut silently stopped taking
+     effect one month after it was supposed to become permanent, and every
+     SUC month after that compounded from the pre-cut figure instead. Both
+     cuts now write back into the forward anchor too, so they properly
+     persist for the rest of the FY the way they did before the anchor
+     split existed.
    - **SUC Start Date** (dropdown next to As-of date/FY start month, options
      Oct 2026 – Mar 2027, default "None") — from that month onward, any FIU
      with **both** SUC Cliff CMGR and SUC Yield set on the Yield & CMGR tab
@@ -296,9 +308,20 @@ rounded).
    every earlier row's Revenue/AU/DF for that FIU was silently dropped —
    in this case losing about ₹2.33L across 4 FIUs with no warning at all.
    Now every row sharing an FIU ID within one month's upload has its
-   Revenue/AU/DF counts summed into a single record, and the upload result
-   always lists which FIU ID(s) this happened for (shown in the status
-   message after uploading) so a merge is never silent either way.
+   Revenue summed into a single record, and the upload result always lists
+   which FIU ID(s) this happened for (shown in the status message after
+   uploading) so a merge is never silent either way.
+
+   Only Revenue is summed, though — **AU/DF counts take the larger of the
+   duplicate rows, not the sum** (fixed 2026-09-10 — ask: "annual revenue
+   ... way higher than it should be" once a SUC Start Date was set, making
+   Data Fetch volume the thing driving revenue). A duplicate row's AU/DF
+   counts describe the *same* underlying month of usage restated for a
+   second billing-type line, not a second population of users/fetches — in
+   one real duplicate pair, AU count was identical across both rows and DF
+   count was within 0.02%. Summing those instead of Revenue would have
+   silently doubled a FIU's real usage, which then fed every SUC-period
+   month's Data-Fetch-driven revenue at roughly 2x what it should've been.
 5. FIUs whose billing model isn't recognized (blank, "Not billed",
    "Unbilled", or anything else unrecognized) are shown as excluded. FIUs
    missing a Yield & CMGR config entry, or with an unusable count, are shown
@@ -834,6 +857,37 @@ container rebuild would.
 Whichever host you use, back up `data/*.json` (or wherever `DATA_DIR`
 points) periodically — or point `lib/store.js` at a real database — since
 that's where all of the app's configs and uploaded data live.
+
+## Testing
+
+Run `npm test` before every deploy — not just after making a change, since
+several of the bugs this suite exists to catch (see below) were themselves
+introduced by a fix for something else. It's a plain `node` script, no test
+framework installed (kept dependency-free on purpose): `test/run.js` runs
+`test/compute.test.js` (pure unit tests against the revenue engine in
+`lib/compute.js` — billing-model classification, past/current/future month
+handling, SUC Cliff/Recovery, every per-FIU override, the what-if
+scenarios; runs in well under a second) and `test/server.test.js`
+(integration tests that spawn `server.js` as a real child process against
+a throwaway `DATA_DIR` and talk to it over HTTP — the login gate, startup
+logging, the DATA_DIR-fallback crash fix, and the Historical Actuals
+duplicate-row-upload handling; a few seconds total), then prints one
+combined pass/fail summary and exits non-zero if anything failed.
+
+Every suite is tied to either a specific piece of documented business
+logic or an actual bug this app has shipped and fixed, called out by date
+in the test names/comments — the point is that a change which
+reintroduces the same failure mode (even as a side effect of fixing
+something unrelated, which is exactly how the 2026-09-10 SUC-cut
+regression happened) fails here, in a few seconds, locally, instead of
+surfacing again as a live "why is revenue wrong" report days later. If
+you're fixing a bug that this suite didn't catch, the fix isn't done until
+there's a new test here that would have caught it — that's what keeps
+this useful instead of stale.
+
+This doesn't cover the browser-side JavaScript in `public/index.html`
+(there's no frontend test runner set up) — treat that as a known gap, not
+a reason to skip `npm test` for backend/calculation changes.
 
 ## API reference
 

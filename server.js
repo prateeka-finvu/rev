@@ -413,15 +413,26 @@ app.post('/api/historical-actuals/bulk', upload.single('file'), (req, res) => {
   // A FIU ID appearing more than once in the same month's upload is a real,
   // recurring shape in these exports (ask: 2026-09-09, "Aug revenue" gap of
   // ~₹2.33L) — e.g. one row billed under Data Fetches and a second row for
-  // the same FIU billed under Active Users, both legitimately contributing
-  // revenue for that month. Every duplicate-fiuId row's Revenue/AU/DF is
-  // now summed into one record per FIU ID + month (per row, so a row that
-  // only has a DF count doesn't zero out a Revenue already summed in from an
-  // earlier row for the same FIU) instead of the old plain upsertManyBy
-  // behavior, where the *last* matching row silently overwrote every field
-  // from the earlier one(s) — quietly dropping whichever row lost that race,
-  // with no warning. mergedFiuIds below lists every FIU ID this happened
-  // for, so a merge is always visible instead of silent either way.
+  // the same FIU billed under Active Users. Revenue genuinely differs
+  // between those rows and both amounts are real money owed, so Revenue is
+  // summed across every duplicate-fiuId row into one record per FIU ID +
+  // month. AU/DF counts are a different story, and summing them too was a
+  // bug (fixed 2026-09-10 — ask: "annual revenue ... way higher than it
+  // should be" once a SUC Start Date made Data Fetch volume the thing
+  // driving revenue): a duplicate row's AU/DF counts describe the *same*
+  // underlying month of usage restated for a second billing-type line, not
+  // a second population of users/fetches — e.g. one real duplicate pair had
+  // auCount identical (7432 and 7432) and dfCount within 0.02% (46851 vs.
+  // 46844) across both rows. Summing those doubled a FIU's real usage
+  // outright, which then fed every SUC-period month's Data-Fetch-driven
+  // revenue at roughly 2x what it should've been. AU/DF now take the
+  // larger of whatever duplicate rows report instead — safe given how
+  // close duplicate readings are in practice, and it also ignores a
+  // leftover/incomplete duplicate row that reports 0. Before the
+  // 2026-09-09 fix, the *last* matching row silently overwrote every field
+  // from the earlier one(s) instead — quietly dropping whichever row lost
+  // that race, with no warning either way. mergedFiuIds below lists every
+  // FIU ID a merge happened for, so it's always visible now.
   const byFiu = new Map(); // normId(fiuId) -> { fiuId, revenue, auCount, dfCount, billingModel, billingYield, rowCount }
   let skipped = 0;
   rows.forEach(r => {
@@ -437,8 +448,8 @@ app.post('/api/historical-actuals/bulk', upload.single('file'), (req, res) => {
     const existing = byFiu.get(key);
     if (existing) {
       if (!isNaN(revenue)) existing.revenue = (isNaN(existing.revenue) ? 0 : existing.revenue) + revenue;
-      if (!isNaN(auCount)) existing.auCount = (isNaN(existing.auCount) ? 0 : existing.auCount) + auCount;
-      if (!isNaN(dfCount)) existing.dfCount = (isNaN(existing.dfCount) ? 0 : existing.dfCount) + dfCount;
+      if (!isNaN(auCount)) existing.auCount = isNaN(existing.auCount) ? auCount : Math.max(existing.auCount, auCount);
+      if (!isNaN(dfCount)) existing.dfCount = isNaN(existing.dfCount) ? dfCount : Math.max(existing.dfCount, dfCount);
       existing.rowCount++;
     } else {
       byFiu.set(key, {
