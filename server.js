@@ -264,6 +264,69 @@ app.post('/api/logout', (req, res) => {
   res.json({ ok: true });
 });
 
+// Diagnostic endpoint (fixed 2026-09-23 — ask: "unable to preserve August
+// actuals across sessions" on Render) — self-check for exactly the class of
+// bug this app has hit twice before (data silently landing somewhere that
+// doesn't survive a restart/redeploy). Previously the only way to check was
+// digging through Render's deploy logs for the "Data directory: ..." line
+// this server already prints at startup — which requires dashboard access
+// and has been hard to relay back accurately. This puts the same
+// information (plus whether it's actually writable right now, and whether
+// Historical Actuals currently has any August rows) behind a simple
+// authenticated GET, so it can be checked by just visiting the URL.
+app.get('/api/data-status', (req, res) => {
+  const dataDir = store.DATA_DIR;
+  const resolvedDataDir = path.resolve(dataDir);
+  const resolvedAppDir = path.resolve(__dirname);
+  // If DATA_DIR ever resolves to somewhere inside the app folder itself,
+  // that's the exact failure mode fixed 2026-09-03 — it means every fresh
+  // deploy's bundled starter data/ folder IS the "persistent" store, so an
+  // update silently resets it. Should never happen given the current
+  // defaults, but worth surfacing directly rather than assuming.
+  const dataDirInsideAppFolder = resolvedDataDir === resolvedAppDir
+    || resolvedDataDir.startsWith(resolvedAppDir + path.sep);
+
+  let writable = true, writeError = null;
+  try {
+    const probe = path.join(dataDir, '.write-test-' + process.pid);
+    fs.writeFileSync(probe, '');
+    fs.unlinkSync(probe);
+  } catch (err) {
+    writable = false;
+    writeError = err.code || err.message;
+  }
+
+  const historicalPath = path.join(dataDir, 'historical-actuals.json');
+  let historicalActuals;
+  try {
+    const stat = fs.statSync(historicalPath);
+    const rows = store.readAll('historical-actuals');
+    const rowsByMonth = {};
+    rows.forEach(r => { rowsByMonth[r.month] = (rowsByMonth[r.month] || 0) + 1; });
+    historicalActuals = {
+      path: historicalPath,
+      lastModified: stat.mtime.toISOString(),
+      totalRows: rows.length,
+      rowsByMonth, // e.g. { "2026-08": 486, ... } — if "2026-08" is missing
+                   // here after you're sure you uploaded it, the upload
+                   // didn't survive; if it's present, it did.
+    };
+  } catch (err) {
+    historicalActuals = { path: historicalPath, error: err.code || err.message };
+  }
+
+  res.json({
+    dataDir,
+    dataDirFellBack: store.DATA_DIR_FELL_BACK, // true = an explicit DATA_DIR (e.g. /var/data) was set but unusable, silently fell back — see the WARNING in the startup logs
+    dataDirInsideAppFolder, // true here would itself be the bug — data would reset on every deploy by design
+    appFolder: __dirname,
+    writable,
+    writeError,
+    historicalActuals,
+    serverTimeUtc: new Date().toISOString(),
+  });
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 const META_TABLE = 'fiu-metadata';

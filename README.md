@@ -265,8 +265,8 @@ rounded).
        still gated on having a usable DF count. Before the SUC Start
        Month, they're excluded as normal. Because their Billing Model
        stays "Unbilled" on record, they'll still show up in the **Unbilled
-       FIUs** section (section 4) even in months where they're now
-       generating real SUC revenue elsewhere on the page — that section
+       FIUs** sub-tab even in months where they're now
+       generating real SUC revenue elsewhere on the page — that sub-tab
        reflects the billing-model config, not month-by-month billing
        status, so the two aren't mutually exclusive for these two FIUs.
        Their expected Data Fetch volume is also cut by **43%** once, right
@@ -342,7 +342,7 @@ rounded).
    risk in a hand-merged or re-exported file), only the first row for it is
    used — the rest are called out separately too, rather than silently
    double-counting that FIU's revenue into every total (fixed 2026-09-03).
-7. Results are split into two sections:
+7. Results are split into two sub-tabs (see "Monthly Revenue tab layout" below for the full list):
    - **Monthly results** — this month's revenue, AU count, and DF count,
      each in its own table. The revenue table covers every billed FIU; the
      AU count table lists only FIUs billed on Active/Unique Users. The **DF
@@ -445,6 +445,38 @@ rounded).
     Mar 2027 ever falls outside the current fiscal year (only possible with
     a non-default FY Start Month), that period's tables show an empty
     state instead of guessing.
+
+## Monthly Revenue tab layout
+
+The ten result sections above (fixed 2026-09-23 — previously one long
+scrolling column) are each their own **sub-tab** within the Monthly Revenue
+tab, in this order: **Projected vs Actual Revenue**, **Monthly results**,
+**Annual results**, **Unbilled FIUs**, **By TSP**, **By Use-case**, **By
+License Type**, **Top 10 - Lending**, **Top 10 - PFM**, **DF Yield
+Analysis**. The side panel (counts upload, as-of date, FY start month, SUC
+Start Date, what-if scenarios) sits outside the sub-tabs and stays visible
+and sticky no matter which one is open — every sub-tab is driven by the
+same compute result, so switching sub-tabs never re-triggers a compute or
+loses whatever's in the side panel.
+
+On screen the sub-tab strip itself uses short labels (redesigned 2026-09-23
+as a single-row, horizontally-scrollable bar so ten labels never wrap onto
+a second line — **Overview**, **Monthly**, **Annual**, **Unbilled**,
+**TSP**, **Use-case**, **License**, **Lending**, **PFM**, **DF Yield**);
+hover one for the full name shown above. The top-level tab bar (Monthly
+Revenue / Charts / FIU Metadata / Yield & CMGR / Historical Actuals) got
+the same treatment and is similarly abbreviated on screen — **Revenue**,
+**Charts**, **Metadata**, **Yield/CMGR**, **Actuals** — again with the
+full name on hover.
+
+A sub-tab that has nothing to show yet (no counts uploaded this session,
+or — for **Unbilled FIUs** specifically — a real compute that just happens
+to have zero unbilled FIUs this month) shows a one-line explanation instead
+of a blank panel, rather than leaving you wondering whether something's
+broken. **Projected vs Actual Revenue** is the default sub-tab shown on
+first load; before the first compute of a session its own card is still
+visible (unlike the other nine, which stay hidden until then), just with
+its "Month-wise figures" table empty until a counts file is uploaded.
 
 ## Projected vs Actual Revenue
 
@@ -849,6 +881,24 @@ of this section) but need their own setup.
      crashing, but if you see that warning in the logs, the real fix is
      still to remove or correct `DATA_DIR` in the **Environment** tab, or
      upgrade to a plan with a disk and actually attach one).
+
+     **Not seeing Historical Actuals (or any other data) survive between
+     visits?** (fixed 2026-09-23 — ask: "unable to preserve August actuals
+     across sessions") Visit `/api/data-status` while logged in — it
+     reports the real `dataDir` this run is using, whether it fell back
+     from an unusable `DATA_DIR`, and exactly which months are present in
+     Historical Actuals right now (see "API reference" below). By far the
+     most common cause, though, is simpler than a bug: **the free tier has
+     no persistent disk at all** (see "Free tier, no card on file" below) —
+     on it, anything written to `data/*.json` (including through this app)
+     survives the service sleeping and waking back up, but is wiped back to
+     the repo's bundled starter data on every new deploy, which is
+     indistinguishable from "not persisting" if deploys happen anywhere
+     near as often as they did while iterating on this app. If that matches
+     what you're seeing, the fix isn't a code change — it's either
+     upgrading to the Starter plan and actually attaching a disk (the
+     Blueprint path above), or accepting that data only survives between
+     deploys, not across them, on the free tier.
 5. **Deploy**. Render builds (`npm install`) and starts (`npm start`) the
    service, and gives you a public `https://fiu-revenue-estimator-xxxx.onrender.com`
    URL (renameable in the service's settings). Visiting it should land on
@@ -964,6 +1014,7 @@ a reason to skip `npm test` for backend/calculation changes.
 - `POST /api/login` — JSON body `{ password, remember? }`. Sets the `session` cookie and returns `{ ok: true }` on a correct password; `401` for a wrong one, `429` if that IP has made too many attempts recently, `400` if `APP_PASSWORD` isn't set. See "Login / access control" above.
 - `POST /api/logout` — clears the `session` cookie, returns `{ ok: true }`.
 - `GET /healthz` — always `200 { ok: true }`, unauthenticated, regardless of whether the login gate is configured. Meant for a host's health check, not for the app itself.
+- `GET /api/data-status` (fixed 2026-09-23 — ask: "unable to preserve August actuals across sessions" on Render) — self-diagnostic for the "data isn't persisting" class of bug. Returns `{ dataDir, dataDirFellBack, dataDirInsideAppFolder, appFolder, writable, writeError, historicalActuals: { path, lastModified, totalRows, rowsByMonth }, serverTimeUtc }`. `rowsByMonth` is a quick way to confirm whether a given month (e.g. `"2026-08"`) is actually present without opening the Historical Actuals tab. See the troubleshooting callout under "Deploying to Render" below.
 - Every other route requires a valid session once `APP_PASSWORD` is set — an unauthenticated request to any `/api/*` route above gets `401 { error: "Not logged in" }` instead of its usual response.
 
 ## Extending it

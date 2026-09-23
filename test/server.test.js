@@ -33,9 +33,10 @@ function freshDataDir() {
 function startServer(envOverrides) {
   return new Promise((resolve, reject) => {
     const port = 20000 + Math.floor(Math.random() * 20000);
+    const dataDir = freshDataDir();
     const env = Object.assign({}, process.env, {
       PORT: String(port),
-      DATA_DIR: freshDataDir(),
+      DATA_DIR: dataDir,
       // Every other optional integration (chat, email auto-pull) stays off
       // unless a test explicitly opts in — keeps these tests hermetic.
       ANTHROPIC_API_KEY: '', GMAIL_USER: '', GMAIL_APP_PASSWORD: '',
@@ -70,6 +71,7 @@ function startServer(envOverrides) {
         clearTimeout(timer);
         resolve({
           port, baseUrl: 'http://127.0.0.1:' + port,
+          dataDir: env.DATA_DIR ? path.resolve(env.DATA_DIR) : undefined,
           getLogs: () => logs,
           stop: () => new Promise(res => { proc.once('exit', res); proc.kill(); })
         });
@@ -352,12 +354,59 @@ async function homeEnvSecretsFileSuite() {
   });
 }
 
+async function dataStatusSuite() {
+  await suite('/api/data-status — self-diagnostic for the "data not persisting" class of bug', async () => {
+    // Fixed 2026-09-23 (ask: "unable to preserve August actuals across
+    // sessions" on Render) — a way to check where data is actually landing
+    // without needing to dig through host deploy logs.
+    let server;
+    try {
+      await testAsync('reports the real DATA_DIR, that it\'s writable, and the seeded historical months (no August yet)', async () => {
+        server = await startServer({});
+        const res = await fetch(server.baseUrl + '/api/data-status');
+        assertEqual(res.status, 200);
+        const body = await res.json();
+        assertEqual(body.dataDir, server.dataDir, 'should report this run\'s actual DATA_DIR');
+        assertEqual(body.dataDirFellBack, false);
+        assertEqual(body.dataDirInsideAppFolder, false, 'a temp DATA_DIR is never inside the app folder');
+        assertEqual(body.writable, true);
+        assert(body.historicalActuals && typeof body.historicalActuals.totalRows === 'number',
+          'expected historicalActuals.totalRows. Body:\n' + JSON.stringify(body));
+        assert(!('2026-08' in (body.historicalActuals.rowsByMonth || {})),
+          'a freshly seeded DATA_DIR should have no August rows yet');
+      });
+
+      await testAsync('a month uploaded through the app shows up here immediately', async () => {
+        const csv = 'FIU ID,Revenue,AU Counts,DF Counts\nsome-fiu,1000,50,900\n';
+        const fd = new FormData();
+        fd.append('month', '2026-08');
+        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'aug.csv');
+        await fetch(server.baseUrl + '/api/historical-actuals/bulk', { method: 'POST', body: fd });
+        const res = await fetch(server.baseUrl + '/api/data-status');
+        const body = await res.json();
+        assertEqual(body.historicalActuals.rowsByMonth['2026-08'], 1,
+          'August should now show up in rowsByMonth. Body:\n' + JSON.stringify(body));
+      });
+
+      await testAsync('requires login when the gate is on, same as every other /api/ route', async () => {
+        await server.stop();
+        server = await startServer({ APP_PASSWORD: 'secret123', SESSION_SECRET: 'test-secret' });
+        const res = await fetch(server.baseUrl + '/api/data-status');
+        assertEqual(res.status, 401);
+      });
+    } finally {
+      if (server) await server.stop();
+    }
+  });
+}
+
 async function main() {
   await loginGateOffSuite();
   await loginGateOnSuite();
   await dataDirFallbackSuite();
   await historicalActualsDuplicateSuite();
   await homeEnvSecretsFileSuite();
+  await dataStatusSuite();
 }
 
 module.exports = main();

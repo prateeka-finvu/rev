@@ -75,8 +75,12 @@
   .brand{ display:flex; align-items:center; gap:14px; }
   .brand-logo{ height:38px; width:auto; flex-shrink:0; }
 
-  .tabs{ display:flex; gap:6px; margin-bottom:20px; border-bottom:1px solid var(--border); }
-  .tab-btn{ font-family:inherit; font-size:13.5px; font-weight:600; padding:10px 16px; border:none; background:transparent; color:var(--text-secondary); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; }
+  /* Kept short on purpose (title="" carries the full name for a hover
+     tooltip) so all five fit on one line without wrapping or scrolling —
+     overflow-x:auto is just a safety net for extreme widths. */
+  .tabs{ display:flex; gap:6px; margin-bottom:20px; border-bottom:1px solid var(--border); overflow-x:auto; overflow-y:hidden; scrollbar-width:none; }
+  .tabs::-webkit-scrollbar{ display:none; }
+  .tab-btn{ font-family:inherit; font-size:13.5px; font-weight:600; padding:10px 16px; border:none; background:transparent; color:var(--text-secondary); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; white-space:nowrap; flex:0 0 auto; }
   .tab-btn.active{ color: var(--series-1); border-bottom-color: var(--series-1); }
   .tab-panel{ display:none; }
   .tab-panel.active{ display:block; }
@@ -93,12 +97,60 @@
   .side-panel{ flex: 0 0 300px; width:300px; position:sticky; top:20px; max-height:calc(100vh - 40px); overflow-y:auto; }
   .side-panel .field{ width:100%; margin-bottom:12px; }
   .side-panel .field select, .side-panel .field input{ width:100%; }
+  /* As-of date / FY start month / SUC Start Date sit side by side instead
+     of each taking its own full-width row — flex-wrap lets them fall back
+     to stacking only once the panel is too narrow to fit them (e.g. the
+     300px desktop sidebar), so the layout adapts rather than being pinned
+     to one breakpoint. */
+  .side-panel .field-row{ display:flex; flex-wrap:wrap; gap:12px; margin-bottom:12px; }
+  .side-panel .field-row .field{ flex:1 1 120px; min-width:120px; width:auto; margin-bottom:0; }
+  #scenariosList{ display:flex; flex-wrap:wrap; gap:2px 18px; }
   .side-panel .upload-box{ width:100%; margin-bottom:12px; }
   .side-panel #emailSourceRow{ align-items:center; margin-bottom:10px; flex-wrap:wrap; }
   .revenue-main{ flex:1; min-width:0; }
+
+  /* Sub-tabs within the Monthly Revenue tab (fixed 2026-09-23 — the ten
+     result sections used to all render in one long scrolling column; now
+     each is its own sub-tab. The side panel (upload + date/FY/SUC/scenario
+     fields) stays outside this — it's sticky and shared across every
+     sub-tab since all of them are driven by the same compute result.
+
+     Styled as a single-row, horizontally-scrollable segmented control
+     (redesigned 2026-09-23 — the original underline tabs wrapped onto two
+     ragged lines once all ten labels were present). Never wraps: on a
+     narrow viewport the strip scrolls sideways instead, which reads as an
+     intentional swipeable tab bar rather than a layout break. The native
+     scrollbar is hidden since the pill styling plus a little peek of the
+     next tab at the edge is enough of an affordance that it's scrollable. */
+  .subtabs{
+    display:flex; gap:4px; margin-bottom:20px; padding:4px;
+    background: var(--surface-2); border:1px solid var(--border); border-radius:10px;
+    overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .subtabs::-webkit-scrollbar{ display:none; }
+  .subtab-btn{
+    font-family:inherit; font-size:12.5px; font-weight:600; padding:7px 13px;
+    border:none; border-radius:7px; background:transparent; color:var(--text-secondary);
+    cursor:pointer; white-space:nowrap; flex:0 0 auto;
+    transition: background .15s ease, color .15s ease;
+  }
+  .subtab-btn:hover{ color: var(--text-primary); }
+  .subtab-btn.active{ color:#fff; background: var(--series-1); }
+  .subtab-panel{ display:none; }
+  .subtab-panel.active{ display:block; }
+
   @media (max-width: 900px){
-    .revenue-layout{ flex-direction:column; }
+    /* align-items:flex-start (set above for the desktop side-by-side
+       layout) makes stacked flex items shrink-to-fit their content instead
+       of filling the available width — which let the scrollable .subtabs
+       strip's un-wrapped buttons blow out the whole page's width on narrow
+       screens instead of scrolling within their own box. Stretch instead,
+       once everything is a single column, so both the side panel and the
+       results column are always exactly the viewport's width. */
+    .revenue-layout{ flex-direction:column; align-items:stretch; }
     .side-panel{ position:static; width:100%; flex:1 1 auto; max-height:none; }
+    .revenue-main{ width:100%; }
   }
 
   .row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
@@ -218,7 +270,6 @@
       <img src="/assets/finvu-logo.png" alt="Finvu" class="brand-logo" />
       <div>
         <h1>FIU Revenue Estimator</h1>
-        <p class="sub">FIU metadata and yield/CMGR are maintained here as configs. Each month, upload just the AU/DF counts — the tool joins them with the configs to compute current-month revenue and projects revenue for every remaining month of the FY using CMGR.</p>
       </div>
     </div>
     <div class="header-actions">
@@ -228,11 +279,11 @@
   </header>
 
   <div class="tabs">
-    <button class="tab-btn active" data-tab="revenue">Monthly Revenue</button>
+    <button class="tab-btn active" data-tab="revenue" title="Monthly Revenue">Revenue</button>
     <button class="tab-btn" data-tab="charts">Charts</button>
-    <button class="tab-btn" data-tab="metadata">FIU Metadata</button>
-    <button class="tab-btn" data-tab="yieldcmgr">Yield &amp; CMGR</button>
-    <button class="tab-btn" data-tab="historical">Historical Actuals</button>
+    <button class="tab-btn" data-tab="metadata" title="FIU Metadata">Metadata</button>
+    <button class="tab-btn" data-tab="yieldcmgr" title="Yield &amp; CMGR">Yield/CMGR</button>
+    <button class="tab-btn" data-tab="historical" title="Historical Actuals">Actuals</button>
   </div>
 
   <!-- ===================== Monthly Revenue tab ===================== -->
@@ -251,6 +302,7 @@
         <div class="fname" id="countsFname">No file selected</div>
         <button class="btn-secondary btn-small" id="useEmailDataBtn" type="button" style="display:none; margin-top:6px;">Use auto-pulled email data instead</button>
       </div>
+      <div class="field-row">
       <div class="field">
         <label for="asOfDate" title="Defaults to yesterday, not today — a daily counts export dated/generated today typically only has real data through end of the previous day (a one-day reporting lag). Change this if the file you're using doesn't have that lag (e.g. a manually pulled same-day report).">As-of date</label>
         <input type="date" id="asOfDate" />
@@ -276,6 +328,7 @@
           <option value="2027-03">Mar 2027</option>
         </select>
       </div>
+      </div>
       <div class="field" id="scenariosField" style="display:none;">
         <label>What-if scenarios</label>
         <div id="scenariosList"></div>
@@ -286,16 +339,32 @@
     </aside>
 
     <div class="revenue-main">
+    <div class="subtabs" id="revenueSubtabs">
+      <button class="subtab-btn active" data-subtab="projected" title="Projected vs Actual Revenue">Overview</button>
+      <button class="subtab-btn" data-subtab="monthly">Monthly</button>
+      <button class="subtab-btn" data-subtab="annual">Annual</button>
+      <button class="subtab-btn" data-subtab="unbilled" title="Unbilled FIUs">Unbilled</button>
+      <button class="subtab-btn" data-subtab="tsp" title="By TSP">TSP</button>
+      <button class="subtab-btn" data-subtab="usecase" title="By Use-case">Use-case</button>
+      <button class="subtab-btn" data-subtab="license" title="By License Type">License</button>
+      <button class="subtab-btn" data-subtab="top10lending" title="Top 10 - Lending">Lending</button>
+      <button class="subtab-btn" data-subtab="top10pfm" title="Top 10 - PFM">PFM</button>
+      <button class="subtab-btn" data-subtab="dfyield" title="DF Yield Analysis">DF Yield</button>
+    </div>
+
+    <div class="subtab-panel active" data-subtab="projected">
     <section class="card">
-      <h2>1. Projected vs Actual Revenue</h2>
+      <h2>Projected vs Actual Revenue</h2>
       <p class="hint">The FY revenue projection — live, reflecting whatever SUC Start Date and what-if scenarios are currently selected — compared against actual revenue as it's recorded in Historical Actuals. Updates automatically every time you change a counts file, the as-of date, SUC Start Date, or a scenario. The chart for this lives on the <strong>Charts</strong> tab — the month-wise figures stay here.</p>
       <div class="snapshot-meta" id="snapshotMeta"></div>
       <h3 class="dt-title" style="margin-top:18px;">Month-wise figures</h3>
       <div id="forecastTable"></div>
     </section>
+    </div>
 
+    <div class="subtab-panel" data-subtab="monthly">
     <section class="card" id="monthlyCard" style="display:none;">
-      <h2>2. Monthly results</h2>
+      <h2>Monthly results</h2>
       <div class="stat-row" id="statRow"></div>
       <div style="font-size:12px; color:var(--text-muted); margin-top:10px;" id="statNote"></div>
 
@@ -310,9 +379,12 @@
       <p class="hint" style="margin-top:-6px;">FIUs billed on Data Fetch/Fix Billing, with this month's raw month-to-date DF count (before full-month projection).</p>
       <div id="monthlyDfTable"></div>
     </section>
+    <p class="hint" id="monthlyCardEmpty">Upload this month's counts (left panel) to see monthly results here.</p>
+    </div>
 
+    <div class="subtab-panel" data-subtab="annual">
     <section class="card" id="annualCard" style="display:none;">
-      <h2>3. Annual results</h2>
+      <h2>Annual results</h2>
       <div class="stat-row" id="fyStatRow"></div>
       <div class="row" style="margin-top:16px;">
         <button class="btn-secondary" id="exportCsv" type="button">Export FY grid as CSV</button>
@@ -329,16 +401,22 @@
       <p class="hint" style="margin-top:-6px;">Projected full-month DF count per month (grown by CMGR from this month's baseline) for every FIU with a Data Fetch figure, regardless of billing model.</p>
       <div id="annualDfTable"></div>
     </section>
+    <p class="hint" id="annualCardEmpty">Upload this month's counts (left panel) to see annual results here.</p>
+    </div>
 
+    <div class="subtab-panel" data-subtab="unbilled">
     <section class="card" id="unbilledCard" style="display:none;">
-      <h2>4. Unbilled FIUs</h2>
+      <h2>Unbilled FIUs</h2>
       <p class="hint">FIUs whose billing model is blank, "Not billed"/"Unbilled", or otherwise unrecognized — excluded from revenue above, but shown here with their raw AU/DF counts so nothing billable-looking silently disappears.</p>
       <div class="stat-row" id="unbilledStatRow"></div>
       <div id="unbilledTable" style="margin-top:14px;"></div>
     </section>
+    <p class="hint" id="unbilledCardEmpty">Upload this month's counts (left panel) to see unbilled FIUs here.</p>
+    </div>
 
+    <div class="subtab-panel" data-subtab="tsp">
     <section class="card" id="groupTspCard" style="display:none;">
-      <h2>5. By TSP</h2>
+      <h2>By TSP</h2>
       <p class="hint">Revenue, AU count, and DF count rolled up by TSP (from the FIU Metadata config), as a full FY grid. A blank TSP is bucketed as "(Unspecified)" rather than dropped.</p>
 
       <h3 class="dt-title" style="margin-top:22px;">By TSP — Revenue</h3>
@@ -350,9 +428,12 @@
       <h3 class="dt-title" style="margin-top:24px;">By TSP — DF count</h3>
       <div id="groupTspDf"></div>
     </section>
+    <p class="hint" id="groupTspCardEmpty">Upload this month's counts (left panel) to see the By TSP rollup here.</p>
+    </div>
 
+    <div class="subtab-panel" data-subtab="usecase">
     <section class="card" id="groupUseCaseCard" style="display:none;">
-      <h2>6. By Use-case</h2>
+      <h2>By Use-case</h2>
       <p class="hint">Revenue, AU count, and DF count rolled up by Use-case (from the FIU Metadata config), as a full FY grid. A blank Use-case is bucketed as "(Unspecified)" rather than dropped.</p>
 
       <h3 class="dt-title" style="margin-top:22px;">By Use-case — Revenue</h3>
@@ -364,9 +445,12 @@
       <h3 class="dt-title" style="margin-top:24px;">By Use-case — DF count</h3>
       <div id="groupUseCaseDf"></div>
     </section>
+    <p class="hint" id="groupUseCaseCardEmpty">Upload this month's counts (left panel) to see the By Use-case rollup here.</p>
+    </div>
 
+    <div class="subtab-panel" data-subtab="license">
     <section class="card" id="groupLicenseCard" style="display:none;">
-      <h2>7. By License Type</h2>
+      <h2>By License Type</h2>
       <p class="hint">Revenue, AU count, and DF count rolled up by License Type (from the FIU Metadata config), as a full FY grid. A blank License Type is bucketed as "(Unspecified)" rather than dropped.</p>
 
       <h3 class="dt-title" style="margin-top:22px;">By License Type — Revenue</h3>
@@ -378,9 +462,12 @@
       <h3 class="dt-title" style="margin-top:24px;">By License Type — DF count</h3>
       <div id="groupLicenseDf"></div>
     </section>
+    <p class="hint" id="groupLicenseCardEmpty">Upload this month's counts (left panel) to see the By License Type rollup here.</p>
+    </div>
 
+    <div class="subtab-panel" data-subtab="top10lending">
     <section class="card" id="topTenLendingCard" style="display:none;">
-      <h2>8. Top 10 - Lending</h2>
+      <h2>Top 10 - Lending</h2>
       <p class="hint">FY revenue and Data Fetch count for the FIUs flagged <strong>Top 10 = Yes</strong> in the FIU Metadata config with Use-case "Lending". Set the flag on the FIU Metadata tab.</p>
 
       <h3 class="dt-title" style="margin-top:22px;">Top 10 Lending — Revenue</h3>
@@ -389,9 +476,12 @@
       <h3 class="dt-title" style="margin-top:24px;">Top 10 Lending — DF count</h3>
       <div id="topTenLendingDfTable"></div>
     </section>
+    <p class="hint" id="topTenLendingCardEmpty">Upload this month's counts (left panel) to see Top 10 - Lending here.</p>
+    </div>
 
+    <div class="subtab-panel" data-subtab="top10pfm">
     <section class="card" id="topTenPfmCard" style="display:none;">
-      <h2>9. Top 10 - PFM</h2>
+      <h2>Top 10 - PFM</h2>
       <p class="hint">FY revenue, AU count, and Data Fetch count for the FIUs flagged <strong>Top 10 = Yes</strong> in the FIU Metadata config with Use-case "PFM". Set the flag on the FIU Metadata tab.</p>
 
       <h3 class="dt-title" style="margin-top:22px;">Top 10 PFM — Revenue</h3>
@@ -403,9 +493,12 @@
       <h3 class="dt-title" style="margin-top:24px;">Top 10 PFM — DF count</h3>
       <div id="topTenPfmDfTable"></div>
     </section>
+    <p class="hint" id="topTenPfmCardEmpty">Upload this month's counts (left panel) to see Top 10 - PFM here.</p>
+    </div>
 
+    <div class="subtab-panel" data-subtab="dfyield">
     <section class="card" id="dfYieldCard" style="display:none;">
-      <h2>10. DF Yield Analysis</h2>
+      <h2>DF Yield Analysis</h2>
       <p class="hint"><strong>DF Yield = Total Revenue &divide; Total DF Count</strong> for the scope and month shown. Revenue only counts months that are actually billed (same rule as everywhere else); DF Count includes every FIU that reported a DF count that month, regardless of billing model — the same broad population as the DF count tables above. That means DF Yield reflects revenue earned across the whole Data Fetch footprint, not just the FIUs currently billing on it, so it can differ noticeably from any single FIU's configured Yield. A scope with no DF volume that month shows "—" rather than a divide-by-zero.</p>
 
       <h3 class="dt-title" style="margin-top:22px;" id="dfYieldCurrentHeading">Current Month — Overall</h3>
@@ -433,6 +526,8 @@
       <p class="hint" style="margin-top:-6px;">Each TSP's DF Yield compared across the three periods above, side by side.</p>
       <div id="dfYieldTspByPeriod"></div>
     </section>
+    <p class="hint" id="dfYieldCardEmpty">Upload this month's counts (left panel) to see DF Yield Analysis here.</p>
+    </div>
     </div>
    </div>
   </div>
@@ -619,6 +714,43 @@
       document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
     });
   });
+
+  // ---------- Monthly Revenue sub-tabs ----------
+  // (fixed 2026-09-23) The ten result sections used to all sit in one long
+  // scrolling column; each is now its own sub-tab (same active/inactive
+  // pattern as the top-level tabs above, just scoped inside .revenue-main).
+  // The side panel (upload + date/FY/SUC/scenario fields) is outside this
+  // and stays visible across every sub-tab, since all of them are driven by
+  // the same compute result.
+  document.querySelectorAll('.subtab-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.subtab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector('.subtab-panel[data-subtab="' + btn.dataset.subtab + '"]').classList.add('active');
+    });
+  });
+
+  // Each result card (Monthly results, Annual results, Unbilled FIUs, the
+  // three rollups, both Top 10 sections, DF Yield Analysis) starts hidden
+  // (style="display:none;") until the first compute produces something for
+  // it — in the old single-column layout that just meant the section didn't
+  // appear yet, with whatever came after it flowing up to fill the gap. In
+  // the sub-tab layout that's not enough on its own: clicking a not-yet-
+  // populated sub-tab would show a totally blank panel with no indication
+  // why, since the panel itself has nothing else in it. setCardVisible
+  // keeps the existing show/hide-on-data logic exactly as it was everywhere
+  // it's already called (still just a display:block/none toggle on the
+  // card), but now also flips a sibling "<id>Empty" hint paragraph to say
+  // why nothing's there yet — every card wrapped in a sub-tab panel has one
+  // (id is the card's id + "Empty"); harmless no-op for a card that doesn't
+  // (there are none as of this fix, but this stays safe if that changes).
+  function setCardVisible(cardId, visible) {
+    const card = document.getElementById(cardId);
+    if (card) card.style.display = visible ? 'block' : 'none';
+    const empty = document.getElementById(cardId + 'Empty');
+    if (empty) empty.style.display = visible ? 'none' : 'block';
+  }
 
   // ---------- theme ----------
   const themeToggle = document.getElementById('themeToggle');
@@ -1705,8 +1837,8 @@
   }
 
   function renderResults(data){
-    document.getElementById('monthlyCard').style.display = 'block';
-    document.getElementById('annualCard').style.display = 'block';
+    setCardVisible('monthlyCard', true);
+    setCardVisible('annualCard', true);
     const currentIndex = data.currentIndex || 0;
     const current = data.months[currentIndex];
     // "billed" = billed *this month specifically* — a row can be billed
@@ -2082,7 +2214,7 @@
     const topTenLendingRows = data.rows.filter(r => r.topTen && useCaseNorm(r.useCase) === 'lending');
     const topTenPfmRows = data.rows.filter(r => r.topTen && useCaseNorm(r.useCase) === 'pfm');
 
-    document.getElementById('topTenLendingCard').style.display = 'block';
+    setCardVisible('topTenLendingCard', true);
     renderDataTable({
       containerId: 'topTenLendingRevenueTable',
       rows: topTenLendingRows,
@@ -2124,7 +2256,7 @@
       footer: () => '<tr><td colspan="3">Total</td>' + data.months.map((m,i)=>'<td class="num">'+fmt(sumMonthValue(topTenLendingRows,i,monthDfUsageValue),0)+'</td>').join('') + '</tr>'
     });
 
-    document.getElementById('topTenPfmCard').style.display = 'block';
+    setCardVisible('topTenPfmCard', true);
     renderDataTable({
       containerId: 'topTenPfmRevenueTable',
       rows: topTenPfmRows,
@@ -2189,24 +2321,24 @@
     // Each grouping has its own card with three tables (Revenue, AU count,
     // DF count) — data.groupedByTsp/UseCase/License are each
     // { revenue: [...], au: [...], df: [...] } from the backend.
-    document.getElementById('groupTspCard').style.display = 'block';
+    setCardVisible('groupTspCard', true);
     renderGroupTable('groupTspRevenue', 'TSP', data.groupedByTsp.revenue, data.months, currentIndex, 'revenue');
     renderGroupTable('groupTspAu', 'TSP', data.groupedByTsp.au, data.months, currentIndex, 'count');
     renderGroupTable('groupTspDf', 'TSP', data.groupedByTsp.df, data.months, currentIndex, 'count');
 
-    document.getElementById('groupUseCaseCard').style.display = 'block';
+    setCardVisible('groupUseCaseCard', true);
     renderGroupTable('groupUseCaseRevenue', 'Use-case', data.groupedByUseCase.revenue, data.months, currentIndex, 'revenue');
     renderGroupTable('groupUseCaseAu', 'Use-case', data.groupedByUseCase.au, data.months, currentIndex, 'count');
     renderGroupTable('groupUseCaseDf', 'Use-case', data.groupedByUseCase.df, data.months, currentIndex, 'count');
 
-    document.getElementById('groupLicenseCard').style.display = 'block';
+    setCardVisible('groupLicenseCard', true);
     renderGroupTable('groupLicenseRevenue', 'License Type', data.groupedByLicense.revenue, data.months, currentIndex, 'revenue');
     renderGroupTable('groupLicenseAu', 'License Type', data.groupedByLicense.au, data.months, currentIndex, 'count');
     renderGroupTable('groupLicenseDf', 'License Type', data.groupedByLicense.df, data.months, currentIndex, 'count');
 
     // ---- DF Yield Analysis ----
     if (data.dfYieldAnalysis){
-      document.getElementById('dfYieldCard').style.display = 'block';
+      setCardVisible('dfYieldCard', true);
       renderDfYieldAnalysis(data.dfYieldAnalysis);
     }
 
@@ -2325,12 +2457,19 @@
 
   // summary: { count, totalAuCount, totalDfCount }; rows: the notBillable rows
   function renderUnbilled(summary, rows){
-    const card = document.getElementById('unbilledCard');
     if (!summary || !summary.count){
-      card.style.display = 'none';
+      setCardVisible('unbilledCard', false);
+      // Distinguish "haven't computed yet" from "computed, and there just
+      // happen to be zero unbilled FIUs this month" — the generic
+      // setCardVisible hint (written for "nothing computed yet") would be
+      // actively wrong for the second, very normal case.
+      const empty = document.getElementById('unbilledCardEmpty');
+      if (empty) empty.textContent = lastResult
+        ? 'No unbilled FIUs this month.'
+        : 'Upload this month\'s counts (left panel) to see unbilled FIUs here.';
       return;
     }
-    card.style.display = 'block';
+    setCardVisible('unbilledCard', true);
     document.getElementById('unbilledStatRow').innerHTML = [
       tile('Unbilled FIUs', fmt(summary.count,0)),
       tile('Total AU count', fmt(summary.totalAuCount,0)),
