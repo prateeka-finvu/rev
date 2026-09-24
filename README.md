@@ -493,7 +493,7 @@ against what actually came in, month by month, for the whole FY. The chart
 itself lives on the **Charts** tab; the month-wise figures table stays on
 the **Monthly Revenue** tab, right where it always was.
 
-- **Projected** is exactly the current compute result's FY total-by-month —
+- **Live Projection** is exactly the current compute result's FY total-by-month —
   same counts file, as-of date, DPI Pricing Start Date, and what-if scenario(s) as
   whatever's selected in the live view right now. It recomputes and
   redraws automatically every time you change any of those (a new counts
@@ -513,8 +513,8 @@ the **Monthly Revenue** tab, right where it always was.
   Actuals** for each FY month. A month with no historical rows yet shows
   as a gap in the line (not zero) — it fills in automatically once that
   month's actuals are recorded.
-- The chart (on the Charts tab) shows Projected/Actual/Original Plan as
-  three lines per month across the full FY (see "Original FY Projection"
+- The chart (on the Charts tab) shows Live Projection/Actual/Original Plan
+  as three lines per month across the full FY (see "Original FY Projection"
   below for the third), with a hover tooltip (crosshair snaps to the
   nearest month) and end-of-line value labels. The month-wise figures table
   (on the Monthly Revenue tab) has the exact numbers for all three, plus
@@ -529,42 +529,42 @@ revenue gets displayed as the same number which is not the reality")
 The live-tracking fix above (2026-09-03) has a gap: once a month has a
 recorded Actual, the live compute result **is** that Actual for that month
 (`computeRevenue`'s `isPast` branch in `lib/compute.js` returns the
-recorded actual revenue, not a forecast) — so "Projected" for every closed
-month was just a copy of "Actual", a trivial ₹0 / 0.0% variance that isn't
-a real comparison.
+recorded actual revenue, not a forecast) — so "Live Projection" for every
+closed month was just a copy of "Actual", a trivial ₹0 / 0.0% variance that
+isn't a real comparison.
 
-The **Original FY Projection** card, right below the month-wise figures
-table, is a one-time reference: what each month's revenue was expected to
-be back when the FY began. It's a plain static config — never recomputed
-by this tool, same spirit as FIU Metadata or Yield & CMGR — read via
-`GET /api/revenue-projection-baseline` (see "API reference" below), keyed
-by calendar month.
+The **Original FY Projection** is a one-time reference: what each month's
+revenue was expected to be back when the FY began. It's a plain static
+config — never recomputed by this tool, same spirit as FIU Metadata or
+Yield & CMGR — read via `GET /api/revenue-projection-baseline` (see "API
+reference" below), keyed by calendar month.
 
-**Shown side by side with Projected and Actual, not swapped in (changed
-2026-09-24 — ask: "Sep onwards projected figures are not as per the table
-I shared earlier").** An earlier version of this made the "Projected"
-figure switch to the baseline number once a month had an Actual recorded,
-which fixed the trivial-zero-variance problem for closed months but gave
-open months (nothing recorded yet) no visual sign they were still showing
-the live forecast rather than the plan — which read as the baseline simply
-not applying to Sep onward. Now every month always shows all three
-figures — Projected (live), Original Plan (this static baseline), and
-Actual — as separate columns/lines, so there's never any ambiguity about
-which is which. Variance/Variance % compare Actual against the Original
-Plan whenever a plan value is set for that month (a real plan-vs-actual
-comparison, not the trivial zero this was originally built to fix),
-falling back to the live Projected figure only for a month with no plan
-value at all. The live model itself is unaffected either way — a closed
-month's Projected still just mirrors its Actual (`computeRevenue`'s
-`isPast` branch, unchanged since 2026-09-03), which is expected, not a
-bug — the Original Plan column is what gives you a non-trivial comparison
-for that month, not a change to what "Projected" means.
+**Shown side by side with Live Projection and Actual, not swapped in
+(changed 2026-09-24 — ask: "Sep onwards projected figures are not as per
+the table I shared earlier").** An earlier version of this made the
+"Projected" figure switch to the baseline number once a month had an
+Actual recorded, which fixed the trivial-zero-variance problem for closed
+months but gave open months (nothing recorded yet) no visual sign they
+were still showing the live forecast rather than the plan — which read as
+the baseline simply not applying to Sep onward. Now every month always
+shows all three figures — Live Projection, Original Plan (this static
+baseline), and Actual — as separate columns/lines, so there's never any
+ambiguity about which is which. Variance/Variance % compare Actual against
+the Original Plan whenever a plan value is set for that month (a real
+plan-vs-actual comparison, not the trivial zero this was originally built
+to fix), falling back to the Live Projection figure only for a month with
+no plan value at all. The live model itself is unaffected either way — a
+closed month's Live Projection still just mirrors its Actual
+(`computeRevenue`'s `isPast` branch, unchanged since 2026-09-03), which is
+expected, not a bug — the Original Plan column is what gives you a
+non-trivial comparison for that month, not a change to what "Live
+Projection" means.
 
 **Seed-file only, not editable in the app (changed 2026-09-24 — ask: "give
 you the projections for each month already ... remove the input fields
-from the UI and just use the file with the data in it").** This card used
-to be a grid of 12 number inputs plus a Save button, but a value typed in
-through the running app on Render's free tier doesn't survive a
+from the UI and just use the file with the data in it").** This used to be
+a grid of 12 number inputs plus a Save button, but a value typed in through
+the running app on Render's free tier doesn't survive a
 redeploy/restart/spin-down — same problem Historical Actuals had before it
 was seeded from a committed file (see "Making a closed month's data
 survive for free" below). Since this config is meant to be set once per FY
@@ -573,8 +573,18 @@ committed seed file instead: **`data/revenue-projection-baseline.json`**,
 shape `{ "values": { "2026-04": 9415196, ... }, "updatedAt": "<ISO date>" }`.
 Edit that file directly (or `POST /api/revenue-projection-baseline`, still
 available for scripted use even though the UI no longer calls it) and
-redeploy to change a figure — the card itself just displays whatever's
-currently in the config.
+redeploy to change a figure.
+
+**No dedicated display of its own (changed 2026-09-24 — ask: "This section
+need not be displayed since the numbers are already displayed in the table
+above it").** This used to also have its own read-only card, right below
+the month-wise figures table, repeating the same 12 monthly figures already
+shown there as the "Original Plan" column (and on the Charts tab as the
+"Original Plan" line) — since that was a plain duplicate of numbers already
+visible, the card was removed. The config still loads in the background on
+every page load so the table column and chart line have something to
+compare against; there's just nothing to look at beyond those two views
+now.
 
 ## Charts tab
 

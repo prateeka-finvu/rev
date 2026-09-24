@@ -115,19 +115,6 @@
   .side-panel #emailSourceRow{ align-items:center; margin-bottom:10px; flex-wrap:wrap; }
   .revenue-main{ flex:1; min-width:0; }
 
-  /* Original FY Projection — 12 small read-only labeled figures, one per FY
-     month, wrapping as needed (same flex-wrap pattern as the side panel's
-     field-row above) rather than one per line. Read-only (fixed 2026-09-24
-     — ask: "remove the input fields from the UI and just use the file with
-     the data in it") — this config is now maintained entirely via a
-     committed seed file, not typed into the running app, so there's no
-     input/Save affordance here anymore, just a display. */
-  .baseline-grid{ display:flex; flex-wrap:wrap; gap:10px 14px; }
-  .baseline-field{ display:flex; flex-direction:column; gap:4px; width:112px; }
-  .baseline-field label{ font-size:11.5px; color: var(--text-secondary); font-weight:600; }
-  .baseline-field .baseline-value{ width:100%; border-radius:7px; border:1px solid var(--border); background: var(--surface-2); color: var(--text-primary); padding:7px 8px; font-family:inherit; font-size:13px; }
-  .baseline-field .baseline-value.empty{ color: var(--text-muted); }
-
   /* Sub-tabs within the Monthly Revenue tab (fixed 2026-09-23 — the ten
      result sections used to all render in one long scrolling column; now
      each is its own sub-tab. The side panel (upload + date/FY/SUC/scenario
@@ -374,16 +361,10 @@
     <div class="subtab-panel active" data-subtab="projected">
     <section class="card">
       <h2>Projected vs Actual Revenue</h2>
-      <p class="hint">Three figures per month, side by side: <strong>Live Projection</strong> — the live FY revenue model, reflecting whatever DPI Pricing Start Date and what-if scenarios are currently selected (identical to Actual for a month that's already closed, since a closed month's actual replaces the forecast in the model itself — see the DPI Pricing Start Date hint below); <strong>Original Plan</strong> — the static <strong>Original FY Projection</strong> below, unchanged all year; and <strong>Actual</strong>, as recorded in Historical Actuals. Updates automatically every time you change a counts file, the as-of date, DPI Pricing Start Date, or a scenario. The chart for this lives on the <strong>Charts</strong> tab — the month-wise figures stay here. Variance compares Actual against the Original Plan (falling back to the Live Projection figure for a month with no plan value set).</p>
+      <p class="hint">Three figures per month, side by side: <strong>Live Projection</strong> — the live FY revenue model, reflecting whatever DPI Pricing Start Date and what-if scenarios are currently selected (identical to Actual for a month that's already closed, since a closed month's actual replaces the forecast in the model itself — see the DPI Pricing Start Date hint below); <strong>Original Plan</strong> — what was expected for that month's revenue back when the FY began, a static, fixed reference never recomputed by this tool (a static config maintained in the app's data files, not editable here — see the README if it ever needs updating); and <strong>Actual</strong>, as recorded in Historical Actuals. Updates automatically every time you change a counts file, the as-of date, DPI Pricing Start Date, or a scenario. The chart for this lives on the <strong>Charts</strong> tab — the month-wise figures stay here. Variance compares Actual against the Original Plan (falling back to the Live Projection figure for a month with no plan value set).</p>
       <div class="snapshot-meta" id="snapshotMeta"></div>
       <h3 class="dt-title" style="margin-top:18px;">Month-wise figures</h3>
       <div id="forecastTable"></div>
-    </section>
-
-    <section class="card">
-      <h3 class="dt-title" style="margin-top:0;">Original FY Projection <span class="hint" style="font-weight:400; display:inline;">— static, set once at the start of the FY</span></h3>
-      <p class="hint">What was expected for each month's revenue back when the FY began — a fixed reference, never recomputed by this tool. Shown as its own <strong>Original Plan</strong> column in the table above, for every month, closed or not — a blank month here just shows as "—" there. This is a static config maintained in the app's data files, not editable from here — see the README if it ever needs updating.</p>
-      <div class="baseline-grid" id="baselineGrid"></div>
     </section>
     </div>
 
@@ -561,7 +542,7 @@
   <div class="tab-panel" id="tab-charts">
     <section class="card">
       <h2>Projected vs Actual Revenue</h2>
-      <p class="hint">Three lines per month: the live FY revenue projection (reflecting whatever DPI Pricing Start Date and what-if scenarios are currently selected on the Monthly Revenue tab), the static Original Plan set at the start of the FY, and actual revenue as it's recorded in Historical Actuals. See the month-wise figures, and the Original FY Projection itself, on the Monthly Revenue tab.</p>
+      <p class="hint">Three lines per month: the live FY revenue projection (reflecting whatever DPI Pricing Start Date and what-if scenarios are currently selected on the Monthly Revenue tab), the static Original Plan set at the start of the FY, and actual revenue as it's recorded in Historical Actuals. See the same figures in the month-wise table on the Monthly Revenue tab.</p>
       <div class="chart-legend" id="forecastLegend"></div>
       <div class="chart-wrap" id="forecastChartWrap">
         <div id="forecastChart"></div>
@@ -1391,19 +1372,17 @@
   // 2026-09-03 to just track whatever's live, same as every other chart on
   // this page.
   //
-  // That fix left a gap, though (ask: 2026-09-24): once a month has a
-  // recorded Actual, the live compute IS that Actual for that month (see
-  // computeRevenue's `isPast` branch in lib/compute.js) — so "Projected"
-  // for every closed month is just a copy of "Actual", a trivial ₹0/0.0%
-  // variance that isn't a real comparison. The Original FY Projection
-  // baseline below (GET /api/revenue-projection-baseline, read from a
-  // committed seed file — see the "Original FY Projection" panel's own
-  // comment further down) fixes that specifically — and only — for closed
-  // months: applyBaselineOverlay() swaps in the baseline figure wherever a
-  // month already has an Actual AND a baseline value exists, leaving every
-  // other month (nothing recorded yet) on the live figure exactly as the
-  // 2026-09-03 fix intended, so a stale baseline never overrides what the
-  // model currently expects for the rest of the year.
+  // Separately (ask: 2026-09-24, "Sep onwards projected figures are not as
+  // per the table I shared earlier"), once a month has a recorded Actual,
+  // the live compute IS that Actual for that month (see computeRevenue's
+  // `isPast` branch in lib/compute.js) — so "Live Projection" for every
+  // closed month is just a copy of "Actual", a trivial ₹0/0.0% variance
+  // that isn't a real comparison against what was originally planned. The
+  // Original FY Projection baseline (GET /api/revenue-projection-baseline,
+  // read from a committed seed file — see applyBaselineOverlay() below)
+  // gives a real comparison for every month, closed or not, shown as its
+  // own "Original Plan" column/series rather than swapped into the live
+  // figure — see applyBaselineOverlay()'s own comment for why.
   const snapshotMeta = document.getElementById('snapshotMeta');
   let forecastCache = null; // { months, projected, baseline, actual, label }
   let projectionBaseline = {}; // { 'YYYY-MM': number, ... } — loaded from /api/revenue-projection-baseline
@@ -1437,53 +1416,29 @@
     });
   }
 
-  // ---- Original FY Projection baseline: load + display (read-only) ----
-  // Read-only display only (fixed 2026-09-24 — ask: "give you the
-  // projections for each month already ... remove the input fields from
-  // the UI and just use the file with the data in it"). This config used to
-  // be editable here via a grid of inputs + Save button, but that meant a
-  // value typed into the running app on Render's free tier would be lost on
-  // the next redeploy/restart/spin-down, same problem Historical Actuals
-  // already had before it was seeded from a committed file. Since this
-  // config only needs setting once per FY anyway, it's simpler and more
-  // durable as a plain committed seed file (data/revenue-projection-
-  // baseline.json) — same pattern as FIU Metadata / Yield & CMGR /
-  // Historical Actuals. This panel just shows what's currently in it;
-  // updating a value means editing that file (or POSTing to
-  // /api/revenue-projection-baseline, still available for scripted use) and
-  // redeploying, not typing into this page.
-  const baselineGrid = document.getElementById('baselineGrid');
-  let baselineMonths = []; // the 12 FY months this grid is currently showing figures for
-
-  function renderBaselineGrid(){
-    if (!baselineGrid) return;
-    baselineGrid.innerHTML = baselineMonths.map(m => {
-      const key = monthKeyOf(m);
-      const v = projectionBaseline[key];
-      const has = v !== undefined && v !== null;
-      return '<div class="baseline-field">' +
-        '<label>'+esc(m.label)+'</label>' +
-        '<div class="baseline-value'+(has ? '' : ' empty')+'">'+(has ? fmtCurrency(v) : '—')+'</div>' +
-        '</div>';
-    }).join('');
-  }
-
-  // Fetches the canonical 12-month FY list independent of any compute (same
-  // endpoint the Actual series uses) so the baseline display has something
-  // to render even before a counts file is ever uploaded, and stays in sync
-  // with whatever FY start month is currently selected.
+  // ---- Original FY Projection baseline: load (read-only, no own display) ----
+  // No dedicated display of its own (fixed 2026-09-24 — ask: "This section
+  // need not be displayed since the numbers are already displayed in the
+  // table above it") — the values are already visible as the "Original
+  // Plan" column in the month-wise table (and as a line on the Charts tab),
+  // so a separate card repeating the same 12 figures was redundant. This
+  // just loads the config in the background so applyBaselineOverlay() has
+  // something to read.
+  //
+  // The config itself is a plain committed seed file
+  // (data/revenue-projection-baseline.json) — same pattern as FIU Metadata /
+  // Yield & CMGR / Historical Actuals — not editable from the UI (fixed
+  // 2026-09-24 — ask: "remove the input fields from the UI and just use the
+  // file with the data in it"): a value typed into the running app on
+  // Render's free tier wouldn't survive a redeploy/restart/spin-down, and
+  // this config only needs setting once per FY anyway. Updating a value
+  // means editing that file (or POSTing to /api/revenue-projection-baseline,
+  // still available for scripted use) and redeploying.
   async function loadBaselinePanel(){
     try {
-      const q = new URLSearchParams({ asOfDate: asOfDateInput.value || '', fyStartMonth: fyStartMonthInput.value }).toString();
-      const [monthsRes, baselineRes] = await Promise.all([
-        apiFetch(API + '/api/revenue-actuals?' + q),
-        apiFetch(API + '/api/revenue-projection-baseline')
-      ]);
-      const monthsData = await monthsRes.json();
-      const baselineData = await baselineRes.json();
-      baselineMonths = monthsData.months || [];
-      projectionBaseline = (baselineData && baselineData.values) || {};
-      renderBaselineGrid();
+      const res = await apiFetch(API + '/api/revenue-projection-baseline');
+      const data = await res.json();
+      projectionBaseline = (data && data.values) || {};
       applyBaselineOverlay();
       if (forecastCache) { renderForecastChartFromCache(); renderForecastTable(); }
     } catch (err) {
@@ -2909,7 +2864,7 @@
   loadYc();
   loadHist();
   refreshForecastChart(null); // empty state until the first compute runs
-  loadBaselinePanel(); // Original FY Projection grid — independent of any compute
+  loadBaselinePanel(); // Original FY Projection data — independent of any compute
   // Auto-pull today's counts from the latest matching Metabase email on
   // every page load — this is what makes a plain refresh show updated
   // numbers with no manual upload step. Falls back to a clear status
