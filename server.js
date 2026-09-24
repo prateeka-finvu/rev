@@ -333,6 +333,7 @@ const META_TABLE = 'fiu-metadata';
 const YC_TABLE = 'yield-cmgr';
 const HIST_TABLE = 'historical-actuals';
 const PROJECTION_SNAPSHOT_TABLE = 'projection-snapshot';
+const PROJECTION_BASELINE_TABLE = 'revenue-projection-baseline';
 
 // Historical key = normId(fiuId) + '::' + 'YYYY-MM' — one row per FIU per
 // month, so a compound key (not a plain fiuId upsert) is required.
@@ -1039,6 +1040,40 @@ app.get('/api/revenue-actuals', (req, res) => {
   const historicalByKey = new Map(histRows.map(r => [histKey(r), r]));
   const metadataById = new Map(metaRows.map(r => [store.normId(r.fiuId), r]));
   res.json({ months: monthCols, actualsByMonth: buildActualsByMonth(monthCols, historicalByKey, metadataById) });
+});
+
+// ---------- Original FY Revenue Projection (static baseline) ----------
+// A manually-entered, one-time reference: what each month's revenue was
+// expected to be back at the start of the FY. Purely a static config, like
+// FIU Metadata / Yield & CMGR — never recomputed by this tool, unlike the
+// live "Projected" figure (which, per computeRevenue's `isPast` branch,
+// literally *is* that month's actual once one's recorded — see the comment
+// there). Without this, "Projected vs Actual" shows an identical number and
+// ₹0/0.0% variance for every closed month, which isn't a real comparison —
+// this baseline gives the Projected vs Actual table something genuine to
+// hold a closed month's actual up against (ask: 2026-09-24). Keyed by
+// "YYYY-MM"; value is a plain rupee number. Deliberately does NOT replace
+// the live figure for a month that has no actual yet — see the frontend's
+// applyBaselineOverlay(), which is where the "only once a month has closed"
+// rule actually lives.
+app.get('/api/revenue-projection-baseline', (req, res) => {
+  res.json(store.readObject(PROJECTION_BASELINE_TABLE, null) || { values: {}, updatedAt: null });
+});
+app.post('/api/revenue-projection-baseline', (req, res) => {
+  const incoming = req.body && req.body.values;
+  if (!incoming || typeof incoming !== 'object' || Array.isArray(incoming)) {
+    return res.status(400).json({ error: 'Expected { values: { "YYYY-MM": number, ... } }' });
+  }
+  const values = {};
+  for (const [k, v] of Object.entries(incoming)) {
+    if (!MONTH_RE.test(k)) continue; // ignore any junk key defensively
+    if (v === '' || v === null || v === undefined) continue; // clearing a month = just omit it
+    const n = toNumber(v);
+    if (!isNaN(n)) values[k] = n;
+  }
+  const saved = { values, updatedAt: new Date().toISOString() };
+  store.writeObject(PROJECTION_BASELINE_TABLE, saved);
+  res.json(saved);
 });
 
 // ---------- Chat with your data ----------

@@ -361,7 +361,13 @@ async function dataStatusSuite() {
     // without needing to dig through host deploy logs.
     let server;
     try {
-      await testAsync('reports the real DATA_DIR, that it\'s writable, and the seeded historical months (no August yet)', async () => {
+      await testAsync('reports the real DATA_DIR, that it\'s writable, and the seeded historical months (Apr-Aug, no September yet)', async () => {
+        // August joined the permanent seed 2026-09-24 (see "Making a closed
+        // month's data survive for free" in README.md) once its actuals
+        // were final — so a fresh DATA_DIR now legitimately has August
+        // rows, same as Apr-Jul. September hasn't happened yet in-story, so
+        // it's still a reliable "definitely not seeded" month for this
+        // test to check against.
         server = await startServer({});
         const res = await fetch(server.baseUrl + '/api/data-status');
         assertEqual(res.status, 200);
@@ -372,20 +378,22 @@ async function dataStatusSuite() {
         assertEqual(body.writable, true);
         assert(body.historicalActuals && typeof body.historicalActuals.totalRows === 'number',
           'expected historicalActuals.totalRows. Body:\n' + JSON.stringify(body));
-        assert(!('2026-08' in (body.historicalActuals.rowsByMonth || {})),
-          'a freshly seeded DATA_DIR should have no August rows yet');
+        assert(body.historicalActuals.rowsByMonth['2026-08'] > 0,
+          'August is now part of the seed data — expected rowsByMonth to already include it. Body:\n' + JSON.stringify(body));
+        assert(!('2026-09' in (body.historicalActuals.rowsByMonth || {})),
+          'a freshly seeded DATA_DIR should have no September rows yet');
       });
 
       await testAsync('a month uploaded through the app shows up here immediately', async () => {
         const csv = 'FIU ID,Revenue,AU Counts,DF Counts\nsome-fiu,1000,50,900\n';
         const fd = new FormData();
-        fd.append('month', '2026-08');
-        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'aug.csv');
+        fd.append('month', '2026-09');
+        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'sep.csv');
         await fetch(server.baseUrl + '/api/historical-actuals/bulk', { method: 'POST', body: fd });
         const res = await fetch(server.baseUrl + '/api/data-status');
         const body = await res.json();
-        assertEqual(body.historicalActuals.rowsByMonth['2026-08'], 1,
-          'August should now show up in rowsByMonth. Body:\n' + JSON.stringify(body));
+        assertEqual(body.historicalActuals.rowsByMonth['2026-09'], 1,
+          'September should now show up in rowsByMonth. Body:\n' + JSON.stringify(body));
       });
 
       await testAsync('requires login when the gate is on, same as every other /api/ route', async () => {
@@ -400,6 +408,88 @@ async function dataStatusSuite() {
   });
 }
 
+async function projectionBaselineSuite() {
+  await suite('/api/revenue-projection-baseline — static Original FY Projection config (ask: 2026-09-24)', async () => {
+    let server;
+    try {
+      // Seeded from data/revenue-projection-baseline.json (fixed 2026-09-24
+      // — ask: "give you the projections for each month already ... remove
+      // the input fields from the UI and just use the file with the data in
+      // it") — same seedDataDirIfNeeded() mechanism as FIU Metadata/Yield &
+      // CMGR/Historical Actuals, so a fresh DATA_DIR now comes pre-populated
+      // with the committed FY-start plan rather than starting blank.
+      await testAsync('starts out pre-seeded with the committed Original FY Projection baseline', async () => {
+        server = await startServer({});
+        const res = await fetch(server.baseUrl + '/api/revenue-projection-baseline');
+        assertEqual(res.status, 200);
+        const body = await res.json();
+        assert(body && typeof body.values === 'object', 'expected a values object. Body:\n' + JSON.stringify(body));
+        assertEqual(Object.keys(body.values).length, 12, 'expected all 12 FY months seeded from data/revenue-projection-baseline.json');
+        assertEqual(body.values['2026-04'], 9415196);
+        assertEqual(body.values['2027-03'], 26660084);
+        assert(body.updatedAt, 'expected an updatedAt timestamp');
+      });
+
+      await testAsync('saves and reads back a set of monthly values', async () => {
+        const res = await fetch(server.baseUrl + '/api/revenue-projection-baseline', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ values: { '2026-04': 7921439, '2026-05': '8154435' } })
+        });
+        assertEqual(res.status, 200);
+        const saved = await res.json();
+        assertEqual(saved.values['2026-04'], 7921439);
+        assertEqual(saved.values['2026-05'], 8154435, 'a numeric string should be coerced to a number');
+        assert(saved.updatedAt, 'expected an updatedAt timestamp');
+
+        const res2 = await fetch(server.baseUrl + '/api/revenue-projection-baseline');
+        const body2 = await res2.json();
+        assertEqual(body2.values['2026-04'], 7921439, 'should still be there on a fresh GET');
+      });
+
+      await testAsync('a second save replaces the whole config rather than merging', async () => {
+        await fetch(server.baseUrl + '/api/revenue-projection-baseline', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ values: { '2026-06': 8041628 } })
+        });
+        const res = await fetch(server.baseUrl + '/api/revenue-projection-baseline');
+        const body = await res.json();
+        assert(!('2026-04' in body.values), 'April should be gone — the grid always saves its full current state, not a delta');
+        assertEqual(body.values['2026-06'], 8041628);
+      });
+
+      await testAsync('ignores a malformed month key and a non-numeric value rather than erroring', async () => {
+        const res = await fetch(server.baseUrl + '/api/revenue-projection-baseline', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ values: { 'not-a-month': 100, '2026-07': 'garbage', '2026-08': 1600000 } })
+        });
+        assertEqual(res.status, 200);
+        const body = await res.json();
+        assert(!('not-a-month' in body.values), 'malformed key should be dropped');
+        assert(!('2026-07' in body.values), 'non-numeric value should be dropped');
+        assertEqual(body.values['2026-08'], 1600000);
+      });
+
+      await testAsync('requires login when the gate is on, same as every other /api/ route', async () => {
+        await server.stop();
+        server = await startServer({ APP_PASSWORD: 'secret123', SESSION_SECRET: 'test-secret' });
+        const getRes = await fetch(server.baseUrl + '/api/revenue-projection-baseline');
+        assertEqual(getRes.status, 401);
+        const postRes = await fetch(server.baseUrl + '/api/revenue-projection-baseline', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ values: { '2026-04': 100 } })
+        });
+        assertEqual(postRes.status, 401);
+      });
+    } finally {
+      if (server) await server.stop();
+    }
+  });
+}
+
 async function main() {
   await loginGateOffSuite();
   await loginGateOnSuite();
@@ -407,6 +497,7 @@ async function main() {
   await historicalActualsDuplicateSuite();
   await homeEnvSecretsFileSuite();
   await dataStatusSuite();
+  await projectionBaselineSuite();
 }
 
 module.exports = main();

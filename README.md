@@ -56,12 +56,20 @@ support.
 
 **Historical actuals** (`data/historical-actuals.json`) — one row per FIU
 per month for any month you've recorded real, final actuals for (currently
-Apr–Jul 2026, seeded with the app). See "Historical actuals" under Monthly
+Apr–Aug 2026, seeded with the app). See "Historical actuals" under Monthly
 workflow below. Add new months from the **Historical Actuals** tab once
 they end — upload a file with `FIU ID` and any of `Revenue`, `active_users`,
 `successful_data_fetches` for a chosen month, or add/edit/delete individual
 rows by hand. Uploading a month only ever touches that month's FIU rows —
 every other month and FIU is left untouched, so it's always safe to run.
+
+**Original FY Projection** (`data/revenue-projection-baseline.json`,
+added 2026-09-24) — one figure per FY month: the revenue expected for that
+month back when the FY began, used to give the "Projected vs Actual
+Revenue" card something real to compare a closed month's Actual against
+instead of a copy of itself. Read-only in the app — see "Original FY
+Projection" under Monthly workflow below for the full explanation and how
+to update a value.
 `billingModel`/`billingYield` on each row are captured from the FIU
 Metadata/Yield & CMGR configs at upload time, for reference only — they
 aren't used in any calculation, only the row's own `revenue`/`auCount`/
@@ -505,14 +513,68 @@ the **Monthly Revenue** tab, right where it always was.
   Actuals** for each FY month. A month with no historical rows yet shows
   as a gap in the line (not zero) — it fills in automatically once that
   month's actuals are recorded.
-- The chart (on the Charts tab) shows both series as a line per month across
-  the full FY, with a hover tooltip (crosshair snaps to the nearest month)
-  and end-of-line value labels. The month-wise figures table (on the Monthly
-  Revenue tab) has the exact numbers plus variance (Actual − Projected) and
-  variance %.
+- The chart (on the Charts tab) shows Projected/Actual/Original Plan as
+  three lines per month across the full FY (see "Original FY Projection"
+  below for the third), with a hover tooltip (crosshair snaps to the
+  nearest month) and end-of-line value labels. The month-wise figures table
+  (on the Monthly Revenue tab) has the exact numbers for all three, plus
+  variance (Actual − Original Plan, see below) and variance %.
 - Before the first compute of a session, the chart area just says to upload
   a counts file on the Monthly Revenue tab — nothing else on the page is
   blocked by it.
+
+### Original FY Projection (added 2026-09-24 — ask: "the projected and actual
+revenue gets displayed as the same number which is not the reality")
+
+The live-tracking fix above (2026-09-03) has a gap: once a month has a
+recorded Actual, the live compute result **is** that Actual for that month
+(`computeRevenue`'s `isPast` branch in `lib/compute.js` returns the
+recorded actual revenue, not a forecast) — so "Projected" for every closed
+month was just a copy of "Actual", a trivial ₹0 / 0.0% variance that isn't
+a real comparison.
+
+The **Original FY Projection** card, right below the month-wise figures
+table, is a one-time reference: what each month's revenue was expected to
+be back when the FY began. It's a plain static config — never recomputed
+by this tool, same spirit as FIU Metadata or Yield & CMGR — read via
+`GET /api/revenue-projection-baseline` (see "API reference" below), keyed
+by calendar month.
+
+**Shown side by side with Projected and Actual, not swapped in (changed
+2026-09-24 — ask: "Sep onwards projected figures are not as per the table
+I shared earlier").** An earlier version of this made the "Projected"
+figure switch to the baseline number once a month had an Actual recorded,
+which fixed the trivial-zero-variance problem for closed months but gave
+open months (nothing recorded yet) no visual sign they were still showing
+the live forecast rather than the plan — which read as the baseline simply
+not applying to Sep onward. Now every month always shows all three
+figures — Projected (live), Original Plan (this static baseline), and
+Actual — as separate columns/lines, so there's never any ambiguity about
+which is which. Variance/Variance % compare Actual against the Original
+Plan whenever a plan value is set for that month (a real plan-vs-actual
+comparison, not the trivial zero this was originally built to fix),
+falling back to the live Projected figure only for a month with no plan
+value at all. The live model itself is unaffected either way — a closed
+month's Projected still just mirrors its Actual (`computeRevenue`'s
+`isPast` branch, unchanged since 2026-09-03), which is expected, not a
+bug — the Original Plan column is what gives you a non-trivial comparison
+for that month, not a change to what "Projected" means.
+
+**Seed-file only, not editable in the app (changed 2026-09-24 — ask: "give
+you the projections for each month already ... remove the input fields
+from the UI and just use the file with the data in it").** This card used
+to be a grid of 12 number inputs plus a Save button, but a value typed in
+through the running app on Render's free tier doesn't survive a
+redeploy/restart/spin-down — same problem Historical Actuals had before it
+was seeded from a committed file (see "Making a closed month's data
+survive for free" below). Since this config is meant to be set once per FY
+rather than touched regularly, it's simpler and more durable as a plain
+committed seed file instead: **`data/revenue-projection-baseline.json`**,
+shape `{ "values": { "2026-04": 9415196, ... }, "updatedAt": "<ISO date>" }`.
+Edit that file directly (or `POST /api/revenue-projection-baseline`, still
+available for scripted use even though the UI no longer calls it) and
+redeploy to change a figure — the card itself just displays whatever's
+currently in the config.
 
 ## Charts tab
 
@@ -891,14 +953,20 @@ of this section) but need their own setup.
      most common cause, though, is simpler than a bug: **the free tier has
      no persistent disk at all** (see "Free tier, no card on file" below) —
      on it, anything written to `data/*.json` (including through this app)
-     survives the service sleeping and waking back up, but is wiped back to
-     the repo's bundled starter data on every new deploy, which is
-     indistinguishable from "not persisting" if deploys happen anywhere
-     near as often as they did while iterating on this app. If that matches
-     what you're seeing, the fix isn't a code change — it's either
+     is wiped back to the repo's bundled starter data every time the
+     service redeploys, restarts, **or spins down from 15 minutes of
+     inactivity** (corrected 2026-09-24 — Render's own docs on the free
+     plan's [ephemeral filesystem](https://render.com/docs/free) are
+     explicit that a filesystem change is lost on all three, not just on a
+     new deploy; this README previously and incorrectly said data survives
+     sleep/wake). For an internal tool that isn't visited constantly,
+     ordinary idle time between check-ins is enough on its own to reset
+     anything uploaded through the app — no deploy required. If that
+     matches what you're seeing, the fix isn't a code change — it's
      upgrading to the Starter plan and actually attaching a disk (the
-     Blueprint path above), or accepting that data only survives between
-     deploys, not across them, on the free tier.
+     Blueprint path above). See also "Making a closed month's data survive
+     for free" below for a no-disk-required option for data that's already
+     final (won't change again).
 5. **Deploy**. Render builds (`npm install`) and starts (`npm start`) the
    service, and gives you a public `https://fiu-revenue-estimator-xxxx.onrender.com`
    URL (renameable in the service's settings). Visiting it should land on
@@ -928,17 +996,20 @@ The trade-off: on the free plan there is no disk at all, so wherever the
 app writes its data (by default, the home-directory folder described in
 "Running it locally" above — but on Render's free tier, home directory or
 not, it's still just a folder inside that container's own throwaway
-filesystem) it's gone the moment the container gets rebuilt. Edits made
+filesystem) it's gone the moment the container gets rebuilt. Free services
+spin down after 15 minutes with no traffic and take roughly a minute to
+wake back up on the next visit — and per Render's docs, a filesystem change
+is lost not only on a new deploy but on **that spin-down and every plain
+restart too** (corrected 2026-09-24 — this section previously said data
+survives the service sleeping and waking back up, which Render's own
+[free-plan docs](https://render.com/docs/free) contradict: "any changes to
+your web service's filesystem... are lost every time the service
+redeploys, restarts, or spins down"). Practically, that means edits made
 through the app (FIU Metadata, Yield & CMGR, uploaded historical actuals)
-survive the service sleeping and waking back up, but get wiped back to the
-repo's bundled starter data on every new deploy (fixed 2026-09-03: this
-used to also get wiped by every restart, not just every deploy, because the
-app used to default to reading/writing the bundled `data/` folder directly
-— now it at least survives restarts within the same deploy). Free services
-also spin down after 15 minutes with no traffic and take roughly a minute
-to wake back up on the next visit. For a small internal tool that isn't
-redeployed often, restart-level persistence might be enough; if the team is
-actively editing FIU Metadata/Yield & CMGR/Historical Actuals day to day,
+can reset from nothing more than the team not visiting the tool for 15
+minutes — not just from a deploy. For a small internal tool, that's often
+indistinguishable from "doesn't save at all." If the team is actively
+editing FIU Metadata/Yield & CMGR/Historical Actuals day to day,
 the paid Starter plan + disk (the Blueprint path above) is the only way
 those edits survive a deploy, not just a restart.
 
@@ -956,6 +1027,50 @@ container rebuild would.
 Whichever host you use, back up `data/*.json` (or wherever `DATA_DIR`
 points) periodically — or point `lib/store.js` at a real database — since
 that's where all of the app's configs and uploaded data live.
+
+### Making a closed month's data survive for free (no disk needed)
+
+Apr–Aug 2026's Historical Actuals always come back after a free-tier
+redeploy/restart/spin-down, while a month uploaded live through the app
+(e.g. September, once it closes) won't — this looks like inconsistent
+behavior, but it's actually because Apr–Aug aren't just *in the running
+app's data*, they're **committed to `data/historical-actuals.json` in this
+git repo**. That file is the "starter data" the free-tier troubleshooting
+notes above keep mentioning: `lib/store.js`'s `seedDataDirIfNeeded()`
+copies every file under `data/` into a fresh `DATA_DIR` the moment the app
+starts with nothing there yet — which, on the free tier, is *every*
+redeploy, restart, and spin-down. Apr–Aug aren't surviving some special
+persistence mechanism; they're just part of the deployed image, so every
+fresh container gets a fresh copy automatically, the same way the code
+itself does. (August specifically was folded in 2026-09-24, the same way
+this section describes below — it was live-uploaded data until then, same
+as whatever month is current as you're reading this.)
+
+You can use exactly this mechanism to make **any closed month** (one whose
+actuals are final and won't change again) survive the same way, with no
+paid plan or disk required:
+
+1. While logged in to the running app, visit `/api/historical-actuals`
+   directly in the browser (or `curl` it with the session cookie) — it
+   returns every row currently in Historical Actuals, in the exact shape
+   `data/historical-actuals.json` already uses:
+   `[{ fiuId, month, billingModel, revenue, auCount, dfCount, billingYield },
+   ...]`.
+2. Save that response, replacing (or merging into) `data/historical-actuals.json`
+   in the repo. For a month you want to lock in permanently, keep its rows;
+   rows for a month that's still live/changing don't need to go in here —
+   only what's actually closed.
+3. Commit and push `data/historical-actuals.json` to `main`.
+4. Redeploy (or just wait for the next redeploy/spin-down) — that month's
+   rows are now part of the seed data, so `seedDataDirIfNeeded()` restores
+   them into every fresh `DATA_DIR` from then on, exactly like Apr–Aug.
+
+This only protects a month once its rows are committed — anything uploaded
+through the app *after* that commit is still subject to the free tier's
+ephemeral filesystem until it, too, gets folded into the seed file the same
+way. Treat it as a "close the books" step at the end of each month, not a
+substitute for the paid disk if the team needs data to survive mid-month
+edits too.
 
 ## Testing
 
@@ -1006,6 +1121,8 @@ a reason to skip `npm test` for backend/calculation changes.
 - `POST /api/projection-snapshot` — multipart `file` + form fields `asOfDate`, `fyStartMonth` (same defaults as `/api/compute`; SUC is always forced off). Saves and returns `{ snapshotDate, asOfDate, fyStartMonth, months, totalsByMonth }`, overwriting any previous snapshot. **No longer called by the UI as of 2026-09-03** — the "Projected vs Actual Revenue" chart now tracks the live compute result instead (see "Projected vs Actual Revenue" above). Left in the backend for API compatibility in case anything else depends on it.
 - `GET /api/projection-snapshot` — returns `{ snapshot }`, or `{ snapshot: null }` if none has been saved yet. Same status: no longer called by the UI, kept for compatibility.
 - `GET /api/revenue-actuals?asOfDate=&fyStartMonth=` — returns `{ months, actualsByMonth }`, summed live from Historical Actuals for each FY month (`null` for a month with no historical rows yet). Both query params are optional with the same defaults as `/api/compute`.
+- `GET /api/revenue-projection-baseline` (added 2026-09-24) — returns `{ values, updatedAt }`, where `values` is `{ "YYYY-MM": number, ... }` — the Original FY Projection static baseline, seeded from `data/revenue-projection-baseline.json` (see "Projected vs Actual Revenue" above). `{ values: {}, updatedAt: null }` if the seed file is missing/empty.
+- `POST /api/revenue-projection-baseline` — JSON body `{ values: { "YYYY-MM": number, ... } }`. Replaces the whole config (not a merge). A malformed month key or non-numeric value is silently dropped rather than rejecting the request; an empty string for a month clears it. Returns the saved `{ values, updatedAt }`. **Not called by the UI as of 2026-09-24** — the card that used to Save through this endpoint is now read-only; kept for scripted/API use (and it's what a committed change to `data/revenue-projection-baseline.json` effectively replaces on the next deploy anyway).
 - `GET /api/historical-actuals` — returns every recorded row: `[{ fiuId, month, revenue?, auCount?, dfCount?, billingModel?, billingYield? }, ...]`.
 - `POST /api/historical-actuals` — JSON body `{ fiuId, month, revenue?, auCount?, dfCount?, billingModel?, billingYield? }` (`month` as `YYYY-MM`). Upserts one row, keyed by `fiuId` + `month` together (not `fiuId` alone) — a FIU can have one row per month.
 - `DELETE /api/historical-actuals/:fiuId/:month` — removes one FIU's row for that month.

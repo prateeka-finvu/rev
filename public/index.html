@@ -24,6 +24,8 @@
     --series-1-450:   #2a78d6;
     --series-2:       #eb6834;
     --series-2-100:   #fbdccb;
+    --series-3:       #1baf7a;
+    --series-3-100:   #cdf0e2;
     --good:           #0ca30c;
     --critical:       #d03b3b;
     --warning:        #fab219;
@@ -45,6 +47,8 @@
       --series-1-450:   #3987e5;
       --series-2:       #d95926;
       --series-2-100:   #6b3216;
+      --series-3:       #199e70;
+      --series-3-100:   #114f37;
     }
   }
   :root[data-theme="dark"]{
@@ -63,6 +67,8 @@
     --series-1-450:   #3987e5;
     --series-2:       #d95926;
     --series-2-100:   #6b3216;
+    --series-3:       #199e70;
+    --series-3-100:   #114f37;
   }
   *{ box-sizing: border-box; }
   body{ margin:0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--page); color: var(--text-primary); }
@@ -108,6 +114,19 @@
   .side-panel .upload-box{ width:100%; margin-bottom:12px; }
   .side-panel #emailSourceRow{ align-items:center; margin-bottom:10px; flex-wrap:wrap; }
   .revenue-main{ flex:1; min-width:0; }
+
+  /* Original FY Projection — 12 small read-only labeled figures, one per FY
+     month, wrapping as needed (same flex-wrap pattern as the side panel's
+     field-row above) rather than one per line. Read-only (fixed 2026-09-24
+     — ask: "remove the input fields from the UI and just use the file with
+     the data in it") — this config is now maintained entirely via a
+     committed seed file, not typed into the running app, so there's no
+     input/Save affordance here anymore, just a display. */
+  .baseline-grid{ display:flex; flex-wrap:wrap; gap:10px 14px; }
+  .baseline-field{ display:flex; flex-direction:column; gap:4px; width:112px; }
+  .baseline-field label{ font-size:11.5px; color: var(--text-secondary); font-weight:600; }
+  .baseline-field .baseline-value{ width:100%; border-radius:7px; border:1px solid var(--border); background: var(--surface-2); color: var(--text-primary); padding:7px 8px; font-family:inherit; font-size:13px; }
+  .baseline-field .baseline-value.empty{ color: var(--text-muted); }
 
   /* Sub-tabs within the Monthly Revenue tab (fixed 2026-09-23 — the ten
      result sections used to all render in one long scrolling column; now
@@ -334,7 +353,7 @@
         <div id="scenariosList"></div>
       </div>
       <p class="hint" style="margin:10px 0 0;">Results update automatically as soon as a file is chosen, and again whenever you change any of the fields above — no button to press.</p>
-      <p class="hint" style="margin:6px 0 0;">Leave <strong>SUC Start Date</strong> on "None" to use each FIU's regular Yield/CMGR for the whole FY (as before). Pick a month to switch a SUC-configured FIU's revenue — from that month onward — to <strong>SUC Yield × expected Data Fetch volume</strong> instead, regardless of its regular billing model. The SUC period itself splits into two quarters: the first 3 months (<strong>SUC Cliff</strong>) grow at <strong>SUC Cliff CMGR</strong>, then every month after that (<strong>SUC Recovery</strong>) grows at <strong>SUC Recovery CMGR</strong> (falling back to the FIU's regular CMGR if that's left blank) — SUC Yield doesn't change between the two, only the growth rate does. FIUs missing SUC Cliff CMGR or SUC Yield, or with no usable DF count, stay on their regular Yield/CMGR the whole FY, and that's called out in the results rather than left silent. Months governed by SUC values are highlighted <span class="badge suc-legend">like this</span> (hover a cell to see whether it's Cliff or Recovery), and seeded historical actuals (Apr–Jul) are highlighted <span class="badge actual-legend">like this</span>, in the Annual tables.</p>
+      <p class="hint" style="margin:6px 0 0;">Leave <strong>SUC Start Date</strong> on "None" to use each FIU's regular Yield/CMGR for the whole FY (as before). Pick a month to switch a SUC-configured FIU's revenue — from that month onward — to <strong>SUC Yield × expected Data Fetch volume</strong> instead, regardless of its regular billing model. The SUC period itself splits into two quarters: the first 3 months (<strong>SUC Cliff</strong>) grow at <strong>SUC Cliff CMGR</strong>, then every month after that (<strong>SUC Recovery</strong>) grows at <strong>SUC Recovery CMGR</strong> (falling back to the FIU's regular CMGR if that's left blank) — SUC Yield doesn't change between the two, only the growth rate does. FIUs missing SUC Cliff CMGR or SUC Yield, or with no usable DF count, stay on their regular Yield/CMGR the whole FY, and that's called out in the results rather than left silent. Months governed by SUC values are highlighted <span class="badge suc-legend">like this</span> (hover a cell to see whether it's Cliff or Recovery), and seeded historical actuals (Apr–Aug) are highlighted <span class="badge actual-legend">like this</span>, in the Annual tables.</p>
       <div class="status-msg" id="computeStatus"></div>
     </aside>
 
@@ -355,10 +374,16 @@
     <div class="subtab-panel active" data-subtab="projected">
     <section class="card">
       <h2>Projected vs Actual Revenue</h2>
-      <p class="hint">The FY revenue projection — live, reflecting whatever SUC Start Date and what-if scenarios are currently selected — compared against actual revenue as it's recorded in Historical Actuals. Updates automatically every time you change a counts file, the as-of date, SUC Start Date, or a scenario. The chart for this lives on the <strong>Charts</strong> tab — the month-wise figures stay here.</p>
+      <p class="hint">Three figures per month, side by side: <strong>Projected</strong> — the live FY revenue model, reflecting whatever SUC Start Date and what-if scenarios are currently selected (identical to Actual for a month that's already closed, since a closed month's actual replaces the forecast in the model itself — see the SUC Start Date hint below); <strong>Original Plan</strong> — the static <strong>Original FY Projection</strong> below, unchanged all year; and <strong>Actual</strong>, as recorded in Historical Actuals. Updates automatically every time you change a counts file, the as-of date, SUC Start Date, or a scenario. The chart for this lives on the <strong>Charts</strong> tab — the month-wise figures stay here. Variance compares Actual against the Original Plan (falling back to the live Projected figure for a month with no plan value set).</p>
       <div class="snapshot-meta" id="snapshotMeta"></div>
       <h3 class="dt-title" style="margin-top:18px;">Month-wise figures</h3>
       <div id="forecastTable"></div>
+    </section>
+
+    <section class="card">
+      <h3 class="dt-title" style="margin-top:0;">Original FY Projection <span class="hint" style="font-weight:400; display:inline;">— static, set once at the start of the FY</span></h3>
+      <p class="hint">What was expected for each month's revenue back when the FY began — a fixed reference, never recomputed by this tool. Shown as its own <strong>Original Plan</strong> column in the table above, for every month, closed or not — a blank month here just shows as "—" there. This is a static config maintained in the app's data files, not editable from here — see the README if it ever needs updating.</p>
+      <div class="baseline-grid" id="baselineGrid"></div>
     </section>
     </div>
 
@@ -536,7 +561,7 @@
   <div class="tab-panel" id="tab-charts">
     <section class="card">
       <h2>Projected vs Actual Revenue</h2>
-      <p class="hint">The FY revenue projection — live, reflecting whatever SUC Start Date and what-if scenarios are currently selected on the Monthly Revenue tab — compared against actual revenue as it's recorded in Historical Actuals. See the month-wise figures on the Monthly Revenue tab.</p>
+      <p class="hint">Three lines per month: the live FY revenue projection (reflecting whatever SUC Start Date and what-if scenarios are currently selected on the Monthly Revenue tab), the static Original Plan set at the start of the FY, and actual revenue as it's recorded in Historical Actuals. See the month-wise figures, and the Original FY Projection itself, on the Monthly Revenue tab.</p>
       <div class="chart-legend" id="forecastLegend"></div>
       <div class="chart-wrap" id="forecastChartWrap">
         <div id="forecastChart"></div>
@@ -1342,6 +1367,14 @@
       triggerCompute();
     });
   });
+  // The FY month list (and therefore which 12 months the baseline grid
+  // shows inputs for) depends on fyStartMonth, and can shift year
+  // boundaries off asOfDate too — refresh it alongside the live compute.
+  [asOfDateInput, fyStartMonthInput].forEach(el => {
+    el.addEventListener('change', function(){
+      loadBaselinePanel();
+    });
+  });
 
   // ================= Projected vs Actual Revenue (section 1) =================
   // "Projected" tracks the live compute result — same SUC Start Date and
@@ -1357,8 +1390,106 @@
   // never reflected whatever scenario was actually selected — fixed
   // 2026-09-03 to just track whatever's live, same as every other chart on
   // this page.
+  //
+  // That fix left a gap, though (ask: 2026-09-24): once a month has a
+  // recorded Actual, the live compute IS that Actual for that month (see
+  // computeRevenue's `isPast` branch in lib/compute.js) — so "Projected"
+  // for every closed month is just a copy of "Actual", a trivial ₹0/0.0%
+  // variance that isn't a real comparison. The Original FY Projection
+  // baseline below (GET /api/revenue-projection-baseline, read from a
+  // committed seed file — see the "Original FY Projection" panel's own
+  // comment further down) fixes that specifically — and only — for closed
+  // months: applyBaselineOverlay() swaps in the baseline figure wherever a
+  // month already has an Actual AND a baseline value exists, leaving every
+  // other month (nothing recorded yet) on the live figure exactly as the
+  // 2026-09-03 fix intended, so a stale baseline never overrides what the
+  // model currently expects for the rest of the year.
   const snapshotMeta = document.getElementById('snapshotMeta');
-  let forecastCache = null; // { months, projected, actual, label }
+  let forecastCache = null; // { months, projected, baseline, actual, label }
+  let projectionBaseline = {}; // { 'YYYY-MM': number, ... } — loaded from /api/revenue-projection-baseline
+
+  function pad2(n){ return String(n).padStart(2, '0'); }
+  function monthKeyOf(m){ return m.year + '-' + pad2(m.month); }
+
+  // Derives forecastCache.baseline (the Original FY Projection figure for
+  // each month, or null where none is set) from the current
+  // projectionBaseline — called whenever forecastCache is (re)built and
+  // again whenever the baseline reloads, so the chart/table stay in sync
+  // without needing a fresh /api/compute round-trip.
+  //
+  // Deliberately does NOT touch forecastCache.projected (fixed 2026-09-24 —
+  // ask: "Sep onwards projected figures are not as per the table I shared
+  // earlier"). The previous version of this function swapped the baseline
+  // INTO forecastCache.projected once a month had an Actual, so the live
+  // model and the original plan shared one column — which meant every open
+  // month (nothing recorded yet) silently showed the live forecast instead
+  // of the plan, with no visual cue they were different things. Now the two
+  // are always separate, visible side by side, for every month whether
+  // closed or not: "Projected" is always the live model (and, same as
+  // before the baseline existed, that's identical to Actual for a month
+  // that's already closed — see computeRevenue's `isPast` branch — which is
+  // expected, not a bug), and "Original Plan" is always this static figure.
+  function applyBaselineOverlay(){
+    if (!forecastCache) return;
+    forecastCache.baseline = forecastCache.months.map(m => {
+      const v = projectionBaseline[monthKeyOf(m)];
+      return (v === undefined || v === null) ? null : v;
+    });
+  }
+
+  // ---- Original FY Projection baseline: load + display (read-only) ----
+  // Read-only display only (fixed 2026-09-24 — ask: "give you the
+  // projections for each month already ... remove the input fields from
+  // the UI and just use the file with the data in it"). This config used to
+  // be editable here via a grid of inputs + Save button, but that meant a
+  // value typed into the running app on Render's free tier would be lost on
+  // the next redeploy/restart/spin-down, same problem Historical Actuals
+  // already had before it was seeded from a committed file. Since this
+  // config only needs setting once per FY anyway, it's simpler and more
+  // durable as a plain committed seed file (data/revenue-projection-
+  // baseline.json) — same pattern as FIU Metadata / Yield & CMGR /
+  // Historical Actuals. This panel just shows what's currently in it;
+  // updating a value means editing that file (or POSTing to
+  // /api/revenue-projection-baseline, still available for scripted use) and
+  // redeploying, not typing into this page.
+  const baselineGrid = document.getElementById('baselineGrid');
+  let baselineMonths = []; // the 12 FY months this grid is currently showing figures for
+
+  function renderBaselineGrid(){
+    if (!baselineGrid) return;
+    baselineGrid.innerHTML = baselineMonths.map(m => {
+      const key = monthKeyOf(m);
+      const v = projectionBaseline[key];
+      const has = v !== undefined && v !== null;
+      return '<div class="baseline-field">' +
+        '<label>'+esc(m.label)+'</label>' +
+        '<div class="baseline-value'+(has ? '' : ' empty')+'">'+(has ? fmtCurrency(v) : '—')+'</div>' +
+        '</div>';
+    }).join('');
+  }
+
+  // Fetches the canonical 12-month FY list independent of any compute (same
+  // endpoint the Actual series uses) so the baseline display has something
+  // to render even before a counts file is ever uploaded, and stays in sync
+  // with whatever FY start month is currently selected.
+  async function loadBaselinePanel(){
+    try {
+      const q = new URLSearchParams({ asOfDate: asOfDateInput.value || '', fyStartMonth: fyStartMonthInput.value }).toString();
+      const [monthsRes, baselineRes] = await Promise.all([
+        apiFetch(API + '/api/revenue-actuals?' + q),
+        apiFetch(API + '/api/revenue-projection-baseline')
+      ]);
+      const monthsData = await monthsRes.json();
+      const baselineData = await baselineRes.json();
+      baselineMonths = monthsData.months || [];
+      projectionBaseline = (baselineData && baselineData.values) || {};
+      renderBaselineGrid();
+      applyBaselineOverlay();
+      if (forecastCache) { renderForecastChartFromCache(); renderForecastTable(); }
+    } catch (err) {
+      // Non-fatal — the rest of the tab works fine without this loading.
+    }
+  }
 
   function fmtCompactCurrency(n){
     if (n === undefined || n === null || isNaN(n)) return '—';
@@ -1610,21 +1741,35 @@
     renderLineChart({
       containerId: 'forecastChart', legendId: 'forecastLegend', tooltipId: 'forecastTooltip', wrapId: 'forecastChartWrap',
       months: forecastCache.months,
-      ariaLabel: 'Projected versus actual revenue by month',
+      ariaLabel: 'Projected versus actual versus original plan revenue by month',
       series: [
         { key:'projected', label:'Projected ('+forecastCache.label+')', colorVar:'--series-1', data: forecastCache.projected },
-        { key:'actual', label:'Actual (recorded)', colorVar:'--series-2', data: forecastCache.actual }
+        { key:'actual', label:'Actual (recorded)', colorVar:'--series-2', data: forecastCache.actual },
+        { key:'baseline', label:'Original Plan', colorVar:'--series-3', data: forecastCache.baseline }
       ]
     });
   }
 
   // Table view alongside the chart — same numbers, always reachable without
   // hovering (see dataviz skill: a table view exists).
+  //
+  // Three independent figures per month, shown side by side rather than one
+  // column swapping between them (fixed 2026-09-24 — ask: "Sep onwards
+  // projected figures are not as per the table I shared earlier", after an
+  // earlier version of this table made "Projected" switch to the Original
+  // Plan figure once a month closed, with no visual distinction for months
+  // that hadn't): "Projected" is always the live model, "Original Plan" is
+  // always the static Original FY Projection baseline, and "Actual" is
+  // whatever's recorded. Variance compares Actual against the Original Plan
+  // whenever one is set (that's the real plan-vs-actual comparison this was
+  // built for), falling back to the live Projected figure only for a month
+  // with no plan value at all.
   function renderForecastTable(){
     if (!forecastCache){ document.getElementById('forecastTable').innerHTML = ''; return; }
     const rows = forecastCache.months.map((m, i) => ({
       label: m.label,
       projected: forecastCache.projected[i],
+      baseline: forecastCache.baseline ? forecastCache.baseline[i] : null,
       actual: forecastCache.actual[i]
     }));
     renderDataTable({
@@ -1635,27 +1780,40 @@
       maxHeight: '360px',
       columns: [
         { key:'label', label:'Month', value: r => r.label },
-        { key:'projected', label:'Projected', numeric:true, value:r=>r.projected, render:r=>fmtCurrency(r.projected) },
+        { key:'projected', label:'Projected', numeric:true, value:r=>r.projected, render:r=> fmtCurrency(r.projected) },
+        { key:'baseline', label:'Original Plan', numeric:true, value:r=>r.baseline, render:r=> (r.baseline===null||r.baseline===undefined) ? '—' : fmtCurrency(r.baseline) },
         { key:'actual', label:'Actual', numeric:true, value:r=>r.actual, render:r=> (r.actual===null||r.actual===undefined) ? '—' : fmtCurrency(r.actual) },
-        { key:'variance', label:'Variance (Actual − Projected)', numeric:true,
-          value: r => (r.actual===null||r.actual===undefined) ? null : r.actual - r.projected,
+        { key:'variance', label:'Variance (Actual − Plan)', numeric:true,
+          value: r => {
+            if (r.actual===null||r.actual===undefined) return null;
+            const base = (r.baseline===null||r.baseline===undefined) ? r.projected : r.baseline;
+            return r.actual - base;
+          },
           render: r => {
             if (r.actual===null||r.actual===undefined) return '—';
+            const base = (r.baseline===null||r.baseline===undefined) ? r.projected : r.baseline;
             // Rounded to the rupee before the sign check — otherwise two
             // months that are actually equal (a historical month's Actual
             // and Projected are computed from the same source data via two
             // independent code paths) can show a stray "-₹0"/"+₹0" from
             // sub-rupee floating-point noise.
-            const diff = Math.round(r.actual - r.projected) || 0; // normalize -0
+            const diff = Math.round(r.actual - base) || 0; // normalize -0
             return (diff>0?'+':'') + fmtCurrency(diff);
           }
         },
         { key:'variancePct', label:'Variance %', numeric:true,
-          value: r => (r.actual===null||r.actual===undefined||!r.projected) ? null : (r.actual-r.projected)/r.projected*100,
+          value: r => {
+            if (r.actual===null||r.actual===undefined) return null;
+            const base = (r.baseline===null||r.baseline===undefined) ? r.projected : r.baseline;
+            if (!base) return null;
+            return (r.actual-base)/base*100;
+          },
           render: r => {
-            if (r.actual===null||r.actual===undefined||!r.projected) return '—';
-            const diff = Math.round(r.actual - r.projected) || 0; // normalize -0
-            const pct = (diff/r.projected)*100;
+            if (r.actual===null||r.actual===undefined) return '—';
+            const base = (r.baseline===null||r.baseline===undefined) ? r.projected : r.baseline;
+            if (!base) return '—';
+            const diff = Math.round(r.actual - base) || 0; // normalize -0
+            const pct = (diff/base)*100;
             return (pct>0?'+':'') + pct.toFixed(1) + '%';
           }
         }
@@ -1698,10 +1856,12 @@
     forecastCache = {
       months: data.months,
       projected: data.totalsByMonth,
+      baseline: null,                     // filled in below by applyBaselineOverlay()
       actual: actData.actualsByMonth,
       label
     };
-    if (snapshotMeta) snapshotMeta.textContent = 'Live as of ' + data.asOfDate + ' (' + label + '). Actual is summed live from Historical Actuals each time this refreshes.';
+    applyBaselineOverlay();
+    if (snapshotMeta) snapshotMeta.textContent = 'Live as of ' + data.asOfDate + ' (' + label + '). Actual is summed live from Historical Actuals each time this refreshes. Original Plan is the static Original FY Projection, shown alongside for every month, closed or not.';
     renderForecastChartFromCache();
     renderForecastTable();
   }
@@ -2749,6 +2909,7 @@
   loadYc();
   loadHist();
   refreshForecastChart(null); // empty state until the first compute runs
+  loadBaselinePanel(); // Original FY Projection grid — independent of any compute
   // Auto-pull today's counts from the latest matching Metabase email on
   // every page load — this is what makes a plain refresh show updated
   // numbers with no manual upload step. Falls back to a clear status

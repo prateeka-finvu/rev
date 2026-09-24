@@ -6343,5 +6343,4450 @@
     "auCount": 1292,
     "dfCount": 1356,
     "billingYield": 1.35
+  },
+  {
+    "fiuId": "fiulive@axisbank",
+    "month": "2026-08",
+    "revenue": 1817620,
+    "auCount": 363524,
+    "dfCount": 19843637,
+    "billingModel": "Unique Users",
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@dreamplug",
+    "month": "2026-08",
+    "revenue": 1333000,
+    "auCount": 2184712,
+    "dfCount": 75298613,
+    "billingModel": "Unique Users",
+    "billingYield": 0.6435786254647599
+  },
+  {
+    "fiuId": "fiulive@nuinvestors",
+    "month": "2026-08",
+    "revenue": 578820,
+    "auCount": 28941,
+    "dfCount": 2744279,
+    "billingModel": "Unique Users",
+    "billingYield": 20
+  },
+  {
+    "fiuId": "kbnbfc-fiu",
+    "month": "2026-08",
+    "revenue": 259331.65,
+    "auCount": 280554,
+    "dfCount": 298555,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.8926338999525912
+  },
+  {
+    "fiuId": "fiulive@jupitermoney",
+    "month": "2026-08",
+    "revenue": 268301,
+    "auCount": 268301,
+    "dfCount": 11589476,
+    "billingModel": "Unique Users",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@axissec",
+    "month": "2026-08",
+    "revenue": 250000,
+    "auCount": 5629,
+    "dfCount": 176100,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.0546876647949477
+  },
+  {
+    "fiuId": "NESFB_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 277234.95,
+    "auCount": 523937,
+    "dfCount": 626354,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.529970777061592
+  },
+  {
+    "fiuId": "GROWW_NBT_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 222771,
+    "auCount": 259913,
+    "dfCount": 3065910,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.07020994187045586
+  },
+  {
+    "fiuId": "fiulive@rkbfinance",
+    "month": "2026-08",
+    "revenue": 194595.5,
+    "auCount": 354311,
+    "dfCount": 778382,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "bfl-fiu",
+    "month": "2026-08",
+    "revenue": 205273.5,
+    "auCount": 255739,
+    "dfCount": 410547,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "SI_CREVA_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 180908.4,
+    "auCount": 270703,
+    "dfCount": 349433,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.5869011650654262
+  },
+  {
+    "fiuId": "fiulive@moneycontrol",
+    "month": "2026-08",
+    "revenue": 160000,
+    "auCount": 46810,
+    "dfCount": 2712591,
+    "billingModel": "Fix Billing",
+    "billingYield": 0.0513877915454236
+  },
+  {
+    "fiuId": "fiulive@indmoneysb",
+    "month": "2026-08",
+    "revenue": 153606.1,
+    "auCount": 172464,
+    "dfCount": 1975452,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.08682078336922185
+  },
+  {
+    "fiuId": "KMBL-FIU-PROD",
+    "month": "2026-08",
+    "revenue": 165600.2,
+    "auCount": 75846,
+    "dfCount": 563130,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.418745382675061
+  },
+  {
+    "fiuId": "ICICI-FIU",
+    "month": "2026-08",
+    "revenue": 86851.5,
+    "auCount": 317649,
+    "dfCount": 424006,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.2635978779333312
+  },
+  {
+    "fiuId": "PiramalFinance-FIU",
+    "month": "2026-08",
+    "revenue": 95620,
+    "auCount": 14903,
+    "dfCount": 23905,
+    "billingModel": "Data Fetch",
+    "billingYield": 4
+  },
+  {
+    "fiuId": "poonawala-fincorp-limited",
+    "month": "2026-08",
+    "revenue": 74232,
+    "auCount": 45411,
+    "dfCount": 49488,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.5
+  },
+  {
+    "fiuId": "KHATABOOK_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 65555.6,
+    "auCount": 99450,
+    "dfCount": 398666,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.1976707946923578
+  },
+  {
+    "fiuId": "FINCORP-fiu",
+    "month": "2026-08",
+    "revenue": 21813,
+    "auCount": 16105,
+    "dfCount": 21813,
+    "billingModel": "Data Fetch",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "SNAPMINT_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 50039.5,
+    "auCount": 58821,
+    "dfCount": 71485,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.6998629483241762
+  },
+  {
+    "fiuId": "fiulive@fwfintech",
+    "month": "2026-08",
+    "revenue": 83664,
+    "auCount": 10458,
+    "dfCount": 2887681,
+    "billingModel": "Unique Users",
+    "billingYield": 8
+  },
+  {
+    "fiuId": "policybazaar-prod",
+    "month": "2026-08",
+    "revenue": 43320,
+    "auCount": 10540,
+    "dfCount": 10830,
+    "billingModel": "Data Fetch",
+    "billingYield": 4
+  },
+  {
+    "fiuId": "fiulive@motilaloswal",
+    "month": "2026-08",
+    "revenue": 55980.6,
+    "auCount": 93301,
+    "dfCount": 9794651,
+    "billingModel": "Unique Users",
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "LT_FINANCE_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 59404.95,
+    "auCount": 72628,
+    "dfCount": 91754,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.6518712603376653
+  },
+  {
+    "fiuId": "AKARA_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 76589.8,
+    "auCount": 32172,
+    "dfCount": 577198,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.12772349248387022
+  },
+  {
+    "fiuId": "fiulive@foldmoney",
+    "month": "2026-08",
+    "revenue": 47418,
+    "auCount": 47418,
+    "dfCount": 3331391,
+    "billingModel": "Unique Users",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@onepercentclub",
+    "month": "2026-08",
+    "revenue": 87311,
+    "auCount": 87311,
+    "dfCount": 7233104,
+    "billingModel": "Unique Users",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@dhan",
+    "month": "2026-08",
+    "revenue": 30000,
+    "auCount": 42999,
+    "dfCount": 2495712,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.012584932563638858
+  },
+  {
+    "fiuId": "MONEYVIEW_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 39522.4,
+    "auCount": 69831,
+    "dfCount": 75103,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.5092284003421728
+  },
+  {
+    "fiuId": "SBFC_PROD_FIUID",
+    "month": "2026-08",
+    "revenue": 32016,
+    "auCount": 7407,
+    "dfCount": 10672,
+    "billingModel": "Data Fetch",
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@skfin",
+    "month": "2026-08",
+    "revenue": 22049.5,
+    "auCount": 9032,
+    "dfCount": 11605,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.9
+  },
+  {
+    "fiuId": "fiulive@paytmmoneypfm",
+    "month": "2026-08",
+    "revenue": 28562,
+    "auCount": 28562,
+    "dfCount": 3107101,
+    "billingModel": "Unique Users",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "DSG_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 32995.5,
+    "auCount": 43111,
+    "dfCount": 60140,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.5173489679764108
+  },
+  {
+    "fiuId": "fiulive@lenditt",
+    "month": "2026-08",
+    "revenue": 16061,
+    "auCount": 9622,
+    "dfCount": 16061,
+    "billingModel": "Data Fetch",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@shreem",
+    "month": "2026-08",
+    "revenue": 18480,
+    "auCount": 3696,
+    "dfCount": 230609,
+    "billingModel": "Unique Users",
+    "billingYield": 5
+  },
+  {
+    "fiuId": "SURYODAY_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 68281.5,
+    "auCount": 47395,
+    "dfCount": 97545,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "earlysalary",
+    "month": "2026-08",
+    "revenue": 14281.5,
+    "auCount": 25836,
+    "dfCount": 28563,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "fiulive@credright",
+    "month": "2026-08",
+    "revenue": 19630,
+    "auCount": 1600,
+    "dfCount": 3926,
+    "billingModel": "Data Fetch",
+    "billingYield": 5
+  },
+  {
+    "fiuId": "fiulive@finuture",
+    "month": "2026-08",
+    "revenue": 50724,
+    "auCount": 8454,
+    "dfCount": 501823,
+    "billingModel": "Unique Users",
+    "billingYield": 6
+  },
+  {
+    "fiuId": "fiulive@crest",
+    "month": "2026-08",
+    "revenue": 17205,
+    "auCount": 69,
+    "dfCount": 17205,
+    "billingModel": "Data Fetch",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "finnable-fiu",
+    "month": "2026-08",
+    "revenue": 19187.75,
+    "auCount": 14526,
+    "dfCount": 24450,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.9059400882004948
+  },
+  {
+    "fiuId": "KOTAK-FIU",
+    "month": "2026-08",
+    "revenue": 9018,
+    "auCount": 7349,
+    "dfCount": 9018,
+    "billingModel": "Data Fetch",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "eimplca-fiu",
+    "month": "2026-08",
+    "revenue": 27953.6,
+    "auCount": 24037,
+    "dfCount": 91694,
+    "billingModel": "Unique Users",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "BHANIX_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 14087.8,
+    "auCount": 19425,
+    "dfCount": 22118,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.6432333348236241
+  },
+  {
+    "fiuId": "fiulive@fundsindia",
+    "month": "2026-08",
+    "revenue": 13776,
+    "auCount": 6888,
+    "dfCount": 1884224,
+    "billingModel": "Unique Users",
+    "billingYield": 2
+  },
+  {
+    "fiuId": "MSTOCK_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 14228.9,
+    "auCount": 12263,
+    "dfCount": 20327,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "sayyam-fiu",
+    "month": "2026-08",
+    "revenue": 8505,
+    "auCount": 8450,
+    "dfCount": 8505,
+    "billingModel": "Data Fetch",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "AEROFLEX_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 16839.2,
+    "auCount": 22208,
+    "dfCount": 24056,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.6998446257144443
+  },
+  {
+    "fiuId": "YES_BANK_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 37701.5,
+    "auCount": 75403,
+    "dfCount": 326299,
+    "billingModel": "Unique Users",
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "inprime-fiu",
+    "month": "2026-08",
+    "revenue": 4907.65,
+    "auCount": 3773,
+    "dfCount": 6764,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7325333692867737
+  },
+  {
+    "fiuId": "fiulive@dmihf",
+    "month": "2026-08",
+    "revenue": 13310,
+    "auCount": 1711,
+    "dfCount": 2662,
+    "billingModel": "Data Fetch",
+    "billingYield": 5
+  },
+  {
+    "fiuId": "AXIS_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 10136.4,
+    "auCount": 13098,
+    "dfCount": 16894,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "SVATANTRAMHFC-FIU",
+    "month": "2026-08",
+    "revenue": 9882,
+    "auCount": 2312,
+    "dfCount": 3294,
+    "billingModel": "Data Fetch",
+    "billingYield": 3
+  },
+  {
+    "fiuId": "eimpl-fiu",
+    "month": "2026-08",
+    "revenue": 12343,
+    "auCount": 7432,
+    "dfCount": 46851,
+    "billingModel": "Unique Users",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "VASTU_HF_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 9613.4,
+    "auCount": 6971,
+    "dfCount": 16029,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.5993362538165405
+  },
+  {
+    "fiuId": "fiulive@upmovecapital",
+    "month": "2026-08",
+    "revenue": 8343,
+    "auCount": 2159,
+    "dfCount": 2781,
+    "billingModel": "Data Fetch",
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@sampathi",
+    "month": "2026-08",
+    "revenue": 5542,
+    "auCount": 886,
+    "dfCount": 2771,
+    "billingModel": "Data Fetch",
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@niyogin",
+    "month": "2026-08",
+    "revenue": 9627.4,
+    "auCount": 39413,
+    "dfCount": 48137,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.2
+  },
+  {
+    "fiuId": "fiulive@babalease",
+    "month": "2026-08",
+    "revenue": 13178,
+    "auCount": 5150,
+    "dfCount": 6589,
+    "billingModel": "Data Fetch",
+    "billingYield": 2
+  },
+  {
+    "fiuId": "CAPFLOAT_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 6705.8,
+    "auCount": 13556,
+    "dfCount": 14412,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.5009676960296001
+  },
+  {
+    "fiuId": "CHINMAY_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 8164.5,
+    "auCount": 13503,
+    "dfCount": 20920,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.41233160009454023
+  },
+  {
+    "fiuId": "HIRANANDANI-FIU",
+    "month": "2026-08",
+    "revenue": 6356,
+    "auCount": 2377,
+    "dfCount": 3178,
+    "billingModel": "Data Fetch",
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@goalteller",
+    "month": "2026-08",
+    "revenue": 68,
+    "auCount": 3,
+    "dfCount": 40,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.7
+  },
+  {
+    "fiuId": "HINDUJA_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 6986.7,
+    "auCount": 8607,
+    "dfCount": 9981,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "richman-fincap",
+    "month": "2026-08",
+    "revenue": 5954.85,
+    "auCount": 6512,
+    "dfCount": 11957,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.49759145807806754
+  },
+  {
+    "fiuId": "decimus-fiu",
+    "month": "2026-08",
+    "revenue": 7808.6,
+    "auCount": 8534,
+    "dfCount": 10992,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.9613417346182357
+  },
+  {
+    "fiuId": "SBI_SECURITIES_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 3608.5,
+    "auCount": 4277,
+    "dfCount": 5155,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "PHFL_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 4194.4,
+    "auCount": 4149,
+    "dfCount": 5992,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "fiulive@apac",
+    "month": "2026-08",
+    "revenue": 4434,
+    "auCount": 1679,
+    "dfCount": 2217,
+    "billingModel": "Data Fetch",
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@hdfcsecurities",
+    "month": "2026-08",
+    "revenue": 2902,
+    "auCount": 2902,
+    "dfCount": 123929,
+    "billingModel": "Unique Users",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@hdfclife",
+    "month": "2026-08",
+    "revenue": 3180,
+    "auCount": 999,
+    "dfCount": 1060,
+    "billingModel": "Data Fetch",
+    "billingYield": 3
+  },
+  {
+    "fiuId": "SARVAGRAM_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 3042.5,
+    "auCount": 1968,
+    "dfCount": 2434,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.248695878977569
+  },
+  {
+    "fiuId": "fiulive@kotaksec",
+    "month": "2026-08",
+    "revenue": 2404,
+    "auCount": 2404,
+    "dfCount": 98022,
+    "billingModel": "Unique Users",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@adityabirlahf",
+    "month": "2026-08",
+    "revenue": 2193,
+    "auCount": 2022,
+    "dfCount": 2924,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.75
+  },
+  {
+    "fiuId": "OPTIMO_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 2225.15,
+    "auCount": 2008,
+    "dfCount": 10702,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.20263572355012044
+  },
+  {
+    "fiuId": "fiulive@bajajfinservdirect",
+    "month": "2026-08",
+    "revenue": 968,
+    "auCount": 968,
+    "dfCount": 17477,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.04773049030654994
+  },
+  {
+    "fiuId": "fiulive@save",
+    "month": "2026-08",
+    "revenue": 1506,
+    "auCount": 371,
+    "dfCount": 502,
+    "billingModel": "Data Fetch",
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@indiabulls",
+    "month": "2026-08",
+    "revenue": 3488,
+    "auCount": 718,
+    "dfCount": 1744,
+    "billingModel": "Data Fetch",
+    "billingYield": 2
+  },
+  {
+    "fiuId": "FINOVA_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 1844.5,
+    "auCount": 1582,
+    "dfCount": 2635,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "fiulive@sigfyninvestment",
+    "month": "2026-08",
+    "revenue": 1320,
+    "auCount": 132,
+    "dfCount": 8212,
+    "billingModel": "Unique Users",
+    "billingYield": 10
+  },
+  {
+    "fiuId": "BRANCH_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 1474.8,
+    "auCount": 1637,
+    "dfCount": 2458,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "fiulive@namdev",
+    "month": "2026-08",
+    "revenue": 1437,
+    "auCount": 363,
+    "dfCount": 479,
+    "billingModel": "Data Fetch",
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@knab",
+    "month": "2026-08",
+    "revenue": 1065,
+    "auCount": 159,
+    "dfCount": 355,
+    "billingModel": "Data Fetch",
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@5paisa",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "fiulive@respo",
+    "month": "2026-08",
+    "revenue": 96.75,
+    "auCount": 128,
+    "dfCount": 129,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.75
+  },
+  {
+    "fiuId": "fiulive@easyhomefinance",
+    "month": "2026-08",
+    "revenue": 850,
+    "auCount": 119,
+    "dfCount": 170,
+    "billingModel": "Data Fetch",
+    "billingYield": 5
+  },
+  {
+    "fiuId": "ASHGROVE_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 934,
+    "auCount": 951,
+    "dfCount": 1460,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.6248876909254266
+  },
+  {
+    "fiuId": "WCAPL_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 665,
+    "auCount": 599,
+    "dfCount": 950,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.42581638940234134
+  },
+  {
+    "fiuId": "fiulive@fintoo",
+    "month": "2026-08",
+    "revenue": 1010,
+    "auCount": 101,
+    "dfCount": 273,
+    "billingModel": "Unique Users",
+    "billingYield": 10
+  },
+  {
+    "fiuId": "fiulive@hexawealth",
+    "month": "2026-08",
+    "revenue": 525,
+    "auCount": 175,
+    "dfCount": 8376,
+    "billingModel": "Unique Users",
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@jiraaf",
+    "month": "2026-08",
+    "revenue": 599,
+    "auCount": 597,
+    "dfCount": 599,
+    "billingModel": "Data Fetch",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "CREDITSAISON_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 1849.35,
+    "auCount": 12141,
+    "dfCount": 12329,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.15
+  },
+  {
+    "fiuId": "KIFS_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 648.9,
+    "auCount": 547,
+    "dfCount": 927,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "fiulive@savefin",
+    "month": "2026-08",
+    "revenue": 537,
+    "auCount": 115,
+    "dfCount": 179,
+    "billingModel": "Data Fetch",
+    "billingYield": 3
+  },
+  {
+    "fiuId": "MAS_PROD",
+    "month": "2026-08",
+    "revenue": 445.35,
+    "auCount": 515,
+    "dfCount": 637,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "TAPSTART_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 306.6,
+    "auCount": 388,
+    "dfCount": 438,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "fiulive@coinwise",
+    "month": "2026-08",
+    "revenue": 332,
+    "auCount": 332,
+    "dfCount": 80237,
+    "billingModel": "Unique Users",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "AGRIM-FIU",
+    "month": "2026-08",
+    "revenue": 284,
+    "auCount": 58,
+    "dfCount": 71,
+    "billingModel": "Data Fetch",
+    "billingYield": 4
+  },
+  {
+    "fiuId": "fiulive@axiscapital",
+    "month": "2026-08",
+    "revenue": 281,
+    "auCount": 281,
+    "dfCount": 14548,
+    "billingModel": "Unique Users",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "PAHAL_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 581.65,
+    "auCount": 662,
+    "dfCount": 838,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.6942857142857143
+  },
+  {
+    "fiuId": "PRODIGEE_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 246.2,
+    "auCount": 125,
+    "dfCount": 966,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.4774674115456238
+  },
+  {
+    "fiuId": "fiulive@juliusbaer",
+    "month": "2026-08",
+    "revenue": 240,
+    "auCount": 240,
+    "dfCount": 9921,
+    "billingModel": "Unique Users",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@angelone",
+    "month": "2026-08",
+    "revenue": 218,
+    "auCount": 218,
+    "dfCount": 14076,
+    "billingModel": "Unique Users",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@nobias",
+    "month": "2026-08",
+    "revenue": 224,
+    "auCount": 32,
+    "dfCount": 717,
+    "billingModel": "Unique Users",
+    "billingYield": 7
+  },
+  {
+    "fiuId": "fiulive@paymeindia",
+    "month": "2026-08",
+    "revenue": 129,
+    "auCount": 38,
+    "dfCount": 43,
+    "billingModel": "Data Fetch",
+    "billingYield": 3
+  },
+  {
+    "fiuId": "TRUSTLENDERS_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 189.7,
+    "auCount": 225,
+    "dfCount": 271,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.6999999999999998
+  },
+  {
+    "fiuId": "FINODAYA_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 211.4,
+    "auCount": 191,
+    "dfCount": 522,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.4091040462427745
+  },
+  {
+    "fiuId": "JOHNDEERE-FIU",
+    "month": "2026-08",
+    "revenue": 90,
+    "auCount": 20,
+    "dfCount": 30,
+    "billingModel": "Data Fetch",
+    "billingYield": 3
+  },
+  {
+    "fiuId": "BNF_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 235.2,
+    "auCount": 255,
+    "dfCount": 336,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "fiulive@paytmmoney",
+    "month": "2026-08",
+    "revenue": 122,
+    "auCount": 122,
+    "dfCount": 8068,
+    "billingModel": "Unique Users",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "sbilife-fiu",
+    "month": "2026-08",
+    "revenue": 104,
+    "auCount": 74,
+    "dfCount": 80,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3
+  },
+  {
+    "fiuId": "STFT_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 154,
+    "auCount": 116,
+    "dfCount": 220,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "fiulive@equirus",
+    "month": "2026-08",
+    "revenue": 62,
+    "auCount": 62,
+    "dfCount": 3751,
+    "billingModel": "Unique Users",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@angeloneinv",
+    "month": "2026-08",
+    "revenue": 61,
+    "auCount": 61,
+    "dfCount": 4192,
+    "billingModel": "Unique Users",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "fiulive@puneestock",
+    "month": "2026-08",
+    "revenue": 223,
+    "auCount": 7,
+    "dfCount": 223,
+    "billingModel": "Data Fetch",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "APSIRE_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 46.2,
+    "auCount": 27,
+    "dfCount": 66,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "RADIAN_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 310.1,
+    "auCount": 341,
+    "dfCount": 443,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "JANASHA_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 43.4,
+    "auCount": 54,
+    "dfCount": 62,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "SRNG_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 53.2,
+    "auCount": 57,
+    "dfCount": 76,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "fiulive@satya",
+    "month": "2026-08",
+    "revenue": 39,
+    "auCount": 9,
+    "dfCount": 13,
+    "billingModel": "Data Fetch",
+    "billingYield": 3
+  },
+  {
+    "fiuId": "fiulive@orimadvisors",
+    "month": "2026-08",
+    "revenue": 27,
+    "auCount": 27,
+    "dfCount": 5348,
+    "billingModel": "Unique Users",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "VALLABHI_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 7,
+    "auCount": 4,
+    "dfCount": 10,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7
+  },
+  {
+    "fiuId": "BAJAJ_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 2901,
+    "auCount": 3879,
+    "dfCount": 4835,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.6
+  },
+  {
+    "fiuId": "POCKETLY_PROD",
+    "month": "2026-08",
+    "revenue": 5.4,
+    "auCount": 2,
+    "dfCount": 9
+  },
+  {
+    "fiuId": "snapmint",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "fiulive@vridhihomefinance",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "fiulive@gbhansali",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "fiulive@exclusiveleasing",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "fiulive@indiainfoline",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "fiulive@fincare",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "fiulive@electronicafinance",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "fiulive@ekagratalive",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "fiulive@credavenue",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "fiulive@cars24",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "dev_ramfincorp",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "1finance-fiu",
+    "month": "2026-08",
+    "revenue": 1240.4,
+    "auCount": 0,
+    "dfCount": 3101,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.39999999999999997
+  },
+  {
+    "fiuId": "1financep2ppl-fiu",
+    "month": "2026-08",
+    "revenue": 1670.9,
+    "auCount": 0,
+    "dfCount": 1120,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3446878198567043
+  },
+  {
+    "fiuId": "5paisa-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "abc1-fiu",
+    "month": "2026-08",
+    "revenue": 23136.5,
+    "auCount": 0,
+    "dfCount": 92546,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.25
+  },
+  {
+    "fiuId": "absli-fiu",
+    "month": "2026-08",
+    "revenue": 484.5,
+    "auCount": 0,
+    "dfCount": 323,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3476394849785407
+  },
+  {
+    "fiuId": "adventfinancial-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "alic-fiu",
+    "month": "2026-08",
+    "revenue": 105,
+    "auCount": 0,
+    "dfCount": 70,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3476923076923077
+  },
+  {
+    "fiuId": "aliceblue-fiu",
+    "month": "2026-08",
+    "revenue": 3719,
+    "auCount": 0,
+    "dfCount": 3719,
+    "billingModel": "Data Fetch",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "arigamoney-fiu",
+    "month": "2026-08",
+    "revenue": 143.6,
+    "auCount": 359,
+    "dfCount": 21238,
+    "billingModel": "Unique Users",
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "arthan-fiu",
+    "month": "2026-08",
+    "revenue": 1.5,
+    "auCount": 0,
+    "dfCount": 1,
+    "billingModel": "Data Fetch",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "ashikasbl-fiu",
+    "month": "2026-08",
+    "revenue": 229.5,
+    "auCount": 0,
+    "dfCount": 153,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3476190476190477
+  },
+  {
+    "fiuId": "bajajfsl-fiu",
+    "month": "2026-08",
+    "revenue": 31611.8,
+    "auCount": 0,
+    "dfCount": 21075,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.347627820909932
+  },
+  {
+    "fiuId": "balic-fiu",
+    "month": "2026-08",
+    "revenue": 6817.1,
+    "auCount": 134,
+    "dfCount": 4650,
+    "billingModel": "Unique Users",
+    "billingYield": 0.39999999999999997
+  },
+  {
+    "fiuId": "bhfl-fiu",
+    "month": "2026-08",
+    "revenue": 9966,
+    "auCount": 0,
+    "dfCount": 4983,
+    "billingModel": "Data Fetch",
+    "billingYield": 2
+  },
+  {
+    "fiuId": "cashpositivefpl-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "chillarfpl-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "chli-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "choicemf-fiu",
+    "month": "2026-08",
+    "revenue": 79.2,
+    "auCount": 0,
+    "dfCount": 99,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7741666666666666
+  },
+  {
+    "fiuId": "cmapl-fiu",
+    "month": "2026-08",
+    "revenue": 450.4,
+    "auCount": 1126,
+    "dfCount": 41320,
+    "billingModel": "Unique Users",
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "creditwisecpl-fiu",
+    "month": "2026-08",
+    "revenue": 216,
+    "auCount": 0,
+    "dfCount": 144,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3476223776223777
+  },
+  {
+    "fiuId": "devmuni-fiu",
+    "month": "2026-08",
+    "revenue": 58.5,
+    "auCount": 0,
+    "dfCount": 39,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3476253687315636
+  },
+  {
+    "fiuId": "digambercl-fiu",
+    "month": "2026-08",
+    "revenue": 808.8,
+    "auCount": 0,
+    "dfCount": 1011,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7742274678111588
+  },
+  {
+    "fiuId": "dspam-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingModel": "Unique Users",
+    "billingYield": 0.39999999999999997
+  },
+  {
+    "fiuId": "dwaithapl-fiu",
+    "month": "2026-08",
+    "revenue": 0.4,
+    "auCount": 1,
+    "dfCount": 79,
+    "billingModel": "Unique Users",
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "dynamicepl-fiu",
+    "month": "2026-08",
+    "revenue": 9.6,
+    "auCount": 24,
+    "dfCount": 41,
+    "billingModel": "Unique Users",
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "epimoneypl-fiu",
+    "month": "2026-08",
+    "revenue": 122.8,
+    "auCount": 0,
+    "dfCount": 150,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.2092964824120602
+  },
+  {
+    "fiuId": "finaglefspl-fiu",
+    "month": "2026-08",
+    "revenue": 11154,
+    "auCount": 0,
+    "dfCount": 7436,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3476280235345393
+  },
+  {
+    "fiuId": "finzfpl-fiu",
+    "month": "2026-08",
+    "revenue": 16.5,
+    "auCount": 0,
+    "dfCount": 11,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3475000000000001
+  },
+  {
+    "fiuId": "grownetfpl-fiu",
+    "month": "2026-08",
+    "revenue": 76.5,
+    "auCount": 0,
+    "dfCount": 51,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3476595744680853
+  },
+  {
+    "fiuId": "karnspl-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3476277965254344
+  },
+  {
+    "fiuId": "kasarcncpl-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "kbspl-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 6459,
+    "dfCount": 6546,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "kotaklife-fiu",
+    "month": "2026-08",
+    "revenue": 1116,
+    "auCount": 0,
+    "dfCount": 744,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3476307189542485
+  },
+  {
+    "fiuId": "lordkrishnafsl-fiu",
+    "month": "2026-08",
+    "revenue": 2419.5,
+    "auCount": 0,
+    "dfCount": 1613,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3476278118609406
+  },
+  {
+    "fiuId": "maxlifeinsurance-fiu",
+    "month": "2026-08",
+    "revenue": 8356,
+    "auCount": 0,
+    "dfCount": 4178,
+    "billingModel": "Data Fetch",
+    "billingYield": 2
+  },
+  {
+    "fiuId": "mfppl-fiu",
+    "month": "2026-08",
+    "revenue": 123.2,
+    "auCount": 0,
+    "dfCount": 154,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7741176470588236
+  },
+  {
+    "fiuId": "muthootml-fiu",
+    "month": "2026-08",
+    "revenue": 38989.5,
+    "auCount": 0,
+    "dfCount": 47441,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7822249972453814
+  },
+  {
+    "fiuId": "narendrafcpl-fiu",
+    "month": "2026-08",
+    "revenue": 4687.5,
+    "auCount": 0,
+    "dfCount": 3125,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3476282880551962
+  },
+  {
+    "fiuId": "navifs-fiu",
+    "month": "2026-08",
+    "revenue": 697715,
+    "auCount": 0,
+    "dfCount": 697715,
+    "billingModel": "Data Fetch",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "neowealthmpl-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "networthtspl-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingModel": "Unique Users",
+    "billingYield": 0.39999999999999997
+  },
+  {
+    "fiuId": "niapl-fiu",
+    "month": "2026-08",
+    "revenue": 95955.6,
+    "auCount": 239889,
+    "dfCount": 686535,
+    "billingModel": "Unique Users",
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "plwealthpl-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0,
+    "billingModel": "Unique Users",
+    "billingYield": 0.39999999999999997
+  },
+  {
+    "fiuId": "pnbmetlife-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "ramkrishna-fiu",
+    "month": "2026-08",
+    "revenue": 13.5,
+    "auCount": 0,
+    "dfCount": 9,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3472727272727274
+  },
+  {
+    "fiuId": "rgfpl-fiu",
+    "month": "2026-08",
+    "revenue": 4.5,
+    "auCount": 0,
+    "dfCount": 3,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3475
+  },
+  {
+    "fiuId": "saloracap-fiu",
+    "month": "2026-08",
+    "revenue": 703.5,
+    "auCount": 0,
+    "dfCount": 469,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3475
+  },
+  {
+    "fiuId": "sampathicpl-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "sigfyn-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "singularitycredit-fiu",
+    "month": "2026-08",
+    "revenue": 52,
+    "auCount": 0,
+    "dfCount": 26,
+    "billingModel": "Data Fetch",
+    "billingYield": 2
+  },
+  {
+    "fiuId": "solomoncap-fiu",
+    "month": "2026-08",
+    "revenue": 192,
+    "auCount": 0,
+    "dfCount": 128,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3476283821093318
+  },
+  {
+    "fiuId": "suburbanfipl-fiu",
+    "month": "2026-08",
+    "revenue": 483.2,
+    "auCount": 0,
+    "dfCount": 604,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.7742314335060448
+  },
+  {
+    "fiuId": "talic-fiu",
+    "month": "2026-08",
+    "revenue": 631.5,
+    "auCount": 0,
+    "dfCount": 421,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3476164383561644
+  },
+  {
+    "fiuId": "tradebookcspl-fiu",
+    "month": "2026-08",
+    "revenue": 52.5,
+    "auCount": 0,
+    "dfCount": 35,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3478260869565217
+  },
+  {
+    "fiuId": "trustassetmpl-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "tsfsl-fiu",
+    "month": "2026-08",
+    "revenue": 511.5,
+    "auCount": 0,
+    "dfCount": 341,
+    "billingModel": "Data Fetch",
+    "billingYield": 1.3476369863013697
+  },
+  {
+    "fiuId": "uniorbitwmpl-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "utimf-fiu",
+    "month": "2026-08",
+    "revenue": 52.4,
+    "auCount": 131,
+    "dfCount": 4540,
+    "billingModel": "Unique Users",
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "ventura-fiu",
+    "month": "2026-08",
+    "revenue": 152,
+    "auCount": 0,
+    "dfCount": 152,
+    "billingModel": "Data Fetch",
+    "billingYield": 1
+  },
+  {
+    "fiuId": "vrindafl-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "waterfield-fiu",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 0,
+    "dfCount": 0
+  },
+  {
+    "fiuId": "wealthbeaconia-fiu",
+    "month": "2026-08",
+    "revenue": 775.6,
+    "auCount": 1939,
+    "dfCount": 401722,
+    "billingModel": "Unique Users",
+    "billingYield": 0.4
+  },
+  {
+    "fiuId": "JFS_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 75747.25,
+    "auCount": 302989,
+    "dfCount": 4867194,
+    "billingModel": "Unique Users",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "Paisabazaar-FIU-LIVE",
+    "month": "2026-08",
+    "revenue": 2270.25,
+    "auCount": 9081,
+    "dfCount": 70189,
+    "billingModel": "Unique Users",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "MOBIKWIK_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 42093.5,
+    "auCount": 168374,
+    "dfCount": 1459669,
+    "billingModel": "Unique Users",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "DEZERV_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 23196.5,
+    "auCount": 92786,
+    "dfCount": 5594015,
+    "billingModel": "Unique Users",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "JIOBLK_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 6768.5,
+    "auCount": 27074,
+    "dfCount": 2922359,
+    "billingModel": "Unique Users",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "ADITYA_BIRLA_CAPITAL_DIGITAL_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 14117.75,
+    "auCount": 56471,
+    "dfCount": 387364,
+    "billingModel": "Unique Users",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "FINWIZARD_FIU_PROD",
+    "month": "2026-08",
+    "revenue": 2219.25,
+    "auCount": 8877,
+    "dfCount": 84754,
+    "billingModel": "Unique Users",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@hdfc",
+    "month": "2026-08",
+    "revenue": 0,
+    "auCount": 402518,
+    "dfCount": 29879237,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@canarabank",
+    "month": "2026-08",
+    "auCount": 68833,
+    "dfCount": 842312,
+    "billingModel": "Fix Billing",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@famli",
+    "month": "2026-08",
+    "auCount": 3126,
+    "dfCount": 457869,
+    "billingModel": "Unique Users",
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "fiulive@motilalresearch",
+    "month": "2026-08",
+    "auCount": 4856,
+    "dfCount": 317025,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@valueresearch",
+    "month": "2026-08",
+    "auCount": 4543,
+    "dfCount": 294874,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "Safebox_FIU_prod",
+    "month": "2026-08",
+    "auCount": 2187,
+    "dfCount": 293689,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "AUBank-FIU",
+    "month": "2026-08",
+    "auCount": 64864,
+    "dfCount": 230312,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@finofin",
+    "month": "2026-08",
+    "auCount": 5742,
+    "dfCount": 217126,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SOLOMON_FIU_PROD",
+    "month": "2026-08",
+    "auCount": 131546,
+    "dfCount": 187009,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@finny",
+    "month": "2026-08",
+    "auCount": 747,
+    "dfCount": 181977,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "OIA-RIA-FIU-260421",
+    "month": "2026-08",
+    "auCount": 979,
+    "dfCount": 133008,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@stackfin",
+    "month": "2026-08",
+    "auCount": 998,
+    "dfCount": 122981,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "DMI_FIU_PROD",
+    "month": "2026-08",
+    "auCount": 91461,
+    "dfCount": 117177,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@invsify",
+    "month": "2026-08",
+    "auCount": 576,
+    "dfCount": 88413,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@sharekhanemp",
+    "month": "2026-08",
+    "auCount": 1950,
+    "dfCount": 87244,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "HDFC-FIU",
+    "month": "2026-08",
+    "auCount": 56980,
+    "dfCount": 86726,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@handauncle",
+    "month": "2026-08",
+    "auCount": 205,
+    "dfCount": 73895,
+    "billingModel": "Unique Users",
+    "billingYield": 0.5
+  },
+  {
+    "fiuId": "fiulive@axissecurities",
+    "month": "2026-08",
+    "auCount": 1485,
+    "dfCount": 60958,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@scripbox",
+    "month": "2026-08",
+    "auCount": 135,
+    "dfCount": 56743,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "chillarfintech-fiu",
+    "month": "2026-08",
+    "auCount": 6821,
+    "dfCount": 52740,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "Coracle-fiu",
+    "month": "2026-08",
+    "auCount": 34882,
+    "dfCount": 49941,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@fourdegree",
+    "month": "2026-08",
+    "auCount": 166,
+    "dfCount": 46293,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@venus",
+    "month": "2026-08",
+    "auCount": 22916,
+    "dfCount": 45283,
+    "billingModel": "Data Fetch",
+    "billingYield": 0.28189176820548023
+  },
+  {
+    "fiuId": "fiulive@5paisarm",
+    "month": "2026-08",
+    "auCount": 781,
+    "dfCount": 42054,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@dezerv",
+    "month": "2026-08",
+    "auCount": 558,
+    "dfCount": 37288,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@iiflcapital",
+    "month": "2026-08",
+    "auCount": 612,
+    "dfCount": 34614,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "USL-STCKBR-FIU-260519",
+    "month": "2026-08",
+    "auCount": 27862,
+    "dfCount": 29709,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@twigg",
+    "month": "2026-08",
+    "auCount": 208,
+    "dfCount": 28916,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@emkayglobal",
+    "month": "2026-08",
+    "auCount": 546,
+    "dfCount": 28016,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@onebanc",
+    "month": "2026-08",
+    "auCount": 351,
+    "dfCount": 26684,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "ZET-RIA-FIU-260703",
+    "month": "2026-08",
+    "auCount": 22,
+    "dfCount": 26555,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@nyvo",
+    "month": "2026-08",
+    "auCount": 114,
+    "dfCount": 25289,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@oceanfinvest",
+    "month": "2026-08",
+    "auCount": 122,
+    "dfCount": 23672,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@meghdoot",
+    "month": "2026-08",
+    "auCount": 18313,
+    "dfCount": 23267,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@mirae",
+    "month": "2026-08",
+    "auCount": 399,
+    "dfCount": 21572,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@airpaymoney",
+    "month": "2026-08",
+    "auCount": 125,
+    "dfCount": 21566,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SHRIRAM_FIU_PROD",
+    "month": "2026-08",
+    "auCount": 20124,
+    "dfCount": 21435,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "STL-RIA-FIU-260608",
+    "month": "2026-08",
+    "auCount": 9496,
+    "dfCount": 21042,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "Khosya-fiu",
+    "month": "2026-08",
+    "auCount": 18812,
+    "dfCount": 20922,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@plnrinvestment",
+    "month": "2026-08",
+    "auCount": 88,
+    "dfCount": 19721,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "PNB-FIU",
+    "month": "2026-08",
+    "auCount": 6208,
+    "dfCount": 15915,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@indianbankpfm",
+    "month": "2026-08",
+    "auCount": 79,
+    "dfCount": 15204,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@krishnarath",
+    "month": "2026-08",
+    "auCount": 395,
+    "dfCount": 14736,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@neowealth",
+    "month": "2026-08",
+    "auCount": 263,
+    "dfCount": 14335,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "moneylicious-dhan",
+    "month": "2026-08",
+    "auCount": 12101,
+    "dfCount": 13910,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "FNJ-RIA-FIU-260616",
+    "month": "2026-08",
+    "auCount": 277,
+    "dfCount": 13816,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "DACPL_NP_001",
+    "month": "2026-08",
+    "auCount": 10768,
+    "dfCount": 13660,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fynro-fiu",
+    "month": "2026-08",
+    "auCount": 88,
+    "dfCount": 13602,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "dev-xpressloans",
+    "month": "2026-08",
+    "auCount": 12299,
+    "dfCount": 13308,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@anandrathi",
+    "month": "2026-08",
+    "auCount": 629,
+    "dfCount": 12264,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@swastik",
+    "month": "2026-08",
+    "auCount": 7059,
+    "dfCount": 11350,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@idbicapital",
+    "month": "2026-08",
+    "auCount": 247,
+    "dfCount": 11248,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "dev-sashienterprises",
+    "month": "2026-08",
+    "auCount": 9994,
+    "dfCount": 10932,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "ASFL_NP_001",
+    "month": "2026-08",
+    "auCount": 8071,
+    "dfCount": 10796,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "dev-incred",
+    "month": "2026-08",
+    "auCount": 9088,
+    "dfCount": 9780,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "stock-fiu-prod",
+    "month": "2026-08",
+    "auCount": 5633,
+    "dfCount": 9473,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@pooja",
+    "month": "2026-08",
+    "auCount": 5842,
+    "dfCount": 9045,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@decimus",
+    "month": "2026-08",
+    "auCount": 37,
+    "dfCount": 9002,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "dev_salarynow",
+    "month": "2026-08",
+    "auCount": 7969,
+    "dfCount": 8950,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "kisetsuSaison-FIU",
+    "month": "2026-08",
+    "auCount": 4708,
+    "dfCount": 8871,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@bajajautocredit",
+    "month": "2026-08",
+    "auCount": 7736,
+    "dfCount": 8383,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "WITCL_NP_001",
+    "month": "2026-08",
+    "auCount": 5422,
+    "dfCount": 8242,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SIB-PVB-FIU-260520",
+    "month": "2026-08",
+    "auCount": 1687,
+    "dfCount": 7907,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "WEA-RIA-FIU-260612",
+    "month": "2026-08",
+    "auCount": 194,
+    "dfCount": 7889,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@indusindsec",
+    "month": "2026-08",
+    "auCount": 172,
+    "dfCount": 6800,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "hdbfs-fiu",
+    "month": "2026-08",
+    "auCount": 6104,
+    "dfCount": 6543,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@etmoney",
+    "month": "2026-08",
+    "auCount": 16,
+    "dfCount": 6526,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "TycoonCredit-fiu",
+    "month": "2026-08",
+    "auCount": 5602,
+    "dfCount": 6422,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@systematix",
+    "month": "2026-08",
+    "auCount": 114,
+    "dfCount": 6327,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@satsai",
+    "month": "2026-08",
+    "auCount": 4084,
+    "dfCount": 6220,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "CITRA-fiu",
+    "month": "2026-08",
+    "auCount": 5385,
+    "dfCount": 6209,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@pocketful",
+    "month": "2026-08",
+    "auCount": 4762,
+    "dfCount": 6082,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@phonepewealth",
+    "month": "2026-08",
+    "auCount": 54,
+    "dfCount": 5935,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@equall",
+    "month": "2026-08",
+    "auCount": 3691,
+    "dfCount": 5889,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@equiruswealth",
+    "month": "2026-08",
+    "auCount": 109,
+    "dfCount": 5617,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "FYR-STCKB-FIU-260603",
+    "month": "2026-08",
+    "auCount": 31,
+    "dfCount": 5542,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@bajajfinancial",
+    "month": "2026-08",
+    "auCount": 119,
+    "dfCount": 5323,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@dyota",
+    "month": "2026-08",
+    "auCount": 66,
+    "dfCount": 5274,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "Sawalsha-fiu",
+    "month": "2026-08",
+    "auCount": 4319,
+    "dfCount": 5135,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "CHB-STCKBR-FIU-260515",
+    "month": "2026-08",
+    "auCount": 46,
+    "dfCount": 4719,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "indusindcfdteam-fiu",
+    "month": "2026-08",
+    "auCount": 3682,
+    "dfCount": 4640,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@spheeti",
+    "month": "2026-08",
+    "auCount": 2949,
+    "dfCount": 4620,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "STP-RIA-FIU-260803",
+    "month": "2026-08",
+    "auCount": 280,
+    "dfCount": 4618,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@equirussecurities",
+    "month": "2026-08",
+    "auCount": 102,
+    "dfCount": 4502,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@gridkey",
+    "month": "2026-08",
+    "auCount": 9,
+    "dfCount": 4396,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "IND-PVB-FIU-260709",
+    "month": "2026-08",
+    "auCount": 3583,
+    "dfCount": 4315,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@tara",
+    "month": "2026-08",
+    "auCount": 86,
+    "dfCount": 4286,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@antique",
+    "month": "2026-08",
+    "auCount": 94,
+    "dfCount": 4256,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "IND-FIU-NBFC-260515",
+    "month": "2026-08",
+    "auCount": 2658,
+    "dfCount": 4041,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@stallion",
+    "month": "2026-08",
+    "auCount": 51,
+    "dfCount": 3744,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "raghavifl-fiu",
+    "month": "2026-08",
+    "auCount": 3092,
+    "dfCount": 3695,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "EQU-RIA-FIU-260525",
+    "month": "2026-08",
+    "auCount": 36,
+    "dfCount": 3690,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@aaritya",
+    "month": "2026-08",
+    "auCount": 2747,
+    "dfCount": 3595,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "UGROCapital-FIU",
+    "month": "2026-08",
+    "auCount": 1808,
+    "dfCount": 3500,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@fincart",
+    "month": "2026-08",
+    "auCount": 88,
+    "dfCount": 3368,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@finvasiasecurities",
+    "month": "2026-08",
+    "auCount": 2488,
+    "dfCount": 3261,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@qode",
+    "month": "2026-08",
+    "auCount": 29,
+    "dfCount": 3209,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SCPL_NP_001",
+    "month": "2026-08",
+    "auCount": 2412,
+    "dfCount": 3169,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "MBF-NBFC-FIU-060526",
+    "month": "2026-08",
+    "auCount": 1511,
+    "dfCount": 3162,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@jcwealth",
+    "month": "2026-08",
+    "auCount": 6,
+    "dfCount": 3082,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@arhamshare",
+    "month": "2026-08",
+    "auCount": 47,
+    "dfCount": 3011,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "UBI-FIU",
+    "month": "2026-08",
+    "auCount": 1780,
+    "dfCount": 2918,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "CAPRIGLOBALCAPITAL-FIU",
+    "month": "2026-08",
+    "auCount": 1948,
+    "dfCount": 2906,
+    "billingModel": "Data Fetch",
+    "billingYield": 2
+  },
+  {
+    "fiuId": "fiulive@ambitfinvest",
+    "month": "2026-08",
+    "auCount": 1225,
+    "dfCount": 2810,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "FEDERAL_PROD_FIUID",
+    "month": "2026-08",
+    "auCount": 1186,
+    "dfCount": 2801,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "TCPL_NP_001",
+    "month": "2026-08",
+    "auCount": 1152,
+    "dfCount": 2794,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "JUNOON-FIU",
+    "month": "2026-08",
+    "auCount": 1975,
+    "dfCount": 2788,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "CAPRIGLOBALHOUSING-FIU",
+    "month": "2026-08",
+    "auCount": 1906,
+    "dfCount": 2705,
+    "billingModel": "Data Fetch",
+    "billingYield": 2
+  },
+  {
+    "fiuId": "DSI-NBFC-FIU-260610",
+    "month": "2026-08",
+    "auCount": 1869,
+    "dfCount": 2617,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@quantmutual",
+    "month": "2026-08",
+    "auCount": 66,
+    "dfCount": 2537,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "TATA_CAPITAL_FIU_PROD",
+    "month": "2026-08",
+    "auCount": 2146,
+    "dfCount": 2524,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "earlysalarypl-fiu",
+    "month": "2026-08",
+    "auCount": 2301,
+    "dfCount": 2448,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "JUB-NBFC-FIU-260514",
+    "month": "2026-08",
+    "auCount": 1920,
+    "dfCount": 2365,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "GDLLEASING",
+    "month": "2026-08",
+    "auCount": 1453,
+    "dfCount": 2320,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "TDV-RIA-FIU-260608",
+    "month": "2026-08",
+    "auCount": 17,
+    "dfCount": 2216,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@indothai",
+    "month": "2026-08",
+    "auCount": 53,
+    "dfCount": 2204,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "JFF-NBFC-FIU-260602",
+    "month": "2026-08",
+    "auCount": 1738,
+    "dfCount": 2200,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SHRIRAM-FIU",
+    "month": "2026-08",
+    "auCount": 1468,
+    "dfCount": 2112,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@mintcap",
+    "month": "2026-08",
+    "auCount": 25,
+    "dfCount": 2100,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@credifin",
+    "month": "2026-08",
+    "auCount": 1006,
+    "dfCount": 2095,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@swastika",
+    "month": "2026-08",
+    "auCount": 778,
+    "dfCount": 2056,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@fusion",
+    "month": "2026-08",
+    "auCount": 1230,
+    "dfCount": 2044,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@nothernarc",
+    "month": "2026-08",
+    "auCount": 1680,
+    "dfCount": 1988,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "ROI-STCKB-FIU-260609",
+    "month": "2026-08",
+    "auCount": 22,
+    "dfCount": 1980,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@liquide",
+    "month": "2026-08",
+    "auCount": 7,
+    "dfCount": 1951,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "EASYHOMEFINANCE-FIU",
+    "month": "2026-08",
+    "auCount": 1163,
+    "dfCount": 1836,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SGR_NP_001",
+    "month": "2026-08",
+    "auCount": 1203,
+    "dfCount": 1822,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@gopi",
+    "month": "2026-08",
+    "auCount": 1061,
+    "dfCount": 1726,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "KLFPL_NP_001",
+    "month": "2026-08",
+    "auCount": 1323,
+    "dfCount": 1672,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@lfcsecurities",
+    "month": "2026-08",
+    "auCount": 47,
+    "dfCount": 1626,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@finverse",
+    "month": "2026-08",
+    "auCount": 1151,
+    "dfCount": 1618,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "flexiloans",
+    "month": "2026-08",
+    "auCount": 1518,
+    "dfCount": 1606,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@greenportfolio",
+    "month": "2026-08",
+    "auCount": 28,
+    "dfCount": 1578,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "sparkcapl-fiu",
+    "month": "2026-08",
+    "auCount": 82,
+    "dfCount": 1556,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@cholamandalam",
+    "month": "2026-08",
+    "auCount": 28,
+    "dfCount": 1479,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "KAABIL-FIU",
+    "month": "2026-08",
+    "auCount": 1021,
+    "dfCount": 1426,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@loksuvidha",
+    "month": "2026-08",
+    "auCount": 1160,
+    "dfCount": 1359,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@seedsfincap",
+    "month": "2026-08",
+    "auCount": 949,
+    "dfCount": 1304,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SAARATHIFINANCE-FIU",
+    "month": "2026-08",
+    "auCount": 951,
+    "dfCount": 1259,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@finideas",
+    "month": "2026-08",
+    "auCount": 65,
+    "dfCount": 1242,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "HFCPL_NP_001",
+    "month": "2026-08",
+    "auCount": 915,
+    "dfCount": 1237,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "iiflsec-fiu",
+    "month": "2026-08",
+    "auCount": 561,
+    "dfCount": 1210,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "VFF-HFC-FIU-260512",
+    "month": "2026-08",
+    "auCount": 910,
+    "dfCount": 1202,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@iiflsamasta",
+    "month": "2026-08",
+    "auCount": 581,
+    "dfCount": 1193,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "finwiser_sandbox_fiu",
+    "month": "2026-08",
+    "auCount": 8,
+    "dfCount": 1176,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "TRANSWARRANTY-NBFC-FIU",
+    "month": "2026-08",
+    "auCount": 767,
+    "dfCount": 1171,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "PHD-RIA-FIU-260615",
+    "month": "2026-08",
+    "auCount": 3,
+    "dfCount": 1108,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "AUXILO-FIU",
+    "month": "2026-08",
+    "auCount": 912,
+    "dfCount": 1107,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "WTS-RIA-FIU-260703",
+    "month": "2026-08",
+    "auCount": 11,
+    "dfCount": 995,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@nirmalbang",
+    "month": "2026-08",
+    "auCount": 813,
+    "dfCount": 989,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "MAH-NBFC-FIU-260512",
+    "month": "2026-08",
+    "auCount": 830,
+    "dfCount": 963,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "ACM-STCKBR-FIU-260511",
+    "month": "2026-08",
+    "auCount": 471,
+    "dfCount": 925,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "AYU-NBFC-FIU-260724",
+    "month": "2026-08",
+    "auCount": 583,
+    "dfCount": 888,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "cholamandalam-fiu-prod",
+    "month": "2026-08",
+    "auCount": 541,
+    "dfCount": 854,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@usfb",
+    "month": "2026-08",
+    "auCount": 502,
+    "dfCount": 847,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "BFL-NBFC-FIU-260616",
+    "month": "2026-08",
+    "auCount": 398,
+    "dfCount": 828,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SIBLFIU",
+    "month": "2026-08",
+    "auCount": 357,
+    "dfCount": 764,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "DFI-NBFC-FIU-260504",
+    "month": "2026-08",
+    "auCount": 340,
+    "dfCount": 746,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "AIP-RIA-FIU-260520",
+    "month": "2026-08",
+    "auCount": 13,
+    "dfCount": 738,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@techfino",
+    "month": "2026-08",
+    "auCount": 554,
+    "dfCount": 732,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "indiafirstlicl-fiu",
+    "month": "2026-08",
+    "auCount": 35,
+    "dfCount": 707,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "ICC-NBFC-FIU-260522",
+    "month": "2026-08",
+    "auCount": 601,
+    "dfCount": 703,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "OWP-PM-FIU-260721",
+    "month": "2026-08",
+    "auCount": 6,
+    "dfCount": 699,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "VEL-NBFC-FIU-260602",
+    "month": "2026-08",
+    "auCount": 569,
+    "dfCount": 690,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@msfincap",
+    "month": "2026-08",
+    "auCount": 321,
+    "dfCount": 661,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "ACM-NBFC-FIU-260604",
+    "month": "2026-08",
+    "auCount": 502,
+    "dfCount": 646,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "NAM-NBFC-FIU-260511",
+    "month": "2026-08",
+    "auCount": 374,
+    "dfCount": 642,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@apollo",
+    "month": "2026-08",
+    "auCount": 510,
+    "dfCount": 640,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@ikigai",
+    "month": "2026-08",
+    "auCount": 17,
+    "dfCount": 615,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "FDP-NBFC-FIU-260608",
+    "month": "2026-08",
+    "auCount": 393,
+    "dfCount": 607,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@vistaar",
+    "month": "2026-08",
+    "auCount": 446,
+    "dfCount": 604,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "CEN-NBFC-FIU-260429",
+    "month": "2026-08",
+    "auCount": 354,
+    "dfCount": 465,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "KSF-NBFC-FIU-260702",
+    "month": "2026-08",
+    "auCount": 189,
+    "dfCount": 463,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "NAMDEV-FIU",
+    "month": "2026-08",
+    "auCount": 339,
+    "dfCount": 457,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "UNNATTI-fiu",
+    "month": "2026-08",
+    "auCount": 253,
+    "dfCount": 444,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@rudowealth",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 426,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "Trickleflood-fiu",
+    "month": "2026-08",
+    "auCount": 410,
+    "dfCount": 415,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "CRISSFIN_FIU_PROD",
+    "month": "2026-08",
+    "auCount": 330,
+    "dfCount": 402,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "KSL-STCKB-FIU-260623",
+    "month": "2026-08",
+    "auCount": 6,
+    "dfCount": 398,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "RELIGAREBROKING-fiu",
+    "month": "2026-08",
+    "auCount": 333,
+    "dfCount": 395,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "BIZLOAN-FIU",
+    "month": "2026-08",
+    "auCount": 259,
+    "dfCount": 384,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "FFP-NBFC-FIU-260605",
+    "month": "2026-08",
+    "auCount": 342,
+    "dfCount": 384
+  },
+  {
+    "fiuId": "fiulive@jainam",
+    "month": "2026-08",
+    "auCount": 335,
+    "dfCount": 378,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "MSL-AMC-FIU-260521",
+    "month": "2026-08",
+    "auCount": 5,
+    "dfCount": 376
+  },
+  {
+    "fiuId": "SPHEETI-FIU",
+    "month": "2026-08",
+    "auCount": 292,
+    "dfCount": 373,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "k2vs-insurance-fiu",
+    "month": "2026-08",
+    "auCount": 4,
+    "dfCount": 347,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@torusfinmarkets",
+    "month": "2026-08",
+    "auCount": 233,
+    "dfCount": 346,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@mukutfinvest",
+    "month": "2026-08",
+    "auCount": 71,
+    "dfCount": 334,
+    "billingModel": "Data Fetch",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@zebu",
+    "month": "2026-08",
+    "auCount": 249,
+    "dfCount": 295,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@goldline",
+    "month": "2026-08",
+    "auCount": 208,
+    "dfCount": 288,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@agffinlease",
+    "month": "2026-08",
+    "auCount": 162,
+    "dfCount": 280,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "WAQTFINANCE-FIU",
+    "month": "2026-08",
+    "auCount": 152,
+    "dfCount": 279,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SDTPL_NP_001",
+    "month": "2026-08",
+    "auCount": 145,
+    "dfCount": 273,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SHF-NBFC-FIU-260609",
+    "month": "2026-08",
+    "auCount": 187,
+    "dfCount": 271,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@dhansafalfin",
+    "month": "2026-08",
+    "auCount": 105,
+    "dfCount": 262,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@money2me",
+    "month": "2026-08",
+    "auCount": 178,
+    "dfCount": 252,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "PCI-NBFC-FIU-260605",
+    "month": "2026-08",
+    "auCount": 188,
+    "dfCount": 248,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "AKME_FIU_PROD",
+    "month": "2026-08",
+    "auCount": 141,
+    "dfCount": 239,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "southindia-finvest",
+    "month": "2026-08",
+    "auCount": 227,
+    "dfCount": 238,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@aanfinance",
+    "month": "2026-08",
+    "auCount": 37,
+    "dfCount": 236,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@rohitprofin",
+    "month": "2026-08",
+    "auCount": 188,
+    "dfCount": 228,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@goodskill",
+    "month": "2026-08",
+    "auCount": 116,
+    "dfCount": 225,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "JAIRAJ",
+    "month": "2026-08",
+    "auCount": 62,
+    "dfCount": 217,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "irage-broking",
+    "month": "2026-08",
+    "auCount": 163,
+    "dfCount": 217,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "cboi-dlp-fiu",
+    "month": "2026-08",
+    "auCount": 137,
+    "dfCount": 211,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "hero-housing",
+    "month": "2026-08",
+    "auCount": 193,
+    "dfCount": 206,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "cettlx-services",
+    "month": "2026-08",
+    "auCount": 5,
+    "dfCount": 201,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@adichitragupta",
+    "month": "2026-08",
+    "auCount": 132,
+    "dfCount": 190,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "finnovate-financial",
+    "month": "2026-08",
+    "auCount": 76,
+    "dfCount": 175,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "KUH-NBFC-FIU-260526",
+    "month": "2026-08",
+    "auCount": 129,
+    "dfCount": 160,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "FINTREE-LIVE",
+    "month": "2026-08",
+    "auCount": 50,
+    "dfCount": 155,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "varashakti-fiu-prod",
+    "month": "2026-08",
+    "auCount": 116,
+    "dfCount": 143,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@marcellus",
+    "month": "2026-08",
+    "auCount": 9,
+    "dfCount": 143,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "PFP-NBFC-FIU-260713",
+    "month": "2026-08",
+    "auCount": 126,
+    "dfCount": 142,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "sbi-fiu",
+    "month": "2026-08",
+    "auCount": 139,
+    "dfCount": 141,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "Marathon-fiu",
+    "month": "2026-08",
+    "auCount": 97,
+    "dfCount": 136,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@jacinth",
+    "month": "2026-08",
+    "auCount": 124,
+    "dfCount": 136,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@mdfcfinanciers",
+    "month": "2026-08",
+    "auCount": 92,
+    "dfCount": 131,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "larktfl-fiu",
+    "month": "2026-08",
+    "auCount": 42,
+    "dfCount": 120,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "lendingkart",
+    "month": "2026-08",
+    "auCount": 80,
+    "dfCount": 115,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SHR-RIA-FIU-260528",
+    "month": "2026-08",
+    "auCount": 6,
+    "dfCount": 114,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "VIKASMONEY-FIU",
+    "month": "2026-08",
+    "auCount": 99,
+    "dfCount": 112,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "NWM-STCKB-FIU-260627",
+    "month": "2026-08",
+    "auCount": 13,
+    "dfCount": 111,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "RAR-fiu",
+    "month": "2026-08",
+    "auCount": 41,
+    "dfCount": 106,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "dev-maxemocapital",
+    "month": "2026-08",
+    "auCount": 86,
+    "dfCount": 102,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "MICROGREENHOUSINGFINANCE-FIU",
+    "month": "2026-08",
+    "auCount": 83,
+    "dfCount": 99,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "BAZAARI-FIU",
+    "month": "2026-08",
+    "auCount": 74,
+    "dfCount": 94,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "EVP-NBFC-FIU-260722",
+    "month": "2026-08",
+    "auCount": 68,
+    "dfCount": 91
+  },
+  {
+    "fiuId": "MAS-RIA-FIU-260423",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 88,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "icicilgicl-fiu",
+    "month": "2026-08",
+    "auCount": 71,
+    "dfCount": 88,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SAN-NBFC-FIU-260528",
+    "month": "2026-08",
+    "auCount": 25,
+    "dfCount": 84,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "MPF-NBFC-FIU-260529",
+    "month": "2026-08",
+    "auCount": 52,
+    "dfCount": 76,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "beryl",
+    "month": "2026-08",
+    "auCount": 48,
+    "dfCount": 73,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "ABHIYAN_FIU_PROD",
+    "month": "2026-08",
+    "auCount": 60,
+    "dfCount": 70,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "iciciprudential-fiu",
+    "month": "2026-08",
+    "auCount": 62,
+    "dfCount": 69,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@cdlfinancial",
+    "month": "2026-08",
+    "auCount": 40,
+    "dfCount": 66,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "PRO-NBFC-FIU-260710",
+    "month": "2026-08",
+    "auCount": 18,
+    "dfCount": 65,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "AFL-NBFC-FIU-260603",
+    "month": "2026-08",
+    "auCount": 61,
+    "dfCount": 62,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "shriramfcpl-fiu",
+    "month": "2026-08",
+    "auCount": 57,
+    "dfCount": 61,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "FEDFINASERV-FIU",
+    "month": "2026-08",
+    "auCount": 34,
+    "dfCount": 59
+  },
+  {
+    "fiuId": "fiulive@finlease",
+    "month": "2026-08",
+    "auCount": 50,
+    "dfCount": 58,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@supreme",
+    "month": "2026-08",
+    "auCount": 33,
+    "dfCount": 57,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "PRANAMYA",
+    "month": "2026-08",
+    "auCount": 7,
+    "dfCount": 56,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "ARY-NBFC-FIU-260723",
+    "month": "2026-08",
+    "auCount": 49,
+    "dfCount": 56,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "UCOB-FIU",
+    "month": "2026-08",
+    "auCount": 43,
+    "dfCount": 54,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@avantifinance",
+    "month": "2026-08",
+    "auCount": 20,
+    "dfCount": 44,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "LLF-NBFC-FIU-260602",
+    "month": "2026-08",
+    "auCount": 17,
+    "dfCount": 44,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "NPPL_004",
+    "month": "2026-08",
+    "auCount": 30,
+    "dfCount": 41,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SpheetiFintech-fiu",
+    "month": "2026-08",
+    "auCount": 27,
+    "dfCount": 41,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "ISL-STCKB-FIU-260713",
+    "month": "2026-08",
+    "auCount": 17,
+    "dfCount": 40
+  },
+  {
+    "fiuId": "fiulive@indusind",
+    "month": "2026-08",
+    "auCount": 23,
+    "dfCount": 39,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "CHARBHUJA",
+    "month": "2026-08",
+    "auCount": 13,
+    "dfCount": 38,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@enorme",
+    "month": "2026-08",
+    "auCount": 28,
+    "dfCount": 38,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@pinkcity",
+    "month": "2026-08",
+    "auCount": 18,
+    "dfCount": 37,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "FWC-NBFC-FIU-260525",
+    "month": "2026-08",
+    "auCount": 27,
+    "dfCount": 35,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@diamondhands",
+    "month": "2026-08",
+    "auCount": 28,
+    "dfCount": 33,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "Barwala-fiu",
+    "month": "2026-08",
+    "auCount": 4,
+    "dfCount": 33,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "FUNDSMAMA-FIU",
+    "month": "2026-08",
+    "auCount": 12,
+    "dfCount": 32,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@coversure",
+    "month": "2026-08",
+    "auCount": 4,
+    "dfCount": 32,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "FEEONLYRIA_FIU_PROD",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 31,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "myfi-fiu",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 31,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@djt",
+    "month": "2026-08",
+    "auCount": 24,
+    "dfCount": 31,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "KotakMahindraBank-FIU",
+    "month": "2026-08",
+    "auCount": 23,
+    "dfCount": 31,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "BPS-NBFC-FIU-260806",
+    "month": "2026-08",
+    "auCount": 12,
+    "dfCount": 30
+  },
+  {
+    "fiuId": "FEXPRIME-fiu",
+    "month": "2026-08",
+    "auCount": 24,
+    "dfCount": 28,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@comfortfincap",
+    "month": "2026-08",
+    "auCount": 25,
+    "dfCount": 27,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "BSD_NP_001",
+    "month": "2026-08",
+    "auCount": 22,
+    "dfCount": 26,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@keertana",
+    "month": "2026-08",
+    "auCount": 24,
+    "dfCount": 25,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@punjabreliable",
+    "month": "2026-08",
+    "auCount": 14,
+    "dfCount": 25,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "STATUSFINANCE-FIU",
+    "month": "2026-08",
+    "auCount": 22,
+    "dfCount": 24,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@saloracapital",
+    "month": "2026-08",
+    "auCount": 14,
+    "dfCount": 22,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "NFP-NBFC-FIU-260603",
+    "month": "2026-08",
+    "auCount": 12,
+    "dfCount": 22,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "CTPL_NP_001",
+    "month": "2026-08",
+    "auCount": 14,
+    "dfCount": 21,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "JSS-NBFC-FIU-260803",
+    "month": "2026-08",
+    "auCount": 7,
+    "dfCount": 21
+  },
+  {
+    "fiuId": "fiulive@dmifinanceltd",
+    "month": "2026-08",
+    "auCount": 16,
+    "dfCount": 19,
+    "billingModel": "Data Fetch",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "YAD-RIA-FIU-260703",
+    "month": "2026-08",
+    "auCount": 2,
+    "dfCount": 19,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "TON-NBFC-FIU-260812",
+    "month": "2026-08",
+    "auCount": 2,
+    "dfCount": 18
+  },
+  {
+    "fiuId": "LORDKRISHNA",
+    "month": "2026-08",
+    "auCount": 15,
+    "dfCount": 16,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@midlandmicrofin",
+    "month": "2026-08",
+    "auCount": 14,
+    "dfCount": 16,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "RAJ-NBFC-FIU-260626",
+    "month": "2026-08",
+    "auCount": 16,
+    "dfCount": 16,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "PAISALO",
+    "month": "2026-08",
+    "auCount": 13,
+    "dfCount": 15,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "WOODCAPITAL-FIU",
+    "month": "2026-08",
+    "auCount": 11,
+    "dfCount": 15,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@metafin",
+    "month": "2026-08",
+    "auCount": 8,
+    "dfCount": 15,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "TJFC_FIU_prod",
+    "month": "2026-08",
+    "auCount": 10,
+    "dfCount": 15,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "JNC-NBFC-FIU-260617",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 14,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "CFL-NBFC-FIU-260625",
+    "month": "2026-08",
+    "auCount": 7,
+    "dfCount": 12,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "GFL-NBFC-FIU-260706",
+    "month": "2026-08",
+    "auCount": 12,
+    "dfCount": 12
+  },
+  {
+    "fiuId": "rk-global",
+    "month": "2026-08",
+    "auCount": 8,
+    "dfCount": 11,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@hillfort",
+    "month": "2026-08",
+    "auCount": 9,
+    "dfCount": 11
+  },
+  {
+    "fiuId": "CGL-NBFC-FIU-260625",
+    "month": "2026-08",
+    "auCount": 9,
+    "dfCount": 11
+  },
+  {
+    "fiuId": "FFP-NBFC-FIU-260615",
+    "month": "2026-08",
+    "auCount": 11,
+    "dfCount": 11
+  },
+  {
+    "fiuId": "fiulive@rtf",
+    "month": "2026-08",
+    "auCount": 7,
+    "dfCount": 10
+  },
+  {
+    "fiuId": "Meet-fiu",
+    "month": "2026-08",
+    "auCount": 7,
+    "dfCount": 10,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "MOU-NBFC-FIU-260423",
+    "month": "2026-08",
+    "auCount": 2,
+    "dfCount": 10
+  },
+  {
+    "fiuId": "MPA-NBFC-FIU-260608",
+    "month": "2026-08",
+    "auCount": 7,
+    "dfCount": 10,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "MFS-NBFC-FIU-260515",
+    "month": "2026-08",
+    "auCount": 4,
+    "dfCount": 9,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "DGF-STCKB-FIU-260709",
+    "month": "2026-08",
+    "auCount": 3,
+    "dfCount": 9,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "ACM-NBFC-FIU-260627",
+    "month": "2026-08",
+    "auCount": 3,
+    "dfCount": 9,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "HFP-NBFC-FIU-260615",
+    "month": "2026-08",
+    "auCount": 6,
+    "dfCount": 8,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "KLG-NBFC-FIU-260805",
+    "month": "2026-08",
+    "auCount": 3,
+    "dfCount": 8
+  },
+  {
+    "fiuId": "SWR-NBFC-FIU-260731",
+    "month": "2026-08",
+    "auCount": 3,
+    "dfCount": 8
+  },
+  {
+    "fiuId": "refynetpl-fiu",
+    "month": "2026-08",
+    "auCount": 5,
+    "dfCount": 7,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SUBURBAN_FIU_PROD",
+    "month": "2026-08",
+    "auCount": 7,
+    "dfCount": 7,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "indian-bank-fiu",
+    "month": "2026-08",
+    "auCount": 6,
+    "dfCount": 7,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@easebuzz",
+    "month": "2026-08",
+    "auCount": 2,
+    "dfCount": 6,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "EDG-NBFCP-FIU-260422",
+    "month": "2026-08",
+    "auCount": 2,
+    "dfCount": 6,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@choice",
+    "month": "2026-08",
+    "auCount": 5,
+    "dfCount": 5,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "muni-broking",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 5,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "KarnatakaBank",
+    "month": "2026-08",
+    "auCount": 4,
+    "dfCount": 5,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "VALUELINE_FIU_PROD",
+    "month": "2026-08",
+    "auCount": 2,
+    "dfCount": 5,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "DECI-NBFC-FIU-5",
+    "month": "2026-08",
+    "auCount": 2,
+    "dfCount": 4
+  },
+  {
+    "fiuId": "RLP-NBFC-FIU-260817",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 4
+  },
+  {
+    "fiuId": "KAR-NBFC-FIU-260608",
+    "month": "2026-08",
+    "auCount": 3,
+    "dfCount": 4
+  },
+  {
+    "fiuId": "TLP-NBFC-FIU-260721",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 4
+  },
+  {
+    "fiuId": "BLA-NBFC-FIU-260724",
+    "month": "2026-08",
+    "auCount": 4,
+    "dfCount": 4
+  },
+  {
+    "fiuId": "fiulive@finvasiafin",
+    "month": "2026-08",
+    "auCount": 2,
+    "dfCount": 3
+  },
+  {
+    "fiuId": "MONEYPLUS_FIU",
+    "month": "2026-08",
+    "auCount": 2,
+    "dfCount": 3,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "fiulive@innovage",
+    "month": "2026-08",
+    "auCount": 2,
+    "dfCount": 3
+  },
+  {
+    "fiuId": "SOF-NBFC-FIU-260512",
+    "month": "2026-08",
+    "auCount": 2,
+    "dfCount": 3,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "LIF-NBFC-FIU-260724",
+    "month": "2026-08",
+    "auCount": 3,
+    "dfCount": 3,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "UGR-NBFC-FIU-260729",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 3
+  },
+  {
+    "fiuId": "dev-navadhancapitalprivatelimited",
+    "month": "2026-08",
+    "auCount": 2,
+    "dfCount": 2
+  },
+  {
+    "fiuId": "Antworks-fiu",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 2,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "FEXPRIM-FIU",
+    "month": "2026-08",
+    "auCount": 2,
+    "dfCount": 2,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "LAN-NBFC-FIU-260525",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 2,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SID-FININD-FIU-260617",
+    "month": "2026-08",
+    "auCount": 2,
+    "dfCount": 2,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "CTL-NBFC-FIU-260713",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 2
+  },
+  {
+    "fiuId": "MFSPL_NP_001",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 2
+  },
+  {
+    "fiuId": "CGGBFIU0001",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 1
+  },
+  {
+    "fiuId": "SaiRoshni-fiu",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 1,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "psb-bank-fiu",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 1
+  },
+  {
+    "fiuId": "GLLFL-fiu",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 1,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "SURJIT-fiu",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 1
+  },
+  {
+    "fiuId": "TEN-NBFC-FIU-260429",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 1,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "RFP-NBFC-FIU-260617",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 1,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "MPF-NBFC-FIU-260629",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 1,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "URB-NBFC-FIU-260512",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 1,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "DLP-RIA-FIU-260820",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 1
+  },
+  {
+    "fiuId": "MFP-NBFC-FIU-260427",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 1,
+    "billingModel": "Unbilled",
+    "billingYield": 0
+  },
+  {
+    "fiuId": "NAP-RIA-FIU-260821",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 1
+  },
+  {
+    "fiuId": "ARK-NBFC-FIU-260512",
+    "month": "2026-08",
+    "auCount": 1,
+    "dfCount": 1
   }
 ]
