@@ -336,7 +336,7 @@
         </select>
       </div>
       <div class="field">
-        <label for="sucStartDate" title="From this month onward, FIUs with both SUC Cliff CMGR and SUC Yield configured switch to SUC Yield x Data Fetch volume. The first 3 months (SUC Cliff) grow at SUC Cliff CMGR; every month after that (SUC Recovery) grows at SUC Recovery CMGR (or the regular CMGR if that's left blank), while SUC Yield stays the same throughout.">SUC Start Date</label>
+        <label for="sucStartDate" title="From this month onward, FIUs with both DPI Pricing Cliff CMGR and DPI Pricing Yield configured switch to DPI Pricing Yield x Data Fetch volume. The first 3 months (DPI Pricing Cliff) grow at DPI Pricing Cliff CMGR; every month after that (DPI Pricing Recovery) grows at DPI Pricing Recovery CMGR (or the regular CMGR if that's left blank), while DPI Pricing Yield stays the same throughout.">DPI Pricing Start Date</label>
         <select id="sucStartDate">
           <option value="" selected>None (regular Yield/CMGR)</option>
           <option value="2026-10">Oct 2026</option>
@@ -353,7 +353,7 @@
         <div id="scenariosList"></div>
       </div>
       <p class="hint" style="margin:10px 0 0;">Results update automatically as soon as a file is chosen, and again whenever you change any of the fields above — no button to press.</p>
-      <p class="hint" style="margin:6px 0 0;">Leave <strong>SUC Start Date</strong> on "None" to use each FIU's regular Yield/CMGR for the whole FY (as before). Pick a month to switch a SUC-configured FIU's revenue — from that month onward — to <strong>SUC Yield × expected Data Fetch volume</strong> instead, regardless of its regular billing model. The SUC period itself splits into two quarters: the first 3 months (<strong>SUC Cliff</strong>) grow at <strong>SUC Cliff CMGR</strong>, then every month after that (<strong>SUC Recovery</strong>) grows at <strong>SUC Recovery CMGR</strong> (falling back to the FIU's regular CMGR if that's left blank) — SUC Yield doesn't change between the two, only the growth rate does. FIUs missing SUC Cliff CMGR or SUC Yield, or with no usable DF count, stay on their regular Yield/CMGR the whole FY, and that's called out in the results rather than left silent. Months governed by SUC values are highlighted <span class="badge suc-legend">like this</span> (hover a cell to see whether it's Cliff or Recovery), and seeded historical actuals (Apr–Aug) are highlighted <span class="badge actual-legend">like this</span>, in the Annual tables.</p>
+      <p class="hint" style="margin:6px 0 0;">Leave <strong>DPI Pricing Start Date</strong> on "None" to use each FIU's regular Yield/CMGR for the whole FY (as before). Pick a month to switch a DPI Pricing-configured FIU's revenue — from that month onward — to <strong>DPI Pricing Yield × expected Data Fetch volume</strong> instead, regardless of its regular billing model. The DPI Pricing period itself splits into two quarters: the first 3 months (<strong>DPI Pricing Cliff</strong>) grow at <strong>DPI Pricing Cliff CMGR</strong>, then every month after that (<strong>DPI Pricing Recovery</strong>) grows at <strong>DPI Pricing Recovery CMGR</strong> (falling back to the FIU's regular CMGR if that's left blank) — DPI Pricing Yield doesn't change between the two, only the growth rate does. FIUs missing DPI Pricing Cliff CMGR or DPI Pricing Yield, or with no usable DF count, stay on their regular Yield/CMGR the whole FY, and that's called out in the results rather than left silent. Months governed by DPI Pricing values are highlighted <span class="badge suc-legend">like this</span> (hover a cell to see whether it's Cliff or Recovery), and seeded historical actuals (Apr–Aug) are highlighted <span class="badge actual-legend">like this</span>, in the Annual tables.</p>
       <div class="status-msg" id="computeStatus"></div>
     </aside>
 
@@ -374,7 +374,7 @@
     <div class="subtab-panel active" data-subtab="projected">
     <section class="card">
       <h2>Projected vs Actual Revenue</h2>
-      <p class="hint">Three figures per month, side by side: <strong>Projected</strong> — the live FY revenue model, reflecting whatever SUC Start Date and what-if scenarios are currently selected (identical to Actual for a month that's already closed, since a closed month's actual replaces the forecast in the model itself — see the SUC Start Date hint below); <strong>Original Plan</strong> — the static <strong>Original FY Projection</strong> below, unchanged all year; and <strong>Actual</strong>, as recorded in Historical Actuals. Updates automatically every time you change a counts file, the as-of date, SUC Start Date, or a scenario. The chart for this lives on the <strong>Charts</strong> tab — the month-wise figures stay here. Variance compares Actual against the Original Plan (falling back to the live Projected figure for a month with no plan value set).</p>
+      <p class="hint">Three figures per month, side by side: <strong>Live Projection</strong> — the live FY revenue model, reflecting whatever DPI Pricing Start Date and what-if scenarios are currently selected (identical to Actual for a month that's already closed, since a closed month's actual replaces the forecast in the model itself — see the DPI Pricing Start Date hint below); <strong>Original Plan</strong> — the static <strong>Original FY Projection</strong> below, unchanged all year; and <strong>Actual</strong>, as recorded in Historical Actuals. Updates automatically every time you change a counts file, the as-of date, DPI Pricing Start Date, or a scenario. The chart for this lives on the <strong>Charts</strong> tab — the month-wise figures stay here. Variance compares Actual against the Original Plan (falling back to the Live Projection figure for a month with no plan value set).</p>
       <div class="snapshot-meta" id="snapshotMeta"></div>
       <h3 class="dt-title" style="margin-top:18px;">Month-wise figures</h3>
       <div id="forecastTable"></div>
@@ -561,7 +561,7 @@
   <div class="tab-panel" id="tab-charts">
     <section class="card">
       <h2>Projected vs Actual Revenue</h2>
-      <p class="hint">Three lines per month: the live FY revenue projection (reflecting whatever SUC Start Date and what-if scenarios are currently selected on the Monthly Revenue tab), the static Original Plan set at the start of the FY, and actual revenue as it's recorded in Historical Actuals. See the month-wise figures, and the Original FY Projection itself, on the Monthly Revenue tab.</p>
+      <p class="hint">Three lines per month: the live FY revenue projection (reflecting whatever DPI Pricing Start Date and what-if scenarios are currently selected on the Monthly Revenue tab), the static Original Plan set at the start of the FY, and actual revenue as it's recorded in Historical Actuals. See the month-wise figures, and the Original FY Projection itself, on the Monthly Revenue tab.</p>
       <div class="chart-legend" id="forecastLegend"></div>
       <div class="chart-wrap" id="forecastChartWrap">
         <div id="forecastChart"></div>
@@ -591,7 +591,7 @@
 
     <section class="card" id="splitPctCard" style="display:none;">
       <h2>PFM vs Lending Split (%)</h2>
-      <p class="hint">Lending's and PFM's share of that month's total Revenue and total Data Fetch count, as a percentage — not cumulative, so the split can shift month to month (e.g. as SUC changes the mix). The two use-cases don't sum to 100%: other use-cases (Uncategorised, RIA, etc.) make up the rest.</p>
+      <p class="hint">Lending's and PFM's share of that month's total Revenue and total Data Fetch count, as a percentage — not cumulative, so the split can shift month to month (e.g. as DPI Pricing changes the mix). The two use-cases don't sum to 100%: other use-cases (Uncategorised, RIA, etc.) make up the rest.</p>
       <div class="chart-legend" id="splitPctLegend"></div>
       <div class="chart-wrap" id="splitPctChartWrap">
         <div id="splitPctChart"></div>
@@ -633,7 +633,7 @@
   <div class="tab-panel" id="tab-yieldcmgr">
     <section class="card">
       <h2>Yield &amp; CMGR config</h2>
-      <p class="hint">Current yield and expected compound monthly growth rate (CMGR) per FIU, used for the current month and to project every remaining month of the FY. CMGR is a decimal — enter 0.05 for 5% monthly growth, or 0 for flat/no growth. <strong>SUC Cliff CMGR</strong>, <strong>SUC Recovery CMGR</strong>, and <strong>SUC Yield</strong> only come into effect once a SUC Start Date is set on the Monthly Revenue tab: SUC Cliff CMGR drives growth for the first 3 months of the SUC period, SUC Recovery CMGR drives growth for every SUC month after that (falls back to the regular CMGR above if left blank), and SUC Yield applies throughout the whole SUC period.</p>
+      <p class="hint">Current yield and expected compound monthly growth rate (CMGR) per FIU, used for the current month and to project every remaining month of the FY. CMGR is a decimal — enter 0.05 for 5% monthly growth, or 0 for flat/no growth. <strong>DPI Pricing Cliff CMGR</strong>, <strong>DPI Pricing Recovery CMGR</strong>, and <strong>DPI Pricing Yield</strong> only come into effect once a DPI Pricing Start Date is set on the Monthly Revenue tab: DPI Pricing Cliff CMGR drives growth for the first 3 months of the DPI Pricing period, DPI Pricing Recovery CMGR drives growth for every DPI Pricing month after that (falls back to the regular CMGR above if left blank), and DPI Pricing Yield applies throughout the whole DPI Pricing period.</p>
       <div class="row">
         <button class="btn-secondary" id="addYcRowBtn" type="button">+ Add FIU</button>
         <input type="text" id="ycSearch" placeholder="Filter by FIU ID…" style="min-width:220px;" />
@@ -642,7 +642,7 @@
     <section class="card">
       <div class="table-scroll">
         <table id="ycTable">
-          <thead><tr><th>FIU ID</th><th class="num">Yield</th><th class="num">CMGR</th><th class="num">SUC Cliff CMGR</th><th class="num">SUC Recovery CMGR</th><th class="num">SUC Yield</th><th></th></tr></thead>
+          <thead><tr><th>FIU ID</th><th class="num">Yield</th><th class="num">CMGR</th><th class="num">DPI Pricing Cliff CMGR</th><th class="num">DPI Pricing Recovery CMGR</th><th class="num">DPI Pricing Yield</th><th></th></tr></thead>
           <tbody id="ycTableBody"></tbody>
         </table>
       </div>
@@ -1218,7 +1218,7 @@
           '<input type="checkbox" value="'+esc(d.key)+'" style="width:16px; height:16px; flex:0 0 16px; margin:0; padding:0; accent-color: var(--series-1);" />'+
           '<span style="line-height:1.4; padding-top:1px;">'+esc(d.label)+'</span>'+
         '</label>'
-      ).join('') + '<p class="hint" style="margin:4px 0 0;">Only takes effect once a SUC Start Date is set above — these change how a FIU\'s revenue behaves from that month onward.</p>';
+      ).join('') + '<p class="hint" style="margin:4px 0 0;">Only takes effect once a DPI Pricing Start Date is set above — these change how a FIU\'s revenue behaves from that month onward.</p>';
       scenariosField.style.display = '';
       scenariosList.querySelectorAll('input[type=checkbox]').forEach(cb => {
         cb.addEventListener('change', function(){ triggerCompute(); });
@@ -1743,7 +1743,7 @@
       months: forecastCache.months,
       ariaLabel: 'Projected versus actual versus original plan revenue by month',
       series: [
-        { key:'projected', label:'Projected ('+forecastCache.label+')', colorVar:'--series-1', data: forecastCache.projected },
+        { key:'projected', label:'Live Projection ('+forecastCache.label+')', colorVar:'--series-1', data: forecastCache.projected },
         { key:'actual', label:'Actual (recorded)', colorVar:'--series-2', data: forecastCache.actual },
         { key:'baseline', label:'Original Plan', colorVar:'--series-3', data: forecastCache.baseline }
       ]
@@ -1780,7 +1780,7 @@
       maxHeight: '360px',
       columns: [
         { key:'label', label:'Month', value: r => r.label },
-        { key:'projected', label:'Projected', numeric:true, value:r=>r.projected, render:r=> fmtCurrency(r.projected) },
+        { key:'projected', label:'Live Projection', numeric:true, value:r=>r.projected, render:r=> fmtCurrency(r.projected) },
         { key:'baseline', label:'Original Plan', numeric:true, value:r=>r.baseline, render:r=> (r.baseline===null||r.baseline===undefined) ? '—' : fmtCurrency(r.baseline) },
         { key:'actual', label:'Actual', numeric:true, value:r=>r.actual, render:r=> (r.actual===null||r.actual===undefined) ? '—' : fmtCurrency(r.actual) },
         { key:'variance', label:'Variance (Actual − Plan)', numeric:true,
@@ -1822,13 +1822,13 @@
   }
 
   // Builds a short human-readable description of what's currently driving
-  // "Projected" — e.g. "no SUC", "SUC from Oct 2026", "SUC from Oct 2026,
-  // scenario: Lending CMGR 1.5x worse during SUC Cliff" — read straight off
-  // the live form fields, since this always runs right after a compute that
-  // used exactly these same values.
+  // "Projected" — e.g. "no DPI Pricing", "DPI Pricing from Oct 2026", "DPI
+  // Pricing from Oct 2026, scenario: Lending CMGR 1.5x worse during DPI
+  // Pricing Cliff" — read straight off the live form fields, since this
+  // always runs right after a compute that used exactly these same values.
   function forecastLabelFor(){
     const sucSel = sucStartDateInput.options[sucStartDateInput.selectedIndex];
-    const sucLabel = sucStartDateInput.value ? 'SUC from ' + (sucSel ? sucSel.textContent : sucStartDateInput.value) : 'no SUC';
+    const sucLabel = sucStartDateInput.value ? 'DPI Pricing from ' + (sucSel ? sucSel.textContent : sucStartDateInput.value) : 'no DPI Pricing';
     const activeLabels = Array.from(scenariosList.querySelectorAll('input[type=checkbox]:checked'))
       .map(cb => cb.nextElementSibling ? cb.nextElementSibling.textContent : cb.value);
     return sucLabel + (activeLabels.length ? ', scenario: ' + activeLabels.join(' + ') : '');
@@ -2077,7 +2077,7 @@
     if (missing.length) noteBits.push(missing.length + ' missing yield/CMGR config or usage data');
     if (flaggedPeriod.length) noteBits.push(flaggedPeriod.length + ' billed FIU' + (flaggedPeriod.length===1?'':'s') + ' flagged Quarterly/Annual (badge below) — same monthly formula is applied, not prorated');
     if (data.sucSummary && data.sucSummary.active){
-      noteBits.push('SUC Start Date ' + data.sucSummary.startLabel + ' active — ' + data.sucSummary.switchedCount + ' FIU' + (data.sucSummary.switchedCount===1?'':'s') + ' switch to SUC Yield × Data Fetch volume from that month onward (highlighted), regardless of their regular billing model' + (data.sucSummary.missingCount ? ', ' + data.sucSummary.missingCount + ' billed FIU' + (data.sucSummary.missingCount===1?'':'s') + ' missing SUC config kept on regular Yield/CMGR' : '') + (data.sucSummary.missingDfCount ? ', ' + data.sucSummary.missingDfCount + ' SUC-configured FIU' + (data.sucSummary.missingDfCount===1?'':'s') + ' have no DF count to switch onto (shown as missing config from that month)' : ''));
+      noteBits.push('DPI Pricing Start Date ' + data.sucSummary.startLabel + ' active — ' + data.sucSummary.switchedCount + ' FIU' + (data.sucSummary.switchedCount===1?'':'s') + ' switch to DPI Pricing Yield × Data Fetch volume from that month onward (highlighted), regardless of their regular billing model' + (data.sucSummary.missingCount ? ', ' + data.sucSummary.missingCount + ' billed FIU' + (data.sucSummary.missingCount===1?'':'s') + ' missing DPI Pricing config kept on regular Yield/CMGR' : '') + (data.sucSummary.missingDfCount ? ', ' + data.sucSummary.missingDfCount + ' DPI Pricing-configured FIU' + (data.sucSummary.missingDfCount===1?'':'s') + ' have no DF count to switch onto (shown as missing config from that month)' : ''));
     }
     document.getElementById('statNote').textContent = noteBits.join(' · ');
 
@@ -2145,10 +2145,10 @@
     const cellTitle = (r, i) => {
       const m = r.monthly[i];
       if (!m || !m.billable || !m.sucActive) return '';
-      if (m.sucPhase === 'cliff') return 'SUC Cliff (month 1–3 of SUC) — usage grows at SUC Cliff CMGR';
+      if (m.sucPhase === 'cliff') return 'DPI Pricing Cliff (month 1–3 of DPI Pricing) — usage grows at DPI Pricing Cliff CMGR';
       return r.sucRecoveryCmgr != null
-        ? 'SUC Recovery (month 4+ of SUC) — usage grows at SUC Recovery CMGR; SUC Yield stays the same'
-        : 'SUC Recovery (month 4+ of SUC) — SUC Recovery CMGR not set, so usage reverts to the regular CMGR; SUC Yield stays the same';
+        ? 'DPI Pricing Recovery (month 4+ of DPI Pricing) — usage grows at DPI Pricing Recovery CMGR; DPI Pricing Yield stays the same'
+        : 'DPI Pricing Recovery (month 4+ of DPI Pricing) — DPI Pricing Recovery CMGR not set, so usage reverts to the regular CMGR; DPI Pricing Yield stays the same';
     };
     // Numeric value for sorting/searching a given month column — honors the
     // same isActual/hasActual-vs-billable gate as the cell renderers above,
@@ -2850,7 +2850,7 @@
     chatPanel.classList.toggle('open');
     if (chatPanel.classList.contains('open') && !chatOpened) {
       chatOpened = true;
-      addChatBubble('system-note', 'Ask questions about the currently computed FY data — revenue, DF Yield, groupings, SUC status, and more. Answers come from the real Claude API and are based only on what\'s currently computed here.');
+      addChatBubble('system-note', 'Ask questions about the currently computed FY data — revenue, DF Yield, groupings, DPI Pricing status, and more. Answers come from the real Claude API and are based only on what\'s currently computed here.');
       if (!lastResult) addChatBubble('system-note', 'Upload a counts file and compute revenue first — there\'s no data to ask about yet.');
     }
   });

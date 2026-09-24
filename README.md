@@ -22,28 +22,28 @@ losing who's flagged.
 
 **Yield & CMGR** (`Yield & CMGR` tab): FIU ID, Yield, CMGR (compound monthly
 growth rate, as a decimal — `0.05` for 5% monthly growth, `0` for flat,
-negative values are fine for a shrinking FIU), plus **SUC Cliff CMGR**,
-**SUC Recovery CMGR**, and **SUC Yield** — a per-Data-Fetch rate plus two
-growth rates for the two halves of the SUC period. By default these are just
-tracked for reference and don't affect the calculation; set a **SUC Start
+negative values are fine for a shrinking FIU), plus **DPI Pricing Cliff CMGR**,
+**DPI Pricing Recovery CMGR**, and **DPI Pricing Yield** — a per-Data-Fetch rate plus two
+growth rates for the two halves of the DPI Pricing period. By default these are just
+tracked for reference and don't affect the calculation; set a **DPI Pricing Start
 Date** on the Monthly Revenue tab to actually switch a FIU over to them from
-that month onward (see "SUC Start Date" under Monthly workflow below). From
-that month on, the FIU's revenue is **SUC Yield × expected Data Fetch
+that month onward (see "DPI Pricing Start Date" under Monthly workflow below). From
+that month on, the FIU's revenue is **DPI Pricing Yield × expected Data Fetch
 volume** — its regular Unique-User billing no longer applies, even for a FIU
 whose Billing Model is "Unique Users". Because Data Fetch volume is
 typically many times larger than Active/Unique User counts for the same
-FIU, **SUC Yield needs to be entered as a genuine per-Data-Fetch rate**
+FIU, **DPI Pricing Yield needs to be entered as a genuine per-Data-Fetch rate**
 (usually much smaller than the regular per-user Yield) — not just a second
 number in the same range as Yield, or FY totals after the switch will run
-far higher than intended. SUC Recovery CMGR can be left blank — a FIU
-without one just keeps growing at its regular CMGR once the SUC Recovery
-quarter starts (see "SUC Cliff vs. SUC Recovery" below). It ships pre-seeded
+far higher than intended. DPI Pricing Recovery CMGR can be left blank — a FIU
+without one just keeps growing at its regular CMGR once the DPI Pricing Recovery
+quarter starts (see "DPI Pricing Cliff vs. DPI Pricing Recovery" below). It ships pre-seeded
 with each FIU's regular CMGR as a starting point (so it's visible instead of
 blank and matches the pre-split default behavior) — edit any FIU's value on
 the Yield & CMGR tab to make its Recovery growth diverge from its regular
 CMGR. The 98 FIUs with no regular CMGR on record were left blank rather than
 seeded with a guess. The 33 FIUs with Use-case "PFM" and a License Type
-other than "Bank" have SUC Recovery CMGR set to **0** specifically (ask:
+other than "Bank" have DPI Pricing Recovery CMGR set to **0** specifically (ask:
 2026-08-19) rather than the regular-CMGR default — edit any of them
 individually on the Yield & CMGR tab if that's not the right Recovery
 assumption for a particular FIU.
@@ -75,7 +75,7 @@ Metadata/Yield & CMGR configs at upload time, for reference only — they
 aren't used in any calculation, only the row's own `revenue`/`auCount`/
 `dfCount` are.
 
-Yield, CMGR, SUC Cliff CMGR, SUC Recovery CMGR, and SUC Yield are all
+Yield, CMGR, DPI Pricing Cliff CMGR, DPI Pricing Recovery CMGR, and DPI Pricing Yield are all
 displayed rounded to 2 decimal places throughout the Monthly Revenue tab and
 the Yield & CMGR config table (the underlying stored values keep full
 precision — only the display is
@@ -92,7 +92,7 @@ rounded).
    change it if the file you're using doesn't have that lag).
    There's no "Compute" button — results appear as soon as a file is chosen,
    and recompute automatically whenever you change the as-of date, FY start
-   month, or SUC Start Date.
+   month, or DPI Pricing Start Date.
 
    > **Why "yesterday", not "today"?** (found 2026-09-02) A daily counts
    > export is usually dated/generated today but only actually contains data
@@ -102,7 +102,7 @@ rounded).
    > that month) — if it's set to "today" but the file only has one real day
    > of data, that projection divides by one extra day it shouldn't, roughly
    > **halving** the projected month, which then compounds through every
-   > later SUC month. Confirmed against a real Metabase export: treating it
+   > later DPI Pricing month. Confirmed against a real Metabase export: treating it
    > as "today" understated projected FY revenue by ~39% (₹13.6cr vs. an
    > independent reference model's ₹22.2cr); treating the same file as
    > "yesterday" landed within ~2% of that reference (₹22.6cr). The default
@@ -150,63 +150,63 @@ rounded).
 
      That same fix introduced its own regression, also now fixed
      (2026-09-10 — ask: "annual revenue ... way higher than it should be"
-     once a SUC Start Date was set): the SUC-period one-time Data Fetch
+     once a DPI Pricing Start Date was set): the DPI Pricing-period one-time Data Fetch
      volume cuts below (the PFM/non-Bank ÷6 rule, HDFC's 43% cut) were only
      being applied to the current month's *displayed* figure, not to the
      new forward-compounding anchor — so the cut silently stopped taking
      effect one month after it was supposed to become permanent, and every
-     SUC month after that compounded from the pre-cut figure instead. Both
+     DPI Pricing month after that compounded from the pre-cut figure instead. Both
      cuts now write back into the forward anchor too, so they properly
      persist for the rest of the FY the way they did before the anchor
      split existed.
-   - **SUC Start Date** (dropdown next to As-of date/FY start month, options
+   - **DPI Pricing Start Date** (dropdown next to As-of date/FY start month, options
      Oct 2026 – Mar 2027, default "None") — from that month onward, any FIU
-     with **both** SUC Cliff CMGR and SUC Yield set on the Yield & CMGR tab
-     switches its revenue to **SUC Yield × expected Data Fetch volume**,
+     with **both** DPI Pricing Cliff CMGR and DPI Pricing Yield set on the Yield & CMGR tab
+     switches its revenue to **DPI Pricing Yield × expected Data Fetch volume**,
      for the rest of the FY — regardless of that FIU's regular billing
-     model. Unique-User billing does not apply once SUC is in effect: even
+     model. Unique-User billing does not apply once DPI Pricing is in effect: even
      a FIU billed on Active/Unique Users switches onto its (projected)
-     Data Fetch volume from the switch month onward. A FIU missing SUC
-     Cliff CMGR or SUC Yield, or with no usable DF count to switch onto, is
+     Data Fetch volume from the switch month onward. A FIU missing DPI Pricing
+     Cliff CMGR or DPI Pricing Yield, or with no usable DF count to switch onto, is
      left on its regular Yield/CMGR for the whole FY rather than guessed,
      and both cases are called out in the Monthly results note. Months (and
      the current-month revenue cell, if the switch date has already passed)
-     governed by SUC values are highlighted amber in every revenue/AU/DF
+     governed by DPI Pricing values are highlighted amber in every revenue/AU/DF
      table. Leaving it on "None" reproduces the exact behavior from before
      this option existed.
-   - **SUC Cliff vs. SUC Recovery** — the SUC period isn't one flat growth
-     rate. **SUC Yield stays the same for the whole SUC period** — only the
+   - **DPI Pricing Cliff vs. DPI Pricing Recovery** — the DPI Pricing period isn't one flat growth
+     rate. **DPI Pricing Yield stays the same for the whole DPI Pricing period** — only the
      Data Fetch growth rate changes partway through, and each half has its
      own configurable rate on the Yield & CMGR tab:
-     - **SUC Cliff**: the SUC Start Month plus the following 2 months (3
-       months total). Data Fetch volume compounds at **SUC Cliff CMGR**
+     - **DPI Pricing Cliff**: the DPI Pricing Start Month plus the following 2 months (3
+       months total). Data Fetch volume compounds at **DPI Pricing Cliff CMGR**
        here — modeling an expected dip right after a price increase.
-     - **SUC Recovery**: every SUC-active month after the 3-month Cliff
+     - **DPI Pricing Recovery**: every DPI Pricing-active month after the 3-month Cliff
        window, for the rest of the FY. Data Fetch volume compounds at
-       **SUC Recovery CMGR** — modeling usage recovering once the market
-       adjusts to the new pricing — while still being billed at SUC Yield.
-       **SUC Recovery CMGR can be left blank**: a FIU without one just
-       keeps growing at its regular (pre-SUC) CMGR once Recovery starts,
+       **DPI Pricing Recovery CMGR** — modeling usage recovering once the market
+       adjusts to the new pricing — while still being billed at DPI Pricing Yield.
+       **DPI Pricing Recovery CMGR can be left blank**: a FIU without one just
+       keeps growing at its regular (pre-DPI Pricing) CMGR once Recovery starts,
        same as before this field existed.
-     - If the SUC Start Month is late enough in the FY that the 3-month
-       Cliff window runs past March close-out (SUC Start Month = Jan, Feb,
+     - If the DPI Pricing Start Month is late enough in the FY that the 3-month
+       Cliff window runs past March close-out (DPI Pricing Start Month = Jan, Feb,
        or Mar), the FY simply ends before Recovery ever kicks in — every
-       SUC-active month shown that year is Cliff. (E.g. SUC Start Month =
-       Feb'27 → only Feb'27 and Mar'27 are SUC-active, and both are Cliff;
+       DPI Pricing-active month shown that year is Cliff. (E.g. DPI Pricing Start Month =
+       Feb'27 → only Feb'27 and Mar'27 are DPI Pricing-active, and both are Cliff;
        Recovery would only start in Apr'27, which is next FY.)
-     - SUC-active revenue/AU/DF cells are hoverable — the tooltip says
+     - DPI Pricing-active revenue/AU/DF cells are hoverable — the tooltip says
        whether that particular month is Cliff or Recovery (and, for
-       Recovery, whether it's using SUC Recovery CMGR or falling back to
+       Recovery, whether it's using DPI Pricing Recovery CMGR or falling back to
        the regular CMGR), in addition to the amber highlight marking it as
-       SUC-governed.
+       DPI Pricing-governed.
    - **What-if revenue scenarios** — optional, opt-in checkboxes ("What-if
-     scenarios" field, shown once a SUC Start Date is set) that adjust how
-     SUC-active months are computed, on top of everything above. Any
+     scenarios" field, shown once a DPI Pricing Start Date is set) that adjust how
+     DPI Pricing-active months are computed, on top of everything above. Any
      combination can be turned on together — they target disjoint FIU
      populations, so there's no interaction to worry about between them:
-     - **Lending DF volume falls 50% (not ~34%) during SUC Cliff** — for
-       every Lending-use-case FIU whose own SUC Cliff CMGR is already
-       negative, during the SUC Cliff only (the first 3 months of the SUC
+     - **Lending DF volume falls 50% (not ~34%) during DPI Pricing Cliff** — for
+       every Lending-use-case FIU whose own DPI Pricing Cliff CMGR is already
+       negative, during the DPI Pricing Cliff only (the first 3 months of the DPI Pricing
        period), that FIU's Cliff-phase monthly rate is replaced with a flat
        **-20.63%/month** — the constant rate that compounds to exactly a
        50% cumulative fall over 3 months, versus the ~34% fall a typical
@@ -215,13 +215,13 @@ rounded).
        -13%/month baseline only worked out to a 47.8% fall, not 50%). A
        Lending FIU whose Cliff CMGR is zero or positive is left completely
        untouched — there's no sensible "worse" reading for a FIU that isn't
-       already degrading. SUC Recovery is deliberately left untouched
+       already degrading. DPI Pricing Recovery is deliberately left untouched
        either way: recovery is still assumed to happen at the
-       originally-anticipated pace, not accelerated. Pre-SUC months, and
-       FIUs SUC doesn't apply to, are untouched too.
-     - **Non-bank PFM FIUs → ₹0 post-SUC** — for every PFM-use-case FIU
+       originally-anticipated pace, not accelerated. Pre-DPI Pricing months, and
+       FIUs DPI Pricing doesn't apply to, are untouched too.
+     - **Non-bank PFM FIUs → ₹0 post-DPI Pricing** — for every PFM-use-case FIU
        whose License Type isn't Bank (the same population the 1/6 DF cut
-       above applies to), revenue is forced to ₹0 for every SUC-active
+       above applies to), revenue is forced to ₹0 for every DPI Pricing-active
        month — shown as an explicit ₹0, not a missing/"—" figure. Usage/DF
        figures for those FIUs and months are still shown as normal; only
        revenue is zeroed.
@@ -234,53 +234,53 @@ rounded).
      exposed in the UI — added on request, keep this list updated if more
      are added or these are removed):
      - PFM-use-case FIUs whose License isn't Bank get their expected Data
-       Fetch volume cut to **1/6** once, at the SUC switch month — it then
-       keeps compounding normally (Cliff at SUC Cliff CMGR, then Recovery
-       at SUC Recovery CMGR/regular CMGR, per the Cliff/Recovery split
+       Fetch volume cut to **1/6** once, at the DPI Pricing switch month — it then
+       keeps compounding normally (Cliff at DPI Pricing Cliff CMGR, then Recovery
+       at DPI Pricing Recovery CMGR/regular CMGR, per the Cliff/Recovery split
        above) from that reduced baseline.
      - **fiulive@canarabank**: revenue fixed at ₹3,50,000 in Nov 2026 and
        ₹0 every other month of the FY (replaces historical actuals too).
      - **fiulive@moneycontrol**: revenue fixed at ₹1,60,000 every month
-       through the month before the SUC Start Date (or the whole FY if no
-       SUC Start Date is set); normal computation resumes from the SUC
+       through the month before the DPI Pricing Start Date (or the whole FY if no
+       DPI Pricing Start Date is set); normal computation resumes from the DPI Pricing
        Start Date onward.
      - **fiulive@axisbank**: AU count fixed at 25,000 from Sep 2026 onward
        for any month Unique-User billing still applies (i.e. not
-       SUC-active); DF count during the SUC period fixed at 10% of the
-       recorded July 2026 DF count, flat every SUC month. (Revisited
+       DPI Pricing-active); DF count during the DPI Pricing period fixed at 10% of the
+       recorded July 2026 DF count, flat every DPI Pricing month. (Revisited
        2026-09-02 against a newer reference sheet with a different implied
        Oct'26 figure — kept as-is on request.)
      - **ICICI**, **SBI Cards**, **KMBL-FIU-PROD (PFM)**: all three are
        newly onboarding in H2 with no real Data Fetch volume yet, so the
-       normal DF-baseline-compounding SUC math has nothing to grow from.
-       Each has a flat monthly revenue figure hardcoded for the SUC period
+       normal DF-baseline-compounding DPI Pricing math has nothing to grow from.
+       Each has a flat monthly revenue figure hardcoded for the DPI Pricing period
        (from the Sep 2026 reference sheet) — ICICI ₹51,000/month and SBI
        Cards ₹80,000/month, both flat Oct 2026 – Mar 2027; KMBL-FIU-PROD
        (PFM) ₹13,79,669/month Oct–Dec 2026, then ₹2,29,945/month Jan–Mar
        2027. This is a stand-in only: the moment one of these FIUs' *current
        month* upload reports a real (nonzero) Data Fetch count, the flat
        figure stops being used for that FIU — for good, not just that one
-       month — and it switches to the normal SUC computation (DF baseline ×
-       SUC Yield, Cliff/Recovery CMGR) off that real, growing baseline
+       month — and it switches to the normal DPI Pricing computation (DF baseline ×
+       DPI Pricing Yield, Cliff/Recovery CMGR) off that real, growing baseline
        instead. No manual step needed for that switch — it's re-evaluated
        fresh from whatever counts were just uploaded, every time.
      - **fiulive@hdfc** and **HDFC-FIU**: both are "Unbilled" on the FIU
-       Metadata tab, which normally excludes a FIU from SUC entirely (SUC
+       Metadata tab, which normally excludes a FIU from DPI Pricing entirely (DPI Pricing
        only ever applies to an otherwise-billable FIU). For just these two,
-       that exclusion is waived from the SUC Start Month onward — from
-       then on they compute revenue as **DF Count × SUC Yield** exactly
-       like any other SUC-configured FIU (Cliff/Recovery split included),
-       still gated on having a usable DF count. Before the SUC Start
+       that exclusion is waived from the DPI Pricing Start Month onward — from
+       then on they compute revenue as **DF Count × DPI Pricing Yield** exactly
+       like any other DPI Pricing-configured FIU (Cliff/Recovery split included),
+       still gated on having a usable DF count. Before the DPI Pricing Start
        Month, they're excluded as normal. Because their Billing Model
        stays "Unbilled" on record, they'll still show up in the **Unbilled
        FIUs** sub-tab even in months where they're now
-       generating real SUC revenue elsewhere on the page — that sub-tab
+       generating real DPI Pricing revenue elsewhere on the page — that sub-tab
        reflects the billing-model config, not month-by-month billing
        status, so the two aren't mutually exclusive for these two FIUs.
        Their expected Data Fetch volume is also cut by **43%** once, right
-       at the SUC switch (assumed to be the share of their DF volume that's
+       at the DPI Pricing switch (assumed to be the share of their DF volume that's
        on-bank data, which they're assumed to stop fetching this way once
-       SUC pricing applies to cut costs) — it then keeps compounding
+       DPI Pricing pricing applies to cut costs) — it then keeps compounding
        normally (Cliff/Recovery CMGR) from that reduced baseline, same
        one-time-cut pattern as the PFM/non-Bank 1/6 rule above.
 4. **Historical actuals** — the Annual tables show the full fiscal year
@@ -322,13 +322,13 @@ rounded).
 
    Only Revenue is summed, though — **AU/DF counts take the larger of the
    duplicate rows, not the sum** (fixed 2026-09-10 — ask: "annual revenue
-   ... way higher than it should be" once a SUC Start Date was set, making
+   ... way higher than it should be" once a DPI Pricing Start Date was set, making
    Data Fetch volume the thing driving revenue). A duplicate row's AU/DF
    counts describe the *same* underlying month of usage restated for a
    second billing-type line, not a second population of users/fetches — in
    one real duplicate pair, AU count was identical across both rows and DF
    count was within 0.02%. Summing those instead of Revenue would have
-   silently doubled a FIU's real usage, which then fed every SUC-period
+   silently doubled a FIU's real usage, which then fed every DPI Pricing-period
    month's Data-Fetch-driven revenue at roughly 2x what it should've been.
 5. FIUs whose billing model isn't recognized (blank, "Not billed",
    "Unbilled", or anything else unrecognized) are shown as excluded. FIUs
@@ -356,7 +356,7 @@ rounded).
      AU count table lists only FIUs billed on Active/Unique Users. The **DF
      count table lists every FIU that reported a DF count at all**,
      regardless of billing model — a Unique-User-billed FIU's Data Fetch
-     volume is visible here even before SUC makes it relevant. Each of the
+     volume is visible here even before DPI Pricing makes it relevant. Each of the
      three Monthly results tables has a **Contribution %** column — that
      FIU's share of this month's total for that metric (revenue/AU/DF), so
      "—" means either no value this month or the total itself is zero,
@@ -371,10 +371,10 @@ rounded).
      that isn't in *this specific month's* counts upload but has real
      Historical Actuals or a live count in some other month — all twelve
      months; amber highlighting marks the months where that volume is
-     actually driving billed (SUC) revenue. This table used to drop a FIU
+     actually driving billed (DPI Pricing) revenue. This table used to drop a FIU
      entirely (from every month, not just the current one) whenever this
      month's upload didn't happen to include it, or — separately — whenever
-     it was Unbilled and no SUC Start Date was set; both fixed 2026-09-03.
+     it was Unbilled and no DPI Pricing Start Date was set; both fixed 2026-09-03.
      A third, related bug (also fixed 2026-09-03, ask: "not seeing
      historical DF counts for fiulive@hdfc... after upload[ing] month wise
      files"): even once a FIU's row showed up, a **historical month's**
@@ -424,7 +424,7 @@ rounded).
     Annual AU count table); the DF count view rolls up every FIU that
     reported a DF count at all, regardless of billing model (matching the
     per-FIU Annual DF count table) — so a Unique-User-billed FIU's Data
-    Fetch volume is visible here too, not just once SUC makes it relevant.
+    Fetch volume is visible here too, not just once DPI Pricing makes it relevant.
     Unlike Revenue, the AU and DF views don't have an FY Total column (same
     convention as their per-FIU counterparts) — just a Total row per month.
     None of these grouped tables (By TSP, By Use-case, By License Type) has
@@ -461,7 +461,7 @@ scrolling column) are each their own **sub-tab** within the Monthly Revenue
 tab, in this order: **Projected vs Actual Revenue**, **Monthly results**,
 **Annual results**, **Unbilled FIUs**, **By TSP**, **By Use-case**, **By
 License Type**, **Top 10 - Lending**, **Top 10 - PFM**, **DF Yield
-Analysis**. The side panel (counts upload, as-of date, FY start month, SUC
+Analysis**. The side panel (counts upload, as-of date, FY start month, DPI Pricing
 Start Date, what-if scenarios) sits outside the sub-tabs and stays visible
 and sticky no matter which one is open — every sub-tab is driven by the
 same compute result, so switching sub-tabs never re-triggers a compute or
@@ -494,16 +494,16 @@ itself lives on the **Charts** tab; the month-wise figures table stays on
 the **Monthly Revenue** tab, right where it always was.
 
 - **Projected** is exactly the current compute result's FY total-by-month —
-  same counts file, as-of date, SUC Start Date, and what-if scenario(s) as
+  same counts file, as-of date, DPI Pricing Start Date, and what-if scenario(s) as
   whatever's selected in the live view right now. It recomputes and
   redraws automatically every time you change any of those (a new counts
-  file, the as-of date, SUC Start Date, or a scenario checkbox) — same as
+  file, the as-of date, DPI Pricing Start Date, or a scenario checkbox) — same as
   every other chart on the Charts tab. The legend and the "Live as of …"
   line above the month-wise table both spell out exactly what's currently
-  driving it, e.g. "SUC from Oct 2026, scenario: Lending DF volume falls
-  50% (not ~34%) during SUC Cliff", or "no SUC" with nothing selected.
+  driving it, e.g. "DPI Pricing from Oct 2026, scenario: Lending DF volume falls
+  50% (not ~34%) during DPI Pricing Cliff", or "no DPI Pricing" with nothing selected.
   - This used to be a manually-saved, frozen "snapshot" — a button you had
-    to click, which forced SUC off regardless of what was selected
+    to click, which forced DPI Pricing off regardless of what was selected
     elsewhere, and which could easily go stale for weeks since nothing
     prompted you to refresh it. Fixed 2026-09-03: there's no button and no
     stored snapshot anymore, it's just always current, matching every
@@ -627,7 +627,7 @@ has arrived, no upload step required.
 
 **How it works**: this is built for the common setup where a Metabase
 Dashboard Subscription emails a CSV export on a schedule. On every page
-load (and whenever you change As-of date / FY start month / SUC Start
+load (and whenever you change As-of date / FY start month / DPI Pricing Start
 Date), the app checks the inbox over IMAP for the most recently received
 email — within the last 14 days — whose subject contains a text you
 configure, that has a CSV attached, and computes the FY revenue curve from
@@ -657,7 +657,7 @@ check.
 
 **Manual upload still works as an override**: choosing a file via
 **Choose counts file** takes over immediately and stays in effect (even
-across As-of date/FY start month/SUC Start Date changes) until you click
+across As-of date/FY start month/DPI Pricing Start Date changes) until you click
 **Use auto-pulled email data instead** or refresh the page, at which point
 it goes back to whatever the latest matching email currently is.
 
@@ -804,7 +804,7 @@ real password into situations that expected no password to be set at all.
 There's a floating chat button (bottom-right of the page, once you've
 computed a month) that opens a panel where you can ask plain-English
 questions about the currently computed FY data — e.g. "which TSP has the
-highest DF Yield this month?", "how many FIUs switched to SUC?", "what's
+highest DF Yield this month?", "how many FIUs switched to DPI Pricing?", "what's
 driving the jump in Lending revenue in October?". It's backed by the real
 Anthropic API (Claude) — not a canned/rule-based Q&A engine — so it can
 handle genuinely open-ended questions, not just a fixed menu of them.
@@ -1080,7 +1080,7 @@ introduced by a fix for something else. It's a plain `node` script, no test
 framework installed (kept dependency-free on purpose): `test/run.js` runs
 `test/compute.test.js` (pure unit tests against the revenue engine in
 `lib/compute.js` — billing-model classification, past/current/future month
-handling, SUC Cliff/Recovery, every per-FIU override, the what-if
+handling, DPI Pricing Cliff/Recovery, every per-FIU override, the what-if
 scenarios; runs in well under a second) and `test/server.test.js`
 (integration tests that spawn `server.js` as a real child process against
 a throwaway `DATA_DIR` and talk to it over HTTP — the login gate, startup
@@ -1093,7 +1093,7 @@ Every suite is tied to either a specific piece of documented business
 logic or an actual bug this app has shipped and fixed, called out by date
 in the test names/comments — the point is that a change which
 reintroduces the same failure mode (even as a side effect of fixing
-something unrelated, which is exactly how the 2026-09-10 SUC-cut
+something unrelated, which is exactly how the 2026-09-10 DPI Pricing-cut
 regression happened) fails here, in a few seconds, locally, instead of
 surfacing again as a live "why is revenue wrong" report days later. If
 you're fixing a bug that this suite didn't catch, the fix isn't done until
@@ -1118,7 +1118,7 @@ a reason to skip `npm test` for backend/calculation changes.
   list of keys actually recognized/turned on for that compute.
 - `POST /api/compute-from-email` — JSON body `{ asOfDate?, fyStartMonth?, sucStartDate?, scenarios?, force? }` (same meaning/defaults as `/api/compute`'s form fields — `scenarios` here is also a comma-separated string; `force: true` bypasses the email check cache). Finds the latest matching email over IMAP (see "Auto-pull counts from email" above), computes from its CSV attachment exactly like `/api/compute`, and adds an `emailSource: { subject, date, filename, fetchedAt, fromCache }` field to the response. `400` if `GMAIL_USER`/`GMAIL_APP_PASSWORD`/`METABASE_EMAIL_SUBJECT` aren't all set, `404` if nothing matched, `502` on an IMAP connection/auth failure.
 - `GET /api/scenarios` — returns `[{ key, label, description }, ...]`, the What-if scenario definitions the frontend builds its checkboxes from (see `SCENARIO_DEFINITIONS` in `lib/compute.js`).
-- `POST /api/projection-snapshot` — multipart `file` + form fields `asOfDate`, `fyStartMonth` (same defaults as `/api/compute`; SUC is always forced off). Saves and returns `{ snapshotDate, asOfDate, fyStartMonth, months, totalsByMonth }`, overwriting any previous snapshot. **No longer called by the UI as of 2026-09-03** — the "Projected vs Actual Revenue" chart now tracks the live compute result instead (see "Projected vs Actual Revenue" above). Left in the backend for API compatibility in case anything else depends on it.
+- `POST /api/projection-snapshot` — multipart `file` + form fields `asOfDate`, `fyStartMonth` (same defaults as `/api/compute`; DPI Pricing is always forced off). Saves and returns `{ snapshotDate, asOfDate, fyStartMonth, months, totalsByMonth }`, overwriting any previous snapshot. **No longer called by the UI as of 2026-09-03** — the "Projected vs Actual Revenue" chart now tracks the live compute result instead (see "Projected vs Actual Revenue" above). Left in the backend for API compatibility in case anything else depends on it.
 - `GET /api/projection-snapshot` — returns `{ snapshot }`, or `{ snapshot: null }` if none has been saved yet. Same status: no longer called by the UI, kept for compatibility.
 - `GET /api/revenue-actuals?asOfDate=&fyStartMonth=` — returns `{ months, actualsByMonth }`, summed live from Historical Actuals for each FY month (`null` for a month with no historical rows yet). Both query params are optional with the same defaults as `/api/compute`.
 - `GET /api/revenue-projection-baseline` (added 2026-09-24) — returns `{ values, updatedAt }`, where `values` is `{ "YYYY-MM": number, ... }` — the Original FY Projection static baseline, seeded from `data/revenue-projection-baseline.json` (see "Projected vs Actual Revenue" above). `{ values: {}, updatedAt: null }` if the seed file is missing/empty.
