@@ -469,22 +469,24 @@ loses whatever's in the side panel.
 
 On screen the sub-tab strip itself uses short labels (redesigned 2026-09-23
 as a single-row, horizontally-scrollable bar so ten labels never wrap onto
-a second line — **Overview**, **Monthly**, **Annual**, **Unbilled**,
-**TSP**, **Use-case**, **License**, **Lending**, **PFM**, **DF Yield**);
-hover one for the full name shown above. The top-level tab bar (Monthly
-Revenue / Charts / FIU Metadata / Yield & CMGR / Historical Actuals) got
+a second line — **Attainment** (renamed from "Overview" 2026-09-25),
+**Monthly**, **Annual**, **Unbilled**, **TSP**, **Use-case**, **License**,
+**Lending**, **PFM**, **DF Yield**); hover one for the full name shown
+above (still "Projected vs Actual Revenue" for the Attainment sub-tab —
+only the on-screen label changed). The top-level tab bar (Monthly Revenue /
+Summary / Charts / FIU Metadata / Yield & CMGR / Historical Actuals) got
 the same treatment and is similarly abbreviated on screen — **Revenue**,
-**Charts**, **Metadata**, **Yield/CMGR**, **Actuals** — again with the
-full name on hover.
+**Summary**, **Charts**, **Metadata**, **Yield/CMGR**, **Actuals** — again
+with the full name on hover.
 
 A sub-tab that has nothing to show yet (no counts uploaded this session,
 or — for **Unbilled FIUs** specifically — a real compute that just happens
 to have zero unbilled FIUs this month) shows a one-line explanation instead
 of a blank panel, rather than leaving you wondering whether something's
-broken. **Projected vs Actual Revenue** is the default sub-tab shown on
-first load; before the first compute of a session its own card is still
-visible (unlike the other nine, which stay hidden until then), just with
-its "Month-wise figures" table empty until a counts file is uploaded.
+broken. **Projected vs Actual Revenue** (Attainment) is the default sub-tab
+shown on first load; before the first compute of a session its own card is
+still visible (unlike the other nine, which stay hidden until then), just
+with its "Month-wise figures" table empty until a counts file is uploaded.
 
 ## Projected vs Actual Revenue
 
@@ -585,6 +587,41 @@ visible, the card was removed. The config still loads in the background on
 every page load so the table column and chart line have something to
 compare against; there's just nothing to look at beyond those two views
 now.
+
+## Summary tab (added 2026-09-25)
+
+The **Summary** tab is a top-level tab (next to Revenue) with fourteen
+headline stat tiles across five cards, for a quick exec-level read of the
+FY without opening the month-wise table. Like every other view on the
+page, it's derived entirely from whatever's currently computed on the
+Monthly Revenue tab — a new counts file, a changed as-of date, or a
+different **DPI Pricing Start Date** all update it automatically, no
+separate compute. Before the first compute of a session it shows the same
+"upload counts to see this" hint every other card uses.
+
+- **FY Overview** — **FY 27 Revenue (Projected)**, the FY's Live Projection
+  total across all 12 months, and **Mar'27 MRR (Projected)**, that same
+  Live Projection figure for the FY's last month alone. Both are exactly
+  the numbers on the Attainment sub-tab's month-wise table (Live
+  Projection column), just totaled/isolated here.
+- **Pre-DPI Period Revenue** / **DPI Period Revenue** — the FY split into
+  two periods around the global **DPI Pricing Start Date** (the same
+  dropdown that drives the live compute, Monthly Revenue tab's side
+  panel): **Pre-DPI** is April up to (not including) that month, **DPI**
+  is that month through March. Each period gets its total Live Projection
+  revenue plus a Lending-only and PFM-only breakdown (from the same
+  Revenue by Use-case grouping the Charts tab uses — the two don't sum to
+  the period total, since other use-cases like Uncategorised/RIA make up
+  the rest). **If no DPI Pricing Start Date is set** ("None"), there's no
+  DPI period to speak of: every month counts as Pre-DPI, and the three DPI
+  Period Revenue tiles show "—" rather than a guessed split.
+- **Pre-DPI Yield** / **DPI Yield** — each period's total Revenue ÷ total
+  Data Fetch count, overall and by Lending/PFM — the same "DF Yield"
+  definition already used on the DF Yield Analysis sub-tab and formatted
+  the same way (`fmtYield`, more decimal precision than currency since a
+  per-fetch rate is typically well under ₹1), just totaled across a whole
+  period's months instead of one. DPI Yield tiles show "—" under the same
+  no-DPI-Start-Date condition as DPI Period Revenue above.
 
 ## Charts tab
 

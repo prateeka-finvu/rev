@@ -286,6 +286,7 @@
 
   <div class="tabs">
     <button class="tab-btn active" data-tab="revenue" title="Monthly Revenue">Revenue</button>
+    <button class="tab-btn" data-tab="summary">Summary</button>
     <button class="tab-btn" data-tab="charts">Charts</button>
     <button class="tab-btn" data-tab="metadata" title="FIU Metadata">Metadata</button>
     <button class="tab-btn" data-tab="yieldcmgr" title="Yield &amp; CMGR">Yield/CMGR</button>
@@ -346,7 +347,7 @@
 
     <div class="revenue-main">
     <div class="subtabs" id="revenueSubtabs">
-      <button class="subtab-btn active" data-subtab="projected" title="Projected vs Actual Revenue">Overview</button>
+      <button class="subtab-btn active" data-subtab="projected" title="Projected vs Actual Revenue">Attainment</button>
       <button class="subtab-btn" data-subtab="monthly">Monthly</button>
       <button class="subtab-btn" data-subtab="annual">Annual</button>
       <button class="subtab-btn" data-subtab="unbilled" title="Unbilled FIUs">Unbilled</button>
@@ -536,6 +537,42 @@
     </div>
     </div>
    </div>
+  </div>
+
+  <!-- ===================== Summary tab ===================== -->
+  <div class="tab-panel" id="tab-summary">
+    <div id="summaryCards" style="display:none;">
+    <section class="card">
+      <h2>FY Overview</h2>
+      <p class="hint">The FY's headline numbers — same Live Projection figures as the Attainment sub-tab on the Monthly Revenue tab, just the top-line totals. Updates with every counts file, as-of date, DPI Pricing Start Date, or scenario change.</p>
+      <div class="stat-row" id="summaryOverviewRow"></div>
+    </section>
+
+    <section class="card">
+      <h2>Pre-DPI Period Revenue</h2>
+      <p class="hint" id="summaryPreDpiRevenueHint"></p>
+      <div class="stat-row" id="summaryPreDpiRevenueRow"></div>
+    </section>
+
+    <section class="card">
+      <h2>DPI Period Revenue</h2>
+      <p class="hint" id="summaryDpiRevenueHint"></p>
+      <div class="stat-row" id="summaryDpiRevenueRow"></div>
+    </section>
+
+    <section class="card">
+      <h2>Pre-DPI Yield</h2>
+      <p class="hint">Pre-DPI period Revenue ÷ Pre-DPI period Data Fetch count — same "DF Yield" definition used on the DF Yield Analysis sub-tab, just totaled across the Pre-DPI months instead of a single month.</p>
+      <div class="stat-row" id="summaryPreDpiYieldRow"></div>
+    </section>
+
+    <section class="card">
+      <h2>DPI Yield</h2>
+      <p class="hint">DPI period Revenue ÷ DPI period Data Fetch count — same "DF Yield" definition used on the DF Yield Analysis sub-tab, just totaled across the DPI months instead of a single month.</p>
+      <div class="stat-row" id="summaryDpiYieldRow"></div>
+    </section>
+    </div>
+    <p class="hint" id="summaryCardsEmpty">Upload this month's counts (Monthly Revenue tab) to see summary metrics here.</p>
   </div>
 
   <!-- ===================== Charts tab ===================== -->
@@ -1825,6 +1862,112 @@
     return '<div class="stat-tile"><div class="label">'+label+'</div><div class="value">'+value+'</div></div>';
   }
 
+  // ---- Summary tab ----
+  // Splits the FY into two periods around the global DPI Pricing Start Date
+  // (the same one-word-at-a-time-checked dropdown that drives the live
+  // compute — sucStartDateInput.value, "YYYY-MM" or "" for None): "Pre-DPI"
+  // is April up to (not including) that month, "DPI" is that month through
+  // the end of the FY. If no DPI Pricing Start Date is set, there's no DPI
+  // period to speak of — dpiStartIndex falls past the last month, so every
+  // month counts as Pre-DPI and every DPI figure below comes out ₹0 / "—"
+  // rather than silently guessing a split.
+  //
+  // "Yield" throughout this tab means Revenue ÷ DF Count for the period —
+  // the same DF Yield definition already used on the DF Yield Analysis
+  // sub-tab (fmtYield), just totaled across a whole period's months
+  // instead of one. Lending/PFM breakdowns come straight from
+  // data.groupedByUseCase, which already applies the same billable-revenue
+  // and DF-count inclusion rules as every other total on this page.
+  function sumRange(arr, from, to){
+    let s = 0;
+    for (let i = from; i < to && i < (arr ? arr.length : 0); i++) s += (arr[i] || 0);
+    return s;
+  }
+  function dpiStartIndexFor(months){
+    const val = sucStartDateInput ? sucStartDateInput.value : '';
+    if (!val) return months.length; // no DPI Pricing Start Date -> no DPI period
+    const m = /^(\d{4})-(\d{2})$/.exec(val);
+    if (!m) return months.length;
+    const y = parseInt(m[1], 10), mo = parseInt(m[2], 10);
+    const idx = months.findIndex(mm => mm.year === y && mm.month === mo);
+    return idx >= 0 ? idx : months.length;
+  }
+  function findUseCaseGroup(groups, label){
+    return (groups || []).find(g => g.label === label) || null;
+  }
+  function renderSummaryTab(data){
+    const months = data.months || [];
+    const totalsByMonth = data.totalsByMonth || [];
+    const useCaseRevenue = (data.groupedByUseCase && data.groupedByUseCase.revenue) || [];
+    const useCaseDf = (data.groupedByUseCase && data.groupedByUseCase.df) || [];
+    const lendingRevenue = findUseCaseGroup(useCaseRevenue, 'Lending');
+    const pfmRevenue = findUseCaseGroup(useCaseRevenue, 'PFM');
+    const lendingDf = findUseCaseGroup(useCaseDf, 'Lending');
+    const pfmDf = findUseCaseGroup(useCaseDf, 'PFM');
+    // Overall DF count per month = sum across every use-case group, since
+    // groupedByUseCase partitions every DF-eligible row exhaustively
+    // (blanks bucket into "(Unspecified)") — this reconciles with the DF
+    // Yield Analysis sub-tab's "Overall" DF Count for the same month.
+    const overallDfByMonth = months.map((_, i) => useCaseDf.reduce((s, g) => s + ((g.monthly && g.monthly[i]) || 0), 0));
+
+    const dpiStartIndex = dpiStartIndexFor(months);
+    const dpiActive = dpiStartIndex < months.length;
+    const preDpiLabel = dpiStartIndex > 0 ? (months[0].label + ' – ' + months[dpiStartIndex - 1].label) : 'none (DPI Pricing starts in the FY\'s first month)';
+    const dpiLabel = dpiActive ? (months[dpiStartIndex].label + ' – ' + months[months.length - 1].label) : 'none — no DPI Pricing Start Date is set';
+
+    // ---- FY Overview ----
+    const fyRevenue = totalsByMonth.reduce((a, b) => a + (b || 0), 0);
+    const marRevenue = totalsByMonth.length ? totalsByMonth[totalsByMonth.length - 1] : null;
+    const marLabel = months.length ? months[months.length - 1].label : 'last month';
+    document.getElementById('summaryOverviewRow').innerHTML = [
+      tile('FY 27 Revenue (Projected)', fmtCurrency(fyRevenue)),
+      tile(marLabel + ' MRR (Projected)', fmtCurrency(marRevenue)),
+    ].join('');
+
+    // ---- Revenue, split Pre-DPI / DPI ----
+    const preDpiRevenue = sumRange(totalsByMonth, 0, dpiStartIndex);
+    const dpiRevenue = sumRange(totalsByMonth, dpiStartIndex, totalsByMonth.length);
+    const preDpiLendingRevenue = sumRange(lendingRevenue && lendingRevenue.monthly, 0, dpiStartIndex);
+    const preDpiPfmRevenue = sumRange(pfmRevenue && pfmRevenue.monthly, 0, dpiStartIndex);
+    const dpiLendingRevenue = sumRange(lendingRevenue && lendingRevenue.monthly, dpiStartIndex, totalsByMonth.length);
+    const dpiPfmRevenue = sumRange(pfmRevenue && pfmRevenue.monthly, dpiStartIndex, totalsByMonth.length);
+
+    document.getElementById('summaryPreDpiRevenueHint').textContent = 'Revenue from ' + (months[0] ? months[0].label : 'the start of the FY') + ' up to the month before DPI Pricing begins. Current Pre-DPI period: ' + preDpiLabel + '.';
+    document.getElementById('summaryPreDpiRevenueRow').innerHTML = [
+      tile('Pre-DPI Revenue', fmtCurrency(preDpiRevenue)),
+      tile('Pre-DPI Revenue (Lending)', fmtCurrency(preDpiLendingRevenue)),
+      tile('Pre-DPI Revenue (PFM)', fmtCurrency(preDpiPfmRevenue)),
+    ].join('');
+
+    document.getElementById('summaryDpiRevenueHint').textContent = 'Revenue from the DPI Pricing Start Date through the end of the FY. Current DPI period: ' + dpiLabel + '.';
+    document.getElementById('summaryDpiRevenueRow').innerHTML = [
+      tile('DPI Period Revenue', dpiActive ? fmtCurrency(dpiRevenue) : '—'),
+      tile('DPI Period Revenue (Lending)', dpiActive ? fmtCurrency(dpiLendingRevenue) : '—'),
+      tile('DPI Period Revenue (PFM)', dpiActive ? fmtCurrency(dpiPfmRevenue) : '—'),
+    ].join('');
+
+    // ---- Yield, split Pre-DPI / DPI (Revenue / DF Count for the period) ----
+    const preDpiDf = sumRange(overallDfByMonth, 0, dpiStartIndex);
+    const dpiDf = sumRange(overallDfByMonth, dpiStartIndex, overallDfByMonth.length);
+    const preDpiLendingDf = sumRange(lendingDf && lendingDf.monthly, 0, dpiStartIndex);
+    const preDpiPfmDf = sumRange(pfmDf && pfmDf.monthly, 0, dpiStartIndex);
+    const dpiLendingDf = sumRange(lendingDf && lendingDf.monthly, dpiStartIndex, overallDfByMonth.length);
+    const dpiPfmDf = sumRange(pfmDf && pfmDf.monthly, dpiStartIndex, overallDfByMonth.length);
+    const yieldOf = (rev, df) => (df > 0 ? rev / df : null);
+
+    document.getElementById('summaryPreDpiYieldRow').innerHTML = [
+      tile('Pre-DPI Yield', fmtYield(yieldOf(preDpiRevenue, preDpiDf))),
+      tile('Pre-DPI Yield (Lending)', fmtYield(yieldOf(preDpiLendingRevenue, preDpiLendingDf))),
+      tile('Pre-DPI Yield (PFM)', fmtYield(yieldOf(preDpiPfmRevenue, preDpiPfmDf))),
+    ].join('');
+
+    document.getElementById('summaryDpiYieldRow').innerHTML = [
+      tile('DPI Yield', dpiActive ? fmtYield(yieldOf(dpiRevenue, dpiDf)) : '—'),
+      tile('DPI Yield (Lending)', dpiActive ? fmtYield(yieldOf(dpiLendingRevenue, dpiLendingDf)) : '—'),
+      tile('DPI Yield (PFM)', dpiActive ? fmtYield(yieldOf(dpiPfmRevenue, dpiPfmDf)) : '—'),
+    ].join('');
+  }
+
   // Generic sortable + searchable data table. Fully owns `config.containerId`'s
   // innerHTML. Click a header to sort by that column (again to flip direction);
   // the search box filters rows by substring match across each column's raw
@@ -1954,6 +2097,8 @@
   function renderResults(data){
     setCardVisible('monthlyCard', true);
     setCardVisible('annualCard', true);
+    setCardVisible('summaryCards', true);
+    renderSummaryTab(data);
     const currentIndex = data.currentIndex || 0;
     const current = data.months[currentIndex];
     // "billed" = billed *this month specifically* — a row can be billed
