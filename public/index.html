@@ -286,7 +286,6 @@
 
   <div class="tabs">
     <button class="tab-btn active" data-tab="revenue" title="Monthly Revenue">Revenue</button>
-    <button class="tab-btn" data-tab="summary">Summary</button>
     <button class="tab-btn" data-tab="charts">Charts</button>
     <button class="tab-btn" data-tab="metadata" title="FIU Metadata">Metadata</button>
     <button class="tab-btn" data-tab="yieldcmgr" title="Yield &amp; CMGR">Yield/CMGR</button>
@@ -347,7 +346,8 @@
 
     <div class="revenue-main">
     <div class="subtabs" id="revenueSubtabs">
-      <button class="subtab-btn active" data-subtab="projected" title="Projected vs Actual Revenue">Attainment</button>
+      <button class="subtab-btn active" data-subtab="summary">Summary</button>
+      <button class="subtab-btn" data-subtab="projected" title="Projected vs Actual Revenue">Attainment</button>
       <button class="subtab-btn" data-subtab="monthly">Monthly</button>
       <button class="subtab-btn" data-subtab="annual">Annual</button>
       <button class="subtab-btn" data-subtab="unbilled" title="Unbilled FIUs">Unbilled</button>
@@ -359,7 +359,42 @@
       <button class="subtab-btn" data-subtab="dfyield" title="DF Yield Analysis">DF Yield</button>
     </div>
 
-    <div class="subtab-panel active" data-subtab="projected">
+    <div class="subtab-panel active" data-subtab="summary">
+    <div id="summaryCards" style="display:none;">
+    <section class="card">
+      <h2>FY Overview</h2>
+      <p class="hint">The FY's headline numbers — same Live Projection figures as the Attainment sub-tab, just the top-line totals. Updates with every counts file, as-of date, DPI Pricing Start Date, or scenario change.</p>
+      <div class="stat-row" id="summaryOverviewRow"></div>
+    </section>
+
+    <section class="card">
+      <h2>Pre-DPI Period Revenue</h2>
+      <p class="hint" id="summaryPreDpiRevenueHint"></p>
+      <div class="stat-row" id="summaryPreDpiRevenueRow"></div>
+    </section>
+
+    <section class="card">
+      <h2>DPI Period Revenue</h2>
+      <p class="hint" id="summaryDpiRevenueHint"></p>
+      <div class="stat-row" id="summaryDpiRevenueRow"></div>
+    </section>
+
+    <section class="card">
+      <h2>Pre-DPI Yield</h2>
+      <p class="hint">Pre-DPI period Revenue ÷ Pre-DPI period Data Fetch count — same "DF Yield" definition used on the DF Yield Analysis sub-tab, just totaled across the Pre-DPI months instead of a single month.</p>
+      <div class="stat-row" id="summaryPreDpiYieldRow"></div>
+    </section>
+
+    <section class="card">
+      <h2>DPI Yield</h2>
+      <p class="hint">DPI period Revenue ÷ DPI period Data Fetch count — same "DF Yield" definition used on the DF Yield Analysis sub-tab, just totaled across the DPI months instead of a single month.</p>
+      <div class="stat-row" id="summaryDpiYieldRow"></div>
+    </section>
+    </div>
+    <p class="hint" id="summaryCardsEmpty">Upload this month's counts (left panel) to see summary metrics here.</p>
+    </div>
+
+    <div class="subtab-panel" data-subtab="projected">
     <section class="card">
       <h2>Projected vs Actual Revenue</h2>
       <p class="hint">Three figures per month, side by side: <strong>Live Projection</strong> — the live FY revenue model, reflecting whatever DPI Pricing Start Date and what-if scenarios are currently selected (identical to Actual for a month that's already closed, since a closed month's actual replaces the forecast in the model itself — see the DPI Pricing Start Date hint below); <strong>Original Plan</strong> — what was expected for that month's revenue back when the FY began, a static, fixed reference never recomputed by this tool (a static config maintained in the app's data files, not editable here — see the README if it ever needs updating); and <strong>Actual</strong>, as recorded in Historical Actuals. Updates automatically every time you change a counts file, the as-of date, DPI Pricing Start Date, or a scenario. The chart for this lives on the <strong>Charts</strong> tab — the month-wise figures stay here. Variance compares Actual against the Original Plan (falling back to the Live Projection figure for a month with no plan value set).</p>
@@ -537,42 +572,6 @@
     </div>
     </div>
    </div>
-  </div>
-
-  <!-- ===================== Summary tab ===================== -->
-  <div class="tab-panel" id="tab-summary">
-    <div id="summaryCards" style="display:none;">
-    <section class="card">
-      <h2>FY Overview</h2>
-      <p class="hint">The FY's headline numbers — same Live Projection figures as the Attainment sub-tab on the Monthly Revenue tab, just the top-line totals. Updates with every counts file, as-of date, DPI Pricing Start Date, or scenario change.</p>
-      <div class="stat-row" id="summaryOverviewRow"></div>
-    </section>
-
-    <section class="card">
-      <h2>Pre-DPI Period Revenue</h2>
-      <p class="hint" id="summaryPreDpiRevenueHint"></p>
-      <div class="stat-row" id="summaryPreDpiRevenueRow"></div>
-    </section>
-
-    <section class="card">
-      <h2>DPI Period Revenue</h2>
-      <p class="hint" id="summaryDpiRevenueHint"></p>
-      <div class="stat-row" id="summaryDpiRevenueRow"></div>
-    </section>
-
-    <section class="card">
-      <h2>Pre-DPI Yield</h2>
-      <p class="hint">Pre-DPI period Revenue ÷ Pre-DPI period Data Fetch count — same "DF Yield" definition used on the DF Yield Analysis sub-tab, just totaled across the Pre-DPI months instead of a single month.</p>
-      <div class="stat-row" id="summaryPreDpiYieldRow"></div>
-    </section>
-
-    <section class="card">
-      <h2>DPI Yield</h2>
-      <p class="hint">DPI period Revenue ÷ DPI period Data Fetch count — same "DF Yield" definition used on the DF Yield Analysis sub-tab, just totaled across the DPI months instead of a single month.</p>
-      <div class="stat-row" id="summaryDpiYieldRow"></div>
-    </section>
-    </div>
-    <p class="hint" id="summaryCardsEmpty">Upload this month's counts (Monthly Revenue tab) to see summary metrics here.</p>
   </div>
 
   <!-- ===================== Charts tab ===================== -->

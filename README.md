@@ -456,37 +456,41 @@ rounded).
 
 ## Monthly Revenue tab layout
 
-The ten result sections above (fixed 2026-09-23 — previously one long
-scrolling column) are each their own **sub-tab** within the Monthly Revenue
-tab, in this order: **Projected vs Actual Revenue**, **Monthly results**,
-**Annual results**, **Unbilled FIUs**, **By TSP**, **By Use-case**, **By
-License Type**, **Top 10 - Lending**, **Top 10 - PFM**, **DF Yield
-Analysis**. The side panel (counts upload, as-of date, FY start month, DPI Pricing
-Start Date, what-if scenarios) sits outside the sub-tabs and stays visible
-and sticky no matter which one is open — every sub-tab is driven by the
-same compute result, so switching sub-tabs never re-triggers a compute or
-loses whatever's in the side panel.
+The eleven result sections above (fixed 2026-09-23 — previously one long
+scrolling column; **Summary** added 2026-09-25 as the new first/default
+sub-tab, moved there from a short-lived top-level tab of its own — see
+"Summary sub-tab" below) are each their own **sub-tab** within the Monthly
+Revenue tab, in this order: **Summary**, **Projected vs Actual Revenue**,
+**Monthly results**, **Annual results**, **Unbilled FIUs**, **By TSP**,
+**By Use-case**, **By License Type**, **Top 10 - Lending**, **Top 10 -
+PFM**, **DF Yield Analysis**. The side panel (counts upload, as-of date,
+FY start month, DPI Pricing Start Date, what-if scenarios) sits outside
+the sub-tabs and stays visible and sticky no matter which one is open —
+every sub-tab is driven by the same compute result, so switching sub-tabs
+never re-triggers a compute or loses whatever's in the side panel.
 
 On screen the sub-tab strip itself uses short labels (redesigned 2026-09-23
-as a single-row, horizontally-scrollable bar so ten labels never wrap onto
-a second line — **Attainment** (renamed from "Overview" 2026-09-25),
-**Monthly**, **Annual**, **Unbilled**, **TSP**, **Use-case**, **License**,
-**Lending**, **PFM**, **DF Yield**); hover one for the full name shown
-above (still "Projected vs Actual Revenue" for the Attainment sub-tab —
-only the on-screen label changed). The top-level tab bar (Monthly Revenue /
-Summary / Charts / FIU Metadata / Yield & CMGR / Historical Actuals) got
-the same treatment and is similarly abbreviated on screen — **Revenue**,
-**Summary**, **Charts**, **Metadata**, **Yield/CMGR**, **Actuals** — again
+as a single-row, horizontally-scrollable bar so eleven labels never wrap
+onto a second line — **Summary**, **Attainment** (renamed from "Overview"
+2026-09-25), **Monthly**, **Annual**, **Unbilled**, **TSP**, **Use-case**,
+**License**, **Lending**, **PFM**, **DF Yield**); hover one for the full
+name shown above (still "Projected vs Actual Revenue" for the Attainment
+sub-tab — only the on-screen label changed). The top-level tab bar
+(Monthly Revenue / Charts / FIU Metadata / Yield & CMGR / Historical
+Actuals) got the same treatment and is similarly abbreviated on screen —
+**Revenue**, **Charts**, **Metadata**, **Yield/CMGR**, **Actuals** — again
 with the full name on hover.
 
 A sub-tab that has nothing to show yet (no counts uploaded this session,
 or — for **Unbilled FIUs** specifically — a real compute that just happens
 to have zero unbilled FIUs this month) shows a one-line explanation instead
 of a blank panel, rather than leaving you wondering whether something's
-broken. **Projected vs Actual Revenue** (Attainment) is the default sub-tab
-shown on first load; before the first compute of a session its own card is
-still visible (unlike the other nine, which stay hidden until then), just
-with its "Month-wise figures" table empty until a counts file is uploaded.
+broken. **Summary** is the default sub-tab shown on first load (changed
+2026-09-25 — previously **Projected vs Actual Revenue**/Attainment); like
+every sub-tab other than Attainment, its cards stay hidden behind an
+"upload counts to see this" hint until the first compute of the session —
+Attainment is the one exception, whose card is visible pre-compute too,
+just with its "Month-wise figures" table empty.
 
 ## Projected vs Actual Revenue
 
@@ -588,16 +592,20 @@ every page load so the table column and chart line have something to
 compare against; there's just nothing to look at beyond those two views
 now.
 
-## Summary tab (added 2026-09-25)
+## Summary sub-tab (added 2026-09-25)
 
-The **Summary** tab is a top-level tab (next to Revenue) with fourteen
-headline stat tiles across five cards, for a quick exec-level read of the
-FY without opening the month-wise table. Like every other view on the
-page, it's derived entirely from whatever's currently computed on the
-Monthly Revenue tab — a new counts file, a changed as-of date, or a
-different **DPI Pricing Start Date** all update it automatically, no
+The **Summary** sub-tab is the first sub-tab within Monthly Revenue, and
+the default one shown right after login (changed 2026-09-25 — briefly a
+top-level tab of its own for one release, moved here and made the default
+per ask: "The Summary tab should be a sub-tab and the default sub-tab that
+opens after login"). It has fourteen headline stat tiles across five
+cards, for a quick exec-level read of the FY without opening the
+month-wise table. Like every other sub-tab, it's derived entirely from
+whatever's currently computed — a new counts file, a changed as-of date,
+or a different **DPI Pricing Start Date** all update it automatically, no
 separate compute. Before the first compute of a session it shows the same
-"upload counts to see this" hint every other card uses.
+"upload counts to see this" hint every sub-tab other than Attainment
+uses.
 
 - **FY Overview** — **FY 27 Revenue (Projected)**, the FY's Live Projection
   total across all 12 months, and **Mar'27 MRR (Projected)**, that same
