@@ -187,6 +187,12 @@
   .stat-tile .label{ font-size:12px; color: var(--text-muted); margin-bottom:6px; }
   .stat-tile .value{ font-size: 20px; font-weight:700; font-variant-numeric: proportional-nums; }
   .stat-tile .value small{ font-size:12px; font-weight:500; color: var(--text-secondary); }
+  /* Summary sub-tab (added 2026-09-25): a Lending/PFM-specific Revenue or DF
+     Count tile's % share of that period's total, rendered as a subscript
+     figure right after the value — genuinely subscript (vertical-align:sub,
+     smaller), not just a lighter inline number, so it reads as "this many,
+     which is this share" rather than a second equal-weight figure. */
+  .stat-tile .value .tile-share{ font-size:11px; font-weight:600; font-variant-numeric: proportional-nums; color: var(--text-muted); vertical-align: sub; margin-left:3px; }
 
   table{ width:100%; border-collapse: collapse; font-size: 12.5px; }
   thead th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.02em; color: var(--text-muted); font-weight:600; padding: 7px 8px; border-bottom: 1px solid var(--baseline); white-space:nowrap; position: sticky; top:0; background: var(--surface-1); }
@@ -377,6 +383,18 @@
       <h2>DPI Period Revenue</h2>
       <p class="hint" id="summaryDpiRevenueHint"></p>
       <div class="stat-row" id="summaryDpiRevenueRow"></div>
+    </section>
+
+    <section class="card">
+      <h2>Pre-DPI Period DF Count</h2>
+      <p class="hint" id="summaryPreDpiDfHint"></p>
+      <div class="stat-row" id="summaryPreDpiDfRow"></div>
+    </section>
+
+    <section class="card">
+      <h2>DPI Period DF Count</h2>
+      <p class="hint" id="summaryDpiDfHint"></p>
+      <div class="stat-row" id="summaryDpiDfRow"></div>
     </section>
 
     <section class="card">
@@ -1894,6 +1912,15 @@
   function findUseCaseGroup(groups, label){
     return (groups || []).find(g => g.label === label) || null;
   }
+  // A Lending/PFM-specific tile's share of that period's overall total
+  // (e.g. Pre-DPI Revenue (Lending) ÷ Pre-DPI Revenue), rendered as the
+  // subscript "(NN.N%)" appended to the tile's value — '' (nothing
+  // rendered) when the total is 0/absent, same "don't guess a percentage
+  // of nothing" rule fmtPct already follows elsewhere on this page.
+  function tileShare(part, total){
+    if (!total) return '';
+    return ' <span class="tile-share">('+ ((part / total) * 100).toFixed(1) +'%)</span>';
+  }
   function renderSummaryTab(data){
     const months = data.months || [];
     const totalsByMonth = data.totalsByMonth || [];
@@ -1934,24 +1961,40 @@
     document.getElementById('summaryPreDpiRevenueHint').textContent = 'Revenue from ' + (months[0] ? months[0].label : 'the start of the FY') + ' up to the month before DPI Pricing begins. Current Pre-DPI period: ' + preDpiLabel + '.';
     document.getElementById('summaryPreDpiRevenueRow').innerHTML = [
       tile('Pre-DPI Revenue', fmtCurrency(preDpiRevenue)),
-      tile('Pre-DPI Revenue (Lending)', fmtCurrency(preDpiLendingRevenue)),
-      tile('Pre-DPI Revenue (PFM)', fmtCurrency(preDpiPfmRevenue)),
+      tile('Pre-DPI Revenue (Lending)', fmtCurrency(preDpiLendingRevenue) + tileShare(preDpiLendingRevenue, preDpiRevenue)),
+      tile('Pre-DPI Revenue (PFM)', fmtCurrency(preDpiPfmRevenue) + tileShare(preDpiPfmRevenue, preDpiRevenue)),
     ].join('');
 
     document.getElementById('summaryDpiRevenueHint').textContent = 'Revenue from the DPI Pricing Start Date through the end of the FY. Current DPI period: ' + dpiLabel + '.';
     document.getElementById('summaryDpiRevenueRow').innerHTML = [
       tile('DPI Period Revenue', dpiActive ? fmtCurrency(dpiRevenue) : '—'),
-      tile('DPI Period Revenue (Lending)', dpiActive ? fmtCurrency(dpiLendingRevenue) : '—'),
-      tile('DPI Period Revenue (PFM)', dpiActive ? fmtCurrency(dpiPfmRevenue) : '—'),
+      tile('DPI Period Revenue (Lending)', dpiActive ? fmtCurrency(dpiLendingRevenue) + tileShare(dpiLendingRevenue, dpiRevenue) : '—'),
+      tile('DPI Period Revenue (PFM)', dpiActive ? fmtCurrency(dpiPfmRevenue) + tileShare(dpiPfmRevenue, dpiRevenue) : '—'),
     ].join('');
 
-    // ---- Yield, split Pre-DPI / DPI (Revenue / DF Count for the period) ----
+    // ---- DF Count, split Pre-DPI / DPI (same period boundaries as Revenue above) ----
     const preDpiDf = sumRange(overallDfByMonth, 0, dpiStartIndex);
     const dpiDf = sumRange(overallDfByMonth, dpiStartIndex, overallDfByMonth.length);
     const preDpiLendingDf = sumRange(lendingDf && lendingDf.monthly, 0, dpiStartIndex);
     const preDpiPfmDf = sumRange(pfmDf && pfmDf.monthly, 0, dpiStartIndex);
     const dpiLendingDf = sumRange(lendingDf && lendingDf.monthly, dpiStartIndex, overallDfByMonth.length);
     const dpiPfmDf = sumRange(pfmDf && pfmDf.monthly, dpiStartIndex, overallDfByMonth.length);
+
+    document.getElementById('summaryPreDpiDfHint').textContent = 'Data Fetch count from ' + (months[0] ? months[0].label : 'the start of the FY') + ' up to the month before DPI Pricing begins. Current Pre-DPI period: ' + preDpiLabel + '.';
+    document.getElementById('summaryPreDpiDfRow').innerHTML = [
+      tile('Pre-DPI Period DF Count', fmt(preDpiDf, 0)),
+      tile('Pre-DPI Period DF Count (Lending)', fmt(preDpiLendingDf, 0) + tileShare(preDpiLendingDf, preDpiDf)),
+      tile('Pre-DPI Period DF Count (PFM)', fmt(preDpiPfmDf, 0) + tileShare(preDpiPfmDf, preDpiDf)),
+    ].join('');
+
+    document.getElementById('summaryDpiDfHint').textContent = 'Data Fetch count from the DPI Pricing Start Date through the end of the FY. Current DPI period: ' + dpiLabel + '.';
+    document.getElementById('summaryDpiDfRow').innerHTML = [
+      tile('DPI Period DF Count', dpiActive ? fmt(dpiDf, 0) : '—'),
+      tile('DPI Period DF Count (Lending)', dpiActive ? fmt(dpiLendingDf, 0) + tileShare(dpiLendingDf, dpiDf) : '—'),
+      tile('DPI Period DF Count (PFM)', dpiActive ? fmt(dpiPfmDf, 0) + tileShare(dpiPfmDf, dpiDf) : '—'),
+    ].join('');
+
+    // ---- Yield, split Pre-DPI / DPI (Revenue / DF Count for the period) ----
     const yieldOf = (rev, df) => (df > 0 ? rev / df : null);
 
     document.getElementById('summaryPreDpiYieldRow').innerHTML = [

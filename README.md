@@ -598,14 +598,14 @@ The **Summary** sub-tab is the first sub-tab within Monthly Revenue, and
 the default one shown right after login (changed 2026-09-25 — briefly a
 top-level tab of its own for one release, moved here and made the default
 per ask: "The Summary tab should be a sub-tab and the default sub-tab that
-opens after login"). It has fourteen headline stat tiles across five
-cards, for a quick exec-level read of the FY without opening the
-month-wise table. Like every other sub-tab, it's derived entirely from
-whatever's currently computed — a new counts file, a changed as-of date,
-or a different **DPI Pricing Start Date** all update it automatically, no
-separate compute. Before the first compute of a session it shows the same
-"upload counts to see this" hint every sub-tab other than Attainment
-uses.
+opens after login"). It has twenty headline stat tiles across seven cards
+(grew from fourteen/five 2026-09-25 — see the DF Count cards below), for a
+quick exec-level read of the FY without opening the month-wise table.
+Like every other sub-tab, it's derived entirely from whatever's currently
+computed — a new counts file, a changed as-of date, or a different
+**DPI Pricing Start Date** all update it automatically, no separate
+compute. Before the first compute of a session it shows the same "upload
+counts to see this" hint every sub-tab other than Attainment uses.
 
 - **FY Overview** — **FY 27 Revenue (Projected)**, the FY's Live Projection
   total across all 12 months, and **Mar'27 MRR (Projected)**, that same
@@ -623,6 +623,13 @@ uses.
   the rest). **If no DPI Pricing Start Date is set** ("None"), there's no
   DPI period to speak of: every month counts as Pre-DPI, and the three DPI
   Period Revenue tiles show "—" rather than a guessed split.
+- **Pre-DPI Period DF Count** / **DPI Period DF Count** (added 2026-09-25)
+  — the same two periods as the Revenue cards above, but for total Data
+  Fetch count instead of Revenue, again overall plus a Lending-only and
+  PFM-only breakdown. Uses the same DF-count inclusion rule as every other
+  DF figure on the page (`groupDfUsage` in `lib/compute.js` — every FIU
+  with a usable DF count, regardless of its regular billing model). Same
+  "—" behavior as DPI Period Revenue when no DPI Pricing Start Date is set.
 - **Pre-DPI Yield** / **DPI Yield** — each period's total Revenue ÷ total
   Data Fetch count, overall and by Lending/PFM — the same "DF Yield"
   definition already used on the DF Yield Analysis sub-tab and formatted
@@ -630,6 +637,16 @@ uses.
   per-fetch rate is typically well under ₹1), just totaled across a whole
   period's months instead of one. DPI Yield tiles show "—" under the same
   no-DPI-Start-Date condition as DPI Period Revenue above.
+
+**Lending/PFM share, as a subscript (added 2026-09-25).** Every
+Lending-only or PFM-only tile above (Revenue and DF Count, both periods —
+not Yield) shows its share of that period's overall total right after the
+value, as a smaller subscript figure in parentheses — e.g. Pre-DPI Revenue
+(Lending) reading **₹1,13,96,636 ₍33.7%₎**, meaning Lending was 33.7% of
+total Pre-DPI Revenue. The subscript is left off (not "0.0%" or similar)
+whenever the period's overall total is 0 — e.g. every Lending/PFM tile in
+a DPI card when no DPI Pricing Start Date is set, since the "—" placeholder
+already covers that case with nothing to take a share of.
 
 ## Charts tab
 
