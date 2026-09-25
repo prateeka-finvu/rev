@@ -193,6 +193,21 @@
      smaller), not just a lighter inline number, so it reads as "this many,
      which is this share" rather than a second equal-weight figure. */
   .stat-tile .value .tile-share{ font-size:11px; font-weight:600; font-variant-numeric: proportional-nums; color: var(--text-muted); vertical-align: sub; margin-left:3px; }
+  /* Summary sub-tab cards only ever hold 2-3 tiles per row (never 4 like
+     every other .stat-row on the page), so giving them the same 4-column
+     grid left each tile narrower than it needed to be — narrow enough that
+     a Lending/PFM tile's value + "(NN.N%)" share wrapped onto two lines
+     (ask 2026-09-25: "Expand the width of the cards to accommodate the %
+     value in the same line as the absolute value"). 3 columns here instead
+     of 4 widens every tile enough for that to sit on one line, and also
+     keeps the value from wrapping at all as a belt-and-braces fix even if a
+     future tile's text runs long. Mobile keeps the same 2-column layout as
+     every other .stat-row — three-wide would be cramped at that width, and
+     the value/share wrapping onto two lines there is fine (never reported
+     as an issue, unlike the desktop 4-column case above). */
+  #summaryCards .stat-row{ grid-template-columns: repeat(3, 1fr); }
+  #summaryCards .stat-tile .value{ white-space: nowrap; }
+  @media (max-width: 760px){ #summaryCards .stat-row{ grid-template-columns: repeat(2, 1fr); } #summaryCards .stat-tile .value{ white-space: normal; } }
 
   table{ width:100%; border-collapse: collapse; font-size: 12.5px; }
   thead th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.02em; color: var(--text-muted); font-weight:600; padding: 7px 8px; border-bottom: 1px solid var(--baseline); white-space:nowrap; position: sticky; top:0; background: var(--surface-1); }
