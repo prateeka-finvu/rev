@@ -1102,21 +1102,63 @@ that's where all of the app's configs and uploaded data live.
 
 ### Making a closed month's data survive for free (no disk needed)
 
-Apr–Aug 2026's Historical Actuals always come back after a free-tier
+Apr–Sep 2026's Historical Actuals always come back after a free-tier
 redeploy/restart/spin-down, while a month uploaded live through the app
-(e.g. September, once it closes) won't — this looks like inconsistent
-behavior, but it's actually because Apr–Aug aren't just *in the running
+(e.g. October, once it closes) won't — this looks like inconsistent
+behavior, but it's actually because Apr–Sep aren't just *in the running
 app's data*, they're **committed to `data/historical-actuals.json` in this
 git repo**. That file is the "starter data" the free-tier troubleshooting
 notes above keep mentioning: `lib/store.js`'s `seedDataDirIfNeeded()`
 copies every file under `data/` into a fresh `DATA_DIR` the moment the app
 starts with nothing there yet — which, on the free tier, is *every*
-redeploy, restart, and spin-down. Apr–Aug aren't surviving some special
+redeploy, restart, and spin-down. Apr–Sep aren't surviving some special
 persistence mechanism; they're just part of the deployed image, so every
 fresh container gets a fresh copy automatically, the same way the code
-itself does. (August specifically was folded in 2026-09-24, the same way
-this section describes below — it was live-uploaded data until then, same
-as whatever month is current as you're reading this.)
+itself does. (August specifically was folded in 2026-09-24, and September
+in 2026-10-19, the same way this section describes below — each was
+live-uploaded data until its own fold-in date, same as whatever month is
+current as you're reading this.)
+
+September's fold-in (2026-10-19, ask: "the actual revenue in September
+... shows ... 87.7 lacs" vs. the real MIS figure of 93.71 lacs) is also
+why the app's September Actual revenue may differ from what you remember
+seeing before that date: September previously had **no** Historical Actual
+rows at all, so it was falling through to the live-projection path
+(counts × whatever's in Yield & CMGR config) instead of showing a real
+recorded figure. The fix added September's real per-FIU revenue/AU/DF
+figures from that month's MIS export, with three notes worth knowing:
+- **28 FIU IDs in that MIS export aren't in FIU Metadata at all** (combined
+  ≈₹1,094 — immaterial) and were left out rather than added as new FIUs.
+- **"KMBL-FIU-PROD" appeared twice** in that export under one shared ID —
+  one row for the Lending line (₹74,790), one for the PFM line (₹2,19,415.90,
+  recorded against `KMBL-FIU-PROD (PFM)`, which had never had an actual
+  before). If a future month's export repeats this shared-ID shape, it
+  needs the same manual split — the normal `/api/historical-actuals/bulk`
+  dedupe logic (see its code comment, "ask: 2026-09-09") instead *sums*
+  same-ID duplicate rows together, which is right for a FIU billed under
+  two billing types at once but wrong for two different business lines
+  sharing one label.
+- **13 FIUs had their FIU Metadata/Yield & CMGR config corrected** in the
+  same change, since they had real September revenue but were configured
+  as `Unbilled` or with a `0` Yield (which would have kept suppressing
+  their revenue in every month after September too, not just the one this
+  fix targeted): `Coracle-fiu`, `Khosya-fiu`, `Sawalsha-fiu`,
+  `TycoonCredit-fiu`, `fiulive@motilalresearch`, `STP-RIA-FIU-260803`,
+  `fiulive@stackfin`, and `sparkcapl-fiu` moved off `Unbilled` onto `Data
+  Fetch` or `Unique Users` (whichever usage type's revenue ÷ usage came out
+  to a clean flat rate in September's actuals); `JFS_FIU_PROD`,
+  `MOBIKWIK_FIU_PROD`, `DEZERV_FIU_PROD`, `Paisabazaar-FIU-LIVE`, and
+  `ADITYA_BIRLA_CAPITAL_DIGITAL_FIU_PROD` (already `Unique Users`) and
+  `KMBL-FIU-PROD (PFM)` got a real Yield in place of `0`/missing — all five
+  `Unique Users` FIUs resolved to the same clean ₹0.75/unique-user rate.
+  CMGR was deliberately left untouched for all of these — September is
+  their first real month of billed revenue, so there's no trend yet to
+  derive a growth rate from; review it once a few more months of actuals
+  exist. `TycoonCredit-fiu` and `sparkcapl-fiu` didn't resolve to a
+  perfectly clean rate either way (closest 2-decimal match used,
+  defaulting to `Data Fetch` as the more common billing model) — lowest
+  confidence of the thirteen, but also the smallest amounts (≈₹12.3K and
+  ≈₹1.25K respectively).
 
 You can use exactly this mechanism to make **any closed month** (one whose
 actuals are final and won't change again) survive the same way, with no

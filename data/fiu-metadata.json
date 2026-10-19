@@ -1625,7 +1625,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
+    "billingModel": "Unique Users",
     "topTen": false
   },
   {
@@ -1697,7 +1697,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
+    "billingModel": "Unique Users",
     "topTen": false
   },
   {
@@ -1796,7 +1796,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
+    "billingModel": "Data Fetch",
     "topTen": false
   },
   {
@@ -1877,7 +1877,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
+    "billingModel": "Data Fetch",
     "topTen": false
   },
   {
@@ -2138,7 +2138,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
+    "billingModel": "Data Fetch",
     "topTen": false
   },
   {
@@ -2255,7 +2255,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
+    "billingModel": "Data Fetch",
     "topTen": false
   },
   {
@@ -2660,7 +2660,7 @@
     "tspName": "",
     "licenseType": "Insurance",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
+    "billingModel": "Data Fetch",
     "topTen": false
   },
   {
@@ -2678,7 +2678,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
+    "billingModel": "Unique Users",
     "topTen": false
   },
   {

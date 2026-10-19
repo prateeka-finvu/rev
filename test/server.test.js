@@ -361,13 +361,14 @@ async function dataStatusSuite() {
     // without needing to dig through host deploy logs.
     let server;
     try {
-      await testAsync('reports the real DATA_DIR, that it\'s writable, and the seeded historical months (Apr-Aug, no September yet)', async () => {
-        // August joined the permanent seed 2026-09-24 (see "Making a closed
-        // month's data survive for free" in README.md) once its actuals
-        // were final — so a fresh DATA_DIR now legitimately has August
-        // rows, same as Apr-Jul. September hasn't happened yet in-story, so
-        // it's still a reliable "definitely not seeded" month for this
-        // test to check against.
+      await testAsync('reports the real DATA_DIR, that it\'s writable, and the seeded historical months (Apr-Sep, no October yet)', async () => {
+        // August joined the permanent seed 2026-09-24, and September joined
+        // it 2026-10-19 (see "Making a closed month's data survive for
+        // free" in README.md) once each month's actuals were final — so a
+        // fresh DATA_DIR now legitimately has August and September rows,
+        // same as Apr-Jul. October hasn't happened yet in-story, so it's
+        // still a reliable "definitely not seeded" month for this test to
+        // check against.
         server = await startServer({});
         const res = await fetch(server.baseUrl + '/api/data-status');
         assertEqual(res.status, 200);
@@ -380,20 +381,25 @@ async function dataStatusSuite() {
           'expected historicalActuals.totalRows. Body:\n' + JSON.stringify(body));
         assert(body.historicalActuals.rowsByMonth['2026-08'] > 0,
           'August is now part of the seed data — expected rowsByMonth to already include it. Body:\n' + JSON.stringify(body));
-        assert(!('2026-09' in (body.historicalActuals.rowsByMonth || {})),
-          'a freshly seeded DATA_DIR should have no September rows yet');
+        assert(body.historicalActuals.rowsByMonth['2026-09'] > 0,
+          'September is now part of the seed data too — expected rowsByMonth to already include it. Body:\n' + JSON.stringify(body));
+        assert(!('2026-10' in (body.historicalActuals.rowsByMonth || {})),
+          'a freshly seeded DATA_DIR should have no October rows yet');
       });
 
       await testAsync('a month uploaded through the app shows up here immediately', async () => {
+        // Deliberately uses October, not September — September is now part
+        // of the permanent seed (see test above), so it's no longer a safe
+        // "starts at zero" month for this assertion to anchor on.
         const csv = 'FIU ID,Revenue,AU Counts,DF Counts\nsome-fiu,1000,50,900\n';
         const fd = new FormData();
-        fd.append('month', '2026-09');
-        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'sep.csv');
+        fd.append('month', '2026-10');
+        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'oct.csv');
         await fetch(server.baseUrl + '/api/historical-actuals/bulk', { method: 'POST', body: fd });
         const res = await fetch(server.baseUrl + '/api/data-status');
         const body = await res.json();
-        assertEqual(body.historicalActuals.rowsByMonth['2026-09'], 1,
-          'September should now show up in rowsByMonth. Body:\n' + JSON.stringify(body));
+        assertEqual(body.historicalActuals.rowsByMonth['2026-10'], 1,
+          'October should now show up in rowsByMonth. Body:\n' + JSON.stringify(body));
       });
 
       await testAsync('requires login when the gate is on, same as every other /api/ route', async () => {
