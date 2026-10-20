@@ -27,15 +27,18 @@ negative values are fine for a shrinking FIU), plus **DPI Pricing Cliff CMGR**,
 growth rates for the two halves of the DPI Pricing period. By default these are just
 tracked for reference and don't affect the calculation; set a **DPI Pricing Start
 Date** on the Monthly Revenue tab to actually switch a FIU over to them from
-that month onward (see "DPI Pricing Start Date" under Monthly workflow below). From
-that month on, the FIU's revenue is **DPI Pricing Yield × expected Data Fetch
-volume** — its regular Unique-User billing no longer applies, even for a FIU
-whose Billing Model is "Unique Users". Because Data Fetch volume is
-typically many times larger than Active/Unique User counts for the same
-FIU, **DPI Pricing Yield needs to be entered as a genuine per-Data-Fetch rate**
-(usually much smaller than the regular per-user Yield) — not just a second
-number in the same range as Yield, or FY totals after the switch will run
-far higher than intended. DPI Pricing Recovery CMGR can be left blank — a FIU
+that month onward (see "DPI Pricing Start Date" under Monthly workflow below).
+**DPI Pricing Yield is no longer what drives DPI-period revenue (changed
+2026-10-20 — see "Deposit vs. non-Deposit split" below)** — it's kept on the
+Yield & CMGR tab purely as the (unchanged) gate for whether a FIU is
+DPI-Pricing-eligible at all (alongside DPI Pricing Cliff CMGR), but its ₹
+value itself is no longer read when computing a DPI-period month's revenue.
+From the DPI Pricing Start Date on, a FIU's revenue instead splits its
+expected Data Fetch volume by Deposit vs. non-Deposit FI Type, pricing each
+share differently — see "Deposit vs. non-Deposit split" below for the full
+mechanism. Its regular Unique-User billing still no longer applies either
+way, even for a FIU whose Billing Model is "Unique Users". DPI Pricing
+Recovery CMGR can be left blank — a FIU
 without one just keeps growing at its regular CMGR once the DPI Pricing Recovery
 quarter starts (see "DPI Pricing Cliff vs. DPI Pricing Recovery" below). It ships pre-seeded
 with each FIU's regular CMGR as a starting point (so it's visible instead of
@@ -162,18 +165,104 @@ rounded).
    - **DPI Pricing Start Date** (dropdown next to As-of date/FY start month, options
      Oct 2026 – Mar 2027, default "None") — from that month onward, any FIU
      with **both** DPI Pricing Cliff CMGR and DPI Pricing Yield set on the Yield & CMGR tab
-     switches its revenue to **DPI Pricing Yield × expected Data Fetch volume**,
-     for the rest of the FY — regardless of that FIU's regular billing
-     model. Unique-User billing does not apply once DPI Pricing is in effect: even
-     a FIU billed on Active/Unique Users switches onto its (projected)
-     Data Fetch volume from the switch month onward. A FIU missing DPI Pricing
-     Cliff CMGR or DPI Pricing Yield, or with no usable DF count to switch onto, is
-     left on its regular Yield/CMGR for the whole FY rather than guessed,
-     and both cases are called out in the Monthly results note. Months (and
+     switches its revenue onto its **expected Data Fetch volume, split by
+     Deposit vs. non-Deposit FI Type** (see "Deposit vs. non-Deposit split"
+     just below — this replaced a flat "DPI Pricing Yield × expected Data
+     Fetch volume" formula on 2026-10-20), for the rest of the FY —
+     regardless of that FIU's regular billing model. Unique-User billing
+     does not apply once DPI Pricing is in effect: even a FIU billed on
+     Active/Unique Users switches onto its (projected) Data Fetch volume
+     from the switch month onward. A FIU missing DPI Pricing Cliff CMGR or
+     DPI Pricing Yield, or with no usable DF count to switch onto, is left
+     on its regular Yield/CMGR for the whole FY rather than guessed, and
+     both cases are called out in the Monthly results note. Months (and
      the current-month revenue cell, if the switch date has already passed)
      governed by DPI Pricing values are highlighted amber in every revenue/AU/DF
      table. Leaving it on "None" reproduces the exact behavior from before
      this option existed.
+   - **Deposit vs. non-Deposit split (added 2026-10-20 — ask: "split the
+     yield in the DPI period based on FI type")** — a DPI-period month's
+     revenue is no longer a single rate times that FIU's whole Data Fetch
+     volume. Instead, each FIU has two blended, pre-computed ₹/fetch rates
+     on file (`sucDepositRate`, `sucNonDepositRate` in `yield-cmgr.json`,
+     not editable from the UI) and a `sucDepositSharePct` (what fraction of
+     its Data Fetch volume is Deposit-type), and its expected DF volume for
+     that month is split and priced as
+     `dfVolume × (sucDepositSharePct × sucDepositRate + (1 − sucDepositSharePct) × sucNonDepositRate)`.
+     "Deposit FI type" means savings account, current account, recurring
+     deposit, fixed/term deposit, or sole-proprietorship account (the
+     business's definition, not this app's) — everything else (equities,
+     ETFs, mutual funds, NPS, REITs, insurance policies, GSTR, etc.) is
+     non-Deposit.
+     - **sucDepositRate** and **sucDepositSharePct** come from a one-time
+       external analysis of two FIU×purpose-code×DPU-slab×FI-Type reports
+       ("DPU SNA reports" for Aug and Sep 2026 — `successful_fetches`
+       broken out by duration slab and FI Type), combined across both
+       months and matched against the **Finfactor "Digital Public
+       Infrastructure Utility Rate Card"** (its FIP Fee column, by DPU
+       slab: 13mo ₹4.20, 7mo ₹2.80, 4mo ₹1.40, 1mo ₹0.47, 1w ₹0.35, 2-5
+       days/1 day/"profile and summary only" ₹0.105 — the DPU report's
+       `5d`/`1d`/`ps` slabs map onto those three respectively; its
+       `unknown_range` slab, with no rate-card row of its own, was priced
+       at the same ₹0.105 floor rate as a conservative default). For each
+       FIU: `sucDepositSharePct` = (Deposit-type fetches across Aug+Sep) ÷
+       (all fetches across Aug+Sep); `sucDepositRate` = the Deposit-type
+       fetches' own DPU-slab mix, weighted against the rate card above,
+       averaged into one blended ₹/fetch figure. Both are held **fixed**
+       at whatever they measured across Aug+Sep for every future DPI-period
+       month — the regular monthly counts upload only ever gives one
+       combined DF number per FIU, not a Deposit/non-Deposit breakdown, so
+       there's no way to re-derive this per month going forward without a
+       fresh DPU-level report. If a future DPU-level report becomes
+       available, re-run the same derivation and update these two fields
+       (not something to hand-edit — see the calculation documented in the
+       patch that introduced this, or ask for a fresh one).
+     - **sucNonDepositRate** is this FIU's own realized ₹/fetch rate —
+       (that FIU's Historical Actuals revenue, summed across every month on
+       file) ÷ (its Historical Actuals Data Fetch count, same months) —
+       i.e. exactly the "DF Yield" figure the DF Yield Analysis and Summary
+       tabs already show elsewhere in this app, just computed once and
+       stored rather than read live. This is deliberately **not** the same
+       thing as that FIU's regular Yield field: Yield is ₹/*user* for an
+       Active/Unique-User-billed FIU (e.g. axisbank's Yield is ₹5), and
+       multiplying that straight against Data Fetch volume — often 1-2
+       orders of magnitude larger than a user count — would wildly overstate
+       the non-Deposit portion. This exact mistake was caught and fixed
+       while building this feature (axisbank's Nov 2026 DPI-period revenue
+       came out ~17x too high, ₹55.1L instead of ₹2.4L, before the fix);
+       `test/compute.test.js`'s "DPI period Deposit/non-Deposit rate split"
+       suite has a dedicated regression test for it.
+     - **KMBL-FIU-PROD shared-ID caveat (updated 2026-10-20)**: the DPU
+       reports label both Kotak Mahindra Bank business lines —
+       `KMBL-FIU-PROD` (Lending) and `KMBL-FIU-PROD (PFM)` — under the
+       single ID `KMBL-FIU-PROD` (the same shared-ID shape the September
+       Historical Actuals fix hit — see "Making a closed month's data
+       survive for free" above). They're now split apart using each row's
+       `purpose_code`: Lending = purpose codes `103`+`104`, PFM = purpose
+       codes `101`+`102`, each filtered and summarized independently from
+       the combined Aug+Sep 2026 DPU data before deriving its own
+       `sucDepositSharePct`/`sucDepositRate` (replacing the earlier
+       placeholder where both lines carried the same combined-bucket
+       values). A handful of rows with a blank `purpose_code` and
+       `fi_type = UNKNOWN` (268 successful fetches total across both
+       months, against ~1.03M total) don't match either line and are
+       excluded from both denominators as immaterial. Note: no
+       `purpose_code = 101` rows appear at all for Kotak in either month's
+       data on file — PFM's current figures come entirely from `102`.
+       That's fine mechanically (the filter still includes `101` and will
+       pick up volume automatically if it ever appears in a future
+       report), but it's worth confirming with Kotak/Finfactor that `101`
+       is in fact expected to be zero-volume for this FIU rather than
+       missing from the extract. If a future DPU report separates the two
+       lines under their own `fiu_id`s entirely, this purpose_code split
+       becomes unnecessary and each can be derived directly.
+     - **Graceful degradation**: a FIU with no Deposit share/rate on file
+       at all contributes 0 from the Deposit side and bills its whole DF
+       volume at `sucNonDepositRate` (currently every DPI-eligible FIU has
+       one, via the derivation above, so this only matters for a future FIU
+       onboarded without a DPU-level report); a Deposit share with no
+       matching rate likewise contributes 0 from that portion rather than
+       turning the whole month's revenue into `NaN`.
    - **DPI Pricing Cliff vs. DPI Pricing Recovery** — the DPI Pricing period isn't one flat growth
      rate. **DPI Pricing Yield stays the same for the whole DPI Pricing period** — only the
      Data Fetch growth rate changes partway through, and each half has its

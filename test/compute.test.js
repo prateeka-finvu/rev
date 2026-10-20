@@ -220,7 +220,7 @@ suite('SUC Cliff / Recovery', () => {
   test('phase and rate switch exactly at the 3-month Cliff/Recovery boundary', () => {
     const { row } = rowFor('FIU-H', {
       metaOver: { billingModel: 'Data Fetch' },
-      ycOver: { sucYield: 1, sucCliffCmgr: -0.13, sucRecoveryCmgr: 0.02 },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.13, sucRecoveryCmgr: 0.02 },
       counts: [{ fiuId: 'FIU-H', activeUsers: '', dataFetches: 500000 }],
       hist: [{ fiuId: 'FIU-H', month: '2026-08', revenue: 100000, auCount: '', dfCount: 4000000 }],
       asOf: d(2026, 9, 9),
@@ -249,7 +249,7 @@ suite('SUC Cliff / Recovery', () => {
   test('SUC Recovery CMGR falls back to the FIU\'s regular CMGR when left blank', () => {
     const { row } = rowFor('FIU-I', {
       metaOver: { billingModel: 'Data Fetch' },
-      ycOver: { cmgr: 0.03, sucYield: 1, sucCliffCmgr: -0.1 /* sucRecoveryCmgr omitted */ },
+      ycOver: { cmgr: 0.03, sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.1 /* sucRecoveryCmgr omitted */ },
       counts: [{ fiuId: 'FIU-I', activeUsers: '', dataFetches: 500000 }],
       hist: [{ fiuId: 'FIU-I', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }],
       asOf: d(2026, 9, 9),
@@ -264,13 +264,107 @@ suite('SUC Cliff / Recovery', () => {
   test('SUC never applies without both SUC Yield and SUC Cliff CMGR configured', () => {
     const { row } = rowFor('FIU-J', {
       metaOver: { billingModel: 'Data Fetch' },
-      ycOver: { sucYield: 1 /* no sucCliffCmgr */ },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1 /* no sucCliffCmgr */ },
       counts: [{ fiuId: 'FIU-J', activeUsers: '', dataFetches: 500000 }],
       hist: [{ fiuId: 'FIU-J', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }],
       asOf: d(2026, 9, 9),
       sucStart: { year: 2026, month: 10 }
     });
     assertEqual(row.monthly[6].sucActive, false, 'missing SUC Cliff CMGR should leave this FIU on its regular CMGR/Yield entirely');
+  });
+});
+
+suite('DPI period Deposit/non-Deposit rate split (ask: 2026-10-20)', () => {
+  // Deposit-type Data Fetch volume during the DPI period bills at the DPU
+  // rate card (sucDepositRate — a blended rate derived externally from the
+  // DPU report and the Finfactor DPI Utility Rate Card, not computed by
+  // this file); non-Deposit volume keeps billing at sucNonDepositRate — the
+  // FIU's own realized Rs/fetch rate, derived externally from its
+  // Historical Actuals revenue / Data Fetch count (the same "DF Yield"
+  // concept the DF Yield Analysis / Summary tabs already use elsewhere).
+  // The old single "100% of DF volume x SUC Yield" formula no longer
+  // drives revenue at all (SUC Yield / sucYieldValue is confirmed unused
+  // for pricing from here on — ask: "No, it does not if you use the rate
+  // card and divide the total fetches into different DPU buckets" — though
+  // the field stays on file and is still what gates sucConfigured/
+  // sucApplicable, unchanged from before this feature). Crucially,
+  // sucNonDepositRate is NOT the same thing as the FIU's regular Yield &
+  // CMGR `yield` field — that field is Rs/*user* for an Active/Unique-
+  // User-billed FIU, and multiplying it straight against Data Fetch volume
+  // would wildly overstate the non-Deposit portion (caught during this
+  // feature's own build: axisbank's Rs-5/user Yield applied against its
+  // ~2M-fetch DPI-period volume produced a ~17x-too-high monthly figure
+  // before this was caught and sucNonDepositRate was introduced instead).
+  test('100% Deposit share bills entirely at the DPU/rate-card Deposit rate, ignoring both sucNonDepositRate and the legacy SUC Yield', () => {
+    const { row } = rowFor('FIU-DEP1', {
+      metaOver: { billingModel: 'Data Fetch' },
+      ycOver: { sucYield: 9 /* legacy field — must be ignored */, sucCliffCmgr: 0, sucRecoveryCmgr: 0, sucDepositSharePct: 1, sucDepositRate: 4, sucNonDepositRate: 1.5 },
+      counts: [{ fiuId: 'FIU-DEP1', activeUsers: '', dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-DEP1', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    const oct = 1000000 * 1.05; // Sept anchor at the regular 5% CMGR, flat (0%) Cliff rate thereafter
+    assertClose(row.monthly[6].dfUsage, oct, 1);
+    assertClose(row.monthly[6].revenue, oct * 4, 1, 'revenue = dfUsage x Deposit rate (4), not x sucNonDepositRate (1.5) or x legacy SUC Yield (9)');
+  });
+
+  test('0% Deposit share (no Deposit split configured at all) bills entirely at sucNonDepositRate, not the legacy SUC Yield', () => {
+    const { row } = rowFor('FIU-DEP0', {
+      metaOver: { billingModel: 'Data Fetch' },
+      ycOver: { sucYield: 9 /* legacy field — must be ignored */, sucCliffCmgr: 0, sucRecoveryCmgr: 0, sucNonDepositRate: 2.5 /* no sucDepositSharePct/sucDepositRate at all */ },
+      counts: [{ fiuId: 'FIU-DEP0', activeUsers: '', dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-DEP0', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    const oct = 1000000 * 1.05;
+    assertClose(row.monthly[6].revenue, oct * 2.5, 1, 'revenue = dfUsage x sucNonDepositRate (2.5) when there is no Deposit share on file, not x legacy SUC Yield (9)');
+  });
+
+  test('a mixed Deposit share blends the Deposit rate and sucNonDepositRate proportionally', () => {
+    const { row } = rowFor('FIU-DEPMIX', {
+      metaOver: { billingModel: 'Data Fetch' },
+      ycOver: { sucYield: 9 /* legacy field — must be ignored */, sucCliffCmgr: 0, sucRecoveryCmgr: 0, sucDepositSharePct: 0.4, sucDepositRate: 4, sucNonDepositRate: 1.5 },
+      counts: [{ fiuId: 'FIU-DEPMIX', activeUsers: '', dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-DEPMIX', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    const oct = 1000000 * 1.05;
+    const expected = oct * (0.4 * 4 + 0.6 * 1.5); // 40% at the Deposit rate, 60% at sucNonDepositRate
+    assertClose(row.monthly[6].revenue, expected, 1);
+  });
+
+  test('a Deposit share on file with no Deposit rate contributes zero from that portion instead of corrupting the whole month to NaN', () => {
+    const { row } = rowFor('FIU-DEPNORATE', {
+      metaOver: { billingModel: 'Data Fetch' },
+      ycOver: { sucYield: 9 /* legacy field — must be ignored */, sucCliffCmgr: 0, sucRecoveryCmgr: 0, sucDepositSharePct: 0.4 /* sucDepositRate omitted */, sucNonDepositRate: 1.5 },
+      counts: [{ fiuId: 'FIU-DEPNORATE', activeUsers: '', dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-DEPNORATE', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    const oct = 1000000 * 1.05;
+    assert(!isNaN(row.monthly[6].revenue), 'a missing Deposit rate should not NaN out the whole month\'s revenue');
+    assertClose(row.monthly[6].revenue, oct * 0.6 * 1.5, 1, 'the 40% Deposit portion contributes 0 — only the 60% non-Deposit portion (at sucNonDepositRate 1.5) counts');
+  });
+
+  test('an Active/Unique-User-billed FIU is NOT billed against its own Rs/user Yield during the DPI period — that would be a unit mismatch against Data Fetch volume', () => {
+    const { row } = rowFor('FIU-AUDEP', {
+      metaOver: { billingModel: 'Unique Users' },
+      // yield: 5 is Rs/user (the yc() helper default is overridden here to
+      // make the mismatch obvious) — if this ever leaks into the DPI-period
+      // formula again, dfUsage (500k-ish) x 5 would blow this test's
+      // assertion way past sucNonDepositRate's modest 0.1 figure.
+      ycOver: { yield: 5, sucYield: 9 /* legacy field — must be ignored */, sucCliffCmgr: 0, sucRecoveryCmgr: 0, sucNonDepositRate: 0.1 },
+      counts: [{ fiuId: 'FIU-AUDEP', activeUsers: 50000, dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-AUDEP', month: '2026-08', revenue: 100000, auCount: 45000, dfCount: 1000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    const oct = 1000000 * 1.05;
+    assertClose(row.monthly[6].revenue, oct * 0.1, 1, 'revenue = dfUsage x sucNonDepositRate (0.1), not x the Rs/user Yield (5)');
   });
 });
 
@@ -283,7 +377,7 @@ suite('PFM/non-Bank DF ÷6 cut persists across the whole SUC period', () => {
   test('cut applies once at the SUC switch, then all later SUC months keep compounding from the reduced baseline', () => {
     const { row } = rowFor('FIU-K', {
       metaOver: { billingModel: 'Active Users', useCase: 'PFM', licenseType: 'NBFC' },
-      ycOver: { sucYield: 1, sucCliffCmgr: -0.13, sucRecoveryCmgr: 0.02 },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.13, sucRecoveryCmgr: 0.02 },
       counts: [{ fiuId: 'FIU-K', activeUsers: 30000, dataFetches: 500000 }],
       hist: [{ fiuId: 'FIU-K', month: '2026-08', revenue: 100000, auCount: 100000, dfCount: 4000000 }],
       asOf: d(2026, 9, 9),
@@ -303,7 +397,7 @@ suite('PFM/non-Bank DF ÷6 cut persists across the whole SUC period', () => {
   test('a Bank-licensed PFM FIU is NOT subject to the ÷6 cut', () => {
     const { row } = rowFor('FIU-L', {
       metaOver: { billingModel: 'Active Users', useCase: 'PFM', licenseType: 'Bank' },
-      ycOver: { sucYield: 1, sucCliffCmgr: -0.13 },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.13 },
       counts: [{ fiuId: 'FIU-L', activeUsers: 30000, dataFetches: 500000 }],
       hist: [{ fiuId: 'FIU-L', month: '2026-08', revenue: 100000, auCount: 100000, dfCount: 4000000 }],
       asOf: d(2026, 9, 9),
@@ -319,7 +413,7 @@ suite('HDFC 43% cut (fiulive@hdfc / HDFC-FIU) — Unbilled but forced onto SUC',
   test('Unbilled + forced SUC eligibility, 43% cut persists across later SUC months', () => {
     const { row } = rowFor('FIULIVE@HDFC', {
       metaOver: { billingModel: 'Unbilled' }, // would normally exclude this FIU from SUC entirely
-      ycOver: { sucYield: 1, sucCliffCmgr: -0.1, sucRecoveryCmgr: 0.02 },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.1, sucRecoveryCmgr: 0.02 },
       counts: [{ fiuId: 'FIULIVE@HDFC', activeUsers: '', dataFetches: 500000 }],
       hist: [{ fiuId: 'FIULIVE@HDFC', month: '2026-08', revenue: '', auCount: '', dfCount: 2000000 }],
       asOf: d(2026, 9, 9),
@@ -351,7 +445,7 @@ suite('axisbank overrides (fiulive@axisbank)', () => {
   test('DF count during SUC fixed at 10% of the recorded July actual, flat every SUC month', () => {
     const { row } = rowFor('FIULIVE@AXISBANK', {
       metaOver: { billingModel: 'Active Users' },
-      ycOver: { sucYield: 2, sucCliffCmgr: -0.1 },
+      ycOver: { sucYield: 2, sucDepositSharePct: 1, sucDepositRate: 2, sucCliffCmgr: -0.1 },
       counts: [{ fiuId: 'FIULIVE@AXISBANK', activeUsers: 999, dataFetches: 123 }],
       hist: [
         { fiuId: 'FIULIVE@AXISBANK', month: '2026-07', revenue: '', auCount: '', dfCount: 1000000 },
@@ -371,7 +465,7 @@ suite('What-if scenario: Lending DF volume falls 50% during SUC Cliff', () => {
   test('exactly a 50% cumulative fall over the 3-month Cliff for a negative-CMGR Lending FIU', () => {
     const { row } = rowFor('FIU-LEND', {
       metaOver: { billingModel: 'Data Fetch', useCase: 'Lending' },
-      ycOver: { sucYield: 1, sucCliffCmgr: -0.13, sucRecoveryCmgr: 0.02 },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.13, sucRecoveryCmgr: 0.02 },
       counts: [{ fiuId: 'FIU-LEND', activeUsers: '', dataFetches: 500000 }],
       hist: [{ fiuId: 'FIU-LEND', month: '2026-08', revenue: 100000, auCount: '', dfCount: 4000000 }],
       asOf: d(2026, 9, 9),
@@ -386,7 +480,7 @@ suite('What-if scenario: Lending DF volume falls 50% during SUC Cliff', () => {
   test('a Lending FIU with a zero/positive Cliff CMGR is left untouched', () => {
     const { row } = rowFor('FIU-LEND2', {
       metaOver: { billingModel: 'Data Fetch', useCase: 'Lending' },
-      ycOver: { sucYield: 1, sucCliffCmgr: 0.02, sucRecoveryCmgr: 0.02 },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: 0.02, sucRecoveryCmgr: 0.02 },
       counts: [{ fiuId: 'FIU-LEND2', activeUsers: '', dataFetches: 500000 }],
       hist: [{ fiuId: 'FIU-LEND2', month: '2026-08', revenue: 100000, auCount: '', dfCount: 4000000 }],
       asOf: d(2026, 9, 9),
@@ -401,7 +495,7 @@ suite('What-if scenario: Lending DF volume falls 50% during SUC Cliff', () => {
   test('a non-Lending FIU is never affected, even with a negative Cliff CMGR', () => {
     const { row } = rowFor('FIU-NONLEND', {
       metaOver: { billingModel: 'Data Fetch', useCase: 'PFM', licenseType: 'Bank' },
-      ycOver: { sucYield: 1, sucCliffCmgr: -0.13 },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.13 },
       counts: [{ fiuId: 'FIU-NONLEND', activeUsers: '', dataFetches: 500000 }],
       hist: [{ fiuId: 'FIU-NONLEND', month: '2026-08', revenue: 100000, auCount: '', dfCount: 4000000 }],
       asOf: d(2026, 9, 9),
@@ -418,7 +512,7 @@ suite('What-if scenario: non-bank PFM FIUs -> ₹0 post-SUC', () => {
   test('revenue forced to 0 for every SUC month, but dfUsage still shown normally', () => {
     const { row } = rowFor('FIU-PFM0', {
       metaOver: { billingModel: 'Active Users', useCase: 'PFM', licenseType: 'NBFC' },
-      ycOver: { sucYield: 5, sucCliffCmgr: -0.1 },
+      ycOver: { sucYield: 5, sucDepositSharePct: 1, sucDepositRate: 5, sucCliffCmgr: -0.1 },
       counts: [{ fiuId: 'FIU-PFM0', activeUsers: 1000, dataFetches: 500000 }],
       hist: [{ fiuId: 'FIU-PFM0', month: '2026-08', revenue: 20000, auCount: 1000, dfCount: 4000000 }],
       asOf: d(2026, 9, 9),
@@ -435,7 +529,7 @@ suite('Flat SUC-period revenue overrides (ICICI, SBI CARDS, KMBL-FIU-PROD (PFM))
   test('flat schedule applies while the current month\'s DF count is still 0/missing', () => {
     const { row } = rowFor('ICICI', {
       metaOver: { billingModel: 'Data Fetch', useCase: 'PFM' },
-      ycOver: { sucYield: 1, sucCliffCmgr: -0.1 },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.1 },
       counts: [{ fiuId: 'ICICI', activeUsers: '', dataFetches: '' }], // no live DF count yet
       hist: [],
       asOf: d(2026, 9, 9),
@@ -448,7 +542,7 @@ suite('Flat SUC-period revenue overrides (ICICI, SBI CARDS, KMBL-FIU-PROD (PFM))
   test('a real nonzero current-month DF count switches this FIU off the flat schedule for good', () => {
     const { row } = rowFor('ICICI', {
       metaOver: { billingModel: 'Data Fetch', useCase: 'PFM' },
-      ycOver: { sucYield: 1, sucCliffCmgr: -0.1 },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.1 },
       counts: [{ fiuId: 'ICICI', activeUsers: '', dataFetches: 200000 }], // real usage has started
       hist: [],
       asOf: d(2026, 9, 9),
@@ -460,7 +554,7 @@ suite('Flat SUC-period revenue overrides (ICICI, SBI CARDS, KMBL-FIU-PROD (PFM))
   test('KMBL-FIU-PROD (PFM) steps down from Jan 2027', () => {
     const { row } = rowFor('KMBL-FIU-PROD (PFM)', {
       metaOver: { billingModel: 'Data Fetch', useCase: 'PFM' },
-      ycOver: { sucYield: 1, sucCliffCmgr: -0.1 },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.1 },
       counts: [{ fiuId: 'KMBL-FIU-PROD (PFM)', activeUsers: '', dataFetches: '' }],
       hist: [],
       asOf: d(2026, 9, 9),
@@ -485,7 +579,7 @@ suite('Fixed monthly-schedule/flat-until-SUC revenue overrides', () => {
 
   test('FIULIVE@MONEYCONTROL: flat until SUC starts, then falls through to normal computation', () => {
     const { row } = rowFor('FIULIVE@MONEYCONTROL', {
-      ycOver: { sucYield: 1, sucCliffCmgr: -0.1 },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.1 },
       counts: [{ fiuId: 'FIULIVE@MONEYCONTROL', activeUsers: '', dataFetches: 100000 }],
       metaOver: { billingModel: 'Data Fetch' },
       hist: [{ fiuId: 'FIULIVE@MONEYCONTROL', month: '2026-08', revenue: 999, auCount: '', dfCount: 900000 }],
