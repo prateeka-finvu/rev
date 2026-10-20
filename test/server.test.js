@@ -496,6 +496,51 @@ async function projectionBaselineSuite() {
   });
 }
 
+async function reseedSuite() {
+  await suite('/api/reseed — manual reseed-from-bundled-data action (ask: 2026-10-20)', async () => {
+    let server;
+    try {
+      await testAsync('overwrites a stale local data file with the bundled version', async () => {
+        server = await startServer({});
+        // Simulate a DATA_DIR that was seeded once, long before a later
+        // patch changed the bundled yield-cmgr.json — exactly the scenario
+        // that caused DPI Period Revenue to collapse to ~0 for Lending
+        // while looking fine elsewhere.
+        const ycPath = path.join(server.dataDir, 'yield-cmgr.json');
+        const staleContent = JSON.stringify([{ fiuId: 'totally-stale-row', yield: 1, cmgr: 0 }]);
+        fs.writeFileSync(ycPath, staleContent);
+        const res = await fetch(server.baseUrl + '/api/reseed', { method: 'POST' });
+        assertEqual(res.status, 200);
+        const body = await res.json();
+        assert(Array.isArray(body.reseeded) && body.reseeded.includes('yield-cmgr.json'),
+          'expected yield-cmgr.json in the reseeded list. Body:\n' + JSON.stringify(body));
+        const after = fs.readFileSync(ycPath, 'utf8');
+        assert(after !== staleContent, 'yield-cmgr.json should have been overwritten, not left stale');
+        const bundled = fs.readFileSync(path.join(__dirname, '..', 'data', 'yield-cmgr.json'), 'utf8');
+        assertEqual(after, bundled, 'reseeded file should exactly match the bundled data/yield-cmgr.json');
+      });
+
+      await testAsync('reports every bundled .json file it reseeded', async () => {
+        const res = await fetch(server.baseUrl + '/api/reseed', { method: 'POST' });
+        const body = await res.json();
+        const bundledNames = fs.readdirSync(path.join(__dirname, '..', 'data')).filter(n => n.endsWith('.json'));
+        for (const name of bundledNames) {
+          assert(body.reseeded.includes(name), name + ' should be in the reseeded list. Body:\n' + JSON.stringify(body));
+        }
+      });
+
+      await testAsync('requires login when the gate is on, same as every other /api/ route', async () => {
+        await server.stop();
+        server = await startServer({ APP_PASSWORD: 'secret123', SESSION_SECRET: 'test-secret' });
+        const res = await fetch(server.baseUrl + '/api/reseed', { method: 'POST' });
+        assertEqual(res.status, 401);
+      });
+    } finally {
+      if (server) await server.stop();
+    }
+  });
+}
+
 async function main() {
   await loginGateOffSuite();
   await loginGateOnSuite();
@@ -504,6 +549,7 @@ async function main() {
   await homeEnvSecretsFileSuite();
   await dataStatusSuite();
   await projectionBaselineSuite();
+  await reseedSuite();
 }
 
 module.exports = main();

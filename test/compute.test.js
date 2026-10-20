@@ -318,7 +318,11 @@ suite('DPI period Deposit/non-Deposit rate split (ask: 2026-10-20)', () => {
       asOf: d(2026, 9, 9),
       sucStart: { year: 2026, month: 10 }
     });
-    const oct = 1000000 * 1.05;
+    // 0% Deposit share also makes this FIU "pureNonDepositFiu" (ask:
+    // 2026-10-20, see the dedicated suite below) — Cliff CMGR (0%, set
+    // above) is skipped in favor of the regular 5% CMGR, so October
+    // compounds once more past the Sept anchor instead of staying flat.
+    const oct = 1000000 * 1.05 * 1.05;
     assertClose(row.monthly[6].revenue, oct * 2.5, 1, 'revenue = dfUsage x sucNonDepositRate (2.5) when there is no Deposit share on file, not x legacy SUC Yield (9)');
   });
 
@@ -363,8 +367,107 @@ suite('DPI period Deposit/non-Deposit rate split (ask: 2026-10-20)', () => {
       asOf: d(2026, 9, 9),
       sucStart: { year: 2026, month: 10 }
     });
-    const oct = 1000000 * 1.05;
+    // No sucDepositSharePct here either, so this FIU is also
+    // "pureNonDepositFiu" — see the note on the previous test.
+    const oct = 1000000 * 1.05 * 1.05;
     assertClose(row.monthly[6].revenue, oct * 0.1, 1, 'revenue = dfUsage x sucNonDepositRate (0.1), not x the Rs/user Yield (5)');
+  });
+});
+
+suite('Pure non-Deposit FIUs skip DPI Pricing Cliff/Recovery CMGR entirely (ask: 2026-10-20)', () => {
+  // A FIU whose Data Fetch volume is 100% non-Deposit FI types has zero
+  // exposure to the DPI Pricing Rate Card — only Deposit-type fetches are
+  // ever billed off it (see the suite above) — so its real per-fetch cost
+  // never actually rises once DPI Pricing starts. DPI Pricing Cliff and
+  // Recovery CMGR exist specifically to model demand reacting to that
+  // price rise (a dip, then partial recovery); modeling that reaction for
+  // a FIU that was never actually charged more would be wrong. Such a FIU
+  // (sucDepositSharePct effectively 0, including when unconfigured at all
+  // — see the previous suite's default) keeps compounding at its regular
+  // pre-DPI CMGR straight through the whole DPI Pricing period instead —
+  // not just during Cliff, since there's no price rise for it to
+  // "recover" from either.
+  test('0% Deposit share: Cliff CMGR is ignored, regular CMGR applies instead', () => {
+    const { row } = rowFor('FIU-PURENONDEP', {
+      metaOver: { billingModel: 'Data Fetch' },
+      ycOver: { yield: 1, cmgr: 0.05, sucYield: 9, sucCliffCmgr: -0.13, sucRecoveryCmgr: 0.02, sucDepositSharePct: 0, sucNonDepositRate: 1 },
+      counts: [{ fiuId: 'FIU-PURENONDEP', activeUsers: '', dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-PURENONDEP', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    const sepAnchor = 1000000 * 1.05;
+    const octExpected = sepAnchor * 1.05; // regular CMGR, NOT the -13% Cliff CMGR
+    assertClose(row.monthly[6].dfUsage, octExpected, 1, 'October (1st Cliff month) should use the regular 5% CMGR, not the -13% Cliff CMGR');
+  });
+
+  test('0% Deposit share: Recovery CMGR is also ignored, every month past Cliff', () => {
+    const { row } = rowFor('FIU-PURENONDEP2', {
+      metaOver: { billingModel: 'Data Fetch' },
+      ycOver: { yield: 1, cmgr: 0.05, sucYield: 9, sucCliffCmgr: -0.13, sucRecoveryCmgr: 0.3, sucDepositSharePct: 0, sucNonDepositRate: 1 },
+      counts: [{ fiuId: 'FIU-PURENONDEP2', activeUsers: '', dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-PURENONDEP2', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    // Jan 2027 (month index 9) is into Recovery (sucStart=Oct, so Oct/Nov/
+    // Dec are the 3-month Cliff and Jan is the 1st Recovery month) — still
+    // the regular 5% CMGR every step (Sep, Oct, Nov, Dec, Jan = 5
+    // compoundings from the Aug anchor), never switching to the -13%
+    // Cliff or +30% Recovery rate.
+    const expected = 1000000 * Math.pow(1.05, 5);
+    assertClose(row.monthly[9].dfUsage, expected, 1, 'January should still be on the regular CMGR, never switching to Cliff or Recovery');
+  });
+
+  test('any nonzero Deposit share, even a small one, still uses Cliff/Recovery CMGR normally', () => {
+    const { row } = rowFor('FIU-TINYDEP', {
+      metaOver: { billingModel: 'Data Fetch' },
+      ycOver: { yield: 1, cmgr: 0.05, sucYield: 9, sucCliffCmgr: -0.13, sucRecoveryCmgr: 0.02, sucDepositSharePct: 0.0001, sucDepositRate: 5, sucNonDepositRate: 1 },
+      counts: [{ fiuId: 'FIU-TINYDEP', activeUsers: '', dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-TINYDEP', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    const sepAnchor = 1000000 * 1.05;
+    const octExpected = sepAnchor * 0.87; // its own -13% Cliff CMGR, not the regular 5%
+    assertClose(row.monthly[6].dfUsage, octExpected, 1, 'even a 0.01% Deposit share is enough to keep the normal Cliff CMGR in effect');
+  });
+
+  test('the Lending DF volume -50% what-if scenario never applies to a pure non-Deposit FIU', () => {
+    const { row } = rowFor('FIU-PURENONDEP-LEND', {
+      metaOver: { billingModel: 'Data Fetch', useCase: 'Lending' },
+      ycOver: { yield: 1, cmgr: 0.05, sucYield: 9, sucCliffCmgr: -0.13, sucRecoveryCmgr: 0.02, sucDepositSharePct: 0, sucNonDepositRate: 1 },
+      counts: [{ fiuId: 'FIU-PURENONDEP-LEND', activeUsers: '', dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-PURENONDEP-LEND', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 },
+      scenarios: { lendingCmgrWorse: true }
+    });
+    const sepAnchor = 1000000 * 1.05;
+    const octExpected = sepAnchor * 1.05; // still the regular CMGR, not the -20.63% "worse" override
+    assertClose(row.monthly[6].dfUsage, octExpected, 1, 'a pure non-Deposit Lending FIU is indifferent to DPI pricing, so the "worse Cliff" scenario has nothing to make worse');
+  });
+
+  test('pureNonDepositFiu is reported on the row for a 0%-share FIU, and not for one with any share', () => {
+    const { row: zeroShareRow } = rowFor('FIU-PUREFLAG0', {
+      metaOver: { billingModel: 'Data Fetch' },
+      ycOver: { sucYield: 9, sucCliffCmgr: 0, sucRecoveryCmgr: 0, sucDepositSharePct: 0, sucNonDepositRate: 1 },
+      counts: [{ fiuId: 'FIU-PUREFLAG0', activeUsers: '', dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-PUREFLAG0', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    assertEqual(zeroShareRow.pureNonDepositFiu, true);
+
+    const { row: someShareRow } = rowFor('FIU-PUREFLAG1', {
+      metaOver: { billingModel: 'Data Fetch' },
+      ycOver: { sucYield: 9, sucCliffCmgr: 0, sucRecoveryCmgr: 0, sucDepositSharePct: 0.2, sucDepositRate: 5, sucNonDepositRate: 1 },
+      counts: [{ fiuId: 'FIU-PUREFLAG1', activeUsers: '', dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-PUREFLAG1', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    assertEqual(someShareRow.pureNonDepositFiu, false);
   });
 });
 

@@ -1275,6 +1275,53 @@ way. Treat it as a "close the books" step at the end of each month, not a
 substitute for the paid disk if the team needs data to survive mid-month
 edits too.
 
+### Reseeding a long-running local copy (added 2026-10-20)
+
+`seedDataDirIfNeeded()`'s "only copy a file that doesn't already exist"
+rule is exactly right the very first time an environment's `DATA_DIR`
+gets created — it's what lets a fresh Render container (or a fresh local
+run) start with real data instead of a blank slate, without ever risking
+overwriting something real on a routine restart. The flip side: an
+environment whose `DATA_DIR` was seeded once, a while ago, has no way to
+notice that a later update changed the bundled `data/*.json` files —
+those updated files just sit there in the app folder, never copied over,
+because the destination already "exists" as far as that check is
+concerned.
+
+This mostly doesn't matter on Render's free tier, since its ephemeral
+disk means `DATA_DIR` gets wiped and reseeded fresh on every single
+deploy anyway. It matters a lot for a **long-running local copy** used to
+verify patches before they ship — exactly the scenario that first
+surfaced this (ask: 2026-10-20, "something is seriously off" — a locally
+tested copy's DPI Period Revenue for the Lending Use-case had collapsed
+to ₹0 after applying the patch that introduced the Deposit/non-Deposit
+split above, because that copy's `DATA_DIR` still held a `yield-cmgr.json`
+from before the patch, missing `sucDepositSharePct`/`sucDepositRate`/
+`sucNonDepositRate` entirely for every FIU — with no fallback to the old
+flat `sucYield` left in the code, every Data-Fetch-billed FIU's DPI-period
+revenue came out to exactly 0). The same stale-file mechanism, not a
+coincidence, was also why that same local copy was missing September's
+Historical Actuals (added earlier the same day) — both symptoms traced
+back to one `DATA_DIR` that had been seeded before either change shipped.
+
+The fix: an authenticated **`POST /api/reseed`**, surfaced as a **"Reseed
+from bundled data"** button at the bottom of the Historical Actuals
+("Actuals") tab, behind the same `confirm()`-dialog pattern as every
+per-row delete button elsewhere in this app. Unlike the automatic,
+copy-if-missing seeding above, this *unconditionally overwrites* every
+bundled `data/*.json` file in `DATA_DIR` — FIU Metadata, Yield & CMGR,
+Historical Actuals, the Original FY Projection baseline, and any saved
+Projected-vs-Actual snapshot — with whatever's bundled in the copy of the
+app that's currently running. Use it right after applying a patch to a
+long-running local copy (or any environment with a persistent disk that
+isn't getting wiped on deploy) to pick up the update's data changes
+immediately, without needing to delete the data folder and restart by
+hand. It deliberately discards anything entered directly into that
+running app that hasn't been folded into the currently-running copy's
+bundled `data/` yet, so it's a "sync this environment to what's bundled
+right now" action, not a routine one — don't reach for it as part of
+normal day-to-day use, only after an update.
+
 ## Testing
 
 Run `npm test` before every deploy — not just after making a change, since
@@ -1335,6 +1382,7 @@ a reason to skip `npm test` for backend/calculation changes.
 - `POST /api/logout` — clears the `session` cookie, returns `{ ok: true }`.
 - `GET /healthz` — always `200 { ok: true }`, unauthenticated, regardless of whether the login gate is configured. Meant for a host's health check, not for the app itself.
 - `GET /api/data-status` (fixed 2026-09-23 — ask: "unable to preserve August actuals across sessions" on Render) — self-diagnostic for the "data isn't persisting" class of bug. Returns `{ dataDir, dataDirFellBack, dataDirInsideAppFolder, appFolder, writable, writeError, historicalActuals: { path, lastModified, totalRows, rowsByMonth }, serverTimeUtc }`. `rowsByMonth` is a quick way to confirm whether a given month (e.g. `"2026-08"`) is actually present without opening the Historical Actuals tab. See the troubleshooting callout under "Deploying to Render" below.
+- `POST /api/reseed` (added 2026-10-20 — ask: "add the reseed action") — unconditionally overwrites every bundled `data/*.json` file (FIU Metadata, Yield & CMGR, Historical Actuals, Original FY Projection baseline, Projected-vs-Actual snapshot) in `DATA_DIR` with the copy bundled in the app currently running, discarding anything entered directly into the running app that isn't in that bundled data yet. Returns `{ reseeded: [filenames...], dataDir, seedDir }`. Surfaced as the "Reseed from bundled data" button on the Historical Actuals tab. See "Reseeding a long-running local copy" above.
 - Every other route requires a valid session once `APP_PASSWORD` is set — an unauthenticated request to any `/api/*` route above gets `401 { error: "Not logged in" }` instead of its usual response.
 
 ## Extending it

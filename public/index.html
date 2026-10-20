@@ -733,6 +733,14 @@
       </div>
       <div class="empty-state" id="histEmptyState" style="display:none;">No historical actuals recorded yet — upload a file above or add a row manually.</div>
     </section>
+    <section class="card">
+      <h2>Local data folder</h2>
+      <p class="hint">This app only copies a file bundled with the app into its local data folder the first time that file is missing — so it never overwrites real data you've entered on a routine restart. One side effect: after applying an update that changes the bundled FIU Metadata, Yield &amp; CMGR, or Historical Actuals data, this environment's own copy of those files won't pick up the change on its own. <strong>Reseed from bundled data</strong> forces that refresh — it overwrites every local data file (FIU Metadata, Yield &amp; CMGR, Historical Actuals, Original FY Projection, and any saved Projected-vs-Actual snapshot) with whatever is bundled in the copy of the app currently running, discarding anything entered directly into this running app that hasn't been folded into that bundled data yet. Use it right after applying an update, not as part of routine use.</p>
+      <div class="row">
+        <button class="btn-secondary" id="reseedBtn" type="button">Reseed from bundled data</button>
+      </div>
+      <div class="status-msg" id="reseedStatus"></div>
+    </section>
   </div>
 
   <p class="footer-note">
@@ -1190,6 +1198,29 @@
       histUploadStatus.textContent = err.message;
     }
     histFile.value = '';
+  });
+
+  const reseedBtn = document.getElementById('reseedBtn');
+  const reseedStatus = document.getElementById('reseedStatus');
+  reseedBtn.addEventListener('click', async function(){
+    if (!confirm('This overwrites every local data file (FIU Metadata, Yield & CMGR, Historical Actuals, Original FY Projection, and any saved Projected-vs-Actual snapshot) with what\'s bundled in the copy of the app currently running. Anything entered directly into this running app that hasn\'t been folded into that bundled data yet will be lost. Continue?')) return;
+    reseedBtn.disabled = true;
+    reseedStatus.className = 'status-msg';
+    reseedStatus.textContent = 'Reseeding…';
+    try{
+      const res = await apiFetch(API + '/api/reseed', { method: 'POST' });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Reseed failed');
+      reseedStatus.className = 'status-msg ok';
+      reseedStatus.textContent = (data.reseeded && data.reseeded.length)
+        ? 'Reseeded ' + data.reseeded.length + ' file(s): ' + data.reseeded.join(', ') + '. Reloading…'
+        : 'Nothing to reseed (this environment\'s data folder is the bundled data folder itself). Reloading…';
+      setTimeout(() => location.reload(), 900);
+    } catch(err){
+      reseedStatus.className = 'status-msg err';
+      reseedStatus.textContent = err.message;
+      reseedBtn.disabled = false;
+    }
   });
 
   // ================= Monthly Revenue tab =================

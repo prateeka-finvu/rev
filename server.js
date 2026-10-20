@@ -327,6 +327,31 @@ app.get('/api/data-status', (req, res) => {
   });
 });
 
+// Manual "reseed from bundled data" action (ask: 2026-10-20 — "add the
+// reseed action", after a stale local DATA_DIR caused a just-applied
+// patch's updated Yield & CMGR fields to silently not take effect, making
+// an unrelated-looking DPI Period Revenue number go to ~0 for an entire
+// Use-case). Unlike the one-time seeding that runs at startup — which
+// only ever fills in a file that's missing, specifically so it never
+// clobbers real data — this OVERWRITES every bundled data/*.json file in
+// DATA_DIR unconditionally, including FIU Metadata, Yield & CMGR,
+// Historical Actuals, the Original FY Projection baseline, and any saved
+// Projected-vs-Actual snapshot. Anything entered directly into this
+// running app that hasn't been folded into the currently-running copy's
+// bundled data/ yet is discarded. Intentionally a deliberate, manual,
+// authenticated action (not run automatically) — the frontend gates it
+// behind the same confirm()-dialog pattern as every other destructive
+// action in this app (deleting a FIU Metadata/Yield-CMGR/Historical
+// Actuals row).
+app.post('/api/reseed', (req, res) => {
+  try {
+    const result = store.reseedFromBundledData();
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 const META_TABLE = 'fiu-metadata';
