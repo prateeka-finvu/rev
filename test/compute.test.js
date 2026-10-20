@@ -374,19 +374,21 @@ suite('DPI period Deposit/non-Deposit rate split (ask: 2026-10-20)', () => {
   });
 });
 
-suite('Pure non-Deposit FIUs skip DPI Pricing Cliff/Recovery CMGR entirely (ask: 2026-10-20)', () => {
+suite('Pure non-Deposit FIUs are indifferent to DPI Pricing (ask: 2026-10-20)', () => {
   // A FIU whose Data Fetch volume is 100% non-Deposit FI types has zero
   // exposure to the DPI Pricing Rate Card — only Deposit-type fetches are
   // ever billed off it (see the suite above) — so its real per-fetch cost
   // never actually rises once DPI Pricing starts. DPI Pricing Cliff and
-  // Recovery CMGR exist specifically to model demand reacting to that
-  // price rise (a dip, then partial recovery); modeling that reaction for
-  // a FIU that was never actually charged more would be wrong. Such a FIU
-  // (sucDepositSharePct effectively 0, including when unconfigured at all
-  // — see the previous suite's default) keeps compounding at its regular
-  // pre-DPI CMGR straight through the whole DPI Pricing period instead —
-  // not just during Cliff, since there's no price rise for it to
-  // "recover" from either.
+  // Recovery CMGR, and both what-if scenarios below, all exist specifically
+  // to model demand/revenue reacting to that price rise (a volume dip then
+  // partial recovery, or a non-bank PFM FIU losing its revenue entirely);
+  // modeling any of those reactions for a FIU that was never actually
+  // charged more would be wrong. Such a FIU (sucDepositSharePct effectively
+  // 0, including when unconfigured at all — see the previous suite's
+  // default) keeps compounding at its regular pre-DPI CMGR straight through
+  // the whole DPI Pricing period instead — not just during Cliff, since
+  // there's no price rise for it to "recover" from either — and is left out
+  // of both what-if scenarios regardless of Use-case/License Type.
   test('0% Deposit share: Cliff CMGR is ignored, regular CMGR applies instead', () => {
     const { row } = rowFor('FIU-PURENONDEP', {
       metaOver: { billingModel: 'Data Fetch' },
@@ -468,6 +470,19 @@ suite('Pure non-Deposit FIUs skip DPI Pricing Cliff/Recovery CMGR entirely (ask:
       sucStart: { year: 2026, month: 10 }
     });
     assertEqual(someShareRow.pureNonDepositFiu, false);
+  });
+
+  test('the non-bank PFM -> ₹0 what-if scenario never applies to a pure non-Deposit FIU', () => {
+    const { row } = rowFor('FIU-PURENONDEP-PFM', {
+      metaOver: { billingModel: 'Active Users', useCase: 'PFM', licenseType: 'NBFC' },
+      ycOver: { yield: 1, cmgr: 0.05, sucYield: 5, sucCliffCmgr: -0.1, sucDepositSharePct: 0, sucNonDepositRate: 1 },
+      counts: [{ fiuId: 'FIU-PURENONDEP-PFM', activeUsers: 1000, dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-PURENONDEP-PFM', month: '2026-08', revenue: 20000, auCount: 1000, dfCount: 4000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 },
+      scenarios: { nonBankPfmZero: true }
+    });
+    assert(row.monthly[6].revenue > 0, 'a pure non-Deposit non-bank PFM FIU is indifferent to DPI Pricing, so the scenario should not force its revenue to 0');
   });
 });
 

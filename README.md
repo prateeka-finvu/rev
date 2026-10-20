@@ -263,6 +263,36 @@ rounded).
        onboarded without a DPU-level report); a Deposit share with no
        matching rate likewise contributes 0 from that portion rather than
        turning the whole month's revenue into `NaN`.
+     - **Pure non-Deposit FIUs are indifferent to DPI Pricing (added
+       2026-10-20 — ask: "for FIUs that are only doing non-deposit FI type
+       fetches, do not apply the DPI CMGR... we can expect them to remain
+       indifferent to the DPI rate card")**: a FIU with a **0% Deposit
+       share** (`sucDepositSharePct` is exactly 0, including when it's
+       missing/unconfigured entirely — same default as "Graceful
+       degradation" above) is never actually billed at the higher DPI
+       Pricing rate card — its whole Data Fetch volume prices off
+       `sucNonDepositRate`, its own pre-existing realized rate, unchanged
+       by DPI Pricing. Since its real per-fetch cost never rises, it has
+       no reason to behave any differently once DPI Pricing starts, so
+       three DPI-Pricing-period behaviors are all skipped for it:
+       - It keeps compounding at its regular (pre-DPI Pricing) CMGR
+         straight through the **whole** DPI Pricing period — Cliff and
+         Recovery both — instead of DPI Pricing Cliff/Recovery CMGR (see
+         "DPI Pricing Cliff vs. DPI Pricing Recovery" below). There's no
+         price rise for it to dip in reaction to, or later "recover" from.
+       - The **Lending DF volume falls 50%** what-if scenario never
+         applies to it, even if it's a Lending FIU with a negative Cliff
+         CMGR on file — there's no Cliff rate in effect for this scenario
+         to make "worse."
+       - The **Non-bank PFM FIUs → ₹0** what-if scenario never applies to
+         it either, even if it's an otherwise-eligible non-bank PFM FIU —
+         there's no price increase for it to lose revenue in reaction to.
+       A FIU with **any** nonzero Deposit share, however small, is
+       unaffected by all three of the above and behaves exactly as
+       described in the rest of this section. The per-FIU API/compute
+       response exposes this as `pureNonDepositFiu: true/false` on each
+       row. As of this writing, 49 of the 426 currently DPI-Pricing-
+       configured FIUs have a 0% Deposit share and are affected.
    - **DPI Pricing Cliff vs. DPI Pricing Recovery** — the DPI Pricing period isn't one flat growth
      rate. **DPI Pricing Yield stays the same for the whole DPI Pricing period** — only the
      Data Fetch growth rate changes partway through, and each half has its
@@ -288,6 +318,11 @@ rounded).
        Recovery, whether it's using DPI Pricing Recovery CMGR or falling back to
        the regular CMGR), in addition to the amber highlight marking it as
        DPI Pricing-governed.
+     - A **pure non-Deposit FIU** (0% Deposit share) skips this Cliff/
+       Recovery split entirely and keeps compounding at its regular
+       (pre-DPI Pricing) CMGR the whole way through — see "Pure non-Deposit
+       FIUs are indifferent to DPI Pricing" under "Deposit vs. non-Deposit
+       split" above.
    - **What-if revenue scenarios** — optional, opt-in checkboxes ("What-if
      scenarios" field, shown once a DPI Pricing Start Date is set) that adjust how
      DPI Pricing-active months are computed, on top of everything above. Any
@@ -314,6 +349,10 @@ rounded).
        month — shown as an explicit ₹0, not a missing/"—" figure. Usage/DF
        figures for those FIUs and months are still shown as normal; only
        revenue is zeroed.
+     Both scenarios above exclude a **pure non-Deposit FIU** (0% Deposit
+     share) regardless of Use-case/License Type/Cliff CMGR — see "Pure
+     non-Deposit FIUs are indifferent to DPI Pricing" under "Deposit vs.
+     non-Deposit split" above.
      Checking a box re-runs the compute automatically, same as any other
      field on this tab. The response's `scenariosApplied` field lists
      whichever scenario keys were actually turned on for that compute, and
