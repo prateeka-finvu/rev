@@ -422,8 +422,10 @@ rounded).
        keeps compounding normally (Cliff at DPI Pricing Cliff CMGR, then Recovery
        at DPI Pricing Recovery CMGR/regular CMGR, per the Cliff/Recovery split
        above) from that reduced baseline. **fiulive@dreamplug** retains
-       **50%** instead of the general 1/6 (ask: 2026-10-24, "Change the
-       reduction factor in dreamplug traffic from existing value to 50%").
+       **65%** instead of the general 1/6 (ask: 2026-10-24, first set to
+       50% — "Change the reduction factor in dreamplug traffic from
+       existing value to 50%" — then revised the same day to 65% —
+       "update the dreamplug reduction factor to 65% instead of 50%").
      - **fiulive@canarabank**: revenue fixed at ₹3,50,000 in Nov 2026 and
        ₹0 every other month of the FY (replaces historical actuals too).
      - **fiulive@moneycontrol**: revenue fixed at ₹1,60,000 every month
