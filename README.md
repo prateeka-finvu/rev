@@ -250,20 +250,29 @@ rounded).
        bucket for PFM) weighted against the Finfactor DPU rate card above,
        with every fetch treated as 100% Deposit FI type — `sucDepositRate`
        = 3.334653 for `KMBL-FIU-PROD`, 1.224653 for `KMBL-FIU-PROD (PFM)`.
-       The same DPU-slab fetch-count totals also replaced each line's
-       **September 2026 Historical Actuals `dfCount`** (previously each
-       line's own September MIS figure): `KMBL-FIU-PROD` → 1,54,428
-       (underwriting 1,03,225 + monitoring 51,203), `KMBL-FIU-PROD (PFM)`
-       → 7,51,310 — September's recorded **revenue** for both lines is
-       untouched (it's what was actually billed that month); only the
-       `dfCount` reference, and the DF-volume chain every later month
-       compounds forward from, changed. If a future DPU-level report
-       updates these fetch counts or the rate-card derivation, re-run the
-       same calculation and update `sucDepositRate`/`sucDepositSharePct`
-       in `yield-cmgr.json` and the September `dfCount` in
-       `historical-actuals.json` together (not something to hand-edit
-       piecemeal — see the patch that introduced this, or ask for a fresh
-       one).
+       The DPU-slab fetch-count totals were briefly also used to replace
+       each line's September 2026 Historical Actuals `dfCount` directly
+       (1,54,428 for Lending, 7,51,310 for PFM) — this was reverted the
+       same day once it turned out the two lines' original September rows
+       had been **swapped at the source**: the row filed under
+       `KMBL-FIU-PROD` actually belonged to PFM, and vice versa (ask:
+       2026-10-23, "852142 fetches for PFM in September. Use this" /
+       "158442 is the fetches count for Lending for KMBL" /
+       confirmed as a full row swap, not just the `dfCount` field).
+       September's Historical Actuals now read, corrected: `KMBL-FIU-PROD`
+       — revenue ₹2,19,415.9, auCount 1,01,620, dfCount 1,58,442;
+       `KMBL-FIU-PROD (PFM)` — revenue ₹74,790, auCount 37,395, dfCount
+       8,52,142. This is purely a Historical Actuals correction — it does
+       **not** touch `sucDepositRate`/`sucDepositSharePct` in
+       `yield-cmgr.json`, which come from the separate, already
+       FIU-line-disambiguated DPU-slab rate-card screenshots (explicitly
+       labeled "PFM", "underwriting under Lending", "monitoring under
+       Lending" at the time) rather than from this shared-ID September
+       export. If a future DPU-level report updates the fetch counts or
+       the rate-card derivation, re-run the same calculation and update
+       `sucDepositRate`/`sucDepositSharePct` in `yield-cmgr.json` (not
+       something to hand-edit piecemeal — see the patch that introduced
+       this, or ask for a fresh one).
      - **KMBL-FIU-PROD (PFM) CMGR (added 2026-10-23)**: unlike
        `KMBL-FIU-PROD` (Lending), which keeps its existing 10%/month CMGR
        (`cmgr`/`sucCliffCmgr`/`sucRecoveryCmgr` all `0.1`) unchanged,

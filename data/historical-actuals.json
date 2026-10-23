@@ -10829,19 +10829,19 @@
     "fiuId": "KMBL-FIU-PROD",
     "month": "2026-09",
     "billingModel": "Data Fetch",
-    "revenue": 74790,
-    "auCount": 37395,
-    "dfCount": 154428,
-    "billingYield": 0.484303
+    "revenue": 219415.9,
+    "auCount": 101620,
+    "dfCount": 158442,
+    "billingYield": 1.384834
   },
   {
     "fiuId": "KMBL-FIU-PROD (PFM)",
     "month": "2026-09",
     "billingModel": "Data Fetch",
-    "revenue": 219415.9,
-    "auCount": 101620,
-    "dfCount": 751310,
-    "billingYield": 0.292044
+    "revenue": 74790,
+    "auCount": 37395,
+    "dfCount": 852142,
+    "billingYield": 0.087767
   },
   {
     "fiuId": "fiulive@axissec",
