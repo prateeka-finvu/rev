@@ -84,7 +84,7 @@
     "sucCliffCmgr": 0.1,
     "sucRecoveryCmgr": 0.1,
     "sucDepositSharePct": 1,
-    "sucDepositRate": 3.644033,
+    "sucDepositRate": 3.334653,
     "sucNonDepositRate": 0.218037
   },
   {
@@ -5375,10 +5375,12 @@
   {
     "fiuId": "KMBL-FIU-PROD (PFM)",
     "sucYield": 1.75,
-    "sucCliffCmgr": 0,
+    "cmgr": 0.2,
+    "sucCliffCmgr": 0.2,
+    "sucRecoveryCmgr": 0.2,
     "yield": 1.3848,
-    "sucDepositSharePct": 0.805507,
-    "sucDepositRate": 2.191575,
+    "sucDepositSharePct": 1,
+    "sucDepositRate": 1.224653,
     "sucNonDepositRate": 1.384834
   }
 ]

@@ -643,7 +643,19 @@ suite('What-if scenario: non-bank PFM FIUs -> ₹0 post-SUC', () => {
   });
 });
 
-suite('Flat SUC-period revenue overrides (ICICI, SBI CARDS, KMBL-FIU-PROD (PFM))', () => {
+suite('Flat SUC-period revenue overrides (ICICI, SBI CARDS)', () => {
+  // KMBL-FIU-PROD (PFM) used to be the third entry here, with a schedule
+  // that stepped down from ₹13,79,669/month to ₹2,29,945/month at Jan 2027
+  // — removed 2026-10-23 (ask: "replace it") once a real DPU-level fetch
+  // count became available for it (see the new Historical Actuals entry
+  // for it instead, and the "DPI period Deposit/non-Deposit rate split"
+  // suite for its new sucDepositRate/sucDepositSharePct). The step-down
+  // behavior itself was just a plain per-month-key lookup into the
+  // schedule object — the same mechanism the "flat schedule applies" test
+  // below already exercises (just with one amount throughout rather than
+  // two different ones) — so no separate regression coverage is needed
+  // for the lookup itself now that no real schedule uses more than one
+  // amount.
   test('flat schedule applies while the current month\'s DF count is still 0/missing', () => {
     const { row } = rowFor('ICICI', {
       metaOver: { billingModel: 'Data Fetch', useCase: 'PFM' },
@@ -667,19 +679,6 @@ suite('Flat SUC-period revenue overrides (ICICI, SBI CARDS, KMBL-FIU-PROD (PFM))
       sucStart: { year: 2026, month: 10 }
     });
     assert(row.monthly[6].revenue !== 51000, 'once real DF volume shows up, the flat override must stop applying');
-  });
-
-  test('KMBL-FIU-PROD (PFM) steps down from Jan 2027', () => {
-    const { row } = rowFor('KMBL-FIU-PROD (PFM)', {
-      metaOver: { billingModel: 'Data Fetch', useCase: 'PFM' },
-      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.1 },
-      counts: [{ fiuId: 'KMBL-FIU-PROD (PFM)', activeUsers: '', dataFetches: '' }],
-      hist: [],
-      asOf: d(2026, 9, 9),
-      sucStart: { year: 2026, month: 10 }
-    });
-    assertEqual(row.monthly[8].revenue, 1379669, 'December — first tier');
-    assertEqual(row.monthly[9].revenue, 229945, 'January — stepped down');
   });
 });
 

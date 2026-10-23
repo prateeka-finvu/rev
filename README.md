@@ -232,30 +232,45 @@ rounded).
        came out ~17x too high, ₹55.1L instead of ₹2.4L, before the fix);
        `test/compute.test.js`'s "DPI period Deposit/non-Deposit rate split"
        suite has a dedicated regression test for it.
-     - **KMBL-FIU-PROD shared-ID caveat (updated 2026-10-20)**: the DPU
-       reports label both Kotak Mahindra Bank business lines —
-       `KMBL-FIU-PROD` (Lending) and `KMBL-FIU-PROD (PFM)` — under the
-       single ID `KMBL-FIU-PROD` (the same shared-ID shape the September
-       Historical Actuals fix hit — see "Making a closed month's data
-       survive for free" above). They're now split apart using each row's
-       `purpose_code`: Lending = purpose codes `103`+`104`, PFM = purpose
-       codes `101`+`102`, each filtered and summarized independently from
-       the combined Aug+Sep 2026 DPU data before deriving its own
-       `sucDepositSharePct`/`sucDepositRate` (replacing the earlier
-       placeholder where both lines carried the same combined-bucket
-       values). A handful of rows with a blank `purpose_code` and
-       `fi_type = UNKNOWN` (268 successful fetches total across both
-       months, against ~1.03M total) don't match either line and are
-       excluded from both denominators as immaterial. Note: no
-       `purpose_code = 101` rows appear at all for Kotak in either month's
-       data on file — PFM's current figures come entirely from `102`.
-       That's fine mechanically (the filter still includes `101` and will
-       pick up volume automatically if it ever appears in a future
-       report), but it's worth confirming with Kotak/Finfactor that `101`
-       is in fact expected to be zero-volume for this FIU rather than
-       missing from the extract. If a future DPU report separates the two
-       lines under their own `fiu_id`s entirely, this purpose_code split
-       becomes unnecessary and each can be derived directly.
+     - **KMBL-FIU-PROD shared-ID caveat (updated 2026-10-23)**: Kotak
+       Mahindra Bank has two business lines on file under related IDs —
+       `KMBL-FIU-PROD` (Lending) and `KMBL-FIU-PROD (PFM)` — and both now
+       carry **100% Deposit share** (`sucDepositSharePct = 1`), i.e. their
+       whole Data Fetch volume is billed at `sucDepositRate` with no
+       `sucNonDepositRate` blend at all. This superseded an earlier
+       (2026-10-20) derivation that split a combined Aug+Sep 2026 DPU
+       report apart by each row's `purpose_code` (Lending = `103`+`104`,
+       PFM = `101`+`102`) to get a fractional Deposit share for each line.
+       That approach is gone entirely — replaced 2026-10-23 (ask: "these
+       new tables replace the earlier Aug+Sep purpose-code derivation
+       entirely") once a direct, FIU-line-specific DPU-slab breakdown
+       became available instead of the shared-ID report: `sucDepositRate`
+       for each line is now derived straight from its own DPU-slab fetch
+       counts (underwriting + monitoring buckets for Lending, one combined
+       bucket for PFM) weighted against the Finfactor DPU rate card above,
+       with every fetch treated as 100% Deposit FI type — `sucDepositRate`
+       = 3.334653 for `KMBL-FIU-PROD`, 1.224653 for `KMBL-FIU-PROD (PFM)`.
+       The same DPU-slab fetch-count totals also replaced each line's
+       **September 2026 Historical Actuals `dfCount`** (previously each
+       line's own September MIS figure): `KMBL-FIU-PROD` → 1,54,428
+       (underwriting 1,03,225 + monitoring 51,203), `KMBL-FIU-PROD (PFM)`
+       → 7,51,310 — September's recorded **revenue** for both lines is
+       untouched (it's what was actually billed that month); only the
+       `dfCount` reference, and the DF-volume chain every later month
+       compounds forward from, changed. If a future DPU-level report
+       updates these fetch counts or the rate-card derivation, re-run the
+       same calculation and update `sucDepositRate`/`sucDepositSharePct`
+       in `yield-cmgr.json` and the September `dfCount` in
+       `historical-actuals.json` together (not something to hand-edit
+       piecemeal — see the patch that introduced this, or ask for a fresh
+       one).
+     - **KMBL-FIU-PROD (PFM) CMGR (added 2026-10-23)**: unlike
+       `KMBL-FIU-PROD` (Lending), which keeps its existing 10%/month CMGR
+       (`cmgr`/`sucCliffCmgr`/`sucRecoveryCmgr` all `0.1`) unchanged,
+       `KMBL-FIU-PROD (PFM)` now has a **20%/month CMGR** configured
+       (`cmgr`/`sucCliffCmgr`/`sucRecoveryCmgr` all `0.2`, uniform
+       pre-DPI-Pricing and throughout the DPI Pricing period) — it was
+       previously flat (`0%`, no growth at all) before this ask.
      - **Graceful degradation**: a FIU with no Deposit share/rate on file
        at all contributes 0 from the Deposit side and bills its whole DF
        volume at `sucNonDepositRate` (currently every DPI-eligible FIU has
@@ -378,20 +393,25 @@ rounded).
        recorded July 2026 DF count, flat every DPI Pricing month. (Revisited
        2026-09-02 against a newer reference sheet with a different implied
        Oct'26 figure — kept as-is on request.)
-     - **ICICI**, **SBI Cards**, **KMBL-FIU-PROD (PFM)**: all three are
-       newly onboarding in H2 with no real Data Fetch volume yet, so the
-       normal DF-baseline-compounding DPI Pricing math has nothing to grow from.
-       Each has a flat monthly revenue figure hardcoded for the DPI Pricing period
-       (from the Sep 2026 reference sheet) — ICICI ₹51,000/month and SBI
-       Cards ₹80,000/month, both flat Oct 2026 – Mar 2027; KMBL-FIU-PROD
-       (PFM) ₹13,79,669/month Oct–Dec 2026, then ₹2,29,945/month Jan–Mar
-       2027. This is a stand-in only: the moment one of these FIUs' *current
-       month* upload reports a real (nonzero) Data Fetch count, the flat
-       figure stops being used for that FIU — for good, not just that one
-       month — and it switches to the normal DPI Pricing computation (DF baseline ×
-       DPI Pricing Yield, Cliff/Recovery CMGR) off that real, growing baseline
-       instead. No manual step needed for that switch — it's re-evaluated
-       fresh from whatever counts were just uploaded, every time.
+     - **ICICI** and **SBI Cards**: both are newly onboarding in H2 with
+       no real Data Fetch volume yet, so the normal DF-baseline-compounding
+       DPI Pricing math has nothing to grow from. Each has a flat monthly
+       revenue figure hardcoded for the DPI Pricing period (from the Sep
+       2026 reference sheet) — ICICI ₹51,000/month and SBI Cards
+       ₹80,000/month, both flat Oct 2026 – Mar 2027. This is a stand-in
+       only: the moment one of these FIUs' *current month* upload reports
+       a real (nonzero) Data Fetch count, the flat figure stops being used
+       for that FIU — for good, not just that one month — and it switches
+       to the normal DPI Pricing computation (DF baseline × DPI Pricing
+       Yield, Cliff/Recovery CMGR) off that real, growing baseline instead.
+       No manual step needed for that switch — it's re-evaluated fresh from
+       whatever counts were just uploaded, every time.
+       **KMBL-FIU-PROD (PFM) used to be a third entry here** (flat
+       ₹13,79,669/month Oct–Dec 2026, then ₹2,29,945/month Jan–Mar 2027)
+       but was removed 2026-10-23 (ask: "replace it") once a real DPU-level
+       fetch count became available for it — see the September Historical
+       Actuals entry below, which now drives its DF-volume chain the normal
+       way instead.
      - **fiulive@hdfc** and **HDFC-FIU**: both are "Unbilled" on the FIU
        Metadata tab, which normally excludes a FIU from DPI Pricing entirely (DPI Pricing
        only ever applies to an otherwise-billable FIU). For just these two,

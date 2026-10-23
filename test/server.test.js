@@ -362,13 +362,14 @@ async function dataStatusSuite() {
     let server;
     try {
       await testAsync('reports the real DATA_DIR, that it\'s writable, and the seeded historical months (Apr-Sep, no October yet)', async () => {
-        // August joined the permanent seed 2026-09-24, and September joined
-        // it 2026-10-19 (see "Making a closed month's data survive for
-        // free" in README.md) once each month's actuals were final — so a
-        // fresh DATA_DIR now legitimately has August and September rows,
-        // same as Apr-Jul. October hasn't happened yet in-story, so it's
-        // still a reliable "definitely not seeded" month for this test to
-        // check against.
+        // August joined the permanent seed 2026-09-24, September joined it
+        // 2026-10-19 (see "Making a closed month's data survive for free"
+        // in README.md) — KMBL-FIU-PROD and KMBL-FIU-PROD (PFM)'s new
+        // DPU-table DF counts (ask: 2026-10-23 "the numbers I gave are for
+        // September") landed inside the existing September rows, not as a
+        // new October row — so a fresh DATA_DIR still has only August and
+        // September seeded, same as before. October is still a reliable
+        // "definitely not seeded" month for this test to check against.
         server = await startServer({});
         const res = await fetch(server.baseUrl + '/api/data-status');
         assertEqual(res.status, 200);
@@ -388,9 +389,6 @@ async function dataStatusSuite() {
       });
 
       await testAsync('a month uploaded through the app shows up here immediately', async () => {
-        // Deliberately uses October, not September — September is now part
-        // of the permanent seed (see test above), so it's no longer a safe
-        // "starts at zero" month for this assertion to anchor on.
         const csv = 'FIU ID,Revenue,AU Counts,DF Counts\nsome-fiu,1000,50,900\n';
         const fd = new FormData();
         fd.append('month', '2026-10');
