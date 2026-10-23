@@ -295,6 +295,21 @@ rounded).
        matching September's post-swap `billingYield` in
        `historical-actuals.json` exactly. Revisit if a more representative
        blend (e.g. across more realized months) becomes available later.
+     - **KMBL-FIU-PROD (PFM) regular `yield` recalibrated too (added
+       2026-10-24)**: the same staleness existed on the PFM side, just
+       hidden — PFM's `yield` was 1.3848, which was its *own* September
+       realized rate **before** the row-swap correction (when PFM's
+       September row was still the one that actually belonged to
+       Lending). After the swap, PFM's real September realized rate is
+       **0.087767** (₹74,790 ÷ 8,52,142 fetches) — a ~16x difference. This
+       went unnoticed while PFM was still absent from the live monthly
+       counts upload (every month showed "missing config" regardless of
+       `yield`), but surfaced immediately once PFM was given a real
+       current-month counts row (ask: 2026-10-24, "incorporate this and
+       ensure that there are projections available for PFM and Lending
+       for every future month, and that the revenue is increasing given
+       the positive CMGR") — left uncorrected, PFM's projected revenue
+       would have come out roughly 16x too high. `yield` is now 0.087767.
      - **Graceful degradation**: a FIU with no Deposit share/rate on file
        at all contributes 0 from the Deposit side and bills its whole DF
        volume at `sucNonDepositRate` (currently every DPI-eligible FIU has
