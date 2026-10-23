@@ -39,7 +39,7 @@ function histMap(rows) {
 // row array (what nearly every test below inspects).
 function rowFor(fiuId, opts) {
   const {
-    metaOver, ycOver, counts, hist, asOf, fyStart, sucStart, scenarios
+    metaOver, ycOver, counts, hist, asOf, fyStart, sucStart, scenarios, dfOptFactor
   } = opts;
   const metadataById = metaMap([meta(fiuId, metaOver)]);
   const yieldCmgrById = ycMap([yc(fiuId, ycOver)]);
@@ -48,7 +48,8 @@ function rowFor(fiuId, opts) {
     metadataById, yieldCmgrById,
     asOf || d(2026, 9, 9), fyStart || 4, sucStart || null,
     hist ? histMap(hist) : new Map(),
-    scenarios || {}
+    scenarios || {},
+    dfOptFactor
   );
   return { result, row: result.rows.find(r => r.fiuId === fiuId) };
 }
@@ -519,7 +520,12 @@ suite('PFM/non-Bank DF ÷6 cut persists across the whole SUC period', () => {
       counts: [{ fiuId: 'FIU-L', activeUsers: 30000, dataFetches: 500000 }],
       hist: [{ fiuId: 'FIU-L', month: '2026-08', revenue: 100000, auCount: 100000, dfCount: 4000000 }],
       asOf: d(2026, 9, 9),
-      sucStart: { year: 2026, month: 10 }
+      sucStart: { year: 2026, month: 10 },
+      // A Bank-licensed PFM FIU like this one IS subject to the separate
+      // Bank-PFM Data Fetch Optimization factor added 2026-10-23 (see its
+      // own suite below) — disabled here (0%) to keep this test isolated
+      // to exactly what it's named for: the ÷6 non-Bank cut not applying.
+      dfOptFactor: 0
     });
     const sepAnchor = 4000000 * 1.05;
     const oct = sepAnchor * 0.87;
@@ -592,7 +598,12 @@ suite('axisbank overrides (fiulive@axisbank)', () => {
     // 10% of July's 1,000,000 = 100,000, flat every SUC month — NOT compounded.
     assertClose(row.monthly[6].dfUsage, 100000, 0.01, 'October');
     assertClose(row.monthly[9].dfUsage, 100000, 0.01, 'January — still flat, not compounding');
-    assertClose(row.monthly[6].revenue, 100000 * 2, 0.01, 'revenue = flat dfUsage x SUC Yield');
+    // Revenue checked in January, not October: fiulive@axisbank has a
+    // separate, unconditional October-2026-only revenue override (ask:
+    // 2026-10-23, "Change Axis revenue for October to 14,10,965") that
+    // always wins regardless of this fixture's config — see the
+    // "FIULIVE@AXISBANK: October 2026 revenue forced..." test below.
+    assertClose(row.monthly[9].revenue, 100000 * 2, 0.01, 'January revenue = flat dfUsage x SUC Yield');
   });
 });
 
@@ -629,7 +640,13 @@ suite('What-if scenario: Lending DF volume falls 50% during SUC Cliff', () => {
 
   test('a non-Lending FIU is never affected, even with a negative Cliff CMGR', () => {
     const { row } = rowFor('FIU-NONLEND', {
-      metaOver: { billingModel: 'Data Fetch', useCase: 'PFM', licenseType: 'Bank' },
+      // useCase deliberately not 'PFM'/'Lending' and licenseType not 'Bank'
+      // — this test is only about the Lending-only scenario eligibility, so
+      // it must stay clear of both the PFM/non-Bank 1/6 cut and the
+      // Bank-PFM Data Fetch Optimization factor (default 20%), either of
+      // which would also change this FIU's expected dfUsage for reasons
+      // unrelated to what this test checks.
+      metaOver: { billingModel: 'Data Fetch', useCase: 'RIA', licenseType: 'RIA' },
       ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.13 },
       counts: [{ fiuId: 'FIU-NONLEND', activeUsers: '', dataFetches: 500000 }],
       hist: [{ fiuId: 'FIU-NONLEND', month: '2026-08', revenue: 100000, auCount: '', dfCount: 4000000 }],
@@ -738,6 +755,174 @@ suite('Fixed monthly-schedule/flat-until-SUC revenue overrides', () => {
     assertEqual(row.monthly[7].revenue, 0, 'November — revenue zeroed');
     assert(row.monthly[7].billable, 'November — an explicit ₹0, not a "no data"/"missing config" badge');
     assertEqual(row.monthly[11].revenue, 0, 'March — still zeroed; the override has no end date');
+  });
+
+  test('FIULIVE@DREAMPLUG: flat 13,33,000 pre-DPI, falls through once DPI Pricing starts (ask: 2026-10-23)', () => {
+    const { row } = rowFor('FIULIVE@DREAMPLUG', {
+      metaOver: { billingModel: 'Active Users', useCase: 'PFM', licenseType: 'RIA' },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.13 },
+      counts: [{ fiuId: 'FIULIVE@DREAMPLUG', activeUsers: 30000, dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIULIVE@DREAMPLUG', month: '2026-08', revenue: 999, auCount: 100000, dfCount: 4000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    assertEqual(row.monthly[5].revenue, 1333000, 'September (pre-DPI) — flat 13,33,000 regardless of live usage');
+    assert(row.monthly[6].revenue !== 1333000, 'October (DPI-active) — falls through to the normal SUC computation, no longer flat');
+  });
+
+  test('FIULIVE@DREAMPLUG: no DPI Pricing Start Date set at all — flat 13,33,000 for every month of the FY', () => {
+    const { row } = rowFor('FIULIVE@DREAMPLUG', {
+      metaOver: { billingModel: 'Active Users', useCase: 'PFM', licenseType: 'RIA' },
+      counts: [{ fiuId: 'FIULIVE@DREAMPLUG', activeUsers: 30000, dataFetches: 500000 }],
+      hist: [],
+      asOf: d(2026, 9, 9)
+      // sucStart omitted -> null, matching the live app's current "None" DPI Pricing Start Date
+    });
+    assertEqual(row.monthly[5].revenue, 1333000, 'September');
+    assertEqual(row.monthly[11].revenue, 1333000, 'March — the override has no end date without a DPI Pricing Start Date');
+  });
+
+  test('FIULIVE@AXISBANK: October 2026 revenue forced to 14,10,965; every other month keeps its own normal computation (ask: 2026-10-23)', () => {
+    const { row } = rowFor('FIULIVE@AXISBANK', {
+      metaOver: { billingModel: 'Active Users' },
+      counts: [{ fiuId: 'FIULIVE@AXISBANK', activeUsers: 999, dataFetches: '' }],
+      hist: [{ fiuId: 'FIULIVE@AXISBANK', month: '2026-08', revenue: 50000, auCount: 40000, dfCount: '' }],
+      asOf: d(2026, 9, 9)
+    });
+    assertEqual(row.monthly[6].revenue, 1410965, 'October — forced to the new figure, overriding what the AU override alone would give (25,000 x Yield 1 = 25,000)');
+    assertClose(row.monthly[7].usage, 25000, 0.01, 'November — AU override still in effect (sanity check)');
+    assertClose(row.monthly[7].revenue, 25000, 0.01, 'November — untouched by the October-only override, computes normally (25,000 x Yield 1)');
+  });
+});
+
+suite('Bank-license PFM Data Fetch Optimization factor (ask: 2026-10-23)', () => {
+  test('default 20% cut applies once at the DPI Pricing switch, then later months compound from the reduced baseline', () => {
+    const { row } = rowFor('FIU-BANKPFM', {
+      metaOver: { billingModel: 'Active Users', useCase: 'PFM', licenseType: 'Bank' },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.13, sucRecoveryCmgr: 0.02 },
+      counts: [{ fiuId: 'FIU-BANKPFM', activeUsers: 30000, dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-BANKPFM', month: '2026-08', revenue: 100000, auCount: 100000, dfCount: 4000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    const sepAnchor = 4000000 * 1.05;
+    const octPreCut = sepAnchor * 0.87;
+    const octCut = octPreCut * 0.8; // default factor: retain 80% (cut 20%)
+    const nov = octCut * 0.87;
+    assertClose(row.monthly[6].dfUsage, octCut, 1, 'October: 20% cut applied (default factor)');
+    assertClose(row.monthly[7].dfUsage, nov, 1, 'November: still reduced — must keep compounding from the cut baseline, not revert');
+  });
+
+  test('pre-DPI months are completely unaffected by the factor', () => {
+    const { row } = rowFor('FIU-BANKPFM2', {
+      metaOver: { billingModel: 'Data Fetch', useCase: 'PFM', licenseType: 'Bank' },
+      counts: [{ fiuId: 'FIU-BANKPFM2', activeUsers: '', dataFetches: 500000 }],
+      hist: [],
+      asOf: d(2026, 9, 9)
+      // no sucStart -> no DPI Pricing at all this compute
+    });
+    const expectedDf = projectMonthToDate(500000, d(2026, 9, 9));
+    assertClose(row.monthly[5].dfUsage, expectedDf, 1, 'September (current month, no DPI Pricing) — plain MTD projection, no cut');
+  });
+
+  test('a custom factor value (e.g. 50%) overrides the 20% default', () => {
+    const { row } = rowFor('FIU-BANKPFM3', {
+      metaOver: { billingModel: 'Active Users', useCase: 'PFM', licenseType: 'Bank' },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.13 },
+      counts: [{ fiuId: 'FIU-BANKPFM3', activeUsers: 30000, dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-BANKPFM3', month: '2026-08', revenue: 100000, auCount: 100000, dfCount: 4000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 },
+      dfOptFactor: 0.5
+    });
+    const sepAnchor = 4000000 * 1.05;
+    const octPreCut = sepAnchor * 0.87;
+    const octCut = octPreCut * 0.5; // custom factor: retain 50% (cut 50%)
+    assertClose(row.monthly[6].dfUsage, octCut, 1, 'October: custom 50% factor applied instead of the 20% default');
+  });
+
+  test('a non-Bank PFM FIU is not subject to this cut — only the pre-existing 1/6 non-Bank cut applies to it', () => {
+    const { row } = rowFor('FIU-NONBANKPFM', {
+      metaOver: { billingModel: 'Active Users', useCase: 'PFM', licenseType: 'NBFC' },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.13 },
+      counts: [{ fiuId: 'FIU-NONBANKPFM', activeUsers: 30000, dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-NONBANKPFM', month: '2026-08', revenue: 100000, auCount: 100000, dfCount: 4000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    const sepAnchor = 4000000 * 1.05;
+    const octPreCut = sepAnchor * 0.87;
+    const octCut = octPreCut / 6; // the existing PFM/non-Bank cut, NOT the new 20% Bank factor
+    assertClose(row.monthly[6].dfUsage, octCut, 1, 'October: only the pre-existing 1/6 non-Bank cut applies');
+  });
+
+  test('fiulive@axisbank, tagged PFM+Bank (matching production), has the factor baked into its hardcoded 10%-of-July DF figure, flat every DPI Pricing month', () => {
+    const { row } = rowFor('FIULIVE@AXISBANK', {
+      metaOver: { billingModel: 'Active Users', useCase: 'PFM', licenseType: 'Bank' },
+      ycOver: { sucYield: 2, sucDepositSharePct: 1, sucDepositRate: 2, sucCliffCmgr: -0.1 },
+      counts: [{ fiuId: 'FIULIVE@AXISBANK', activeUsers: 999, dataFetches: 123 }],
+      hist: [
+        { fiuId: 'FIULIVE@AXISBANK', month: '2026-07', revenue: '', auCount: '', dfCount: 1000000 },
+        { fiuId: 'FIULIVE@AXISBANK', month: '2026-08', revenue: 50000, auCount: 40000, dfCount: '' }
+      ],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    // 10% of July's 1,000,000 = 100,000, then the default 20% factor cuts it to 80,000 — flat every
+    // DPI Pricing month (it's a hardcoded figure, not a compounding chain), not compounding further.
+    assertClose(row.monthly[6].dfUsage, 80000, 0.01, 'October');
+    assertClose(row.monthly[9].dfUsage, 80000, 0.01, 'January — still flat at the reduced figure, not compounding');
+    // Revenue checked in January, not October — see the comment on the same
+    // pattern in the "DF count during SUC fixed at 10%..." test above:
+    // October's revenue is always overridden to a separate fixed figure.
+    assertClose(row.monthly[9].revenue, 80000 * 2, 0.01, 'January revenue = flat (already-reduced) dfUsage x SUC Yield');
+  });
+
+  test('fiulive@axisbank with a custom factor (e.g. 50%) applied to its hardcoded DF figure', () => {
+    const { row } = rowFor('FIULIVE@AXISBANK', {
+      metaOver: { billingModel: 'Active Users', useCase: 'PFM', licenseType: 'Bank' },
+      ycOver: { sucYield: 2, sucDepositSharePct: 1, sucDepositRate: 2, sucCliffCmgr: -0.1 },
+      counts: [{ fiuId: 'FIULIVE@AXISBANK', activeUsers: 999, dataFetches: 123 }],
+      hist: [
+        { fiuId: 'FIULIVE@AXISBANK', month: '2026-07', revenue: '', auCount: '', dfCount: 1000000 },
+        { fiuId: 'FIULIVE@AXISBANK', month: '2026-08', revenue: 50000, auCount: 40000, dfCount: '' }
+      ],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 },
+      dfOptFactor: 0.5
+    });
+    assertClose(row.monthly[6].dfUsage, 50000, 0.01, 'October: 10% of July (100,000) cut by a custom 50% factor = 50,000');
+  });
+
+  test('the existing axisbank DF-SUC test fixture (no useCase/licenseType set) is unaffected — eligibility is a real metadata match, not just being axisbank', () => {
+    const { row } = rowFor('FIULIVE@AXISBANK', {
+      metaOver: { billingModel: 'Active Users' }, // no useCase/licenseType -> not eligible for the new factor
+      ycOver: { sucYield: 2, sucDepositSharePct: 1, sucDepositRate: 2, sucCliffCmgr: -0.1 },
+      counts: [{ fiuId: 'FIULIVE@AXISBANK', activeUsers: 999, dataFetches: 123 }],
+      hist: [
+        { fiuId: 'FIULIVE@AXISBANK', month: '2026-07', revenue: '', auCount: '', dfCount: 1000000 },
+        { fiuId: 'FIULIVE@AXISBANK', month: '2026-08', revenue: 50000, auCount: 40000, dfCount: '' }
+      ],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    assertClose(row.monthly[6].dfUsage, 100000, 0.01, 'October: plain 10% of July, no Bank-PFM factor baked in without a matching useCase/licenseType');
+  });
+
+  test('fiulive@hdfc: the new factor applies ON TOP of the existing 43% cut (hdfc is PFM+Bank in production)', () => {
+    const { row } = rowFor('FIULIVE@HDFC', {
+      metaOver: { billingModel: 'Unbilled', useCase: 'PFM', licenseType: 'Bank' },
+      ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.1, sucRecoveryCmgr: 0.02 },
+      counts: [{ fiuId: 'FIULIVE@HDFC', activeUsers: '', dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIULIVE@HDFC', month: '2026-08', revenue: '', auCount: '', dfCount: 2000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    const sepAnchor = 2000000 * 1.05;
+    const octPreCut = sepAnchor * 0.9;
+    const oct43Cut = octPreCut * 0.57;   // existing HDFC 43% cut, applied first
+    const octFinal = oct43Cut * 0.8;     // then the new default 20% Bank-PFM factor, on top
+    assertClose(row.monthly[6].dfUsage, octFinal, 1, 'October: 43% cut, then the 20% Bank-PFM factor on top of that');
   });
 });
 

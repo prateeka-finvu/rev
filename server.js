@@ -95,7 +95,7 @@ const cookieParser = require('cookie-parser');
 const store = require('./lib/store');
 const { parseWorkbook, findMasterDataSheet } = require('./lib/parseFile');
 const { buildColumnMap } = require('./lib/columns');
-const { computeRevenue, groupRevenue, groupAuUsage, groupDfUsage, dfYieldBreakdown, buildActualsByMonth, fyFullMonths, monthLabel, toNumber, SCENARIO_DEFINITIONS } = require('./lib/compute');
+const { computeRevenue, groupRevenue, groupAuUsage, groupDfUsage, dfYieldBreakdown, buildActualsByMonth, fyFullMonths, monthLabel, toNumber, SCENARIO_DEFINITIONS, DEFAULT_BANK_PFM_DF_OPTIMIZATION_FACTOR } = require('./lib/compute');
 const { askChat } = require('./lib/chat');
 const { fetchLatestCountsEmail, describeImapError } = require('./lib/mailIngest');
 
@@ -774,7 +774,7 @@ function defaultAsOfDate() {
   return today;
 }
 
-function buildComputeResponse(counts, { asOfDateStr, fyStartMonthStr, sucStartDateStr, scenariosStr, sheetUsed, ignoredSheets }) {
+function buildComputeResponse(counts, { asOfDateStr, fyStartMonthStr, sucStartDateStr, scenariosStr, bankPfmDfOptimizationFactorStr, sheetUsed, ignoredSheets }) {
   const asOfDate = asOfDateStr ? new Date(asOfDateStr + 'T00:00:00Z') : defaultAsOfDate();
   const fyStartMonth = fyStartMonthStr ? parseInt(fyStartMonthStr, 10) : 4;
 
@@ -809,7 +809,19 @@ function buildComputeResponse(counts, { asOfDateStr, fyStartMonthStr, sucStartDa
     });
   }
 
-  const result = computeRevenue(counts, metadataById, yieldCmgrById, asOfDate, fyStartMonth, sucStartDate, historicalByKey, scenarios);
+  // "Data Fetch Optimization factor" — a percentage from the side panel
+  // (e.g. "20" for 20%), reducing PFM-use-case/Bank-license FIUs' Data
+  // Fetch volume during DPI Pricing months (see
+  // DEFAULT_BANK_PFM_DF_OPTIMIZATION_FACTOR in lib/compute.js). Blank/
+  // invalid falls back to that default inside computeRevenue itself, same
+  // as how sucStartDate/scenarios degrade gracefully above.
+  let bankPfmDfOptimizationFactor = NaN;
+  if (bankPfmDfOptimizationFactorStr !== undefined && bankPfmDfOptimizationFactorStr !== null && String(bankPfmDfOptimizationFactorStr).trim() !== '') {
+    const pct = parseFloat(bankPfmDfOptimizationFactorStr);
+    if (!isNaN(pct)) bankPfmDfOptimizationFactor = pct / 100;
+  }
+
+  const result = computeRevenue(counts, metadataById, yieldCmgrById, asOfDate, fyStartMonth, sucStartDate, historicalByKey, scenarios, bankPfmDfOptimizationFactor);
   // Each grouping (TSP / Use-case / License Type) rolls up three separate
   // per-month metrics — Revenue, AU count, and DF count — each with its own
   // row-inclusion rule (see groupRevenue/groupAuUsage/groupDfUsage).
@@ -878,6 +890,7 @@ function buildComputeResponse(counts, { asOfDateStr, fyStartMonthStr, sucStartDa
     ignoredSheets,
     asOfDate: asOfDate.toISOString().slice(0, 10),
     scenariosApplied: Object.keys(scenarios),
+    bankPfmDfOptimizationFactorUsed: isNaN(bankPfmDfOptimizationFactor) ? DEFAULT_BANK_PFM_DF_OPTIMIZATION_FACTOR : bankPfmDfOptimizationFactor,
     ...result,
     groupedByTsp,
     groupedByUseCase,
@@ -903,6 +916,7 @@ app.post('/api/compute', upload.single('file'), (req, res) => {
       fyStartMonthStr: req.body.fyStartMonth,
       sucStartDateStr: req.body.sucStartDate,
       scenariosStr: req.body.scenarios,
+      bankPfmDfOptimizationFactorStr: req.body.bankPfmDfOptimizationFactor,
       sheetUsed: masterName,
       ignoredSheets: sheetNames.filter(n => n !== masterName)
     });
@@ -983,6 +997,7 @@ app.post('/api/compute-from-email', async (req, res) => {
       fyStartMonthStr: req.body.fyStartMonth,
       sucStartDateStr: req.body.sucStartDate,
       scenariosStr: req.body.scenarios,
+      bankPfmDfOptimizationFactorStr: req.body.bankPfmDfOptimizationFactor,
       sheetUsed: masterName,
       ignoredSheets: sheetNames.filter(n => n !== masterName)
     });

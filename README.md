@@ -489,6 +489,47 @@ rounded).
        DPI Pricing pricing applies to cut costs) — it then keeps compounding
        normally (Cliff/Recovery CMGR) from that reduced baseline, same
        one-time-cut pattern as the PFM/non-Bank 1/6 rule above.
+     - **fiulive@dreamplug (added 2026-10-23)**: revenue fixed at
+       **₹13,33,000** every month through the month before the DPI Pricing
+       Start Date (or the whole FY if no DPI Pricing Start Date is set, as
+       on the live app currently) — same `'flat-until-suc'` mechanism as
+       fiulive@moneycontrol above, just a different FIU/amount. DPI
+       Pricing-active months fall through to normal computation (including
+       this same FIU's own 35%-retained PFM/non-Bank DF cut above, which is
+       independent of this revenue override).
+     - **fiulive@axisbank (added 2026-10-23)**: revenue for **October 2026
+       only** is fixed at **₹14,10,965** (ask: "Change Axis revenue for
+       October to 14,10,965"), unconditionally overriding whatever the
+       normal computation produces for that one month. Every other month —
+       September and earlier, November and later — is completely untouched
+       and keeps computing off axisbank's own AU/DF input overrides just
+       above. This is the `'month-overrides'` override type: unlike
+       `'monthly-schedule'` (fiulive@canarabank above), it has no
+       `defaultAmount` — months not explicitly listed fall through to
+       normal computation rather than being forced to something.
+   - **Data Fetch Optimization factor (added 2026-10-23)** — unlike the
+     one-off overrides just above, this one IS exposed in the UI: a
+     percentage field on the Monthly Revenue side panel (default **20%**,
+     same field group as DPI Pricing Start Date/what-if scenarios). During
+     DPI Pricing months only, it reduces the Data Fetch count for every
+     PFM-use-case FIU whose License Type **is** Bank — the mirror image of
+     the PFM/non-Bank 1/6 cut above, for the opposite License Type —
+     applied once at the DPI Pricing switch, after that month's Data Fetch
+     count has already been produced by whichever mechanism actually drives
+     it for that FIU (the normal CMGR-compounding chain, or a FIU-specific
+     hardcoded figure such as fiulive@axisbank's 10%-of-July DF count or
+     fiulive@hdfc's/HDFC-FIU's 43% cut, both of which this factor applies on
+     top of) — then keeps compounding forward from that reduced baseline at
+     the normal rate for later DPI Pricing months, same one-time-cut
+     pattern as the hardcoded overrides above. fiulive@axisbank is a
+     special case internally (its Data Fetch figure during DPI Pricing is a
+     flat hardcode re-asserted every month, not a compounding chain, so the
+     cut is baked directly into that hardcoded figure instead of through the
+     usual "once, then compounds forward" mechanism) but the end result is
+     the same. Sent on every compute request as `bankPfmDfOptimizationFactor`
+     (a percentage, e.g. `20`); blank/invalid falls back to the 20% default.
+     The response's `bankPfmDfOptimizationFactorUsed` field reports the
+     fraction actually used (e.g. `0.2`) — see API reference below.
 4. **Historical actuals** — the Annual tables show the full fiscal year
    (Apr'26–Mar'27), not just the months from your upload onward. Months
    **before or equal to** your as-of date's month are filled from the
@@ -1479,11 +1520,15 @@ a reason to skip `npm test` for backend/calculation changes.
 - `POST /api/seed-from-master-data` — multipart `file`, seeds both configs
 - `POST /api/compute` — multipart `file` + form fields `asOfDate`
   (`YYYY-MM-DD`, defaults to today), `fyStartMonth` (`1`–`12`, defaults to
-  `4` for an April–March FY), `sucStartDate` (`YYYY-MM`, optional), and
+  `4` for an April–March FY), `sucStartDate` (`YYYY-MM`, optional),
   `scenarios` (comma-separated scenario keys, optional — see "What-if
-  revenue scenarios" above). The response includes `scenariosApplied`, the
-  list of keys actually recognized/turned on for that compute.
-- `POST /api/compute-from-email` — JSON body `{ asOfDate?, fyStartMonth?, sucStartDate?, scenarios?, force? }` (same meaning/defaults as `/api/compute`'s form fields — `scenarios` here is also a comma-separated string; `force: true` bypasses the email check cache). Finds the latest matching email over IMAP (see "Auto-pull counts from email" above), computes from its CSV attachment exactly like `/api/compute`, and adds an `emailSource: { subject, date, filename, fetchedAt, fromCache }` field to the response. `400` if `GMAIL_USER`/`GMAIL_APP_PASSWORD`/`METABASE_EMAIL_SUBJECT` aren't all set, `404` if nothing matched, `502` on an IMAP connection/auth failure.
+  revenue scenarios" above), and `bankPfmDfOptimizationFactor` (a
+  percentage, e.g. `20` for 20%, optional — see "Data Fetch Optimization
+  factor" above; blank/invalid falls back to the 20% default). The response
+  includes `scenariosApplied`, the list of keys actually recognized/turned
+  on for that compute, and `bankPfmDfOptimizationFactorUsed`, the fraction
+  (e.g. `0.2`) actually applied.
+- `POST /api/compute-from-email` — JSON body `{ asOfDate?, fyStartMonth?, sucStartDate?, scenarios?, bankPfmDfOptimizationFactor?, force? }` (same meaning/defaults as `/api/compute`'s form fields — `scenarios` here is also a comma-separated string; `force: true` bypasses the email check cache). Finds the latest matching email over IMAP (see "Auto-pull counts from email" above), computes from its CSV attachment exactly like `/api/compute`, and adds an `emailSource: { subject, date, filename, fetchedAt, fromCache }` field to the response. `400` if `GMAIL_USER`/`GMAIL_APP_PASSWORD`/`METABASE_EMAIL_SUBJECT` aren't all set, `404` if nothing matched, `502` on an IMAP connection/auth failure.
 - `GET /api/scenarios` — returns `[{ key, label, description }, ...]`, the What-if scenario definitions the frontend builds its checkboxes from (see `SCENARIO_DEFINITIONS` in `lib/compute.js`).
 - `POST /api/projection-snapshot` — multipart `file` + form fields `asOfDate`, `fyStartMonth` (same defaults as `/api/compute`; DPI Pricing is always forced off). Saves and returns `{ snapshotDate, asOfDate, fyStartMonth, months, totalsByMonth }`, overwriting any previous snapshot. **No longer called by the UI as of 2026-09-03** — the "Projected vs Actual Revenue" chart now tracks the live compute result instead (see "Projected vs Actual Revenue" above). Left in the backend for API compatibility in case anything else depends on it.
 - `GET /api/projection-snapshot` — returns `{ snapshot }`, or `{ snapshot: null }` if none has been saved yet. Same status: no longer called by the UI, kept for compatibility.

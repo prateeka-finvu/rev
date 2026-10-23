@@ -356,6 +356,12 @@
         </select>
       </div>
       </div>
+      <div class="field-row">
+      <div class="field">
+        <label for="bankPfmDfOptimizationFactor" title="During DPI Pricing months only, reduces the Data Fetch count for every PFM-use-case FIU whose License Type is Bank, by this percentage — applied after that month's Data Fetch count is otherwise computed (CMGR-based or a FIU-specific hardcoded figure, whichever applies), and then compounds forward normally from the reduced figure for later DPI Pricing months. Enter 20 for 20%, 0 to disable. Defaults to 20%.">Data Fetch Optimization factor (%)</label>
+        <input type="number" id="bankPfmDfOptimizationFactor" min="0" max="100" step="1" value="20" />
+      </div>
+      </div>
       <div class="field" id="scenariosField" style="display:none;">
         <label>What-if scenarios</label>
         <div id="scenariosList"></div>
@@ -1268,6 +1274,7 @@
   let lastResult = null;
   const sucStartDateInput = document.getElementById('sucStartDate');
   const fyStartMonthInput = document.getElementById('fyStartMonth');
+  const bankPfmDfOptimizationFactorInput = document.getElementById('bankPfmDfOptimizationFactor');
 
   // ---- What-if scenarios ----
   // Checkbox list built from GET /api/scenarios (see SCENARIO_DEFINITIONS in
@@ -1326,6 +1333,7 @@
     fd.append('fyStartMonth', fyStartMonthInput.value);
     fd.append('sucStartDate', sucStartDateInput.value);
     fd.append('scenarios', getSelectedScenarios());
+    fd.append('bankPfmDfOptimizationFactor', bankPfmDfOptimizationFactorInput.value);
     try{
       const res = await apiFetch(API + '/api/compute', { method: 'POST', body: fd });
       const data = await res.json();
@@ -1338,6 +1346,7 @@
       if (data.duplicateCounts && data.duplicateCounts.length) msg += ' ' + data.duplicateCounts.length + ' FIU(s) appeared more than once in the upload — only the first row for each was used.';
       if (data.unmatchedMeta.length) msg += ' ' + data.unmatchedMeta.length + ' FIU(s) in your configs had no counts in this upload.';
       if (data.scenariosApplied && data.scenariosApplied.length) msg += ' Scenario(s) active: ' + data.scenariosApplied.join(', ') + '.';
+      if (typeof data.bankPfmDfOptimizationFactorUsed === 'number' && Math.abs(data.bankPfmDfOptimizationFactorUsed - 0.2) > 0.0001) msg += ' Data Fetch Optimization factor: ' + Math.round(data.bankPfmDfOptimizationFactorUsed * 100) + '%.';
       computeStatus.textContent = msg;
     } catch(err){
       computeStatus.className = 'status-msg err';
@@ -1379,6 +1388,7 @@
           fyStartMonth: fyStartMonthInput.value,
           sucStartDate: sucStartDateInput.value,
           scenarios: getSelectedScenarios(),
+          bankPfmDfOptimizationFactor: bankPfmDfOptimizationFactorInput.value,
           force: !!force
         })
       });
@@ -1392,6 +1402,7 @@
       if (data.duplicateCounts && data.duplicateCounts.length) msg += ' ' + data.duplicateCounts.length + ' FIU(s) appeared more than once in the file — only the first row for each was used.';
       if (data.unmatchedMeta.length) msg += ' ' + data.unmatchedMeta.length + ' FIU(s) in your configs had no counts in this file.';
       if (data.scenariosApplied && data.scenariosApplied.length) msg += ' Scenario(s) active: ' + data.scenariosApplied.join(', ') + '.';
+      if (typeof data.bankPfmDfOptimizationFactorUsed === 'number' && Math.abs(data.bankPfmDfOptimizationFactorUsed - 0.2) > 0.0001) msg += ' Data Fetch Optimization factor: ' + Math.round(data.bankPfmDfOptimizationFactorUsed * 100) + '%.';
       computeStatus.textContent = msg;
       const src = data.emailSource || {};
       emailSourceStatus.className = 'status-msg ok';
@@ -1443,7 +1454,7 @@
     runComputeFromEmail(false);
   });
 
-  [asOfDateInput, sucStartDateInput, fyStartMonthInput].forEach(el => {
+  [asOfDateInput, sucStartDateInput, fyStartMonthInput, bankPfmDfOptimizationFactorInput].forEach(el => {
     el.addEventListener('change', function(){
       triggerCompute();
     });
