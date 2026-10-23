@@ -280,6 +280,21 @@ rounded).
        (`cmgr`/`sucCliffCmgr`/`sucRecoveryCmgr` all `0.2`, uniform
        pre-DPI-Pricing and throughout the DPI Pricing period) — it was
        previously flat (`0%`, no growth at all) before this ask.
+     - **KMBL-FIU-PROD regular `yield` recalibrated to September (added
+       2026-10-23)**: this is the regular (non-DPI-Pricing) ₹/fetch rate
+       used for every month that isn't a recorded Historical Actual and
+       isn't in the DPI Pricing period — it had been stuck at 0.418745,
+       which turned out to be exactly July 2026's realized rate
+       (₹1,42,270 ÷ 3,39,753 fetches), never updated since. The FIU's
+       realized rate has swung a lot month to month — July 0.4187,
+       August 0.2941, September (corrected post-swap) **1.384834** — so
+       projecting future non-DPI months off July's rate was understating
+       them relative to what September actually billed per fetch, even
+       with volume correctly growing from September's real count (ask:
+       2026-10-23, "use September's yield"). `yield` is now 1.384834,
+       matching September's post-swap `billingYield` in
+       `historical-actuals.json` exactly. Revisit if a more representative
+       blend (e.g. across more realized months) becomes available later.
      - **Graceful degradation**: a FIU with no Deposit share/rate on file
        at all contributes 0 from the Deposit side and bills its whole DF
        volume at `sucNonDepositRate` (currently every DPI-eligible FIU has
