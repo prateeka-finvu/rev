@@ -526,7 +526,7 @@ suite('PFM/non-Bank DF ÷6 cut persists across the whole SUC period', () => {
     assertClose(row.monthly[6].dfUsage, oct, 1, 'Bank license -> no ÷6 cut, plain Cliff compounding only');
   });
 
-  test('fiulive@dreamplug retains 65% instead of the general 1/6 (ask: 2026-10-24)', () => {
+  test('fiulive@dreamplug is cut BY 65% (retains 35%), not the general 1/6 (ask: 2026-10-24)', () => {
     const { row } = rowFor('FIULIVE@DREAMPLUG', {
       metaOver: { billingModel: 'Active Users', useCase: 'PFM', licenseType: 'RIA' },
       ycOver: { sucYield: 1, sucDepositSharePct: 1, sucDepositRate: 1, sucCliffCmgr: -0.13, sucRecoveryCmgr: 0.02 },
@@ -537,10 +537,10 @@ suite('PFM/non-Bank DF ÷6 cut persists across the whole SUC period', () => {
     });
     const sepAnchor = 4000000 * 1.05;
     const octPreCut = sepAnchor * 0.87;
-    const octCut = octPreCut * 0.65;                // dreamplug's override: retain 65%, not 1/6
-    const nov = octCut * 0.87;                      // must keep compounding from the overridden (65%) baseline
-    assertClose(row.monthly[6].dfUsage, octCut, 1, 'October: 65% cut applied, not the general 1/6');
-    assertClose(row.monthly[7].dfUsage, nov, 1, 'November: still compounding from the 65%-cut baseline');
+    const octCut = octPreCut * 0.35;                // dreamplug's override: retain 35% (cut by 65%), not 1/6
+    const nov = octCut * 0.87;                      // must keep compounding from the overridden (35%) baseline
+    assertClose(row.monthly[6].dfUsage, octCut, 1, 'October: cut by 65% (retain 35%), not the general 1/6');
+    assertClose(row.monthly[7].dfUsage, nov, 1, 'November: still compounding from the 35%-retained baseline');
   });
 });
 
