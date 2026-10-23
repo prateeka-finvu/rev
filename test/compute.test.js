@@ -706,6 +706,22 @@ suite('Fixed monthly-schedule/flat-until-SUC revenue overrides', () => {
     assertEqual(row.monthly[5].revenue, 160000, 'September (pre-SUC) — flat 160,000 regardless of live usage');
     assert(row.monthly[6].revenue !== 160000, 'October (SUC-active) — falls through to the normal SUC computation, no longer flat');
   });
+
+  test('FIULIVE@NUINVESTORS: usage/dfUsage/revenue all zeroed from November 2026 onward (churned, ask: 2026-10-24)', () => {
+    const { row } = rowFor('FIULIVE@NUINVESTORS', {
+      metaOver: { billingModel: 'Unique Users' },
+      counts: [{ fiuId: 'FIULIVE@NUINVESTORS', activeUsers: 35285, dataFetches: 2722200 }],
+      hist: [{ fiuId: 'FIULIVE@NUINVESTORS', month: '2026-09', revenue: 689120, auCount: 34456, dfCount: 3580574 }],
+      asOf: d(2026, 10, 24)
+    });
+    assertEqual(row.monthly[5].revenue, 689120, 'September — real recorded actual, untouched by the override');
+    assertEqual(row.monthly[6].usage, 35285, 'October (current month) — real live upload, untouched by the override');
+    assertEqual(row.monthly[7].usage, 0, 'November — usage zeroed');
+    assertEqual(row.monthly[7].dfUsage, 0, 'November — dfUsage zeroed too, not just the billed usage metric');
+    assertEqual(row.monthly[7].revenue, 0, 'November — revenue zeroed');
+    assert(row.monthly[7].billable, 'November — an explicit ₹0, not a "no data"/"missing config" badge');
+    assertEqual(row.monthly[11].revenue, 0, 'March — still zeroed; the override has no end date');
+  });
 });
 
 suite('Duplicate FIU ID within one counts upload', () => {

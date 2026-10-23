@@ -426,6 +426,18 @@ rounded).
        through the month before the DPI Pricing Start Date (or the whole FY if no
        DPI Pricing Start Date is set); normal computation resumes from the DPI Pricing
        Start Date onward.
+     - **fiulive@nuinvestors (added 2026-10-24)**: churning — usage
+       (Active Users, its billing metric), DF count, and revenue are all
+       forced to **0 from November 2026 onward**. October 2026 and earlier
+       are completely untouched (real recorded actuals through September,
+       its real live counts-upload figure for October) — only November
+       onward is zeroed, unconditionally, for the rest of the FY (ask:
+       2026-10-24, "make fiulive@nuinvestors DF, AU and Revenue 0 from
+       November as they are churning"). This is the first FIU using the
+       `'zero-from-month'` override type — unlike the other manual
+       overrides above, it forces usage/dfUsage to 0 too, not just revenue,
+       since a churned FIU has no further activity of any kind, not just
+       no further billing.
      - **fiulive@axisbank**: AU count fixed at 25,000 from Sep 2026 onward
        for any month Unique-User billing still applies (i.e. not
        DPI Pricing-active); DF count during the DPI Pricing period fixed at 10% of the
