@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node test/run.js"
+    "test": "node test/run.js",
+    "recompute-deposit-rates": "node scripts/recompute-deposit-rates.js"
   },
   "keywords": [],
   "author": "",

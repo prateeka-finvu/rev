@@ -16,6 +16,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { suite, testAsync, assert, assertEqual } = require('./harness');
+const { buildChatContext } = require('../lib/chat');
 
 const SERVER_PATH = path.join(__dirname, '..', 'server.js');
 
@@ -539,6 +540,356 @@ async function reseedSuite() {
   });
 }
 
+async function purposeCodeYieldSuite() {
+  await suite('/api/compute — By License Type x Purpose Code yield (ask: 2026-10-26)', async () => {
+    let server;
+    try {
+      await testAsync('dfYieldAnalysis.purposeCodeYield is well-formed and finds a real Stock Broker/105 combination with a nonzero Mar 2027 yield', async () => {
+        server = await startServer({});
+        // Use the bundled real FIU Metadata/Yield & CMGR config (seeded
+        // fresh into this test's own DATA_DIR on first read, same as every
+        // other test here) rather than hand-rolled fixtures — the business
+        // logic itself (the per-purpose-code revenue/DF-volume formula) is
+        // already thoroughly covered with controlled synthetic data in
+        // compute.test.js's "purposeCodeYieldBreakdown()" suite; this test
+        // exists only to catch a wiring regression in server.js's
+        // buildComputeResponse (wrong field name, missed import, etc.),
+        // which a unit test around lib/compute.js alone can't see.
+        const metaRes = await fetch(server.baseUrl + '/api/fiu-metadata');
+        const metaRows = await metaRes.json();
+        // SBI_SECURITIES_FIU_PROD is a known Stock Broker FIU with a real,
+        // measured purpose_code 105 slice in the bundled DPU-report-derived
+        // yield-cmgr.json (100% of its code-105 volume in the 7mo slab) —
+        // see scripts/recompute-deposit-rates.js. If a future data refresh
+        // ever drops this specific FIU/code combination, this assertion
+        // (not the feature) needs updating to point at whatever bundled
+        // Stock Broker FIU has code 105 data at that point.
+        const target = metaRows.find(m => String(m.fiuId).toUpperCase() === 'SBI_SECURITIES_FIU_PROD');
+        assert(target, 'expected SBI_SECURITIES_FIU_PROD to still be in the bundled FIU Metadata — update this test if that FIU was retired');
+
+        const csv = ['FIU ID,Active Users,Successful Data Fetches', 'SBI_SECURITIES_FIU_PROD,1000,500000'].join('\n');
+        const fd = new FormData();
+        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'counts.csv');
+        fd.append('asOfDate', '2026-09-09');
+        fd.append('fyStartMonth', '4');
+        fd.append('sucStartDate', '2026-10');
+        const res = await fetch(server.baseUrl + '/api/compute', { method: 'POST', body: fd });
+        const body = await res.json();
+        assertEqual(res.status, 200, 'compute should succeed: ' + JSON.stringify(body));
+
+        const pcy = body.dfYieldAnalysis && body.dfYieldAnalysis.purposeCodeYield;
+        assert(pcy, 'expected dfYieldAnalysis.purposeCodeYield in the response');
+        assert(Array.isArray(pcy.licenseTypes) && pcy.licenseTypes.length > 0, 'licenseTypes should be a non-empty array');
+        assert(Array.isArray(pcy.purposeCodes) && pcy.purposeCodes.includes('105'), 'purposeCodes should include 105');
+        assert(Array.isArray(pcy.byPeriod), 'byPeriod should be an array');
+
+        const row = pcy.byPeriod.find(r => String(r.licenseType).toLowerCase() === 'stock broker' && r.purposeCode === '105');
+        assert(row, 'expected a Stock Broker / 105 row in byPeriod. Rows seen: ' + JSON.stringify(pcy.byPeriod.filter(r => r.purposeCode === '105')));
+        assert(row.mar2027 !== null && row.mar2027 > 0, 'Mar 2027 yield for Stock Broker / 105 should be a positive number once DPI Pricing is active: ' + JSON.stringify(row));
+        assert(row.mar2027Revenue > 0 && row.mar2027DfCount > 0, 'Mar 2027 revenue and DF count should both be positive: ' + JSON.stringify(row));
+      });
+
+      await testAsync('dfYieldAnalysis.purposeCodeYield.totals is well-formed (ask: 2026-10-26, "purpose code wise count of Revenue and Yield")', async () => {
+        server = await startServer({});
+        const csv = ['FIU ID,Active Users,Successful Data Fetches', 'SBI_SECURITIES_FIU_PROD,1000,500000'].join('\n');
+        const fd = new FormData();
+        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'counts.csv');
+        fd.append('asOfDate', '2026-09-09');
+        fd.append('fyStartMonth', '4');
+        fd.append('sucStartDate', '2026-10');
+        const res = await fetch(server.baseUrl + '/api/compute', { method: 'POST', body: fd });
+        const body = await res.json();
+        assertEqual(res.status, 200, 'compute should succeed: ' + JSON.stringify(body));
+
+        const pcy = body.dfYieldAnalysis && body.dfYieldAnalysis.purposeCodeYield;
+        assert(pcy, 'expected dfYieldAnalysis.purposeCodeYield in the response');
+        assert(Array.isArray(pcy.totals), 'totals should be an array');
+        assert(typeof pcy.totalsDpiLabel === 'string' && pcy.totalsDpiLabel.length > 0,
+          'totalsDpiLabel should describe the DPI period once a DPI Pricing Start Date is set: ' + JSON.stringify(pcy.totalsDpiLabel));
+
+        const code105 = pcy.totals.find(t => t.purposeCode === '105');
+        assert(code105, 'expected a code 105 entry in totals. Rows seen: ' + JSON.stringify(pcy.totals));
+        assert(code105.revenue > 0 && code105.dfCount > 0 && code105.yield > 0,
+          'code 105 totals should be positive once DPI Pricing is active: ' + JSON.stringify(code105));
+
+        // totals sums every license type across every DPI month (Oct-Mar
+        // here), so it should be at least as large as the single Stock
+        // Broker / Mar 2027 slice byPeriod already reports for the same
+        // code — a regression check without re-deriving the whole formula
+        // by hand.
+        const stockBrokerMar = pcy.byPeriod.find(r => String(r.licenseType).toLowerCase() === 'stock broker' && r.purposeCode === '105');
+        assert(stockBrokerMar && stockBrokerMar.mar2027Revenue > 0, 'expected a positive Stock Broker/105 Mar 2027 revenue to compare against');
+        assert(code105.revenue >= stockBrokerMar.mar2027Revenue,
+          'totals revenue for code 105 (summed across every license type and every DPI month) should be at least the single Stock Broker/Mar-2027 slice: ' + JSON.stringify({ code105, stockBrokerMar }));
+      });
+
+      await testAsync('purposeCodeYield.totals and totalsDpiLabel are empty when no DPI Pricing Start Date is set', async () => {
+        server = await startServer({});
+        const csv = ['FIU ID,Active Users,Successful Data Fetches', 'SBI_SECURITIES_FIU_PROD,1000,500000'].join('\n');
+        const fd = new FormData();
+        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'counts.csv');
+        fd.append('asOfDate', '2026-09-09');
+        fd.append('fyStartMonth', '4');
+        // sucStartDate intentionally omitted — no DPI Pricing Start Date set
+        const res = await fetch(server.baseUrl + '/api/compute', { method: 'POST', body: fd });
+        const body = await res.json();
+        assertEqual(res.status, 200, 'compute should succeed: ' + JSON.stringify(body));
+
+        const pcy = body.dfYieldAnalysis && body.dfYieldAnalysis.purposeCodeYield;
+        assert(pcy, 'expected dfYieldAnalysis.purposeCodeYield in the response');
+        assertEqual(pcy.totals.length, 0, 'totals should be empty with no DPI Pricing Start Date: ' + JSON.stringify(pcy.totals));
+        assertEqual(pcy.totalsDpiLabel, null, 'totalsDpiLabel should be null with no DPI Pricing Start Date');
+      });
+
+      await testAsync('purposeCodeYield.totals carries a licenseType per row, broken out instead of collapsed across license types (ask: 2026-10-26, "add a license type column")', async () => {
+        server = await startServer({});
+        const csv = ['FIU ID,Active Users,Successful Data Fetches', 'SBI_SECURITIES_FIU_PROD,1000,500000'].join('\n');
+        const fd = new FormData();
+        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'counts.csv');
+        fd.append('asOfDate', '2026-09-09');
+        fd.append('fyStartMonth', '4');
+        fd.append('sucStartDate', '2026-10');
+        const res = await fetch(server.baseUrl + '/api/compute', { method: 'POST', body: fd });
+        const body = await res.json();
+        assertEqual(res.status, 200, 'compute should succeed: ' + JSON.stringify(body));
+
+        const pcy = body.dfYieldAnalysis && body.dfYieldAnalysis.purposeCodeYield;
+        assert(pcy, 'expected dfYieldAnalysis.purposeCodeYield in the response');
+        assert(pcy.totals.length > 0, 'expected at least one totals row with a DPI Pricing Start Date set');
+        pcy.totals.forEach(t => {
+          assert(typeof t.licenseType === 'string' && t.licenseType.length > 0,
+            'every totals row should carry a non-empty licenseType: ' + JSON.stringify(t));
+        });
+
+        const code105Rows = pcy.totals.filter(t => t.purposeCode === '105');
+        const code105StockBroker = code105Rows.find(t => String(t.licenseType).toLowerCase() === 'stock broker');
+        assert(code105StockBroker && code105StockBroker.revenue > 0,
+          'expected a Stock Broker row for code 105 in totals: ' + JSON.stringify(code105Rows));
+
+        // Summing every license-type row for a given purpose code should
+        // reconcile back to that code's single collapsed-across-license-type
+        // revenue figure (code105 checked a few assertions up for byPeriod,
+        // this checks the totals breakout sums correctly against itself).
+        const code105Sum = code105Rows.reduce((s, t) => s + (t.revenue || 0), 0);
+        assert(code105Sum >= code105StockBroker.revenue,
+          'summed code-105 revenue across all license types should be at least the Stock Broker slice alone: ' + JSON.stringify({ code105Sum, code105StockBroker }));
+      });
+
+      await testAsync('purposeCodeYield.dpuSlabs and totals[].dpuSlabPct are well-formed (ask: 2026-10-27, "add a column for each DPU in the DPI rate card and mention each DPU\'s contribution % to DF during the DPI period")', async () => {
+        server = await startServer({});
+        const csv = ['FIU ID,Active Users,Successful Data Fetches', 'SBI_SECURITIES_FIU_PROD,1000,500000'].join('\n');
+        const fd = new FormData();
+        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'counts.csv');
+        fd.append('asOfDate', '2026-09-09');
+        fd.append('fyStartMonth', '4');
+        fd.append('sucStartDate', '2026-10');
+        const res = await fetch(server.baseUrl + '/api/compute', { method: 'POST', body: fd });
+        const body = await res.json();
+        assertEqual(res.status, 200, 'compute should succeed: ' + JSON.stringify(body));
+
+        const pcy = body.dfYieldAnalysis && body.dfYieldAnalysis.purposeCodeYield;
+        assert(pcy, 'expected dfYieldAnalysis.purposeCodeYield in the response');
+        assert(Array.isArray(pcy.dpuSlabs) && pcy.dpuSlabs.length === 8,
+          'expected 8 DPU slabs (the DPI Utility Rate Card rows): ' + JSON.stringify(pcy.dpuSlabs));
+        pcy.dpuSlabs.forEach(s => {
+          assert(typeof s.key === 'string' && s.key.length > 0 && typeof s.label === 'string' && s.label.length > 0,
+            'every dpuSlabs entry should carry a key and a label: ' + JSON.stringify(s));
+        });
+        assert(pcy.dpuSlabs.some(s => s.key === '7mo' && s.label === '7 Months'), 'expected a 7mo/"7 Months" slab: ' + JSON.stringify(pcy.dpuSlabs));
+
+        const code105StockBroker = pcy.totals.find(t => t.purposeCode === '105' && String(t.licenseType).toLowerCase() === 'stock broker');
+        assert(code105StockBroker, 'expected a Stock Broker / 105 row in totals: ' + JSON.stringify(pcy.totals.filter(t => t.purposeCode === '105')));
+        assert(code105StockBroker.dpuSlabPct && typeof code105StockBroker.dpuSlabPct === 'object',
+          'expected a dpuSlabPct object on the totals row: ' + JSON.stringify(code105StockBroker));
+        pcy.dpuSlabs.forEach(s => {
+          const v = code105StockBroker.dpuSlabPct[s.key];
+          assert(v === null || (typeof v === 'number' && !isNaN(v)), 'dpuSlabPct.' + s.key + ' should be null or a number: ' + JSON.stringify(code105StockBroker.dpuSlabPct));
+        });
+        // dpuSlabPct values are a % of the row's OWN dfCount, and only the
+        // Deposit-type share of a row has a DPU-slab breakdown at all (see
+        // purposeCodeYieldBreakdown()'s comment in lib/compute.js) — so
+        // they should sum to somewhere between 0% and 100%, never over.
+        const slabPctSum = pcy.dpuSlabs.reduce((s, slab) => s + (code105StockBroker.dpuSlabPct[slab.key] || 0), 0);
+        assert(slabPctSum >= 0 && slabPctSum <= 100.01,
+          'dpuSlabPct values should sum to at most ~100% of the row\'s dfCount (the Deposit share, never more): ' + JSON.stringify({ slabPctSum, dpuSlabPct: code105StockBroker.dpuSlabPct }));
+      });
+
+      await testAsync('purposeCodeYield.byFiu is well-formed and reconciles with totals (ask: 2026-10-26, "FIU x Purpose Code wise Pre-DPI and Post-DPI Yield")', async () => {
+        server = await startServer({});
+        const csv = ['FIU ID,Active Users,Successful Data Fetches', 'SBI_SECURITIES_FIU_PROD,1000,500000'].join('\n');
+        const fd = new FormData();
+        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'counts.csv');
+        fd.append('asOfDate', '2026-09-09');
+        fd.append('fyStartMonth', '4');
+        fd.append('sucStartDate', '2026-10');
+        const res = await fetch(server.baseUrl + '/api/compute', { method: 'POST', body: fd });
+        const body = await res.json();
+        assertEqual(res.status, 200, 'compute should succeed: ' + JSON.stringify(body));
+
+        const pcy = body.dfYieldAnalysis && body.dfYieldAnalysis.purposeCodeYield;
+        assert(pcy, 'expected dfYieldAnalysis.purposeCodeYield in the response');
+        assert(Array.isArray(pcy.byFiu) && pcy.byFiu.length > 0, 'byFiu should be a non-empty array once DPI Pricing is active: ' + JSON.stringify(pcy.byFiu));
+
+        const target = pcy.byFiu.find(r => String(r.fiuId).toUpperCase() === 'SBI_SECURITIES_FIU_PROD' && r.purposeCode === '105');
+        assert(target, 'expected an SBI_SECURITIES_FIU_PROD / 105 row in byFiu. Rows seen: ' + JSON.stringify(pcy.byFiu.filter(r => r.purposeCode === '105')));
+        assert(typeof target.legalName === 'string' && target.legalName.length > 0, 'byFiu row should carry a legalName: ' + JSON.stringify(target));
+        assert(String(target.licenseType).toLowerCase() === 'stock broker', 'expected SBI_SECURITIES_FIU_PROD to be Stock Broker: ' + JSON.stringify(target));
+        assert(target.revenue > 0 && target.dfCount > 0 && target.yield > 0,
+          'byFiu revenue/dfCount/yield should all be positive once DPI Pricing is active: ' + JSON.stringify(target));
+
+        // byFiu is the per-FIU breakout of the same underlying data as
+        // totals (which is grouped by license type instead) — summing
+        // byFiu's revenue for a given purpose code should exactly equal
+        // summing totals' revenue for that same purpose code, since both
+        // are built from the same buildPurposeCodeGroupTotals() call over
+        // the same DPI-period rows, just grouped differently.
+        const byFiuCode105Sum = pcy.byFiu.filter(r => r.purposeCode === '105').reduce((s, r) => s + (r.revenue || 0), 0);
+        const totalsCode105Sum = pcy.totals.filter(t => t.purposeCode === '105').reduce((s, t) => s + (t.revenue || 0), 0);
+        assert(Math.abs(byFiuCode105Sum - totalsCode105Sum) < 0.01,
+          'byFiu revenue summed for code 105 should reconcile with totals revenue summed for code 105: ' + JSON.stringify({ byFiuCode105Sum, totalsCode105Sum }));
+      });
+
+      await testAsync('purposeCodeYield.byFiu is empty when no DPI Pricing Start Date is set', async () => {
+        server = await startServer({});
+        const csv = ['FIU ID,Active Users,Successful Data Fetches', 'SBI_SECURITIES_FIU_PROD,1000,500000'].join('\n');
+        const fd = new FormData();
+        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'counts.csv');
+        fd.append('asOfDate', '2026-09-09');
+        fd.append('fyStartMonth', '4');
+        // sucStartDate intentionally omitted — no DPI Pricing Start Date set
+        const res = await fetch(server.baseUrl + '/api/compute', { method: 'POST', body: fd });
+        const body = await res.json();
+        assertEqual(res.status, 200, 'compute should succeed: ' + JSON.stringify(body));
+
+        const pcy = body.dfYieldAnalysis && body.dfYieldAnalysis.purposeCodeYield;
+        assert(pcy, 'expected dfYieldAnalysis.purposeCodeYield in the response');
+        assertEqual(pcy.byFiu.length, 0, 'byFiu should be empty with no DPI Pricing Start Date: ' + JSON.stringify(pcy.byFiu));
+      });
+
+      await testAsync('requires login when the gate is on, same as every other /api/ route', async () => {
+        await server.stop();
+        server = await startServer({ APP_PASSWORD: 'secret123', SESSION_SECRET: 'test-secret' });
+        const csv = ['FIU ID,Active Users,Successful Data Fetches', 'SBI_SECURITIES_FIU_PROD,1000,500000'].join('\n');
+        const fd = new FormData();
+        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'counts.csv');
+        const res = await fetch(server.baseUrl + '/api/compute', { method: 'POST', body: fd });
+        assertEqual(res.status, 401);
+      });
+    } finally {
+      if (server) await server.stop();
+    }
+  });
+}
+
+async function useCaseLicenseGroupingSuite() {
+  await suite('/api/compute — groupedByUseCaseLicense (ask: 2026-10-26, "license type column... combination of use-case and license type")', async () => {
+    let server;
+    try {
+      await testAsync('groupedByUseCaseLicense is well-formed and its revenue reconciles with groupedByUseCase', async () => {
+        server = await startServer({});
+        const csv = ['FIU ID,Active Users,Successful Data Fetches', 'SBI_SECURITIES_FIU_PROD,1000,500000'].join('\n');
+        const fd = new FormData();
+        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'counts.csv');
+        fd.append('asOfDate', '2026-09-09');
+        fd.append('fyStartMonth', '4');
+        fd.append('sucStartDate', '2026-10');
+        const res = await fetch(server.baseUrl + '/api/compute', { method: 'POST', body: fd });
+        const body = await res.json();
+        assertEqual(res.status, 200, 'compute should succeed: ' + JSON.stringify(body));
+
+        const uclt = body.groupedByUseCaseLicense;
+        assert(uclt, 'expected groupedByUseCaseLicense in the response');
+        assert(Array.isArray(uclt.revenue) && uclt.revenue.length > 0, 'groupedByUseCaseLicense.revenue should be a non-empty array');
+        assert(Array.isArray(uclt.df) && uclt.df.length > 0, 'groupedByUseCaseLicense.df should be a non-empty array');
+        uclt.revenue.forEach(g => {
+          assert(typeof g.useCase === 'string' && g.useCase.length > 0, 'every row should carry a non-empty useCase: ' + JSON.stringify(g));
+          assert(typeof g.licenseType === 'string' && g.licenseType.length > 0, 'every row should carry a non-empty licenseType: ' + JSON.stringify(g));
+          assert(Array.isArray(g.monthly), 'every row should carry a monthly array: ' + JSON.stringify(g));
+        });
+
+        const sum = arr => arr.reduce((s, g) => s + g.monthly.reduce((a, b) => a + (b || 0), 0), 0);
+        const ucltTotal = sum(uclt.revenue);
+        const plainTotal = sum(body.groupedByUseCase.revenue);
+        assert(Math.abs(ucltTotal - plainTotal) < 0.01,
+          'groupedByUseCaseLicense.revenue summed across every (useCase, licenseType) pair should equal groupedByUseCase.revenue summed across every useCase: ' + JSON.stringify({ ucltTotal, plainTotal }));
+
+        // Same check one level down: summing just the Lending use-case's
+        // license-type breakout should reconcile with the plain Lending
+        // row, same idea as the overall-total check above but scoped to
+        // one use-case so a bug that only affects one useCase's split
+        // (rather than the grand total) would still be caught.
+        const lendingPlain = body.groupedByUseCase.revenue.find(g => g.label === 'Lending');
+        if (lendingPlain) {
+          const lendingPlainTotal = lendingPlain.monthly.reduce((a, b) => a + (b || 0), 0);
+          const lendingUcltTotal = uclt.revenue.filter(g => g.useCase === 'Lending')
+            .reduce((s, g) => s + g.monthly.reduce((a, b) => a + (b || 0), 0), 0);
+          assert(Math.abs(lendingUcltTotal - lendingPlainTotal) < 0.01,
+            'Lending summed across license types in groupedByUseCaseLicense should equal the plain groupedByUseCase Lending total: ' + JSON.stringify({ lendingUcltTotal, lendingPlainTotal }));
+        }
+      });
+    } finally {
+      if (server) await server.stop();
+    }
+  });
+}
+
+async function chatContextSuite() {
+  await suite('lib/chat.js buildChatContext() — condensed data block stays in sync with the real /api/compute response (ask: 2026-10-27, "ensure that all text notes mentioned throughout the UI are consistent with the changes we have been making")', async () => {
+    let server;
+    try {
+      await testAsync('groupedByUseCaseLicense and dfYieldAnalysis.purposeCodeYield (totals/byFiu/dpuSlabs) all survive into the chat context, not just the older pre-2026-10-26 fields', async () => {
+        server = await startServer({});
+        const csv = ['FIU ID,Active Users,Successful Data Fetches', 'SBI_SECURITIES_FIU_PROD,1000,500000'].join('\n');
+        const fd = new FormData();
+        fd.append('file', new Blob([csv], { type: 'text/csv' }), 'counts.csv');
+        fd.append('asOfDate', '2026-09-09');
+        fd.append('fyStartMonth', '4');
+        fd.append('sucStartDate', '2026-10');
+        const res = await fetch(server.baseUrl + '/api/compute', { method: 'POST', body: fd });
+        const computeResult = await res.json();
+        assertEqual(res.status, 200, 'compute should succeed: ' + JSON.stringify(computeResult));
+
+        const ctx = buildChatContext(computeResult);
+
+        assert(ctx.groupedByUseCaseLicense, 'expected groupedByUseCaseLicense in the chat context');
+        assert(Array.isArray(ctx.groupedByUseCaseLicense.revenue) && ctx.groupedByUseCaseLicense.revenue.length > 0,
+          'expected a non-empty groupedByUseCaseLicense.revenue in the chat context');
+        assert(typeof ctx.groupedByUseCaseLicense.revenue[0].useCase === 'string' && typeof ctx.groupedByUseCaseLicense.revenue[0].licenseType === 'string',
+          'groupedByUseCaseLicense rows in the chat context should carry useCase/licenseType: ' + JSON.stringify(ctx.groupedByUseCaseLicense.revenue[0]));
+
+        const pcy = ctx.dfYieldAnalysis && ctx.dfYieldAnalysis.purposeCodeYield;
+        assert(pcy, 'expected dfYieldAnalysis.purposeCodeYield in the chat context — the assistant needs this to answer By Purpose Code / By FIU x Purpose Code questions');
+        assert(Array.isArray(pcy.totals) && pcy.totals.length > 0, 'expected a non-empty purposeCodeYield.totals in the chat context');
+        assert(typeof pcy.totals[0].licenseType === 'string', 'chat context totals rows should carry licenseType: ' + JSON.stringify(pcy.totals[0]));
+        assert(pcy.totals[0].dpuSlabPct && typeof pcy.totals[0].dpuSlabPct === 'object', 'chat context totals rows should carry dpuSlabPct: ' + JSON.stringify(pcy.totals[0]));
+        assert(Array.isArray(pcy.dpuSlabs) && pcy.dpuSlabs.length === 8, 'expected the 8 dpuSlabs in the chat context: ' + JSON.stringify(pcy.dpuSlabs));
+        assert(Array.isArray(pcy.byFiu) && pcy.byFiu.length > 0, 'expected a non-empty purposeCodeYield.byFiu in the chat context');
+      });
+    } finally {
+      if (server) await server.stop();
+    }
+  });
+}
+
+async function bundledDataIntegritySuite() {
+  await suite('Bundled data/fiu-metadata.json — License Type casing', async () => {
+    await testAsync('no "Stock broker" (lowercase b) entries remain — merged into "Stock Broker" (ask: 2026-10-26)', async () => {
+      // License Type is free text on the FIU Metadata tab (no fixed
+      // dropdown), so a casing split like this can happen again — this is
+      // a regression check on the bundled data, not on any compute logic.
+      // Reads the committed file directly rather than going through a
+      // running server, since this is about the data itself.
+      const metaPath = path.join(__dirname, '..', 'data', 'fiu-metadata.json');
+      const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+      const lowercaseB = meta.filter(r => r.licenseType === 'Stock broker');
+      assertEqual(lowercaseB.length, 0,
+        'expected no FIUs left on the "Stock broker" casing variant, found: ' + JSON.stringify(lowercaseB.map(r => r.fiuId)));
+      const properCase = meta.filter(r => r.licenseType === 'Stock Broker');
+      assert(properCase.length > 0, 'expected at least some FIUs on the canonical "Stock Broker" casing');
+    });
+  });
+}
+
 async function main() {
   await loginGateOffSuite();
   await loginGateOnSuite();
@@ -548,6 +899,10 @@ async function main() {
   await dataStatusSuite();
   await projectionBaselineSuite();
   await reseedSuite();
+  await purposeCodeYieldSuite();
+  await useCaseLicenseGroupingSuite();
+  await chatContextSuite();
+  await bundledDataIntegritySuite();
 }
 
 module.exports = main();

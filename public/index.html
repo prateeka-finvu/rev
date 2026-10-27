@@ -211,7 +211,7 @@
 
   table{ width:100%; border-collapse: collapse; font-size: 12.5px; }
   thead th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.02em; color: var(--text-muted); font-weight:600; padding: 7px 8px; border-bottom: 1px solid var(--baseline); white-space:nowrap; position: sticky; top:0; background: var(--surface-1); }
-  thead th.num, tbody td.num{ text-align:right; font-variant-numeric: tabular-nums; }
+  thead th.num, tbody td.num, tfoot td.num{ text-align:right; font-variant-numeric: tabular-nums; }
   tbody td{ padding: 7px 8px; border-bottom: 1px solid var(--grid); white-space:nowrap; }
   tbody tr:hover{ background: rgba(127,127,127,0.06); }
   tbody tr.warn td{ color: var(--critical); }
@@ -237,7 +237,19 @@
   .status-msg.ok{ color: var(--good); }
   .status-msg.err{ color: var(--critical); }
   .dt-title{ font-size:13.5px; margin:0 0 8px; }
-  .table-search{ width:100%; max-width:320px; display:block; margin-bottom:8px; }
+  /* table-toolbar/table-search/btn-export-xlsx (added 2026-10-27, ask: "add
+     an export as .xlsx functionality next to all tables, with a colour
+     filled button for better visibility") — the search box and Export
+     .xlsx button sit side by side above every data table. */
+  .table-toolbar{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:8px; }
+  .table-search{ width:100%; max-width:320px; flex:1 1 220px; margin:0; }
+  .btn-export-xlsx{
+    flex:0 0 auto; display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
+    background:#1D6F42; color:#fff; border:1px solid #165530; border-radius:8px;
+    padding:7px 13px; font-size:12.5px; font-weight:600; cursor:pointer;
+  }
+  .btn-export-xlsx:hover{ background:#175a36; }
+  .btn-export-xlsx:active{ background:#124a2c; }
   th.sortable{ cursor:pointer; user-select:none; }
   th.sortable:hover{ color: var(--text-secondary); }
 
@@ -346,10 +358,10 @@
       <div class="field">
         <label for="sucStartDate" title="From this month onward, FIUs with both DPI Pricing Cliff CMGR and DPI Pricing Yield configured switch to DPI Pricing Yield x Data Fetch volume. The first 3 months (DPI Pricing Cliff) grow at DPI Pricing Cliff CMGR; every month after that (DPI Pricing Recovery) grows at DPI Pricing Recovery CMGR (or the regular CMGR if that's left blank), while DPI Pricing Yield stays the same throughout.">DPI Pricing Start Date</label>
         <select id="sucStartDate">
-          <option value="" selected>None (regular Yield/CMGR)</option>
+          <option value="">None (regular Yield/CMGR)</option>
           <option value="2026-10">Oct 2026</option>
           <option value="2026-11">Nov 2026</option>
-          <option value="2026-12">Dec 2026</option>
+          <option value="2026-12" selected>Dec 2026</option>
           <option value="2027-01">Jan 2027</option>
           <option value="2027-02">Feb 2027</option>
           <option value="2027-03">Mar 2027</option>
@@ -549,7 +561,7 @@
     <div class="subtab-panel" data-subtab="top10lending">
     <section class="card" id="topTenLendingCard" style="display:none;">
       <h2>Top 10 - Lending</h2>
-      <p class="hint">FY revenue and Data Fetch count for the FIUs flagged <strong>Top 10 = Yes</strong> in the FIU Metadata config with Use-case "Lending". Set the flag on the FIU Metadata tab.</p>
+      <p class="hint">FY revenue and Data Fetch count for the 10 highest-FY-Total-revenue FIUs with Use-case "Lending" — computed automatically from this month's figures, not a manually-set flag.</p>
 
       <h3 class="dt-title" style="margin-top:22px;">Top 10 Lending — Revenue</h3>
       <div id="topTenLendingRevenueTable"></div>
@@ -563,7 +575,7 @@
     <div class="subtab-panel" data-subtab="top10pfm">
     <section class="card" id="topTenPfmCard" style="display:none;">
       <h2>Top 10 - PFM</h2>
-      <p class="hint">FY revenue, AU count, and Data Fetch count for the FIUs flagged <strong>Top 10 = Yes</strong> in the FIU Metadata config with Use-case "PFM". Set the flag on the FIU Metadata tab.</p>
+      <p class="hint">FY revenue, AU count, and Data Fetch count for the 10 highest-FY-Total-revenue FIUs with Use-case "PFM" — computed automatically from this month's figures, not a manually-set flag.</p>
 
       <h3 class="dt-title" style="margin-top:22px;">Top 10 PFM — Revenue</h3>
       <div id="topTenPfmRevenueTable"></div>
@@ -580,32 +592,29 @@
     <div class="subtab-panel" data-subtab="dfyield">
     <section class="card" id="dfYieldCard" style="display:none;">
       <h2>DF Yield Analysis</h2>
-      <p class="hint"><strong>DF Yield = Total Revenue &divide; Total DF Count</strong> for the scope and month shown. Revenue only counts months that are actually billed (same rule as everywhere else); DF Count includes every FIU that reported a DF count that month, regardless of billing model — the same broad population as the DF count tables above. That means DF Yield reflects revenue earned across the whole Data Fetch footprint, not just the FIUs currently billing on it, so it can differ noticeably from any single FIU's configured Yield. A scope with no DF volume that month shows "—" rather than a divide-by-zero.</p>
+      <p class="hint"><strong>DF Yield = Revenue &divide; DF Count</strong> for the use-case, license type, and period shown — one row per (Use-case, License Type) combination present in the data, so you can look at DF yields basis a combination of use-case and license type. Revenue only counts months that are actually billed (same rule as everywhere else); DF Count includes every FIU that reported a DF count that month, regardless of billing model — the same broad population as the DF count tables above. That means DF Yield reflects revenue earned across the whole Data Fetch footprint, not just the FIUs currently billing on it, so it can differ noticeably from any single FIU's configured Yield. <strong>Pre-DPI</strong> is April up to (not including) the DPI Pricing Start Date (left panel); <strong>Post-DPI</strong> is that month through the end of the FY — see the period dates below. A row/period with no DF volume shows "—" rather than a divide-by-zero.</p>
+      <p class="hint" id="dfYieldPeriodHint" style="margin-top:-6px;"></p>
+      <div id="dfYieldByUseCase"></div>
 
-      <h3 class="dt-title" style="margin-top:22px;" id="dfYieldCurrentHeading">Current Month — Overall</h3>
-      <div class="stat-row" id="dfYieldCurrentOverall"></div>
-      <h3 class="dt-title" style="margin-top:20px;" id="dfYieldCurrentUcHeading">Current Month — By Use-case</h3>
-      <div id="dfYieldCurrentByUseCase"></div>
-      <h3 class="dt-title" style="margin-top:24px;" id="dfYieldCurrentTspHeading">Current Month — By TSP</h3>
-      <div id="dfYieldCurrentByTsp"></div>
+      <h3 class="dt-title" style="margin-top:30px;">By Use-case — Yield Only</h3>
+      <p class="hint" style="margin-top:-6px;">Added 2026-10-27 (ask: "shows only use-case wise yields for pre-DPI and DPI period") — the same Pre-DPI/Post-DPI Yield as the By Use-case table above, one row per Use-case, but collapsed across License Type (same <code>groupedByUseCase</code> grouping the By Use-case rollup tab elsewhere in this app uses) instead of broken out by it, for a quick use-case-only read without the License Type detail.</p>
+      <p class="hint" id="dfYieldUseCaseSimplePeriodHint" style="margin-top:-6px;"></p>
+      <div id="dfYieldByUseCaseSimple"></div>
 
-      <h3 class="dt-title" style="margin-top:30px;" id="dfYieldOctHeading">Oct 2026 — Overall</h3>
-      <div class="stat-row" id="dfYieldOctOverall"></div>
-      <h3 class="dt-title" style="margin-top:20px;">Oct 2026 — By Use-case</h3>
-      <div id="dfYieldOctByUseCase"></div>
-      <h3 class="dt-title" style="margin-top:24px;">Oct 2026 — By TSP</h3>
-      <div id="dfYieldOctByTsp"></div>
+      <h3 class="dt-title" style="margin-top:30px;">By Purpose Code</h3>
+      <p class="hint" style="margin-top:-6px;">Revenue and DF Yield attributed to each purpose code, using each FIU's own purpose-code mix as measured in a real September 2026 DPU report (held fixed going forward). Only defined during the DPI Pricing period — pre-DPI revenue has no purpose-code attribution at all — so this is summed across the DPI Pricing Start Date through the end of the FY, not split Pre-DPI/Post-DPI like the table above. The 8 DPU columns (the data-pull-duration slabs on the DPI Utility Rate Card — 13 Months down to Profile &amp; Summary) show each slab's share of that row's own DF volume. Only the Deposit-type portion of a row has a DPU-slab breakdown at all — a row's DPU percentages sum to its Deposit share of DF, not to 100%; the remainder is non-Deposit volume, which bills at a flat rate with no DPU concept. "—" (no table) if no DPI Pricing Start Date is set.</p>
+      <p class="hint" id="dfYieldPurposeCodePeriodHint" style="margin-top:-6px;"></p>
+      <div id="dfYieldByPurposeCode"></div>
 
-      <h3 class="dt-title" style="margin-top:30px;" id="dfYieldMarHeading">Mar 2027 — Overall</h3>
-      <div class="stat-row" id="dfYieldMarOverall"></div>
-      <h3 class="dt-title" style="margin-top:20px;">Mar 2027 — By Use-case</h3>
-      <div id="dfYieldMarByUseCase"></div>
-      <h3 class="dt-title" style="margin-top:24px;">Mar 2027 — By TSP</h3>
-      <div id="dfYieldMarByTsp"></div>
+      <h3 class="dt-title" style="margin-top:30px;">By Purpose Code — Yield Only</h3>
+      <p class="hint" style="margin-top:-6px;">Added 2026-10-27 (ask: "shows only purpose code wise yields for DPI period") — Revenue and Yield by Purpose Code, summed across the DPI Pricing period same as the By Purpose Code table above, but collapsed across License Type instead of broken out by it, for a quick purpose-code-only read without the License Type detail. Same "—" (no table) if no DPI Pricing Start Date is set.</p>
+      <p class="hint" id="dfYieldPurposeCodeSimplePeriodHint" style="margin-top:-6px;"></p>
+      <div id="dfYieldByPurposeCodeSimple"></div>
 
-      <h3 class="dt-title" style="margin-top:30px;">By TSP — Current Month vs Oct 2026 vs Mar 2027</h3>
-      <p class="hint" style="margin-top:-6px;">Each TSP's DF Yield compared across the three periods above, side by side.</p>
-      <div id="dfYieldTspByPeriod"></div>
+      <h3 class="dt-title" style="margin-top:30px;">By FIU x Purpose Code</h3>
+      <p class="hint" style="margin-top:-6px;">Per-FIU Pre-DPI and Post-DPI Yield for every (FIU, Purpose Code) combination with measured volume. <strong>Pre-DPI Yield always shows "—"</strong> — not missing data, but a real limit of the model: purpose-code attribution only exists once DPI Pricing revenue kicks in (pre-DPI revenue has no FI-type, let alone purpose-code, attribution at all — see the By Purpose Code hint above), so there's no Pre-DPI purpose-code yield for any FIU to show. Post-DPI Yield is summed across the DPI Pricing Start Date through the end of the FY, same as the By Purpose Code table above, just broken out per FIU instead of totaled. "—" (no table) if no DPI Pricing Start Date is set.</p>
+      <p class="hint" id="dfYieldFiuPurposeCodePeriodHint" style="margin-top:-6px;"></p>
+      <div id="dfYieldByFiuPurposeCode"></div>
     </section>
     <p class="hint" id="dfYieldCardEmpty">Upload this month's counts (left panel) to see DF Yield Analysis here.</p>
     </div>
@@ -676,12 +685,13 @@
       <div class="table-scroll">
         <table id="metaTable">
           <thead><tr>
-            <th>FIU ID</th><th>Legal Name</th><th>TSP</th><th>License Type</th><th>Use-case</th><th>Billing Model</th><th>Top 10</th><th></th>
+            <th>FIU ID</th><th>Legal Name</th><th>TSP</th><th>License Type</th><th>Use-case</th><th>Billing Model</th><th></th>
           </tr></thead>
           <tbody id="metaTableBody"></tbody>
         </table>
       </div>
       <div class="empty-state" id="metaEmptyState" style="display:none;">No FIU metadata yet — import a file or add one manually.</div>
+      <div class="status-msg" id="metaRowStatus"></div>
     </section>
   </div>
 
@@ -703,6 +713,7 @@
         </table>
       </div>
       <div class="empty-state" id="ycEmptyState" style="display:none;">No yield/CMGR entries yet — import from the FIU Metadata tab or add one manually.</div>
+      <div class="status-msg" id="ycRowStatus"></div>
     </section>
   </div>
 
@@ -738,6 +749,7 @@
         </table>
       </div>
       <div class="empty-state" id="histEmptyState" style="display:none;">No historical actuals recorded yet — upload a file above or add a row manually.</div>
+      <div class="status-msg" id="histRowStatus"></div>
     </section>
     <section class="card">
       <h2>Local data folder</h2>
@@ -767,6 +779,14 @@
   </form>
 </div>
 
+<!-- SheetJS (xlsx) — powers the "Export .xlsx" button on every data table
+     (ask: 2026-10-27, "add an export as .xlsx functionality next to all
+     tables"). Vendored locally under /vendor (not loaded from a CDN) to
+     match this app's existing zero-external-script-dependency setup — see
+     public/vendor/XLSX-LICENSE.txt (Apache-2.0). "core" build (not "full")
+     is enough since this app only ever writes a plain .xlsx, never reads
+     legacy .xls/codepage formats. -->
+<script src="/vendor/xlsx.core.min.js"></script>
 <script>
 (function(){
   const API = '';
@@ -881,10 +901,44 @@
     return v.toFixed(1) + '%';
   }
 
+  // Config tabs (FIU Metadata, Yield & CMGR, Historical Actuals) all feed
+  // /api/compute's inputs server-side (metadataById, yieldCmgrById,
+  // historicalByKey — see buildComputeResponse in server.js) but none of
+  // their own save/delete/import actions used to re-run compute afterward
+  // — so e.g. editing a FIU's Use-case here saved fine, but the Monthly
+  // Revenue tab and DF Yield Analysis sub-tab kept showing numbers from
+  // whatever was last computed, until something unrelated (re-selecting
+  // the counts file, nudging a date field) happened to trigger a fresh
+  // compute (ask: 2026-10-27, "I am updating the use-case for these FIUs
+  // using the metadata tab but the use-case wise Yield is not changing").
+  // Every config-tab save/delete/import handler below now calls this
+  // afterward: if a compute has already run at least once (lastResult is
+  // set — nothing to refresh before that, e.g. before any counts file or
+  // email has ever loaded), it kicks off the same triggerCompute() the
+  // side panel's own date/SUC/scenario fields already use, and reports
+  // back through the given status element so the change doesn't look like
+  // a silent no-op. Safe to fire from several tabs in a row —
+  // runCompute()/runComputeFromEmail()'s own computeInFlight+computeQueued
+  // guard (unchanged) already collapses a burst of these into one
+  // trailing run rather than racing.
+  async function refreshComputeAfterConfigChange(statusEl, verb){
+    if (!lastResult) return; // nothing computed yet — no stale view to refresh
+    if (statusEl){
+      statusEl.className = 'status-msg';
+      statusEl.textContent = verb + ' — recomputing revenue with the updated data…';
+    }
+    await triggerCompute();
+    if (statusEl){
+      statusEl.className = 'status-msg ok';
+      statusEl.textContent = verb + ' — revenue recomputed. See the Monthly Revenue tab for the refreshed figures.';
+    }
+  }
+
   // ================= FIU Metadata tab =================
   let metaRows = [];
   const metaBody = document.getElementById('metaTableBody');
   const metaEmpty = document.getElementById('metaEmptyState');
+  const metaRowStatus = document.getElementById('metaRowStatus');
 
   async function loadMeta(){
     const res = await apiFetch(API + '/api/fiu-metadata');
@@ -910,12 +964,11 @@
         '<td><input class="cell-input" data-f="licenseType" value="'+esc(r.licenseType)+'"></td>' +
         '<td><input class="cell-input" data-f="useCase" value="'+esc(r.useCase)+'"></td>' +
         '<td><input class="cell-input" data-f="billingModel" value="'+esc(r.billingModel)+'"></td>' +
-        '<td><select class="cell-input" data-f="topTen"><option value="false"'+(!r.topTen?' selected':'')+'>No</option><option value="true"'+(r.topTen?' selected':'')+'>Yes</option></select></td>' +
         '<td class="row" style="gap:4px;"><button class="btn-primary btn-small" data-act="save-meta">Save</button><button class="btn-secondary btn-small" data-act="cancel-meta">Cancel</button></td>' +
       '</tr>';
     }
     return '<tr data-id="'+esc(r.fiuId)+'">' +
-      '<td>'+esc(r.fiuId)+'</td><td>'+esc(r.legalName)+'</td><td>'+esc(r.tspName)+'</td><td>'+esc(r.licenseType)+'</td><td>'+esc(r.useCase)+'</td><td>'+esc(r.billingModel)+'</td><td>'+(r.topTen?'Yes':'No')+'</td>' +
+      '<td>'+esc(r.fiuId)+'</td><td>'+esc(r.legalName)+'</td><td>'+esc(r.tspName)+'</td><td>'+esc(r.licenseType)+'</td><td>'+esc(r.useCase)+'</td><td>'+esc(r.billingModel)+'</td>' +
       '<td class="row" style="gap:4px;"><button class="btn-secondary btn-small" data-act="edit-meta">Edit</button><button class="btn-danger btn-small" data-act="delete-meta">Delete</button></td>' +
     '</tr>';
   }
@@ -937,11 +990,13 @@
       const res = await apiFetch(API + '/api/fiu-metadata/' + encodeURIComponent(fiuId), {
         method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(updated)
       });
-      if (res.ok) await loadMeta(); else alert('Failed to save');
+      if (res.ok) { await loadMeta(); await refreshComputeAfterConfigChange(metaRowStatus, 'Saved'); }
+      else alert('Failed to save');
     } else if (btn.dataset.act === 'delete-meta'){
       if (!confirm('Delete metadata for ' + fiuId + '?')) return;
       await apiFetch(API + '/api/fiu-metadata/' + encodeURIComponent(fiuId), { method: 'DELETE' });
       await loadMeta();
+      await refreshComputeAfterConfigChange(metaRowStatus, 'Deleted');
     }
   });
 
@@ -953,7 +1008,7 @@
     if (metaRows.some(r => r.fiuId.toLowerCase() === fiuId.trim().toLowerCase())){
       alert('That FIU ID already exists — use Edit instead.'); return;
     }
-    const blank = { fiuId: fiuId.trim(), legalName:'', tspName:'', licenseType:'', useCase:'', billingModel:'', topTen:false };
+    const blank = { fiuId: fiuId.trim(), legalName:'', tspName:'', licenseType:'', useCase:'', billingModel:'' };
     metaRows.unshift(blank);
     metaBody.insertAdjacentHTML('afterbegin', metaRowHtml(blank, true));
   });
@@ -976,6 +1031,7 @@
         'Yield & CMGR: '+data.yieldCmgr.created+' created, '+data.yieldCmgr.updated+' updated.';
       await loadMeta();
       await loadYc();
+      await refreshComputeAfterConfigChange(metaRowStatus, 'Imported');
     } catch(err){
       seedStatus.className = 'status-msg err';
       seedStatus.textContent = err.message;
@@ -987,6 +1043,7 @@
   let ycRows = [];
   const ycBody = document.getElementById('ycTableBody');
   const ycEmpty = document.getElementById('ycEmptyState');
+  const ycRowStatus = document.getElementById('ycRowStatus');
 
   async function loadYc(){
     const res = await apiFetch(API + '/api/yield-cmgr');
@@ -1036,11 +1093,13 @@
       const res = await apiFetch(API + '/api/yield-cmgr/' + encodeURIComponent(fiuId), {
         method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(updated)
       });
-      if (res.ok) await loadYc(); else alert('Failed to save');
+      if (res.ok) { await loadYc(); await refreshComputeAfterConfigChange(ycRowStatus, 'Saved'); }
+      else alert('Failed to save');
     } else if (btn.dataset.act === 'delete-yc'){
       if (!confirm('Delete yield/CMGR for ' + fiuId + '?')) return;
       await apiFetch(API + '/api/yield-cmgr/' + encodeURIComponent(fiuId), { method: 'DELETE' });
       await loadYc();
+      await refreshComputeAfterConfigChange(ycRowStatus, 'Deleted');
     }
   });
 
@@ -1062,6 +1121,7 @@
   let histEditingKey = null;
   const histBody = document.getElementById('histTableBody');
   const histEmpty = document.getElementById('histEmptyState');
+  const histRowStatus = document.getElementById('histRowStatus');
   const histMonthFilter = document.getElementById('histMonthFilter');
 
   function monthLabelFromKey(ym){
@@ -1142,11 +1202,13 @@
       const res = await apiFetch(API + '/api/historical-actuals', {
         method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(updated)
       });
-      if (res.ok) { histEditingKey = null; await loadHist(); } else alert('Failed to save');
+      if (res.ok) { histEditingKey = null; await loadHist(); await refreshComputeAfterConfigChange(histRowStatus, 'Saved'); }
+      else alert('Failed to save');
     } else if (btn.dataset.act === 'delete-hist'){
       if (!confirm('Delete the recorded actual for ' + row.fiuId + ' — ' + monthLabelFromKey(row.month) + '?')) return;
       await apiFetch(API + '/api/historical-actuals/' + encodeURIComponent(row.fiuId) + '/' + encodeURIComponent(row.month), { method: 'DELETE' });
       await loadHist();
+      await refreshComputeAfterConfigChange(histRowStatus, 'Deleted');
     }
   });
 
@@ -1199,6 +1261,7 @@
       histUploadStatus.textContent = 'Used sheet "'+data.sheetUsed+'" for '+monthLabelFromKey(data.month)+': '+data.created+' created, '+data.updated+' updated'+(data.skipped ? ', '+data.skipped+' row(s) skipped (no FIU ID or no usable Revenue/AU/DF value)' : '')+(data.mergedFiuIds && data.mergedFiuIds.length ? ', '+data.mergedFiuIds.length+' FIU ID(s) appeared more than once and had their Revenue/AU/DF summed into one row: '+data.mergedFiuIds.join(', ') : '')+'.';
       histMonthFilter.value = month;
       await loadHist();
+      await refreshComputeAfterConfigChange(histRowStatus, 'Uploaded');
     } catch(err){
       histUploadStatus.className = 'status-msg err';
       histUploadStatus.textContent = err.message;
@@ -1420,10 +1483,14 @@
 
   // Dispatches to whichever source currently drives the view — used by the
   // as-of date / FY start month / SUC Start Date change handlers below so
-  // they don't need to know which source is active.
+  // they don't need to know which source is active. Returns the underlying
+  // runCompute()/runComputeFromEmail(false) promise (added 2026-10-27, no
+  // behavior change for existing fire-and-forget callers below, which
+  // already ignored any return value) so refreshComputeAfterConfigChange
+  // (FIU Metadata/Yield & CMGR/Historical Actuals tabs, above) can await a
+  // config-change-triggered recompute before updating its own status line.
   function triggerCompute(){
-    if (countsSource === 'file') runCompute();
-    else runComputeFromEmail(false);
+    return countsSource === 'file' ? runCompute() : runComputeFromEmail(false);
   }
 
   countsFile.addEventListener('change', function(){
@@ -1838,12 +1905,35 @@
       baseline: forecastCache.baseline ? forecastCache.baseline[i] : null,
       actual: forecastCache.actual[i]
     }));
+    // Total row (ask: 2026-10-26, "add a total row at the bottom for the
+    // 2nd, 3rd and 4th columns") — Live Projection, Original Plan, and
+    // Actual each summed across the FY; a month with no value for a column
+    // (e.g. Actual before it's recorded, or Original Plan if that baseline
+    // was never set) just contributes nothing, same "skip, don't guess"
+    // rule as everywhere else on this page. Variance/Variance % are left
+    // blank — a summed variance or an averaged percentage wouldn't mean
+    // what either column means per month, so they're not totaled.
+    const sumDefined = vals => vals.reduce((s, v) => (v===null||v===undefined||isNaN(v)) ? s : s+v, 0);
+    const totalProjected = sumDefined(rows.map(r=>r.projected));
+    const totalBaseline = sumDefined(rows.map(r=>r.baseline));
+    const totalActual = sumDefined(rows.map(r=>r.actual));
     renderDataTable({
       containerId: 'forecastTable',
+      exportFileName: 'Month-wise figures',
       rows,
       searchable: false,
       emptyMessage: 'No data.',
-      maxHeight: '360px',
+      // No maxHeight here (ask: 2026-10-26, "increase table height so that
+      // scrolling is not required") — falls back to .table-scroll's own
+      // 70vh cap, comfortably taller than all 12 FY rows plus the Total
+      // row, so the table renders in full with no inner scrollbar.
+      footer: () => '<tr><td>Total</td>' +
+        '<td class="num">'+fmtCurrency(totalProjected)+'</td>' +
+        '<td class="num">'+(rows.some(r=>r.baseline!==null&&r.baseline!==undefined) ? fmtCurrency(totalBaseline) : '—')+'</td>' +
+        '<td class="num">'+(rows.some(r=>r.actual!==null&&r.actual!==undefined) ? fmtCurrency(totalActual) : '—')+'</td>' +
+        '<td class="num">—</td>' +
+        '<td class="num">—</td>' +
+        '</tr>',
       columns: [
         { key:'label', label:'Month', value: r => r.label },
         { key:'projected', label:'Live Projection', numeric:true, value:r=>r.projected, render:r=> fmtCurrency(r.projected) },
@@ -2067,6 +2157,50 @@
     ].join('');
   }
 
+  // Excel export for every renderDataTable instance (ask: 2026-10-27, "add
+  // an export as .xlsx functionality next to all tables"). Exports exactly
+  // the columns and rows currently shown — current search filter and sort
+  // order included, so what's exported matches what's on screen — using
+  // each column's raw `value()` (not its formatted `render()` HTML), so
+  // numbers land in Excel as real numbers (sortable/summable there), not
+  // text, rounded to 2 decimals for readability (this app already treats
+  // its figures as estimates, not exact accounting figures — see the chat
+  // feature's system prompt). Deliberately does NOT include a table's
+  // footer/Total row: a footer can be a weighted-average Yield or another
+  // derived figure rather than a plain sum (see e.g. the Contribution %
+  // columns throughout this app), and silently recomputing one here risked
+  // shipping a wrong number dressed up as one of this app's real totals —
+  // safer to leave totals to the on-screen footer and Excel's own SUM().
+  function sanitizeXlsxSheetName(s){
+    // Excel sheet names: max 31 chars, and \ / ? * [ ] : are not allowed.
+    return String(s || 'Export').replace(/[\\/?*[\]:]/g, ' ').replace(/\s+/g,' ').trim().slice(0, 31) || 'Export';
+  }
+  function sanitizeXlsxFileName(s){
+    return String(s || 'export').replace(/[\\/?*:"<>|]/g, '-').replace(/\s+/g,' ').trim() || 'export';
+  }
+  function exportTableToXlsx(config, rows){
+    if (typeof XLSX === 'undefined' || !XLSX.utils){
+      alert('Excel export isn\'t available right now (the export library didn\'t load) — try reloading the page.');
+      return;
+    }
+    const cols = config.columns.filter(c => c.exportable !== false);
+    const header = cols.map(c => c.label);
+    const aoa = [header].concat(rows.map(r => cols.map(c => {
+      const raw = c.value ? c.value(r) : r[c.key];
+      if (raw === null || raw === undefined || (typeof raw === 'number' && isNaN(raw))) return '';
+      if (typeof raw === 'number' && c.numeric) return Math.round(raw * 100) / 100;
+      return raw;
+    })));
+    const ws = XLSX.utils.aoa_to_sheet(aoa);
+    // Reasonable default column widths — wide enough for the header/a
+    // typical value without being needlessly wide for a short numeric one.
+    ws['!cols'] = cols.map(c => ({ wch: Math.max(10, Math.min(32, String(c.label||'').length + 4)) }));
+    const wb = XLSX.utils.book_new();
+    const baseName = config.exportFileName || config.searchPlaceholder || 'Export';
+    XLSX.utils.book_append_sheet(wb, ws, sanitizeXlsxSheetName(baseName));
+    XLSX.writeFile(wb, sanitizeXlsxFileName(baseName) + '.xlsx');
+  }
+
   // Generic sortable + searchable data table. Fully owns `config.containerId`'s
   // innerHTML. Click a header to sort by that column (again to flip direction);
   // the search box filters rows by substring match across each column's raw
@@ -2083,7 +2217,10 @@
   //     from the full, unfiltered row set — a "Total" row shouldn't change
   //     just because someone typed into the search box),
   //   customSorts: { key: row => value } for a default sort that isn't tied
-  //     to a visible column
+  //     to a visible column,
+  //   exportable (default true), exportFileName — see exportTableToXlsx()
+  //     below (ask: 2026-10-27, "add an export as .xlsx functionality next
+  //     to all tables").
   // }
   function renderDataTable(config){
     const container = document.getElementById(config.containerId);
@@ -2131,7 +2268,8 @@
       return config.columns.map(c => {
         const active = state.sortKey === c.key;
         const arrow = active ? (state.sortDir === 'asc' ? ' ▲' : ' ▼') : '';
-        return '<th class="'+(c.numeric?'num ':'')+'sortable" data-key="'+esc(c.key)+'" title="Sort by '+esc(c.label)+'">'+esc(c.label)+arrow+'</th>';
+        const widthAttr = c.width ? ' style="width:'+esc(c.width)+';"' : '';
+        return '<th class="'+(c.numeric?'num ':'')+'sortable"'+widthAttr+' data-key="'+esc(c.key)+'" title="Sort by '+esc(c.label)+'">'+esc(c.label)+arrow+'</th>';
       }).join('');
     }
     function renderBody(rows){
@@ -2143,7 +2281,8 @@
           const tdClass = [c.numeric ? 'num' : '', extra].filter(Boolean).join(' ');
           const titleText = c.cellTitle ? c.cellTitle(r) : '';
           const titleAttr = titleText ? ' title="'+esc(titleText)+'"' : '';
-          return '<td'+(tdClass?' class="'+tdClass+'"':'')+titleAttr+'>'+(c.render ? c.render(r) : esc(c.value ? c.value(r) : r[c.key]))+'</td>';
+          const widthAttr = c.width ? ' style="width:'+esc(c.width)+';"' : '';
+          return '<td'+(tdClass?' class="'+tdClass+'"':'')+titleAttr+widthAttr+'>'+(c.render ? c.render(r) : esc(c.value ? c.value(r) : r[c.key]))+'</td>';
         }).join('');
         return '<tr'+(cls?' class="'+cls+'"':'')+'>'+cells+'</tr>';
       }).join('');
@@ -2166,6 +2305,13 @@
       inp.addEventListener('input', function(){ state.search = inp.value; updateBody(); });
     }
 
+    function wireExport(){
+      if (config.exportable === false) return;
+      const btn = container.querySelector('.btn-export-xlsx');
+      if (!btn) return;
+      btn.addEventListener('click', function(){ exportTableToXlsx(config, computeRows()); });
+    }
+
     function updateBody(){
       const rows = computeRows();
       const tbody = container.querySelector('tbody');
@@ -2179,8 +2325,16 @@
 
     function fullRender(){
       const rows = computeRows();
+      const searchHtml = config.searchable === false ? '' : '<input type="text" class="table-search" placeholder="Search '+esc(config.searchPlaceholder||'this table')+'…" />';
+      // Export .xlsx button (ask: 2026-10-27, "add an export as .xlsx
+      // functionality next to all tables, with a colour filled button for
+      // better visibility") — sits next to the search box in one toolbar
+      // row, shown even on a table with searchable:false (e.g. the
+      // Month-wise figures table) so every table gets the button.
+      const exportHtml = config.exportable === false ? '' : '<button type="button" class="btn-export-xlsx" title="Download this table as an Excel file">&#x2B07; Export .xlsx</button>';
+      const toolbarHtml = (searchHtml || exportHtml) ? '<div class="table-toolbar">'+searchHtml+exportHtml+'</div>' : '';
       container.innerHTML =
-        (config.searchable === false ? '' : '<input type="text" class="table-search" placeholder="Search '+esc(config.searchPlaceholder||'this table')+'…" />') +
+        toolbarHtml +
         '<div class="table-scroll" style="margin-top:8px;'+(config.maxHeight?(' max-height:'+config.maxHeight+';'):'')+'">' +
           '<table><thead><tr>'+renderHead()+'</tr></thead><tbody>'+renderBody(rows)+'</tbody>' +
           (config.footer ? '<tfoot>'+config.footer(config.rows)+'</tfoot>' : '') +
@@ -2188,6 +2342,7 @@
         '</div>';
       wireSearch();
       wireSort();
+      wireExport();
     }
 
     fullRender();
@@ -2376,6 +2531,7 @@
     // ==================== 1) Monthly revenue details ====================
     renderDataTable({
       containerId: 'monthlyRevenueTable',
+      exportFileName: 'Monthly revenue details',
       rows: data.rows,
       rowClass,
       defaultSortKey: 'currentRevenue',
@@ -2400,6 +2556,7 @@
     // ==================== 2) Monthly AU count ====================
     renderDataTable({
       containerId: 'monthlyAuTable',
+      exportFileName: 'Monthly AU count',
       rows: auRows,
       defaultSortKey: 'auCount',
       defaultSortDir: 'desc',
@@ -2424,6 +2581,7 @@
     // kicks in, so it's visible here even while SUC isn't active yet.
     renderDataTable({
       containerId: 'monthlyDfTable',
+      exportFileName: 'Monthly DF count',
       rows: dfRows,
       defaultSortKey: 'dfCount',
       defaultSortDir: 'desc',
@@ -2452,6 +2610,7 @@
     }));
     renderDataTable({
       containerId: 'annualRevenueTable',
+      exportFileName: 'Annual revenue details',
       rows: data.rows,
       rowClass,
       defaultSortKey: 'fyTotal',
@@ -2495,6 +2654,7 @@
     const auFyGrandTotal = auRows.reduce((s,r) => s + auFyValue(r), 0);
     renderDataTable({
       containerId: 'annualAuTable',
+      exportFileName: 'Annual AU count',
       rows: auRows,
       defaultSortKey: 'm'+currentIndex,
       defaultSortDir: 'desc',
@@ -2545,6 +2705,7 @@
 
     renderDataTable({
       containerId: 'annualDfTable',
+      exportFileName: 'Annual DF count',
       rows: dfRows,
       defaultSortKey: 'm'+currentIndex,
       defaultSortDir: 'desc',
@@ -2565,23 +2726,41 @@
     });
 
     // ==================== 7) Top 10 - Lending / Top 10 - PFM ====================
-    // FIUs flagged Top 10 = Yes on the FIU Metadata tab, split by Use-case.
-    // Reuses the same month-column defs (monthRevenueCols/monthAuCols/
-    // monthDfCols) built above for the main Annual tables — they're generic
-    // functions of data.months, not tied to a particular row set.
+    // Computed dynamically — the 10 FIUs with the highest FY Total revenue
+    // within each Use-case, not a manually-maintained flag (ask: 2026-10-26
+    // — "remove the top 10 setting as a static config and show the top 10
+    // in the tool based on the actual values"). Ranked by the exact same FY
+    // Total figure the Revenue table's own "FY Total" column shows (and
+    // these tables were already default-sorted by, even back when Top 10
+    // was a static flag) — a FIU with no billable revenue all FY just sums
+    // to 0 and naturally won't rank near the top, rather than being
+    // specially excluded. Reuses the same month-column defs
+    // (monthRevenueCols/monthAuCols/monthDfCols) built above for the main
+    // Annual tables — they're generic functions of data.months, not tied to
+    // a particular row set.
     const useCaseNorm = uc => String(uc||'').trim().toLowerCase();
-    const topTenLendingRows = data.rows.filter(r => r.topTen && useCaseNorm(r.useCase) === 'lending');
-    const topTenPfmRows = data.rows.filter(r => r.topTen && useCaseNorm(r.useCase) === 'pfm');
+    const fyRevenueTotal = r => r.monthly.reduce((a,m,i)=>a+monthRevenue(r,i),0);
+    function topNByFyRevenue(useCase, n){
+      return data.rows
+        .filter(r => useCaseNorm(r.useCase) === useCase)
+        .map(r => ({ r, total: fyRevenueTotal(r) }))
+        .sort((a,b) => b.total - a.total)
+        .slice(0, n)
+        .map(x => x.r);
+    }
+    const topTenLendingRows = topNByFyRevenue('lending', 10);
+    const topTenPfmRows = topNByFyRevenue('pfm', 10);
 
     setCardVisible('topTenLendingCard', true);
     renderDataTable({
       containerId: 'topTenLendingRevenueTable',
+      exportFileName: 'Top 10 Lending revenue',
       rows: topTenLendingRows,
       rowClass,
       defaultSortKey: 'fyTotal',
       defaultSortDir: 'desc',
       searchPlaceholder: 'FIU ID, legal name, billing model…',
-      emptyMessage: 'No FIUs are flagged Top 10 with Use-case "Lending".',
+      emptyMessage: 'No FIUs have a Use-case of "Lending".',
       maxHeight: '360px',
       columns: [
         { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
@@ -2589,8 +2768,8 @@
         { key:'billingModel', label:'Billing Model', value: r=>r.billingModel, render: r => esc(r.billingModel||'—') + periodBadge(r) },
         ...monthRevenueCols,
         { key:'fyTotal', label:'FY Total', numeric:true,
-          value: r => r.monthly.reduce((a,m,i)=>a+monthRevenue(r,i),0),
-          render: r => fmtCurrency(r.monthly.reduce((a,m,i)=>a+monthRevenue(r,i),0)) },
+          value: r => fyRevenueTotal(r),
+          render: r => fmtCurrency(fyRevenueTotal(r)) },
       ],
       footer: () => {
         const monthTotals = data.months.map((m,i) => sumMonthValue(topTenLendingRows,i,monthRevenueValue));
@@ -2600,11 +2779,12 @@
     });
     renderDataTable({
       containerId: 'topTenLendingDfTable',
+      exportFileName: 'Top 10 Lending DF count',
       rows: topTenLendingRows,
       defaultSortKey: 'm'+currentIndex,
       defaultSortDir: 'desc',
       searchPlaceholder: 'FIU ID, legal name…',
-      emptyMessage: 'No FIUs are flagged Top 10 with Use-case "Lending".',
+      emptyMessage: 'No FIUs have a Use-case of "Lending".',
       maxHeight: '340px',
       columns: [
         { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
@@ -2618,12 +2798,13 @@
     setCardVisible('topTenPfmCard', true);
     renderDataTable({
       containerId: 'topTenPfmRevenueTable',
+      exportFileName: 'Top 10 PFM revenue',
       rows: topTenPfmRows,
       rowClass,
       defaultSortKey: 'fyTotal',
       defaultSortDir: 'desc',
       searchPlaceholder: 'FIU ID, legal name, billing model…',
-      emptyMessage: 'No FIUs are flagged Top 10 with Use-case "PFM".',
+      emptyMessage: 'No FIUs have a Use-case of "PFM".',
       maxHeight: '360px',
       columns: [
         { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
@@ -2631,8 +2812,8 @@
         { key:'billingModel', label:'Billing Model', value: r=>r.billingModel, render: r => esc(r.billingModel||'—') + periodBadge(r) },
         ...monthRevenueCols,
         { key:'fyTotal', label:'FY Total', numeric:true,
-          value: r => r.monthly.reduce((a,m,i)=>a+monthRevenue(r,i),0),
-          render: r => fmtCurrency(r.monthly.reduce((a,m,i)=>a+monthRevenue(r,i),0)) },
+          value: r => fyRevenueTotal(r),
+          render: r => fmtCurrency(fyRevenueTotal(r)) },
       ],
       footer: () => {
         const monthTotals = data.months.map((m,i) => sumMonthValue(topTenPfmRows,i,monthRevenueValue));
@@ -2642,11 +2823,12 @@
     });
     renderDataTable({
       containerId: 'topTenPfmAuTable',
+      exportFileName: 'Top 10 PFM AU count',
       rows: topTenPfmRows,
       defaultSortKey: 'm'+currentIndex,
       defaultSortDir: 'desc',
       searchPlaceholder: 'FIU ID, legal name…',
-      emptyMessage: 'No FIUs are flagged Top 10 with Use-case "PFM".',
+      emptyMessage: 'No FIUs have a Use-case of "PFM".',
       maxHeight: '340px',
       columns: [
         { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
@@ -2658,11 +2840,12 @@
     });
     renderDataTable({
       containerId: 'topTenPfmDfTable',
+      exportFileName: 'Top 10 PFM DF count',
       rows: topTenPfmRows,
       defaultSortKey: 'm'+currentIndex,
       defaultSortDir: 'desc',
       searchPlaceholder: 'FIU ID, legal name…',
-      emptyMessage: 'No FIUs are flagged Top 10 with Use-case "PFM".',
+      emptyMessage: 'No FIUs have a Use-case of "PFM".',
       maxHeight: '340px',
       columns: [
         { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
@@ -2682,24 +2865,26 @@
     // { revenue: [...], au: [...], df: [...] } from the backend.
     setCardVisible('groupTspCard', true);
     renderGroupTable('groupTspRevenue', 'TSP', data.groupedByTsp.revenue, data.months, currentIndex, 'revenue');
-    renderGroupTable('groupTspAu', 'TSP', data.groupedByTsp.au, data.months, currentIndex, 'count');
-    renderGroupTable('groupTspDf', 'TSP', data.groupedByTsp.df, data.months, currentIndex, 'count');
+    renderGroupTable('groupTspAu', 'TSP', data.groupedByTsp.au, data.months, currentIndex, 'count', { metricLabel: 'AU count' });
+    renderGroupTable('groupTspDf', 'TSP', data.groupedByTsp.df, data.months, currentIndex, 'count', { metricLabel: 'DF count' });
 
     setCardVisible('groupUseCaseCard', true);
     renderGroupTable('groupUseCaseRevenue', 'Use-case', data.groupedByUseCase.revenue, data.months, currentIndex, 'revenue');
-    renderGroupTable('groupUseCaseAu', 'Use-case', data.groupedByUseCase.au, data.months, currentIndex, 'count');
-    renderGroupTable('groupUseCaseDf', 'Use-case', data.groupedByUseCase.df, data.months, currentIndex, 'count');
+    renderGroupTable('groupUseCaseAu', 'Use-case', data.groupedByUseCase.au, data.months, currentIndex, 'count', { metricLabel: 'AU count' });
+    renderGroupTable('groupUseCaseDf', 'Use-case', data.groupedByUseCase.df, data.months, currentIndex, 'count', { metricLabel: 'DF count' });
 
     setCardVisible('groupLicenseCard', true);
     renderGroupTable('groupLicenseRevenue', 'License Type', data.groupedByLicense.revenue, data.months, currentIndex, 'revenue');
-    renderGroupTable('groupLicenseAu', 'License Type', data.groupedByLicense.au, data.months, currentIndex, 'count');
-    renderGroupTable('groupLicenseDf', 'License Type', data.groupedByLicense.df, data.months, currentIndex, 'count');
+    renderGroupTable('groupLicenseAu', 'License Type', data.groupedByLicense.au, data.months, currentIndex, 'count', { metricLabel: 'AU count' });
+    renderGroupTable('groupLicenseDf', 'License Type', data.groupedByLicense.df, data.months, currentIndex, 'count', { metricLabel: 'DF count' });
 
     // ---- DF Yield Analysis ----
-    if (data.dfYieldAnalysis){
-      setCardVisible('dfYieldCard', true);
-      renderDfYieldAnalysis(data.dfYieldAnalysis);
-    }
+    setCardVisible('dfYieldCard', true);
+    renderDfYieldByUseCase(data);
+    renderDfYieldByUseCaseSimple(data);
+    renderDfYieldByPurposeCode(data.dfYieldAnalysis ? data.dfYieldAnalysis.purposeCodeYield : null);
+    renderDfYieldByPurposeCodeSimple(data.dfYieldAnalysis ? data.dfYieldAnalysis.purposeCodeYield : null);
+    renderDfYieldByFiuPurposeCode(data.dfYieldAnalysis ? data.dfYieldAnalysis.purposeCodeYield : null);
 
     // ---- Charts tab ----
     renderUseCaseCharts(data);
@@ -2836,6 +3021,7 @@
     ].join('');
     renderDataTable({
       containerId: 'unbilledTable',
+      exportFileName: 'Unbilled FIUs',
       rows,
       customSorts: { totalCount: r => (r.auCount||0)+(r.dfCount||0) },
       defaultSortKey: 'totalCount',
@@ -2901,8 +3087,10 @@
       });
       footerCells += '<td class="num">'+(curTotal?'100.0%':'—')+'</td>';
     }
+    const metricLabel = opts.metricLabel || (isRevenue ? 'Revenue' : 'Count');
     renderDataTable({
       containerId: containerId + '-dt',
+      exportFileName: 'By ' + dimensionLabel + ' - ' + metricLabel,
       rows: groups,
       defaultSortKey: 'm'+(currentIndex||0),
       defaultSortDir: 'desc',
@@ -2914,90 +3102,387 @@
     });
   }
 
-  // analysis: { periods, current, oct2026, mar2027, tspByPeriod } from the
-  // backend's dfYieldAnalysis (see server.js). Each of current/oct2026/
-  // mar2027 is { label, index, overall, byUseCase, byTsp }; index is -1 (and
-  // overall/byUseCase/byTsp are empty) if that calendar month falls outside
-  // the current fiscal year — handled here as an empty-state rather than a
-  // crash so an unusual FY Start Month doesn't break the page.
-  function renderDfYieldAnalysis(analysis){
-    ['Current','Oct','Mar'].forEach((prefix, i) => {
-      const period = [analysis.current, analysis.oct2026, analysis.mar2027][i];
-      const heading = document.getElementById('dfYield'+prefix+'Heading');
-      if (heading) heading.textContent = period.label + ' — Overall';
-      renderDfYieldOverallTile('dfYield'+prefix+'Overall', period);
-      renderDfYieldGroupTable('dfYield'+prefix+'ByUseCase', 'Use-case', period.byUseCase);
-      renderDfYieldGroupTable('dfYield'+prefix+'ByTsp', 'TSP', period.byTsp);
+  // ---- DF Yield Analysis, by Use-case x License Type (replaces the old
+  // per-period/TSP/purpose-code breakdown — ask: 2026-10-26, "give me a tab
+  // that shows use-case wise Annual Revenue, Yield, Pre-DPI Revenue,
+  // Pre-DPI Yield, Post DPI-Revenue, Post-DPI Yield. Replace existing
+  // fields under the 'DF Yield' tab with these.", then "add a license type
+  // column to both these tables so we can look at DF yields basis a
+  // combination of use-case and license type") ----
+  //
+  // One row per (Use-case, License Type) pair actually present
+  // (data.groupedByUseCaseLicense — same grouping/exclusion rules as every
+  // other grouped table on the page, just keyed on the pair instead of
+  // Use-case alone), each FY month bucketed into Pre-DPI / Post-DPI around
+  // the global DPI Pricing Start Date — same boundary, same
+  // sumRange/dpiStartIndexFor helpers, as the Summary tab's Pre-DPI/DPI
+  // Period Revenue tiles. "Yield" is Revenue ÷ DF Count for whichever
+  // period that column covers — same DF Yield definition as before, just
+  // no longer split by calendar month (Current/Oct/Mar), since
+  // Annual/Pre-DPI/Post-DPI already cover the whole FY between them.
+  function renderDfYieldByUseCase(data){
+    const months = data.months || [];
+    const ucltRevenue = (data.groupedByUseCaseLicense && data.groupedByUseCaseLicense.revenue) || [];
+    const ucltDf = (data.groupedByUseCaseLicense && data.groupedByUseCaseLicense.df) || [];
+    const findUcltGroup = (groups, useCase, licenseType) => (groups || []).find(g => g.useCase === useCase && g.licenseType === licenseType) || null;
+    const overallDfByMonth = months.map((_, i) => ucltDf.reduce((s, g) => s + ((g.monthly && g.monthly[i]) || 0), 0));
+
+    const dpiStartIndex = dpiStartIndexFor(months);
+    const dpiActive = dpiStartIndex < months.length;
+    const preDpiLabel = dpiStartIndex > 0 ? (months[0].label + ' – ' + months[dpiStartIndex - 1].label) : 'none (DPI Pricing starts in the FY\'s first month)';
+    const dpiLabel = dpiActive ? (months[dpiStartIndex].label + ' – ' + months[months.length - 1].label) : 'none — no DPI Pricing Start Date is set';
+    const hint = document.getElementById('dfYieldPeriodHint');
+    if (hint) hint.textContent = 'Pre-DPI period: ' + preDpiLabel + '. Post-DPI period: ' + dpiLabel + '.';
+
+    const yieldOf = (rev, df) => (df > 0 ? rev / df : null);
+
+    const rows = ucltRevenue.map(g => {
+      const dfGroup = findUcltGroup(ucltDf, g.useCase, g.licenseType);
+      const dfMonthly = (dfGroup && dfGroup.monthly) || [];
+      const annualRevenue = sumRange(g.monthly, 0, g.monthly.length);
+      const annualDf = sumRange(dfMonthly, 0, dfMonthly.length);
+      const preDpiRevenue = sumRange(g.monthly, 0, dpiStartIndex);
+      const preDpiDf = sumRange(dfMonthly, 0, dpiStartIndex);
+      const postDpiRevenue = dpiActive ? sumRange(g.monthly, dpiStartIndex, g.monthly.length) : 0;
+      const postDpiDf = dpiActive ? sumRange(dfMonthly, dpiStartIndex, dfMonthly.length) : 0;
+      return {
+        useCase: g.useCase,
+        licenseType: g.licenseType,
+        fiuCount: g.fiuCount,
+        annualRevenue, annualYield: yieldOf(annualRevenue, annualDf),
+        preDpiRevenue, preDpiYield: yieldOf(preDpiRevenue, preDpiDf),
+        postDpiRevenue: dpiActive ? postDpiRevenue : null,
+        postDpiYield: dpiActive ? yieldOf(postDpiRevenue, postDpiDf) : null,
+      };
     });
-    renderDfYieldTspByPeriod('dfYieldTspByPeriod', analysis.periods, analysis.tspByPeriod);
-  }
 
-  function renderDfYieldOverallTile(containerId, period){
-    const el = document.getElementById(containerId);
-    if (!el) return;
-    if (period.index < 0 || !period.overall){
-      el.innerHTML = '<div class="empty-state" style="padding:14px;">'+esc(period.label)+' isn\'t part of the current fiscal year.</div>';
+    const totalAnnualRevenue = sumRange(months.map((_,i)=>ucltRevenue.reduce((s,g)=>s+((g.monthly&&g.monthly[i])||0),0)), 0, months.length);
+    const totalAnnualDf = sumRange(overallDfByMonth, 0, overallDfByMonth.length);
+    const totalPreDpiRevenue = sumRange(months.map((_,i)=>ucltRevenue.reduce((s,g)=>s+((g.monthly&&g.monthly[i])||0),0)), 0, dpiStartIndex);
+    const totalPreDpiDf = sumRange(overallDfByMonth, 0, dpiStartIndex);
+    const totalPostDpiRevenue = dpiActive ? sumRange(months.map((_,i)=>ucltRevenue.reduce((s,g)=>s+((g.monthly&&g.monthly[i])||0),0)), dpiStartIndex, months.length) : 0;
+    const totalPostDpiDf = dpiActive ? sumRange(overallDfByMonth, dpiStartIndex, overallDfByMonth.length) : 0;
+
+    const container = document.getElementById('dfYieldByUseCase');
+    if (!container) return;
+    if (!rows.length){
+      container.innerHTML = '<div class="empty-state" style="padding:14px;">No FIUs to group.</div>';
       return;
     }
-    const o = period.overall;
-    el.innerHTML = [
-      tile('Total Revenue', fmtCurrency(o.revenue)),
-      tile('Total DF Count', fmt(o.dfCount,0)),
-      tile('DF Yield', fmtYield(o.yield)),
-    ].join('');
-  }
-
-  // groups: [{ label, revenue, dfCount, yield }]
-  function renderDfYieldGroupTable(containerId, dimensionLabel, groups){
-    const el = document.getElementById(containerId);
-    if (!el) return;
-    if (!groups || !groups.length){
-      el.innerHTML = '<div class="empty-state" style="padding:14px;">No data for this period.</div>';
-      return;
-    }
-    el.innerHTML = '<div id="'+containerId+'-dt"></div>';
+    container.innerHTML = '<div id="dfYieldByUseCase-dt"></div>';
     renderDataTable({
-      containerId: containerId + '-dt',
-      rows: groups,
+      containerId: 'dfYieldByUseCase-dt',
+      exportFileName: 'DF Yield - By Use-case',
+      rows,
+      defaultSortKey: 'annualRevenue',
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'use-case or license type…',
+      emptyMessage: 'No FIUs to group.',
+      maxHeight: '420px',
+      columns: [
+        { key:'useCase', label:'Use-case', width:'140px', value: r=>r.useCase },
+        { key:'licenseType', label:'License Type', width:'140px', value: r=>r.licenseType },
+        // searchable:false on every numeric column below (bug fix,
+        // 2026-10-27, "search is not working properly. Entering 103 shows
+        // results where purpose code is 104"): the generic table search
+        // matches against each column's raw, full-precision value, not
+        // what's displayed — an unrounded revenue/yield figure's decimal
+        // digits can coincidentally contain whatever was typed, pulling in
+        // unrelated rows. searchPlaceholder already promises "use-case or
+        // license type…", so only those two columns should ever be
+        // searched — same fix applied to the By Purpose Code and By FIU x
+        // Purpose Code tables below.
+        { key:'annualRevenue', label:'Annual Revenue', numeric:true, searchable:false, value: r=>r.annualRevenue, render: r=>fmtCurrency(r.annualRevenue) },
+        { key:'annualYield', label:'Yield', numeric:true, searchable:false, value: r=>r.annualYield, render: r=>fmtYield(r.annualYield) },
+        { key:'preDpiRevenue', label:'Pre-DPI Revenue', numeric:true, searchable:false, value: r=>r.preDpiRevenue, render: r=>fmtCurrency(r.preDpiRevenue) },
+        { key:'preDpiYield', label:'Pre-DPI Yield', numeric:true, searchable:false, value: r=>r.preDpiYield, render: r=>fmtYield(r.preDpiYield) },
+        { key:'postDpiRevenue', label:'Post-DPI Revenue', numeric:true, searchable:false, value: r=>r.postDpiRevenue, render: r=> dpiActive ? fmtCurrency(r.postDpiRevenue) : '—' },
+        { key:'postDpiYield', label:'Post-DPI Yield', numeric:true, searchable:false, value: r=>r.postDpiYield, render: r=> dpiActive ? fmtYield(r.postDpiYield) : '—' },
+      ],
+      footer: () => '<tr><td colspan="2">Total</td>' +
+        '<td class="num">'+fmtCurrency(totalAnnualRevenue)+'</td>' +
+        '<td class="num">'+fmtYield(yieldOf(totalAnnualRevenue, totalAnnualDf))+'</td>' +
+        '<td class="num">'+fmtCurrency(totalPreDpiRevenue)+'</td>' +
+        '<td class="num">'+fmtYield(yieldOf(totalPreDpiRevenue, totalPreDpiDf))+'</td>' +
+        '<td class="num">'+(dpiActive?fmtCurrency(totalPostDpiRevenue):'—')+'</td>' +
+        '<td class="num">'+(dpiActive?fmtYield(yieldOf(totalPostDpiRevenue, totalPostDpiDf)):'—')+'</td>' +
+        '</tr>'
+    });
+  }
+
+  // ---- DF Yield Analysis, by Use-case only (ask: 2026-10-27, "shows only
+  // use-case wise yields for pre-DPI and DPI period") ----
+  // Same Pre-DPI/Post-DPI Yield math as renderDfYieldByUseCase above, but
+  // off the plain (non-compound) groupedByUseCase field instead of the
+  // compound groupedByUseCaseLicense — one row per Use-case, License Type
+  // collapsed away entirely (summing a licenseType's monthly figures into
+  // the Use-case total is exactly what groupedByUseCase already is, so
+  // this needed no new backend field at all). Yield-only, no Revenue
+  // columns — the By Use-case table above already shows those in more
+  // detail; this exists purely as a quick, uncluttered read.
+  function renderDfYieldByUseCaseSimple(data){
+    const months = data.months || [];
+    const ucRevenue = (data.groupedByUseCase && data.groupedByUseCase.revenue) || [];
+    const ucDf = (data.groupedByUseCase && data.groupedByUseCase.df) || [];
+    const findUcGroup = (groups, label) => (groups || []).find(g => g.label === label) || null;
+    const overallDfByMonth = months.map((_, i) => ucDf.reduce((s, g) => s + ((g.monthly && g.monthly[i]) || 0), 0));
+
+    const dpiStartIndex = dpiStartIndexFor(months);
+    const dpiActive = dpiStartIndex < months.length;
+    const preDpiLabel = dpiStartIndex > 0 ? (months[0].label + ' – ' + months[dpiStartIndex - 1].label) : 'none (DPI Pricing starts in the FY\'s first month)';
+    const dpiLabel = dpiActive ? (months[dpiStartIndex].label + ' – ' + months[months.length - 1].label) : 'none — no DPI Pricing Start Date is set';
+    const hint = document.getElementById('dfYieldUseCaseSimplePeriodHint');
+    if (hint) hint.textContent = 'Pre-DPI period: ' + preDpiLabel + '. Post-DPI period: ' + dpiLabel + '.';
+
+    const yieldOf = (rev, df) => (df > 0 ? rev / df : null);
+
+    const rows = ucRevenue.map(g => {
+      const dfGroup = findUcGroup(ucDf, g.label);
+      const dfMonthly = (dfGroup && dfGroup.monthly) || [];
+      const preDpiRevenue = sumRange(g.monthly, 0, dpiStartIndex);
+      const preDpiDf = sumRange(dfMonthly, 0, dpiStartIndex);
+      const postDpiRevenue = dpiActive ? sumRange(g.monthly, dpiStartIndex, g.monthly.length) : 0;
+      const postDpiDf = dpiActive ? sumRange(dfMonthly, dpiStartIndex, dfMonthly.length) : 0;
+      return {
+        useCase: g.label,
+        preDpiYield: yieldOf(preDpiRevenue, preDpiDf),
+        postDpiYield: dpiActive ? yieldOf(postDpiRevenue, postDpiDf) : null,
+      };
+    });
+
+    const totalPreDpiRevenue = sumRange(months.map((_,i)=>ucRevenue.reduce((s,g)=>s+((g.monthly&&g.monthly[i])||0),0)), 0, dpiStartIndex);
+    const totalPreDpiDf = sumRange(overallDfByMonth, 0, dpiStartIndex);
+    const totalPostDpiRevenue = dpiActive ? sumRange(months.map((_,i)=>ucRevenue.reduce((s,g)=>s+((g.monthly&&g.monthly[i])||0),0)), dpiStartIndex, months.length) : 0;
+    const totalPostDpiDf = dpiActive ? sumRange(overallDfByMonth, dpiStartIndex, overallDfByMonth.length) : 0;
+
+    const container = document.getElementById('dfYieldByUseCaseSimple');
+    if (!container) return;
+    if (!rows.length){
+      container.innerHTML = '<div class="empty-state" style="padding:14px;">No FIUs to group.</div>';
+      return;
+    }
+    container.innerHTML = '<div id="dfYieldByUseCaseSimple-dt"></div>';
+    renderDataTable({
+      containerId: 'dfYieldByUseCaseSimple-dt',
+      exportFileName: 'DF Yield - By Use-case (Yield Only)',
+      rows,
+      defaultSortKey: 'postDpiYield',
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'use-case…',
+      emptyMessage: 'No FIUs to group.',
+      maxHeight: '320px',
+      columns: [
+        { key:'useCase', label:'Use-case', width:'220px', value: r=>r.useCase },
+        { key:'preDpiYield', label:'Pre-DPI Yield', numeric:true, searchable:false, value: r=>r.preDpiYield, render: r=>fmtYield(r.preDpiYield) },
+        { key:'postDpiYield', label:'Post-DPI Yield', numeric:true, searchable:false, value: r=>r.postDpiYield, render: r=> dpiActive ? fmtYield(r.postDpiYield) : '—' },
+      ],
+      footer: () => '<tr><td>Total</td>' +
+        '<td class="num">'+fmtYield(yieldOf(totalPreDpiRevenue, totalPreDpiDf))+'</td>' +
+        '<td class="num">'+(dpiActive?fmtYield(yieldOf(totalPostDpiRevenue, totalPostDpiDf)):'—')+'</td>' +
+        '</tr>'
+    });
+  }
+
+  // ---- DF Yield Analysis, by Purpose Code x License Type (ask: 2026-10-26,
+  // "Add a purpose code wise count of Revenue and Yield to the DF Yield
+  // tab, along the lines of the previous update", then "add a license type
+  // column to both these tables so we can look at DF yields basis a
+  // combination of use-case and license type") ----
+  // pcy: data.dfYieldAnalysis.purposeCodeYield — pcy.totals:
+  // [{ purposeCode, licenseType, revenue, dfCount, yield }], one row per
+  // Purpose Code x License Type pair actually present, summed across the
+  // whole DPI Pricing period (see buildPurposeCodeTotals in server.js) —
+  // unlike the By Use-case table above, there's no Pre-DPI figure here at
+  // all, since purpose-code attribution only exists once DPI Pricing
+  // revenue kicks in.
+  function renderDfYieldByPurposeCode(pcy){
+    const hint = document.getElementById('dfYieldPurposeCodePeriodHint');
+    const container = document.getElementById('dfYieldByPurposeCode');
+    if (!container) return;
+    const totals = (pcy && pcy.totals) || [];
+    if (!pcy || !pcy.totalsDpiLabel){
+      if (hint) hint.textContent = 'No DPI Pricing Start Date is set — purpose-code figures only exist once DPI Pricing is active.';
+      container.innerHTML = '<div class="empty-state" style="padding:14px;">Set a DPI Pricing Start Date (left panel) to see this.</div>';
+      return;
+    }
+    if (hint) hint.textContent = 'DPI Pricing period shown: ' + pcy.totalsDpiLabel + '.';
+    if (!totals.length){
+      container.innerHTML = '<div class="empty-state" style="padding:14px;">No purpose-code data available.</div>';
+      return;
+    }
+    const totalRevenue = totals.reduce((s,r)=>s+(r.revenue||0),0);
+    const totalDfCount = totals.reduce((s,r)=>s+(r.dfCount||0),0);
+    // DPU rate-card columns (replaced the earlier flat "% of Traffic"
+    // column 2026-10-27 — ask: "add a column for each DPU in the DPI rate
+    // card and mention each DPU's contribution % to DF during the DPI
+    // period. Remove the column titled '% of Traffic'"). pcy.dpuSlabs is
+    // the 8-slab list server.js derives from SUC_DEPOSIT_RATE_CARD
+    // (lib/compute.js) in rate-card order — never hardcoded here, so a
+    // future rate-card change (a slab added/removed) shows up
+    // automatically. Each row's dpuSlabPct[slab.key] is that slab's volume
+    // as a % of the ROW's own dfCount (not the table total) — see the
+    // hint above the table: only Deposit-type volume has a DPU-slab
+    // breakdown, so a row's DPU percentages sum to its Deposit share of
+    // DF, not to 100%.
+    const dpuSlabs = (pcy && pcy.dpuSlabs) || [];
+    const dpuColumns = dpuSlabs.map(slab => ({
+      key: 'dpu_' + slab.key,
+      label: slab.label,
+      numeric: true,
+      width: '92px',
+      searchable: false, // see the searchable:false note on revenue/yield below
+      value: r => (r.dpuSlabPct && r.dpuSlabPct[slab.key] != null) ? r.dpuSlabPct[slab.key] : null,
+      render: r => fmtPct((r.dpuSlabPct && r.dpuSlabPct[slab.key] != null) ? r.dpuSlabPct[slab.key] : null)
+    }));
+    // Footer per DPU column: that slab's volume summed across every row,
+    // as a % of the table's total dfCount — reconstructed from each row's
+    // own dpuSlabPct x dfCount since that's the only form the slab volume
+    // reaches the frontend in.
+    const dpuSlabVolume = (r, slabKey) => (r.dpuSlabPct && r.dpuSlabPct[slabKey] != null)
+      ? (r.dpuSlabPct[slabKey] / 100) * (r.dfCount || 0) : 0;
+    const dpuFooterCells = dpuSlabs.map(slab => {
+      const slabTotal = totals.reduce((s, r) => s + dpuSlabVolume(r, slab.key), 0);
+      return '<td class="num">' + (totalDfCount > 0 ? fmtPct(slabTotal / totalDfCount * 100) : '—') + '</td>';
+    }).join('');
+    container.innerHTML = '<div id="dfYieldByPurposeCode-dt"></div>';
+    renderDataTable({
+      containerId: 'dfYieldByPurposeCode-dt',
+      exportFileName: 'DF Yield - By Purpose Code',
+      rows: totals,
       defaultSortKey: 'revenue',
       defaultSortDir: 'desc',
-      searchPlaceholder: dimensionLabel.toLowerCase()+' name…',
-      emptyMessage: 'No data for this period.',
-      maxHeight: '280px',
+      searchPlaceholder: 'purpose code or license type…',
+      emptyMessage: 'No purpose-code data available.',
+      // No maxHeight here (removed 2026-10-27, ask: "Resize table to avoid
+      // scrolling") — same reasoning as the Month-wise figures table: this
+      // table's row count is bounded by (purpose codes x license types) in
+      // the bundled data, not by anything that grows unbounded, so letting
+      // it render at full height avoids an inner scrollbar.
       columns: [
-        { key:'label', label: dimensionLabel, value: g=>g.label },
-        { key:'revenue', label:'Revenue', numeric:true, value: g=>g.revenue, render: g=>fmtCurrency(g.revenue) },
-        { key:'dfCount', label:'DF Count', numeric:true, value: g=>g.dfCount, render: g=>fmt(g.dfCount,0) },
-        { key:'yield', label:'DF Yield', numeric:true, value: g=>g.yield, render: g=>fmtYield(g.yield) },
-      ]
+        { key:'purposeCode', label:'Purpose Code', width:'140px', value: r=>r.purposeCode },
+        { key:'licenseType', label:'License Type', width:'160px', value: r=>r.licenseType },
+        // searchable:false (bug fix, 2026-10-27, "search is not working
+        // properly. Entering 103 shows results where purpose code is
+        // 104") — the generic table search matches a column's raw,
+        // full-precision value, not what's displayed; an unrounded
+        // revenue/yield/DPU-% figure's decimal digits can coincidentally
+        // contain whatever was typed, pulling in unrelated rows.
+        // searchPlaceholder already promises "purpose code or license
+        // type…", so only those two columns should ever be searched.
+        { key:'revenue', label:'Revenue', numeric:true, searchable:false, value: r=>r.revenue, render: r=>fmtCurrency(r.revenue) },
+        { key:'yield', label:'Yield', numeric:true, searchable:false, value: r=>r.yield, render: r=>fmtYield(r.yield) },
+        ...dpuColumns,
+      ],
+      footer: () => '<tr><td colspan="2">Total</td>' +
+        '<td class="num">'+fmtCurrency(totalRevenue)+'</td>' +
+        '<td class="num">'+fmtYield(totalDfCount>0 ? totalRevenue/totalDfCount : null)+'</td>' +
+        dpuFooterCells +
+        '</tr>'
     });
   }
 
-  // periods: [{ key, label }, ...]; rows: [{ label, [period.key]: yield|null, ... }]
-  function renderDfYieldTspByPeriod(containerId, periods, rows){
-    const el = document.getElementById(containerId);
-    if (!el) return;
-    if (!rows || !rows.length){
-      el.innerHTML = '<div class="empty-state" style="padding:14px;">No TSP data available.</div>';
+  // ---- DF Yield Analysis, by Purpose Code only (ask: 2026-10-27, "shows
+  // only purpose code wise yields for DPI period") ----
+  // Collapses pcy.totals (Purpose Code x License Type) down to one row per
+  // Purpose Code by summing revenue/dfCount across its License Type rows —
+  // exactly reproduces what purposeCodeYieldBreakdown()'s own per-row sum
+  // would give grouped by purpose code alone (summing is associative, so
+  // re-partitioning an already-summed total this way is exact, not an
+  // approximation), so no new backend field was needed for this either.
+  // Revenue + Yield only, DPI period (same as the table above — purpose-
+  // code attribution has no Pre-DPI figure, see the By Purpose Code hint).
+  function renderDfYieldByPurposeCodeSimple(pcy){
+    const hint = document.getElementById('dfYieldPurposeCodeSimplePeriodHint');
+    const container = document.getElementById('dfYieldByPurposeCodeSimple');
+    if (!container) return;
+    const totals = (pcy && pcy.totals) || [];
+    if (!pcy || !pcy.totalsDpiLabel){
+      if (hint) hint.textContent = 'No DPI Pricing Start Date is set — purpose-code figures only exist once DPI Pricing is active.';
+      container.innerHTML = '<div class="empty-state" style="padding:14px;">Set a DPI Pricing Start Date (left panel) to see this.</div>';
       return;
     }
-    el.innerHTML = '<div id="'+containerId+'-dt"></div>';
-    const periodCols = periods.map(p => ({
-      key: p.key, label: p.label, numeric: true,
-      value: g => g[p.key],
-      render: g => fmtYield(g[p.key])
-    }));
+    if (hint) hint.textContent = 'DPI Pricing period shown: ' + pcy.totalsDpiLabel + '.';
+    if (!totals.length){
+      container.innerHTML = '<div class="empty-state" style="padding:14px;">No purpose-code data available.</div>';
+      return;
+    }
+    const byCode = new Map(); // purposeCode -> { purposeCode, revenue, dfCount }
+    totals.forEach(t => {
+      if (!byCode.has(t.purposeCode)) byCode.set(t.purposeCode, { purposeCode: t.purposeCode, revenue: 0, dfCount: 0 });
+      const c = byCode.get(t.purposeCode);
+      c.revenue += t.revenue || 0;
+      c.dfCount += t.dfCount || 0;
+    });
+    const rows = Array.from(byCode.values()).map(c => ({ ...c, yield: c.dfCount > 0 ? c.revenue / c.dfCount : null }));
+    const totalRevenue = rows.reduce((s,r)=>s+(r.revenue||0),0);
+    const totalDfCount = rows.reduce((s,r)=>s+(r.dfCount||0),0);
+    container.innerHTML = '<div id="dfYieldByPurposeCodeSimple-dt"></div>';
     renderDataTable({
-      containerId: containerId + '-dt',
+      containerId: 'dfYieldByPurposeCodeSimple-dt',
+      exportFileName: 'DF Yield - By Purpose Code (Yield Only)',
       rows,
-      defaultSortKey: periods[0] ? periods[0].key : 'label',
+      defaultSortKey: 'revenue',
       defaultSortDir: 'desc',
-      searchPlaceholder: 'TSP name…',
-      emptyMessage: 'No TSP data available.',
-      maxHeight: '340px',
+      searchPlaceholder: 'purpose code…',
+      emptyMessage: 'No purpose-code data available.',
+      maxHeight: '320px',
       columns: [
-        { key:'label', label:'TSP', value: g=>g.label },
-        ...periodCols,
+        { key:'purposeCode', label:'Purpose Code', width:'200px', value: r=>r.purposeCode },
+        { key:'revenue', label:'Revenue', numeric:true, searchable:false, value: r=>r.revenue, render: r=>fmtCurrency(r.revenue) },
+        { key:'yield', label:'Yield', numeric:true, searchable:false, value: r=>r.yield, render: r=>fmtYield(r.yield) },
+      ],
+      footer: () => '<tr><td>Total</td>' +
+        '<td class="num">'+fmtCurrency(totalRevenue)+'</td>' +
+        '<td class="num">'+fmtYield(totalDfCount>0 ? totalRevenue/totalDfCount : null)+'</td>' +
+        '</tr>'
+    });
+  }
+
+  // ---- DF Yield Analysis, by FIU x Purpose Code (ask: 2026-10-26, "Add a
+  // table that has FIU x Purpose Code wise Pre-DPI and Post-DPI Yield") ----
+  // pcy.byFiu: [{ fiuId, legalName, licenseType, purposeCode, revenue,
+  // dfCount, yield }], one row per (FIU, Purpose Code) pair with measured
+  // volume in that code — see buildPurposeCodeGroupTotals in server.js.
+  // Pre-DPI Yield has no backing data at all (see the markup hint above
+  // this table) so it's rendered as a constant "—", not computed from
+  // anything; only Post-DPI Yield (pcy.byFiu's own `yield`) is real.
+  function renderDfYieldByFiuPurposeCode(pcy){
+    const hint = document.getElementById('dfYieldFiuPurposeCodePeriodHint');
+    const container = document.getElementById('dfYieldByFiuPurposeCode');
+    if (!container) return;
+    const rows = (pcy && pcy.byFiu) || [];
+    if (!pcy || !pcy.totalsDpiLabel){
+      if (hint) hint.textContent = 'No DPI Pricing Start Date is set — purpose-code figures only exist once DPI Pricing is active.';
+      container.innerHTML = '<div class="empty-state" style="padding:14px;">Set a DPI Pricing Start Date (left panel) to see this.</div>';
+      return;
+    }
+    if (hint) hint.textContent = 'Post-DPI period shown: ' + pcy.totalsDpiLabel + '.';
+    if (!rows.length){
+      container.innerHTML = '<div class="empty-state" style="padding:14px;">No FIU x Purpose Code data available.</div>';
+      return;
+    }
+    container.innerHTML = '<div id="dfYieldByFiuPurposeCode-dt"></div>';
+    renderDataTable({
+      containerId: 'dfYieldByFiuPurposeCode-dt',
+      exportFileName: 'DF Yield - By FIU x Purpose Code',
+      rows,
+      defaultSortKey: 'revenue',
+      defaultSortDir: 'desc',
+      searchPlaceholder: 'FIU ID, legal name, license type, purpose code…',
+      emptyMessage: 'No FIU x Purpose Code data available.',
+      maxHeight: '420px',
+      columns: [
+        { key:'fiuId', label:'FIU ID', value: r=>r.fiuId },
+        { key:'legalName', label:'Legal Name', value: r=>r.legalName },
+        { key:'licenseType', label:'License Type', width:'140px', value: r=>r.licenseType },
+        { key:'purposeCode', label:'Purpose Code', width:'120px', value: r=>r.purposeCode },
+        { key:'preDpiYield', label:'Pre-DPI Yield', numeric:true, searchable:false, value: ()=>null, render: () => '—' },
+        // searchable:false (bug fix, 2026-10-27, "search is not working
+        // properly") — same raw-value substring issue as the other two DF
+        // Yield tables: searchPlaceholder promises "FIU ID, legal name,
+        // license type, purpose code…", so Post-DPI Yield's raw float
+        // shouldn't be searched either.
+        { key:'postDpiYield', label:'Post-DPI Yield', numeric:true, searchable:false, value: r=>r.yield, render: r=>fmtYield(r.yield) },
       ]
     });
   }

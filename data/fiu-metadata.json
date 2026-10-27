@@ -5,8 +5,7 @@
     "tspName": "Finfactor",
     "licenseType": "Bank",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": true
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@dreamplug",
@@ -14,8 +13,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": true
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "navifs-fiu",
@@ -23,8 +21,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": true
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@nuinvestors",
@@ -32,8 +29,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": true
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "kbnbfc-fiu",
@@ -41,8 +37,7 @@
     "tspName": "Digitap",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": true
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "NESFB_FIU_PROD",
@@ -50,8 +45,7 @@
     "tspName": "Ignosis",
     "licenseType": "Bank",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": true
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@jupitermoney",
@@ -59,8 +53,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": true
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "KMBL-FIU-PROD",
@@ -68,8 +61,7 @@
     "tspName": "In-house",
     "licenseType": "Bank",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": true
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "SI_CREVA_FIU_PROD",
@@ -77,17 +69,15 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": true
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "GROWW_NBT_FIU_PROD",
     "legalName": "GROWW INVEST TECH PRIVATE LIMITED",
     "tspName": "Ignosis",
-    "licenseType": "Stock broker",
+    "licenseType": "Stock Broker",
     "useCase": "PFM",
-    "billingModel": "Data Fetch",
-    "topTen": true
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "bfl-fiu",
@@ -95,17 +85,15 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": true
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@axissec",
     "legalName": "Axis Securities Limited",
     "tspName": "Finfactor",
-    "licenseType": "Stock broker",
+    "licenseType": "Stock Broker",
     "useCase": "PFM",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@rkbfinance",
@@ -113,8 +101,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": true
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@indmoneysb",
@@ -122,8 +109,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@moneycontrol",
@@ -131,8 +117,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Fix Billing",
-    "topTen": false
+    "billingModel": "Fix Billing"
   },
   {
     "fiuId": "ICICI-FIU",
@@ -140,8 +125,7 @@
     "tspName": "Perfios",
     "licenseType": "Bank",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": true
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "PiramalFinance-FIU",
@@ -149,8 +133,7 @@
     "tspName": "Perfios",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "KHATABOOK_FIU_PROD",
@@ -158,8 +141,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": true
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "poonawala-fincorp-limited",
@@ -167,8 +149,7 @@
     "tspName": "Finbox",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "SURYODAY_FIU_PROD",
@@ -176,8 +157,7 @@
     "tspName": "Ignosis",
     "licenseType": "Bank",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "niapl-fiu",
@@ -185,8 +165,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "AKARA_FIU_PROD",
@@ -194,8 +173,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "LT_FINANCE_FIU_PROD",
@@ -203,8 +181,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "muthootml-fiu",
@@ -212,8 +189,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@fwfintech",
@@ -221,17 +197,15 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@motilaloswal",
     "legalName": "Motilal Oswal Financial Services",
     "tspName": "Finfactor",
-    "licenseType": "Stock broker",
+    "licenseType": "Stock Broker",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": true
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "policybazaar-prod",
@@ -239,8 +213,7 @@
     "tspName": "Nishkaiv",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "SNAPMINT_FIU_PROD",
@@ -248,8 +221,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@foldmoney",
@@ -257,8 +229,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": true
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@onepercentclub",
@@ -266,8 +237,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "bajajfsl-fiu",
@@ -275,8 +245,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "SBFC_PROD_FIUID",
@@ -284,8 +253,7 @@
     "tspName": "Lentra",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@credright",
@@ -293,8 +261,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "MONEYVIEW_FIU_PROD",
@@ -302,8 +269,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@finuture",
@@ -311,8 +277,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@dhan",
@@ -320,8 +285,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "finnable-fiu",
@@ -329,8 +293,7 @@
     "tspName": "Digitap",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "DSG_FIU_PROD",
@@ -338,8 +301,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@paytmmoneypfm",
@@ -347,8 +309,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": true
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@skfin",
@@ -356,8 +317,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "FINCORP-fiu",
@@ -365,8 +325,7 @@
     "tspName": "Digitap",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "abc1-fiu",
@@ -374,8 +333,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "AEROFLEX_FIU_PROD",
@@ -383,8 +341,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "YES_BANK_FIU_PROD",
@@ -392,8 +349,7 @@
     "tspName": "Ignosis",
     "licenseType": "Bank",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@shreem",
@@ -401,8 +357,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@crest",
@@ -410,8 +365,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "BHANIX_FIU_PROD",
@@ -419,8 +373,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@fundsindia",
@@ -428,8 +381,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "MSTOCK_FIU_PROD",
@@ -437,8 +389,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@lenditt",
@@ -446,8 +397,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "earlysalary",
@@ -455,8 +405,7 @@
     "tspName": "Setu",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@babalease",
@@ -464,8 +413,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@dmihf",
@@ -473,8 +421,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@venus",
@@ -482,8 +429,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "finaglefspl-fiu",
@@ -491,8 +437,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "SVATANTRAMHFC-FIU",
@@ -500,8 +445,7 @@
     "tspName": "CRIF",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "AXIS_FIU_PROD",
@@ -509,8 +453,7 @@
     "tspName": "Ignosis",
     "licenseType": "Bank",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@niyogin",
@@ -518,8 +461,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "sayyam-fiu",
@@ -527,8 +469,7 @@
     "tspName": "Digitap",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "VASTU_HF_FIU_PROD",
@@ -536,8 +477,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@upmovecapital",
@@ -545,8 +485,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "bhfl-fiu",
@@ -554,8 +493,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "inprime-fiu",
@@ -563,8 +501,7 @@
     "tspName": "Digitap",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "KOTAK-FIU",
@@ -572,8 +509,7 @@
     "tspName": "Perfios",
     "licenseType": "Bank",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "maxlifeinsurance-fiu",
@@ -581,8 +517,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "HIRANANDANI-FIU",
@@ -590,8 +525,7 @@
     "tspName": "CRIF",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "CHINMAY_FIU_PROD",
@@ -599,8 +533,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "CAPFLOAT_FIU_PROD",
@@ -608,8 +541,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "richman-fincap",
@@ -617,8 +549,7 @@
     "tspName": "Setu",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "HINDUJA_FIU_PROD",
@@ -626,8 +557,7 @@
     "tspName": "Ignosis",
     "licenseType": "P2P",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@sampathi",
@@ -635,8 +565,7 @@
     "tspName": "Finfactor",
     "licenseType": "Insurance",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "decimus-fiu",
@@ -644,8 +573,7 @@
     "tspName": "Digitap",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "lordkrishnafsl-fiu",
@@ -653,8 +581,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "narendrafcpl-fiu",
@@ -662,8 +589,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "PHFL_FIU_PROD",
@@ -671,8 +597,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@apac",
@@ -680,8 +605,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "CAPRIGLOBALCAPITAL-FIU",
@@ -689,8 +613,7 @@
     "tspName": "CRIF",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "CAPRIGLOBALHOUSING-FIU",
@@ -698,8 +621,7 @@
     "tspName": "CRIF",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "SBI_SECURITIES_FIU_PROD",
@@ -707,8 +629,7 @@
     "tspName": "Ignosis",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@hdfclife",
@@ -716,8 +637,7 @@
     "tspName": "Finfactor",
     "licenseType": "Insurance",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@indiabulls",
@@ -725,8 +645,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "aliceblue-fiu",
@@ -734,8 +653,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@hdfcsecurities",
@@ -743,8 +661,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "OPTIMO_FIU_PROD",
@@ -752,8 +669,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "SARVAGRAM_FIU_PROD",
@@ -761,8 +677,7 @@
     "tspName": "Ignosis",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@kotaksec",
@@ -770,8 +685,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "BAJAJ_FIU_PROD",
@@ -779,8 +693,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "CREDITSAISON_FIU_PROD",
@@ -788,8 +701,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@adityabirlahf",
@@ -797,8 +709,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "1financep2ppl-fiu",
@@ -806,8 +717,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "FINOVA_FIU_PROD",
@@ -815,8 +725,7 @@
     "tspName": "Ignosis",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "ashikasbl-fiu",
@@ -824,8 +733,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@save",
@@ -833,8 +741,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@famli",
@@ -842,8 +749,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@namdev",
@@ -851,8 +757,7 @@
     "tspName": "Finfactor",
     "licenseType": "",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@sigfyninvestment",
@@ -860,8 +765,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "finzfpl-fiu",
@@ -869,8 +773,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "1finance-fiu",
@@ -878,8 +781,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "utimf-fiu",
@@ -887,8 +789,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "BRANCH_FIU_PROD",
@@ -896,8 +797,7 @@
     "tspName": "Ignosis",
     "licenseType": "RIA",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "balic-fiu",
@@ -905,8 +805,7 @@
     "tspName": "Finarkein",
     "licenseType": "Stock Broker",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@knab",
@@ -914,8 +813,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@bajajfinservdirect",
@@ -923,8 +821,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "ASHGROVE_FIU_PROD",
@@ -932,8 +829,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "KIFS_FIU_PROD",
@@ -941,8 +837,7 @@
     "tspName": "Ignosis",
     "licenseType": "AMC",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "wealthbeaconia-fiu",
@@ -950,8 +845,7 @@
     "tspName": "Finarkein",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@easyhomefinance",
@@ -959,8 +853,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@jiraaf",
@@ -968,8 +861,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "kotaklife-fiu",
@@ -977,8 +869,7 @@
     "tspName": "Finarkein",
     "licenseType": "Insurance",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "talic-fiu",
@@ -986,8 +877,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "digambercl-fiu",
@@ -995,8 +885,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "saloracap-fiu",
@@ -1004,8 +893,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@hexawealth",
@@ -1013,8 +901,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@fintoo",
@@ -1022,8 +909,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "PRODIGEE_FIU_PROD",
@@ -1031,8 +917,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "PAHAL_FIU_PROD",
@@ -1040,8 +925,7 @@
     "tspName": "Ignosis",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "suburbanfipl-fiu",
@@ -1049,8 +933,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@savefin",
@@ -1058,8 +941,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "tsfsl-fiu",
@@ -1067,8 +949,7 @@
     "tspName": "Finarkein",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "AGRIM-FIU",
@@ -1076,8 +957,7 @@
     "tspName": "CRIF",
     "licenseType": "Uncategorised",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "karnspl-fiu",
@@ -1085,8 +965,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "RADIAN_FIU_PROD",
@@ -1094,8 +973,7 @@
     "tspName": "Ignosis",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "absli-fiu",
@@ -1103,8 +981,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "WCAPL_FIU_PROD",
@@ -1112,8 +989,7 @@
     "tspName": "Ignosis",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@coinwise",
@@ -1121,8 +997,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@puneestock",
@@ -1130,8 +1005,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "MAS_PROD",
@@ -1139,8 +1013,7 @@
     "tspName": "Ignosis",
     "licenseType": "RIA",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@axiscapital",
@@ -1148,8 +1021,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "BNF_FIU_PROD",
@@ -1157,8 +1029,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "FINODAYA_FIU_PROD",
@@ -1166,8 +1037,7 @@
     "tspName": "Ignosis",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "TAPSTART_FIU_PROD",
@@ -1175,8 +1045,7 @@
     "tspName": "Ignosis",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@juliusbaer",
@@ -1184,8 +1053,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@angelone",
@@ -1193,8 +1061,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "creditwisecpl-fiu",
@@ -1202,8 +1069,7 @@
     "tspName": "Finarkein",
     "licenseType": "RIA",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "solomoncap-fiu",
@@ -1211,8 +1077,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "cmapl-fiu",
@@ -1220,8 +1085,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "epimoneypl-fiu",
@@ -1229,8 +1093,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "mfppl-fiu",
@@ -1238,8 +1101,7 @@
     "tspName": "Finarkein",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "arigamoney-fiu",
@@ -1247,8 +1109,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@nobias",
@@ -1256,8 +1117,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "TRUSTLENDERS_FIU_PROD",
@@ -1265,8 +1125,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@paymeindia",
@@ -1274,8 +1133,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@paytmmoney",
@@ -1283,8 +1141,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "STFT_FIU_PROD",
@@ -1292,8 +1149,7 @@
     "tspName": "Ignosis",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "ventura-fiu",
@@ -1301,8 +1157,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "alic-fiu",
@@ -1310,8 +1165,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@goalteller",
@@ -1319,8 +1173,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@handauncle",
@@ -1328,8 +1181,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "sbilife-fiu",
@@ -1337,8 +1189,7 @@
     "tspName": "Finarkein",
     "licenseType": "Insurance",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "JOHNDEERE-FIU",
@@ -1346,8 +1197,7 @@
     "tspName": "CRIF",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "choicemf-fiu",
@@ -1355,8 +1205,7 @@
     "tspName": "",
     "licenseType": "AMC",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "grownetfpl-fiu",
@@ -1364,8 +1213,7 @@
     "tspName": "Finarkein",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@equirus",
@@ -1373,8 +1221,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "APSIRE_FIU_PROD",
@@ -1382,8 +1229,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@angeloneinv",
@@ -1391,8 +1237,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "devmuni-fiu",
@@ -1400,8 +1245,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "dwaithapl-fiu",
@@ -1409,8 +1253,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@respo",
@@ -1418,8 +1261,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "singularitycredit-fiu",
@@ -1427,8 +1269,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "SRNG_FIU_PROD",
@@ -1436,8 +1277,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "JANASHA_FIU_PROD",
@@ -1445,8 +1285,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@satya",
@@ -1454,8 +1293,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@orimadvisors",
@@ -1463,8 +1301,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "tradebookcspl-fiu",
@@ -1472,8 +1309,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "networthtspl-fiu",
@@ -1481,8 +1317,7 @@
     "tspName": "",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "rgfpl-fiu",
@@ -1490,8 +1325,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "ramkrishna-fiu",
@@ -1499,8 +1333,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "VALLABHI_FIU_PROD",
@@ -1508,8 +1341,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "dynamicepl-fiu",
@@ -1517,8 +1349,7 @@
     "tspName": "",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "plwealthpl-fiu",
@@ -1526,8 +1357,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "dspam-fiu",
@@ -1535,8 +1365,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@hdfc",
@@ -1544,8 +1373,7 @@
     "tspName": "Finfactor",
     "licenseType": "Bank",
     "useCase": "PFM",
-    "billingModel": "Unbilled",
-    "topTen": true
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "DEZERV_FIU_PROD",
@@ -1553,8 +1381,7 @@
     "tspName": "Ignosis",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "JFS_FIU_PROD",
@@ -1562,8 +1389,7 @@
     "tspName": "Ignosis",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": true
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "JIOBLK_FIU_PROD",
@@ -1571,8 +1397,7 @@
     "tspName": "Ignosis",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "MOBIKWIK_FIU_PROD",
@@ -1580,8 +1405,7 @@
     "tspName": "Ignosis",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@canarabank",
@@ -1589,8 +1413,7 @@
     "tspName": "Finfactor",
     "licenseType": "Bank",
     "useCase": "PFM",
-    "billingModel": "Fix Billing",
-    "topTen": false
+    "billingModel": "Fix Billing"
   },
   {
     "fiuId": "ADITYA_BIRLA_CAPITAL_DIGITAL_FIU_PROD",
@@ -1598,8 +1421,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "AUBank-FIU",
@@ -1607,8 +1429,7 @@
     "tspName": "Perfios",
     "licenseType": "Bank",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@valueresearch",
@@ -1616,8 +1437,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@motilalresearch",
@@ -1625,8 +1445,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "Safebox_FIU_prod",
@@ -1634,8 +1453,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SOLOMON_FIU_PROD",
@@ -1643,8 +1461,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@finofin",
@@ -1652,8 +1469,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@finny",
@@ -1661,8 +1477,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "OIA-RIA-FIU-260421",
@@ -1670,8 +1485,7 @@
     "tspName": "",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "DMI_FIU_PROD",
@@ -1679,8 +1493,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "chillarfintech-fiu",
@@ -1688,8 +1501,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@stackfin",
@@ -1697,8 +1509,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "HDFC-FIU",
@@ -1706,8 +1517,7 @@
     "tspName": "Perfios",
     "licenseType": "Bank",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": true
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@invsify",
@@ -1715,8 +1525,7 @@
     "tspName": "Finfactor",
     "licenseType": "Insurance",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "FINWIZARD_FIU_PROD",
@@ -1724,8 +1533,7 @@
     "tspName": "Ignosis",
     "licenseType": "Insurance",
     "useCase": "Uncategorised",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@sharekhanemp",
@@ -1733,8 +1541,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "eimplca-fiu",
@@ -1742,8 +1549,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@scripbox",
@@ -1751,8 +1557,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@axissecurities",
@@ -1760,8 +1565,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "Paisabazaar-FIU-LIVE",
@@ -1769,8 +1573,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "PFM",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@fourdegree",
@@ -1778,8 +1581,7 @@
     "tspName": "Finfactor",
     "licenseType": "",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "eimpl-fiu",
@@ -1787,8 +1589,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "Coracle-fiu",
@@ -1796,8 +1597,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "ZET-RIA-FIU-260703",
@@ -1805,8 +1605,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@dezerv",
@@ -1814,8 +1613,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@iiflcapital",
@@ -1823,8 +1621,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@twigg",
@@ -1832,8 +1629,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "USL-STCKBR-FIU-260519",
@@ -1841,8 +1637,7 @@
     "tspName": "",
     "licenseType": "HFC",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@nyvo",
@@ -1850,8 +1645,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@onebanc",
@@ -1859,8 +1653,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@emkayglobal",
@@ -1868,8 +1661,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "Khosya-fiu",
@@ -1877,8 +1669,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "STL-RIA-FIU-260608",
@@ -1886,8 +1677,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@airpaymoney",
@@ -1895,8 +1685,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@oceanfinvest",
@@ -1904,8 +1693,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@plnrinvestment",
@@ -1913,8 +1701,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "PNB-FIU",
@@ -1922,8 +1709,7 @@
     "tspName": "Perfios",
     "licenseType": "Bank",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@mirae",
@@ -1931,8 +1717,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SHRIRAM_FIU_PROD",
@@ -1940,8 +1725,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@indianbankpfm",
@@ -1949,8 +1733,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "DACPL_NP_001",
@@ -1958,8 +1741,7 @@
     "tspName": "Novel Patterns",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fynro-fiu",
@@ -1967,8 +1749,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "FNJ-RIA-FIU-260616",
@@ -1976,8 +1757,7 @@
     "tspName": "",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "dev-xpressloans",
@@ -1985,8 +1765,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@pooja",
@@ -1994,8 +1773,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@5paisarm",
@@ -2003,8 +1781,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@neowealth",
@@ -2012,8 +1789,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "dev-sashienterprises",
@@ -2021,8 +1797,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "moneylicious-dhan",
@@ -2030,8 +1805,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@krishnarath",
@@ -2039,8 +1813,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@swastik",
@@ -2048,8 +1821,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@idbicapital",
@@ -2057,8 +1829,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "stock-fiu-prod",
@@ -2066,8 +1837,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@pocketful",
@@ -2075,8 +1845,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "dev_salarynow",
@@ -2084,8 +1853,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@decimus",
@@ -2093,8 +1861,7 @@
     "tspName": "Finfactor",
     "licenseType": "HFC",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "ASFL_NP_001",
@@ -2102,8 +1869,7 @@
     "tspName": "Novel Patterns",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "dev-incred",
@@ -2111,8 +1877,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@etmoney",
@@ -2120,8 +1885,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "kbspl-fiu",
@@ -2129,8 +1893,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "TycoonCredit-fiu",
@@ -2138,8 +1901,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@equall",
@@ -2147,8 +1909,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "WITCL_NP_001",
@@ -2156,8 +1917,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "CITRA-fiu",
@@ -2165,8 +1925,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "hdbfs-fiu",
@@ -2174,8 +1933,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "FYR-STCKB-FIU-260603",
@@ -2183,8 +1941,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@satsai",
@@ -2192,8 +1949,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@indusindsec",
@@ -2201,8 +1957,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@phonepewealth",
@@ -2210,8 +1965,7 @@
     "tspName": "Finfactor",
     "licenseType": "HFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@systematix",
@@ -2219,8 +1973,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@equiruswealth",
@@ -2228,8 +1981,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "kisetsuSaison-FIU",
@@ -2237,8 +1989,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "WEA-RIA-FIU-260612",
@@ -2246,8 +1997,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "Sawalsha-fiu",
@@ -2255,8 +2005,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "CHB-STCKBR-FIU-260515",
@@ -2264,8 +2013,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@spheeti",
@@ -2273,8 +2021,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@gridkey",
@@ -2282,8 +2029,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@bajajfinancial",
@@ -2291,8 +2037,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "indusindcfdteam-fiu",
@@ -2300,8 +2045,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "raghavifl-fiu",
@@ -2309,8 +2053,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "JUNOON-FIU",
@@ -2318,8 +2061,7 @@
     "tspName": "CRIF",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@equirussecurities",
@@ -2327,8 +2069,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@qode",
@@ -2336,8 +2077,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@tara",
@@ -2345,8 +2085,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@antique",
@@ -2354,8 +2093,7 @@
     "tspName": "Finfactor",
     "licenseType": "",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@stallion",
@@ -2363,8 +2101,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "UGROCapital-FIU",
@@ -2372,8 +2109,7 @@
     "tspName": "Perfios",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "TATA_CAPITAL_FIU_PROD",
@@ -2381,8 +2117,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "MBF-NBFC-FIU-060526",
@@ -2390,8 +2125,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@ambitfinvest",
@@ -2399,8 +2133,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@fincart",
@@ -2408,8 +2141,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@finvasiasecurities",
@@ -2417,8 +2149,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "IND-FIU-NBFC-260515",
@@ -2426,8 +2157,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@arhamshare",
@@ -2435,8 +2165,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "IND-PVB-FIU-260709",
@@ -2444,8 +2173,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@anandrathi",
@@ -2453,8 +2181,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@jcwealth",
@@ -2462,8 +2189,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "FEDERAL_PROD_FIUID",
@@ -2471,8 +2197,7 @@
     "tspName": "Lentra",
     "licenseType": "Bank",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "earlysalarypl-fiu",
@@ -2480,8 +2205,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "UBI-FIU",
@@ -2489,8 +2213,7 @@
     "tspName": "Perfios",
     "licenseType": "Bank",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@aaritya",
@@ -2498,8 +2221,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@swastika",
@@ -2507,8 +2229,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@liquide",
@@ -2516,8 +2237,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@dyota",
@@ -2525,8 +2245,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "DSI-NBFC-FIU-260610",
@@ -2534,8 +2253,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "GDLLEASING",
@@ -2543,8 +2261,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SCPL_NP_001",
@@ -2552,8 +2269,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SHRIRAM-FIU",
@@ -2561,8 +2277,7 @@
     "tspName": "CRIF",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "TCPL_NP_001",
@@ -2570,8 +2285,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "KAABIL-FIU",
@@ -2579,8 +2293,7 @@
     "tspName": "Perfios",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "JUB-NBFC-FIU-260514",
@@ -2588,8 +2301,7 @@
     "tspName": "",
     "licenseType": "Insurance",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@quantmutual",
@@ -2597,8 +2309,7 @@
     "tspName": "Finfactor",
     "licenseType": "Bank",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@fusion",
@@ -2606,8 +2317,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SGR_NP_001",
@@ -2615,8 +2325,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@indothai",
@@ -2624,8 +2333,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@mintcap",
@@ -2633,8 +2341,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "ROI-STCKB-FIU-260609",
@@ -2642,8 +2349,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "EQU-RIA-FIU-260525",
@@ -2651,8 +2357,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "sparkcapl-fiu",
@@ -2660,8 +2365,7 @@
     "tspName": "",
     "licenseType": "Insurance",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "fiulive@nothernarc",
@@ -2669,8 +2373,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "STP-RIA-FIU-260803",
@@ -2678,8 +2381,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unique Users",
-    "topTen": false
+    "billingModel": "Unique Users"
   },
   {
     "fiuId": "fiulive@credifin",
@@ -2687,8 +2389,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "PFM",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "TDV-RIA-FIU-260608",
@@ -2696,8 +2397,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@loksuvidha",
@@ -2705,8 +2405,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "iiflsec-fiu",
@@ -2714,8 +2413,7 @@
     "tspName": "",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "flexiloans",
@@ -2723,8 +2421,7 @@
     "tspName": "Setu",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@nirmalbang",
@@ -2732,8 +2429,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@gopi",
@@ -2741,8 +2437,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "JFF-NBFC-FIU-260602",
@@ -2750,8 +2445,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "KLFPL_NP_001",
@@ -2759,8 +2453,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@greenportfolio",
@@ -2768,8 +2461,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@lfcsecurities",
@@ -2777,17 +2469,15 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@finverse",
     "legalName": "Finverse Platform Private Limited",
     "tspName": "Finfactor",
-    "licenseType": "Stock broker",
+    "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@iiflsamasta",
@@ -2795,8 +2485,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@cholamandalam",
@@ -2804,8 +2493,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "finwiser_sandbox_fiu",
@@ -2813,8 +2501,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "TRANSWARRANTY-NBFC-FIU",
@@ -2822,8 +2509,7 @@
     "tspName": "CRIF",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "VFF-HFC-FIU-260512",
@@ -2831,8 +2517,7 @@
     "tspName": "",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@seedsfincap",
@@ -2840,8 +2525,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@bajajautocredit",
@@ -2849,8 +2533,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "HFCPL_NP_001",
@@ -2858,8 +2541,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "PHD-RIA-FIU-260615",
@@ -2867,8 +2549,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "indiafirstlicl-fiu",
@@ -2876,8 +2557,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "ACM-STCKBR-FIU-260511",
@@ -2885,8 +2565,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "MAH-NBFC-FIU-260512",
@@ -2894,8 +2573,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "AUXILO-FIU",
@@ -2903,8 +2581,7 @@
     "tspName": "Perfios",
     "licenseType": "Stock Broker",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SIBLFIU",
@@ -2912,8 +2589,7 @@
     "tspName": "Nishkaiv",
     "licenseType": "Bank",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@usfb",
@@ -2921,8 +2597,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@rudowealth",
@@ -2930,8 +2605,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "WTS-RIA-FIU-260703",
@@ -2939,8 +2613,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "OWP-PM-FIU-260721",
@@ -2948,8 +2621,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@apollo",
@@ -2957,8 +2629,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@techfino",
@@ -2966,8 +2637,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SAARATHIFINANCE-FIU",
@@ -2975,8 +2645,7 @@
     "tspName": "CRIF",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "VEL-NBFC-FIU-260602",
@@ -2984,8 +2653,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SIB-PVB-FIU-260520",
@@ -2993,8 +2661,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SPHEETI-FIU",
@@ -3002,8 +2669,7 @@
     "tspName": "CRIF",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "ICC-NBFC-FIU-260522",
@@ -3011,8 +2677,7 @@
     "tspName": "",
     "licenseType": "RIA",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "DFI-NBFC-FIU-260504",
@@ -3020,8 +2685,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "cholamandalam-fiu-prod",
@@ -3029,8 +2693,7 @@
     "tspName": "",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@msfincap",
@@ -3038,8 +2701,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "NAM-NBFC-FIU-260511",
@@ -3047,8 +2709,7 @@
     "tspName": "",
     "licenseType": "Insurance",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@mukutfinvest",
@@ -3056,8 +2717,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "UNNATTI-fiu",
@@ -3065,8 +2725,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@finideas",
@@ -3074,8 +2733,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "BFL-NBFC-FIU-260616",
@@ -3083,8 +2741,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@ikigai",
@@ -3092,8 +2749,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "k2vs-insurance-fiu",
@@ -3101,8 +2757,7 @@
     "tspName": "Unacores",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "NAMDEV-FIU",
@@ -3110,8 +2765,7 @@
     "tspName": "Perfios",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "CRISSFIN_FIU_PROD",
@@ -3119,8 +2773,7 @@
     "tspName": "Ignosis",
     "licenseType": "",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "Trickleflood-fiu",
@@ -3128,8 +2781,7 @@
     "tspName": "Digitap",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "AIP-RIA-FIU-260520",
@@ -3137,8 +2789,7 @@
     "tspName": "",
     "licenseType": "RIA",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@torusfinmarkets",
@@ -3146,8 +2797,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "RELIGAREBROKING-fiu",
@@ -3155,8 +2805,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@vistaar",
@@ -3164,8 +2813,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "KSF-NBFC-FIU-260702",
@@ -3173,8 +2821,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SDTPL_NP_001",
@@ -3182,8 +2829,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SHF-NBFC-FIU-260609",
@@ -3191,8 +2837,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "EASYHOMEFINANCE-FIU",
@@ -3200,8 +2845,7 @@
     "tspName": "Perfios",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "BIZLOAN-FIU",
@@ -3209,8 +2853,7 @@
     "tspName": "CRIF",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@goldline",
@@ -3218,8 +2861,7 @@
     "tspName": "Finfactor",
     "licenseType": "AMC",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@jainam",
@@ -3227,8 +2869,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "ACM-NBFC-FIU-260604",
@@ -3236,8 +2877,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@meghdoot",
@@ -3245,8 +2885,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "WAQTFINANCE-FIU",
@@ -3254,8 +2893,7 @@
     "tspName": "Perfios",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@aanfinance",
@@ -3263,8 +2901,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@money2me",
@@ -3272,8 +2909,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "southindia-finvest",
@@ -3281,8 +2917,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "irage-broking",
@@ -3290,8 +2925,7 @@
     "tspName": "Setu",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@zebu",
@@ -3299,8 +2933,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "AKME_FIU_PROD",
@@ -3308,8 +2941,7 @@
     "tspName": "Ignosis",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@goodskill",
@@ -3317,8 +2949,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "AYU-NBFC-FIU-260724",
@@ -3326,8 +2957,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@rohitprofin",
@@ -3335,8 +2965,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "JAIRAJ",
@@ -3344,8 +2973,7 @@
     "tspName": "Unacores",
     "licenseType": "Uncategorised",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "KSL-STCKB-FIU-260623",
@@ -3353,8 +2981,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "cettlx-services",
@@ -3362,8 +2989,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@agffinlease",
@@ -3371,8 +2997,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "hero-housing",
@@ -3380,8 +3005,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@dhansafalfin",
@@ -3389,8 +3013,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "cboi-dlp-fiu",
@@ -3398,8 +3021,7 @@
     "tspName": "Lentra",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "finnovate-financial",
@@ -3407,8 +3029,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "PCI-NBFC-FIU-260605",
@@ -3416,8 +3037,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "KUH-NBFC-FIU-260526",
@@ -3425,8 +3045,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "FINTREE-LIVE",
@@ -3434,8 +3053,7 @@
     "tspName": "Unacores",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "larktfl-fiu",
@@ -3443,8 +3061,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "lendingkart",
@@ -3452,8 +3069,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@adichitragupta",
@@ -3461,8 +3077,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "CEN-NBFC-FIU-260429",
@@ -3470,8 +3085,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "MICROGREENHOUSINGFINANCE-FIU",
@@ -3479,8 +3093,7 @@
     "tspName": "Perfios",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@jacinth",
@@ -3488,8 +3101,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@marcellus",
@@ -3497,8 +3109,7 @@
     "tspName": "Finfactor",
     "licenseType": "P2P",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "RAR-fiu",
@@ -3506,8 +3117,7 @@
     "tspName": "Digitap",
     "licenseType": "AMC",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "varashakti-fiu-prod",
@@ -3515,8 +3125,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "VIKASMONEY-FIU",
@@ -3524,8 +3133,7 @@
     "tspName": "CRIF",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "sbi-fiu",
@@ -3533,8 +3141,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "dev-maxemocapital",
@@ -3542,8 +3149,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SAN-NBFC-FIU-260528",
@@ -3551,8 +3157,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@mdfcfinanciers",
@@ -3560,8 +3165,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "Marathon-fiu",
@@ -3569,8 +3173,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "MAS-RIA-FIU-260423",
@@ -3578,8 +3181,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "AFL-NBFC-FIU-260603",
@@ -3587,8 +3189,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "PRO-NBFC-FIU-260710",
@@ -3596,8 +3197,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@avantifinance",
@@ -3605,8 +3205,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "PRANAMYA",
@@ -3614,8 +3213,7 @@
     "tspName": "Unacores",
     "licenseType": "Uncategorised",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "BAZAARI-FIU",
@@ -3623,8 +3221,7 @@
     "tspName": "CRIF",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SHR-RIA-FIU-260528",
@@ -3632,8 +3229,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "beryl",
@@ -3641,8 +3237,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "ABHIYAN_FIU_PROD",
@@ -3650,8 +3245,7 @@
     "tspName": "Ignosis",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "iciciprudential-fiu",
@@ -3659,8 +3253,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "NWM-STCKB-FIU-260627",
@@ -3668,8 +3261,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "UCOB-FIU",
@@ -3677,8 +3269,7 @@
     "tspName": "Perfios",
     "licenseType": "Insurance",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "CHARBHUJA",
@@ -3686,8 +3277,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "icicilgicl-fiu",
@@ -3695,8 +3285,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@cdlfinancial",
@@ -3704,8 +3293,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "MPF-NBFC-FIU-260529",
@@ -3713,8 +3301,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "KotakMahindraBank-FIU",
@@ -3722,8 +3309,7 @@
     "tspName": "Perfios",
     "licenseType": "Bank",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "FUNDSMAMA-FIU",
@@ -3731,8 +3317,7 @@
     "tspName": "CRIF",
     "licenseType": "Insurance",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "FEXPRIME-fiu",
@@ -3740,8 +3325,7 @@
     "tspName": "Digitap",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@supreme",
@@ -3749,8 +3333,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@comfortfincap",
@@ -3758,8 +3341,7 @@
     "tspName": "Finfactor",
     "licenseType": "",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@indusind",
@@ -3767,8 +3349,7 @@
     "tspName": "Finfactor",
     "licenseType": "Bank",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "FWC-NBFC-FIU-260525",
@@ -3776,8 +3357,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@coversure",
@@ -3785,8 +3365,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "FEEONLYRIA_FIU_PROD",
@@ -3794,8 +3373,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@finlease",
@@ -3803,8 +3381,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "LLF-NBFC-FIU-260602",
@@ -3812,8 +3389,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "myfi-fiu",
@@ -3821,8 +3397,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@enorme",
@@ -3830,8 +3405,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SpheetiFintech-fiu",
@@ -3839,8 +3413,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "NPPL_004",
@@ -3848,8 +3421,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "NFP-NBFC-FIU-260603",
@@ -3857,8 +3429,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@dmifinanceltd",
@@ -3866,8 +3437,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "RAJ-NBFC-FIU-260626",
@@ -3875,8 +3445,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "JNC-NBFC-FIU-260617",
@@ -3884,8 +3453,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@keertana",
@@ -3893,8 +3461,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "CTPL_NP_001",
@@ -3902,8 +3469,7 @@
     "tspName": "",
     "licenseType": "Uncategorised",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "Barwala-fiu",
@@ -3911,8 +3477,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@saloracapital",
@@ -3920,8 +3485,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@punjabreliable",
@@ -3929,8 +3493,7 @@
     "tspName": "Finfactor",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "BSD_NP_001",
@@ -3938,8 +3501,7 @@
     "tspName": "",
     "licenseType": "Uncategorised",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "LORDKRISHNA",
@@ -3947,8 +3509,7 @@
     "tspName": "Unacores",
     "licenseType": "Uncategorised",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@djt",
@@ -3956,8 +3517,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "CFL-NBFC-FIU-260625",
@@ -3965,8 +3525,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "Meet-fiu",
@@ -3974,8 +3533,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "ARY-NBFC-FIU-260723",
@@ -3983,8 +3541,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "TJFC_FIU_prod",
@@ -3992,8 +3549,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@pinkcity",
@@ -4001,8 +3557,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "ACM-NBFC-FIU-260627",
@@ -4010,8 +3565,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "PFP-NBFC-FIU-260713",
@@ -4019,8 +3573,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@midlandmicrofin",
@@ -4028,8 +3581,7 @@
     "tspName": "",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "indian-bank-fiu",
@@ -4037,8 +3589,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "MFS-NBFC-FIU-260515",
@@ -4046,8 +3597,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "DGF-STCKB-FIU-260709",
@@ -4055,8 +3605,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SUBURBAN_FIU_PROD",
@@ -4064,8 +3613,7 @@
     "tspName": "Ignosis",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@diamondhands",
@@ -4073,8 +3621,7 @@
     "tspName": "Finfactor",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "PAISALO",
@@ -4082,8 +3629,7 @@
     "tspName": "CRIF",
     "licenseType": "Stock Broker",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "STATUSFINANCE-FIU",
@@ -4091,8 +3637,7 @@
     "tspName": "Perfios",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "WOODCAPITAL-FIU",
@@ -4100,8 +3645,7 @@
     "tspName": "CRIF",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "rk-global",
@@ -4109,8 +3653,7 @@
     "tspName": "Setu",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@easebuzz",
@@ -4118,8 +3661,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "HFP-NBFC-FIU-260615",
@@ -4127,8 +3669,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "FDP-NBFC-FIU-260608",
@@ -4136,8 +3677,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "MPA-NBFC-FIU-260608",
@@ -4145,8 +3685,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "KarnatakaBank",
@@ -4154,8 +3693,7 @@
     "tspName": "Perfios",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "shriramfcpl-fiu",
@@ -4163,8 +3701,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "MONEYPLUS_FIU",
@@ -4172,8 +3709,7 @@
     "tspName": "CRIF",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "Antworks-fiu",
@@ -4181,8 +3717,7 @@
     "tspName": "",
     "licenseType": "Insurance",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "FEXPRIM-FIU",
@@ -4190,8 +3725,7 @@
     "tspName": "CRIF",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "refynetpl-fiu",
@@ -4199,8 +3733,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "LAN-NBFC-FIU-260525",
@@ -4208,8 +3741,7 @@
     "tspName": "",
     "licenseType": "Insurance",
     "useCase": "Uncategorised",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "muni-broking",
@@ -4217,8 +3749,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "VALUELINE_FIU_PROD",
@@ -4226,8 +3757,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SID-FININD-FIU-260617",
@@ -4235,8 +3765,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "arthan-fiu",
@@ -4244,8 +3773,7 @@
     "tspName": "Finarkein",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   },
   {
     "fiuId": "GLLFL-fiu",
@@ -4253,8 +3781,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SOF-NBFC-FIU-260512",
@@ -4262,8 +3789,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@metafin",
@@ -4271,8 +3797,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "fiulive@choice",
@@ -4280,8 +3805,7 @@
     "tspName": "Finfactor",
     "licenseType": "RIA",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "MFP-NBFC-FIU-260427",
@@ -4289,8 +3813,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "YAD-RIA-FIU-260703",
@@ -4298,8 +3821,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "MPF-NBFC-FIU-260629",
@@ -4307,8 +3829,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "RFP-NBFC-FIU-260617",
@@ -4316,8 +3837,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "EDG-NBFCP-FIU-260422",
@@ -4325,8 +3845,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "TEN-NBFC-FIU-260429",
@@ -4334,8 +3853,7 @@
     "tspName": "",
     "licenseType": "NBFC",
     "useCase": "Lending",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "URB-NBFC-FIU-260512",
@@ -4343,8 +3861,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "SaiRoshni-fiu",
@@ -4352,8 +3869,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "LIF-NBFC-FIU-260724",
@@ -4361,8 +3877,7 @@
     "tspName": "",
     "licenseType": "",
     "useCase": "",
-    "billingModel": "Unbilled",
-    "topTen": false
+    "billingModel": "Unbilled"
   },
   {
     "fiuId": "KMBL-FIU-PROD (PFM)",
@@ -4370,7 +3885,6 @@
     "tspName": "In-house",
     "licenseType": "Bank",
     "useCase": "PFM",
-    "billingModel": "Data Fetch",
-    "topTen": false
+    "billingModel": "Data Fetch"
   }
 ]

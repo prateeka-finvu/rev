@@ -95,7 +95,7 @@ const cookieParser = require('cookie-parser');
 const store = require('./lib/store');
 const { parseWorkbook, findMasterDataSheet } = require('./lib/parseFile');
 const { buildColumnMap } = require('./lib/columns');
-const { computeRevenue, groupRevenue, groupAuUsage, groupDfUsage, dfYieldBreakdown, buildActualsByMonth, fyFullMonths, monthLabel, toNumber, SCENARIO_DEFINITIONS, DEFAULT_BANK_PFM_DF_OPTIMIZATION_FACTOR } = require('./lib/compute');
+const { computeRevenue, groupRevenue, groupAuUsage, groupDfUsage, dfYieldBreakdown, purposeCodeYieldBreakdown, buildActualsByMonth, fyFullMonths, monthLabel, toNumber, SCENARIO_DEFINITIONS, DEFAULT_BANK_PFM_DF_OPTIMIZATION_FACTOR, DPU_SLAB_ORDER, DPU_SLAB_LABELS } = require('./lib/compute');
 const { askChat } = require('./lib/chat');
 const { fetchLatestCountsEmail, describeImapError } = require('./lib/mailIngest');
 
@@ -414,12 +414,18 @@ function parseCountsUpload(fileBuffer) {
 // caller that omits a field entirely doesn't blank it out via the upsert
 // merge. This matters most for /api/seed-from-master-data: a re-import
 // whose file doesn't have (or renames) a given column now leaves that
-// field alone instead of wiping every FIU's existing value to '' — same
-// protection topTen already had (see its own comment below); previously
-// applied inconsistently, letting a Master Data re-import with a missing/
-// renamed column (e.g. "Billing Model") silently blank that field for
-// every FIU in the file, dropping them out of revenue entirely (fixed
-// 2026-09-03).
+// field alone instead of wiping every FIU's existing value to '' —
+// previously applied inconsistently, letting a Master Data re-import with
+// a missing/renamed column (e.g. "Billing Model") silently blank that
+// field for every FIU in the file, dropping them out of revenue entirely
+// (fixed 2026-09-03).
+//
+// `topTen` used to be a field here (a manually-set "Top 10 watchlist"
+// flag) — removed 2026-10-26 (ask: "remove the top 10 setting as a static
+// config and show the top 10 in the tool based on the actual values").
+// The Top 10 - Lending/PFM sections now rank FIUs by their own FY Total
+// revenue instead (see public/index.html's topNByFyRevenue), so there's
+// nothing left to store or edit here.
 function toMetaRow(r) {
   const out = { fiuId: r.fiuId };
   if (r.legalName !== undefined) out.legalName = r.legalName || '';
@@ -427,10 +433,6 @@ function toMetaRow(r) {
   if (r.licenseType !== undefined) out.licenseType = r.licenseType || '';
   if (r.useCase !== undefined) out.useCase = r.useCase || '';
   if (r.billingModel !== undefined) out.billingModel = r.billingModel || '';
-  // Only set topTen when the caller actually sent it — so a Master Data
-  // re-import (which never sends this field) doesn't clobber an existing
-  // Top 10 flag back to No via the upsert merge.
-  if (r.topTen !== undefined) out.topTen = !!r.topTen;
   return out;
 }
 // Only includes keys actually present on the input — this matters for
@@ -834,6 +836,34 @@ function buildComputeResponse(counts, { asOfDateStr, fyStartMonthStr, sucStartDa
   const groupedByUseCase = groupBy(r => r.useCase);
   const groupedByLicense = groupBy(r => r.licenseType);
 
+  // Use-case x License Type (ask: 2026-10-26, "add a license type column to
+  // both these tables so we can look at DF yields basis a combination of
+  // use-case and license type") — same groupRevenue/groupDfUsage rules as
+  // every grouping above, just keyed on the (Use-case, License Type) pair
+  // instead of either alone, for the DF Yield Analysis tab's By Use-case
+  // table. \u0001 can't appear in real Use-case/License Type text, so
+  // splitting the compound label back apart afterward is safe; each side
+  // is normalized to "(Unspecified)" before joining (not left to
+  // groupByMetric's own blank-whole-label fallback), so a blank Use-case
+  // or License Type gets its own "(Unspecified)" independently of the
+  // other side, not just when both are blank.
+  const UC_LT_SEP = '\u0001';
+  function ucLtLabel(r) {
+    const uc = (r.useCase || '').trim() || '(Unspecified)';
+    const lt = (r.licenseType || '').trim() || '(Unspecified)';
+    return uc + UC_LT_SEP + lt;
+  }
+  function splitUcLtGroups(groups) {
+    return groups.map(g => {
+      const i = g.label.indexOf(UC_LT_SEP);
+      return { useCase: g.label.slice(0, i), licenseType: g.label.slice(i + 1), fiuCount: g.fiuCount, monthly: g.monthly };
+    });
+  }
+  const groupedByUseCaseLicense = {
+    revenue: splitUcLtGroups(groupRevenue(result.rows, ucLtLabel, result.currentIndex)),
+    df: splitUcLtGroups(groupDfUsage(result.rows, ucLtLabel, result.currentIndex))
+  };
+
   // ---------- DF Yield Analysis ----------
   // DF Yield = Total Revenue / Total DF Count (see dfYieldBreakdown), shown
   // for three fixed points in the FY — the current (as-of) month, Oct 2026,
@@ -877,12 +907,166 @@ function buildComputeResponse(counts, { asOfDateStr, fyStartMonthStr, sucStartDa
     return entry;
   });
 
+  // ---------- By License Type x Purpose Code yield ----------
+  // See purposeCodeYieldBreakdown in lib/compute.js (ask: 2026-10-26 —
+  // "(license type x purpose code) yield" for Stock Broker FIUs, purpose
+  // code 105, for Mar 2027). Computed for the same three periods as the
+  // DF Yield Analysis above, across every (License Type, Purpose Code)
+  // combination actually present in the data, so the frontend's two
+  // dropdowns can filter client-side with no extra round-trip per
+  // selection.
+  const licenseTypesSeen = new Set();
+  result.rows.forEach(r => { const lt = (r.licenseType || '').trim(); if (lt) licenseTypesSeen.add(lt); });
+  const purposeCodesSeen = new Set();
+  yieldCmgrById.forEach(yc => {
+    if (yc && yc.purposeCodeBreakdown) Object.keys(yc.purposeCodeBreakdown).forEach(c => purposeCodesSeen.add(c));
+  });
+
+  function buildPurposeCodePeriodRows(monthIndex) {
+    if (monthIndex < 0) return [];
+    const out = [];
+    purposeCodesSeen.forEach(code => {
+      purposeCodeYieldBreakdown(result.rows, yieldCmgrById, r => r.licenseType, monthIndex, code)
+        .filter(g => licenseTypesSeen.has(g.label)) // drop the "(Unspecified)" license-type bucket
+        .forEach(g => out.push({ licenseType: g.label, purposeCode: code, revenue: g.revenue, dfCount: g.dfCount, yield: g.yield }));
+    });
+    return out;
+  }
+  const pcPeriods = [
+    { key: 'current', rows: buildPurposeCodePeriodRows(result.currentIndex) },
+    { key: 'oct2026', rows: buildPurposeCodePeriodRows(octIndex) },
+    { key: 'mar2027', rows: buildPurposeCodePeriodRows(marIndex) }
+  ];
+  const pcKeyToPair = new Map(); // "licenseType\u0001purposeCode" -> [licenseType, purposeCode]
+  pcPeriods.forEach(p => p.rows.forEach(g => pcKeyToPair.set(g.licenseType + '\u0001' + g.purposeCode, [g.licenseType, g.purposeCode])));
+  const purposeCodeByPeriod = Array.from(pcKeyToPair.values()).sort((a, b) => (a[0] + a[1]).localeCompare(b[0] + b[1])).map(([licenseType, purposeCode]) => {
+    const entry = { licenseType, purposeCode };
+    pcPeriods.forEach(p => {
+      const g = p.rows.find(x => x.licenseType === licenseType && x.purposeCode === purposeCode);
+      entry[p.key] = g ? g.yield : null;
+      entry[p.key + 'Revenue'] = g ? g.revenue : null;
+      entry[p.key + 'DfCount'] = g ? g.dfCount : null;
+    });
+    return entry;
+  });
+  // ---- By Purpose Code x License Type totals (ask: 2026-10-26 — "Add a
+  // purpose code wise count of Revenue and Yield to the DF Yield tab, along
+  // the lines of the previous update", then "add a license type column to
+  // both these tables so we can look at DF yields basis a combination of
+  // use-case and license type") ----
+  // Same purposeCodeYieldBreakdown attribution as above, but summed across
+  // every DPI-active month in the FY — "along the lines of" the By Use-case
+  // table's full-FY-period approach, rather than the three single-month
+  // Current/Oct/Mar snapshots byPeriod above uses — and broken out by
+  // License Type (one row per Purpose Code x License Type pair actually
+  // present, not collapsed across license types). Unlike By Use-case, there
+  // is no meaningful Pre-DPI figure at all — purpose-code attribution only
+  // exists once DPI Pricing revenue kicks in (see purposeCodeYieldBreakdown's
+  // own comment: pre-DPI revenue has no FI-type/purpose-code attribution
+  // whatsoever) — so this is DPI-period-only, summed across the DPI Pricing
+  // Start Date through the end of the FY. Empty if no DPI Pricing Start Date
+  // is set at all (dpiStartIndex < 0).
+  const dpiStartIndex = sucStartDate ? findMonthIndex(result.months, sucStartDate.year, sucStartDate.month) : -1;
+  // Generic groupFn-based summer, shared by the License Type breakdown
+  // (totals) and the per-FIU breakdown (byFiu) below — same
+  // purposeCodeYieldBreakdown attribution, summed across every DPI-active
+  // month, just grouped differently.
+  function buildPurposeCodeGroupTotals(groupFn, filterFn) {
+    if (dpiStartIndex < 0) return [];
+    const totals = new Map(); // "code\u0001group" -> { purposeCode, group, revenue, dfCount, slabVolumes }
+    for (let i = dpiStartIndex; i < result.months.length; i++) {
+      purposeCodesSeen.forEach(code => {
+        purposeCodeYieldBreakdown(result.rows, yieldCmgrById, groupFn, i, code)
+          .filter(filterFn)
+          .forEach(g => {
+            const key = code + '\u0001' + g.label;
+            if (!totals.has(key)) totals.set(key, { purposeCode: code, group: g.label, revenue: 0, dfCount: 0, slabVolumes: {} });
+            const t = totals.get(key);
+            t.revenue += g.revenue || 0;
+            t.dfCount += g.dfCount || 0;
+            // slabVolumes: DPU-slab breakdown of the Deposit-type portion
+            // of g.dfCount — see purposeCodeYieldBreakdown()'s own comment
+            // in lib/compute.js. Summed across every DPI-active month same
+            // as revenue/dfCount above.
+            DPU_SLAB_ORDER.forEach(slab => {
+              const v = (g.slabVolumes && g.slabVolumes[slab]) || 0;
+              if (v) t.slabVolumes[slab] = (t.slabVolumes[slab] || 0) + v;
+            });
+          });
+      });
+    }
+    return Array.from(totals.values())
+      .map(t => ({ purposeCode: t.purposeCode, group: t.group, revenue: t.revenue, dfCount: t.dfCount, slabVolumes: t.slabVolumes, yield: t.dfCount > 0 ? t.revenue / t.dfCount : null }));
+  }
+  const totalsDpiLabel = dpiStartIndex >= 0 && dpiStartIndex < result.months.length
+    ? (result.months[dpiStartIndex].label + ' – ' + result.months[result.months.length - 1].label)
+    : null;
+  // dpuSlabPct (ask: 2026-10-27, "add a column for each DPU in the DPI
+  // rate card and mention each DPU's contribution % to DF during the DPI
+  // period" — replaces the earlier flat "% of Traffic" column): each DPU
+  // slab's volume as a percentage of THIS ROW's own dfCount. Only the
+  // Deposit-type share of a row has a DPU-slab breakdown at all (see
+  // purposeCodeYieldBreakdown()'s comment in lib/compute.js), so a row's
+  // dpuSlabPct values sum to its Deposit share of dfCount, not to 100% —
+  // the remainder is non-Deposit volume, which has no DPU concept to show.
+  const totals = buildPurposeCodeGroupTotals(r => r.licenseType, g => licenseTypesSeen.has(g.label)) // drop "(Unspecified)" license-type bucket, same as byPeriod above
+    .map(t => {
+      const dpuSlabPct = {};
+      DPU_SLAB_ORDER.forEach(slab => {
+        dpuSlabPct[slab] = t.dfCount > 0 ? ((t.slabVolumes[slab] || 0) / t.dfCount * 100) : null;
+      });
+      return { purposeCode: t.purposeCode, licenseType: t.group, revenue: t.revenue, dfCount: t.dfCount, yield: t.yield, dpuSlabPct };
+    })
+    .sort((a, b) => (a.purposeCode + a.licenseType).localeCompare(b.purposeCode + b.licenseType, undefined, { numeric: true }));
+
+  // ---- By FIU x Purpose Code (ask: 2026-10-26, "Add a table that has FIU
+  // x Purpose Code wise Pre-DPI and Post-DPI Yield") ----
+  // One row per (FIU, Purpose Code) pair with measured volume in that
+  // code, Post-DPI Yield summed the same way as totals/byPeriod above.
+  // There's deliberately no computed Pre-DPI Yield field here at all — see
+  // the big comment on purposeCodeYieldBreakdown: pre-DPI revenue has no
+  // FI-type/purpose-code attribution whatsoever, so a per-FIU Pre-DPI
+  // purpose-code yield isn't a number this model can produce, not just one
+  // that happens to be missing. The frontend renders that column as "—"
+  // for every row and explains why, rather than this trying to fake one.
+  const legalNameByFiu = new Map();
+  const licenseTypeByFiu = new Map();
+  result.rows.forEach(r => {
+    legalNameByFiu.set(r.fiuId, r.legalName || '');
+    licenseTypeByFiu.set(r.fiuId, r.licenseType || '');
+  });
+  const byFiu = buildPurposeCodeGroupTotals(r => r.fiuId, () => true)
+    .map(t => ({
+      fiuId: t.group,
+      legalName: legalNameByFiu.get(t.group) || '',
+      licenseType: licenseTypeByFiu.get(t.group) || '',
+      purposeCode: t.purposeCode,
+      revenue: t.revenue,
+      dfCount: t.dfCount,
+      yield: t.yield
+    }))
+    .sort((a, b) => (b.revenue || 0) - (a.revenue || 0));
+
+  const purposeCodeYield = {
+    licenseTypes: Array.from(licenseTypesSeen).sort(),
+    purposeCodes: Array.from(purposeCodesSeen).sort(),
+    byPeriod: purposeCodeByPeriod,
+    totals,
+    byFiu,
+    totalsDpiLabel,
+    // dpuSlabs: the 8 DPU rate-card slabs in display order, label included
+    // so the frontend never hardcodes/re-derives either (ask: 2026-10-27).
+    // Each totals[] row's dpuSlabPct is keyed by the same `key` values.
+    dpuSlabs: DPU_SLAB_ORDER.map(key => ({ key, label: DPU_SLAB_LABELS[key] }))
+  };
+
   const dfYieldAnalysis = {
     periods: tspPeriods.map(p => ({ key: p.key, label: p.label })),
     current: currentPeriod,
     oct2026: octPeriod,
     mar2027: marPeriod,
-    tspByPeriod
+    tspByPeriod,
+    purposeCodeYield
   };
 
   return {
@@ -895,6 +1079,7 @@ function buildComputeResponse(counts, { asOfDateStr, fyStartMonthStr, sucStartDa
     groupedByTsp,
     groupedByUseCase,
     groupedByLicense,
+    groupedByUseCaseLicense,
     dfYieldAnalysis
   };
 }

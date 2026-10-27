@@ -12,13 +12,10 @@ Pages — see "Deploying" below).
 ## What's in each config
 
 **FIU Metadata** (`FIU Metadata` tab): FIU ID, Legal Name, TSP Name, License
-Type, Use-case, Billing Model, and **Top 10** (Yes/No) — a manually-set flag
-for a FIU that belongs to the org's "Top 10" watchlist for its use-case. It
-doesn't affect any revenue calculation; it only drives the Top 10 - Lending
-and Top 10 - PFM sections described under Monthly workflow below. Re-running
-**Import / update from Master Data file** never touches this flag either way
-(that file doesn't carry a Top 10 column), so it's safe to re-seed without
-losing who's flagged.
+Type, Use-case, and Billing Model. (There used to be a manually-set **Top
+10** Yes/No flag here too, driving the Top 10 - Lending/PFM sections —
+removed 2026-10-26; see those sections under Monthly workflow below for
+how Top 10 is determined now.)
 
 **Yield & CMGR** (`Yield & CMGR` tab): FIU ID, Yield, CMGR (compound monthly
 growth rate, as a decimal — `0.05` for 5% monthly growth, `0` for flat,
@@ -83,6 +80,29 @@ displayed rounded to 2 decimal places throughout the Monthly Revenue tab and
 the Yield & CMGR config table (the underlying stored values keep full
 precision — only the display is
 rounded).
+
+**Editing a config auto-refreshes the Monthly Revenue tab (fixed
+2026-10-27 — ask: "I am updating the use-case for these FIUs using the
+metadata tab but the use-case wise Yield is not changing")**: saving,
+deleting, or bulk-importing a row on the FIU Metadata, Yield & CMGR, or
+Historical Actuals tab used to persist correctly on the server but never
+re-ran `/api/compute` — so an edit (e.g. a Use-case change) saved fine,
+but every table on the Monthly Revenue tab and DF Yield Analysis sub-tab
+kept showing figures from whatever was last computed, until something
+unrelated (re-selecting the counts file, nudging the As-of Date) happened
+to trigger a fresh compute. Now every save/delete/import action on those
+three tabs — including the bulk "Import / update from Master Data file"
+and "Choose actuals file" uploads — automatically re-runs compute
+afterward (reusing the same `/api/compute` or `/api/compute-from-email`
+call the side panel's own fields trigger), as long as a counts file or
+email source has already loaded at least once in this session; a status
+line under each tab's table ("Saved — recomputing revenue…", then "Saved
+— revenue recomputed…") confirms it happened. If no counts source has
+loaded yet, there's nothing to refresh, so no recompute fires — edit
+configs before or after your first upload, either way works. Verified
+live: editing a Lending-tagged FIU's Use-case away from Lending and
+clicking Save immediately moved the Summary tab's "DPI Yield (Lending)"
+and "DPI Period DF Count (Lending)" tiles, with no other action taken.
 
 ## Monthly workflow
 
@@ -163,7 +183,9 @@ rounded).
      persist for the rest of the FY the way they did before the anchor
      split existed.
    - **DPI Pricing Start Date** (dropdown next to As-of date/FY start month, options
-     Oct 2026 – Mar 2027, default "None") — from that month onward, any FIU
+     Oct 2026 – Mar 2027, default **Dec 2026** — changed 2026-10-26, was
+     "None"; December 2026 is the actual DPI Pricing Start Date in use, per
+     the ask: "DPI Start period is December 2026") — from that month onward, any FIU
      with **both** DPI Pricing Cliff CMGR and DPI Pricing Yield set on the Yield & CMGR tab
      switches its revenue onto its **expected Data Fetch volume, split by
      Deposit vs. non-Deposit FI Type** (see "Deposit vs. non-Deposit split"
@@ -280,6 +302,27 @@ rounded).
        (`cmgr`/`sucCliffCmgr`/`sucRecoveryCmgr` all `0.2`, uniform
        pre-DPI-Pricing and throughout the DPI Pricing period) — it was
        previously flat (`0%`, no growth at all) before this ask.
+     - **KMBL-FIU-PROD (PFM) and the Top 10 flag (investigated/superseded
+       2026-10-26)**: investigated a report that "PFM projections for KMBL
+       stopped showing" on Render after a deployment. Couldn't reproduce
+       anything wrong in the revenue engine itself (checked with the real
+       October counts file and the DPI Pricing Start Date actually in use,
+       December 2026 — this FIU comes back fully billable in every month
+       either way). The likely real cause at the time: `KMBL-FIU-PROD
+       (PFM)`'s manually-set **Top 10** flag shipped as `No` in the
+       committed config, and the "Top 10 - PFM" section filtered strictly
+       on that flag, independent of billability — if it had been switched
+       to "Yes" by hand in production and then reverted (the only way that
+       happens is the "Reseed from bundled data" action, since a normal
+       deploy leaves the persistent disk alone per `render.yaml`), PFM
+       would vanish from Top 10 - PFM specifically while showing up fine
+       everywhere else. First fixed by setting the flag to `Yes` directly;
+       **the whole flag was removed shortly after** (see "Top 10 -
+       Lending/PFM" under Monthly workflow below) in favor of ranking by
+       FY Total revenue automatically, which made this specific flag/reseed
+       interaction moot going forward — KMBL-FIU-PROD (PFM) now appears (or
+       doesn't) in Top 10 - PFM purely based on whether its own revenue
+       ranks it there.
      - **KMBL-FIU-PROD regular `yield` recalibrated to September (added
        2026-10-23)**: this is the regular (non-DPI-Pricing) ₹/fetch rate
        used for every month that isn't a recorded Historical Actual and
@@ -310,6 +353,127 @@ rounded).
        for every future month, and that the revenue is increasing given
        the positive CMGR") — left uncorrected, PFM's projected revenue
        would have come out roughly 16x too high. `yield` is now 0.087767.
+     - **Re-derived from a real September 2026 DPU report, AA Fee column
+       (added 2026-10-26, corrected 2026-10-26 — see the dynamic-tiering
+       bullet right below for the correction)**: `sucDepositSlabShares`
+       (see below) for every FIU, including the two KMBL-FIU-PROD lines
+       (see the "KMBL-FIU-PROD shared-ID caveat" above), was derived from a
+       real DPU SNA report, `dpu_sna_report_account_level_2026-09-01_
+       2026-09-30.xlsx` (FIU x purpose_code x dpu_slab x fi_type, with
+       `fi_requests`/`successful_fetches` columns), replacing the
+       2026-10-20 derivation above (which combined Aug+Sep and used the
+       rate card's **FIP Fee** column instead). This methodology change —
+       September only, and the **AA Fee** column, not FIP Fee — was an
+       explicit ask (2026-10-26): "1. Use the attached file[DPU report]. 2.
+       You can lock it based on September numbers. 3. AA fee only. 4. Yes,
+       replace Deposit type rates only while calculating revenue for other
+       FI types at pre-DPI rates." `sucNonDepositRate` is completely
+       untouched by this — non-Deposit FI types still bill at each FIU's
+       own realized historical rate exactly as before (see
+       "sucNonDepositRate" above). Of the 523 FIUs in `yield-cmgr.json`,
+       429 got a real recomputed slab-share mix (+ `sucDepositSharePct`),
+       57 were present in the report with zero Deposit-type volume
+       (`sucDepositSharePct` set to exactly 0), 35 weren't in the report at
+       all and were left completely untouched, and the 2 KMBL lines were
+       derived via the purpose-code split described below. One data-quality
+       wrinkle: a session touching more than one Deposit-type sub-type
+       (e.g. both `DEPOSIT` and `TERM_DEPOSIT`) is counted in each of those
+       rows per the report's own documented behavior, which can push a
+       FIU's raw summed Deposit count very slightly above its deduped total
+       `fi_type='ALL'` count — `sucDepositSharePct` is clamped to a maximum
+       of `1.0` for the 36 FIUs this affected (worst case ~17% over, most
+       under 5%). Reusable for a future month's DPU report:
+       `node scripts/recompute-deposit-rates.js <report.xlsx>` — see that
+       script's own header comment for the full methodology.
+     - **Deposit rate tiering is now dynamic, per DPI-Pricing month, not
+       locked to September (corrected 2026-10-26 — ask: "apply the tier
+       discount based on the FIU's projected data fetch count for deposit
+       FI type for each month. Do not simply apply discount based on
+       September volumes.")**: the rate card's AA Fee column isn't a single
+       number per DPU-slab row — it's a volume-discounted range (discount
+       tiers: `<1,000,000` fetches/month 0%, `1,000,000-4,999,999` 10%,
+       `5,000,000-9,999,999` 15%, `>=10,000,000` 20%), applied to the
+       **higher end** of that row's range: `13mo ₹4.8, 7mo ₹3.35, 4mo
+       ₹1.70, 1mo ₹0.470, 1w ₹0.350, 2-5 days ₹0.180`, each × `(1 −
+       discount)`. The `1 day` and "Profile and summary only" rows are a
+       flat `₹0.08` regardless of volume — no discount tier applies to
+       either (ask: "1 day and profile-summary do not feature tier
+       discounts"). An earlier version of this feature (2026-10-26, same
+       day) locked a FIU's discount tier to whatever its September Deposit
+       volume measured, baking one static blended `sucDepositRate` into
+       `yield-cmgr.json` for the whole DPI Pricing period. That's wrong for
+       any FIU whose projected Deposit volume grows (or shrinks) enough to
+       cross a tier boundary partway through the DPI Pricing period — this
+       correction instead stores each FIU's fixed **per-slab mix** as
+       `sucDepositSlabShares` (e.g. `{ "13mo": 0.70, "7mo": 0.11, "4mo":
+       0.01, "1mo": 0.18 }` — fractions of that FIU's total Deposit volume,
+       summing to ~1) and recomputes the blended ₹/fetch Deposit rate
+       **fresh in `lib/compute.js`, every DPI-Pricing month**, from that
+       month's own projected Deposit-type Data Fetch volume (`dfUsage ×
+       sucDepositSharePct`) — see `SUC_DEPOSIT_RATE_CARD`,
+       `sucDepositTierDiscount()`, and `sucDepositRateForMonth()` in
+       `lib/compute.js`. Only the discount tier moves month to month; the
+       slab mix itself stays fixed at whatever `scripts/recompute-deposit-
+       rates.js` measured, since the regular monthly counts upload has no
+       DPU-slab breakdown to re-measure the mix itself from. A FIU with no
+       `sucDepositSlabShares` on file (not yet covered by a DPU report)
+       falls back to the older static `sucDepositRate` field instead,
+       completely unaffected by volume — `sucDepositRateIsDynamic` in each
+       FIU's computed row reports which path applied. Purpose code plays no
+       special role in any of this — code `105` is split into
+       Deposit/non-Deposit exactly the same way every other purpose code
+       is (ask: "Same logic can be used for 105 as for other purpose
+       codes") — this file has no purpose-code-level logic at all; purpose
+       code only matters one level up, in how `scripts/recompute-deposit-
+       rates.js` aggregates a DPU report's rows into a FIU's slab mix (see
+       the KMBL split just below).
+     - **KMBL-FIU-PROD now included via a purpose-code split (corrected
+       2026-10-26 — ask: "For KMBL, consider fetches for purpose codes 101
+       and 102 as PFM and for 103 and 104 as Lending")**: the real DPU SNA
+       report has only one shared ID (`KMBL-FIU-PROD`) covering both
+       business lines combined; the original version of this feature
+       (same day) excluded both KMBL lines entirely from the DPU-based
+       derivation to avoid re-merging them, leaving both on their older,
+       specially-derived flat rates. This correction instead has
+       `scripts/recompute-deposit-rates.js` split `KMBL-FIU-PROD`'s own
+       report rows by `purpose_code` before aggregating — `101`+`102` build
+       `KMBL-FIU-PROD (PFM)`'s slab mix, `103`+`104` build `KMBL-FIU-PROD`
+       (Lending)'s own slab mix — using the `fi_type='ALL'` (deduplicated
+       per-session) rows for each, consistent with both lines' established
+       **100%-Deposit-share convention** (`sucDepositSharePct = 1`, set
+       directly rather than computed from a combined ALL-type total that
+       can't be split by business line). Both lines' older static
+       `sucDepositRate` values (`3.334653` for Lending, `1.224653` for PFM)
+       are left on file untouched but are no longer read — both now have
+       real `sucDepositSlabShares` and so take the dynamic, per-month path
+       described above like every other DPU-covered FIU.
+     - **purposeCodeBreakdown (added 2026-10-26 — ask: "(license type x
+       purpose code) yield")**: alongside each FIU's overall
+       `sucDepositSlabShares`/`sucDepositSharePct`, the same
+       `scripts/recompute-deposit-rates.js` run also writes a per-FIU,
+       per-purpose-code breakdown — `purposeCodeBreakdown: { "<code>": {
+       sharePct, depositSharePct, slabShares } }` — for every purpose_code
+       that FIU has nonzero volume in. `sharePct` is that code's share of
+       the FIU's total DF volume (so a FIU's codes sum to ~1); `
+       depositSharePct` is that code's OWN Deposit-type share, which can
+       differ from the FIU's overall `sucDepositSharePct` (a FIU can run a
+       different FI-type mix on one purpose code than another);
+       `slabShares` is that code's own per-slab mix, same convention as
+       `sucDepositSlabShares`. This powers the DF Yield Analysis tab's By
+       Purpose Code table (see `purposeCodeYieldBreakdown()` in
+       `lib/compute.js`, and the Monthly Revenue tab layout section
+       below). Both KMBL lines get this too, scoped to just the purpose
+       codes that line actually handles (101/102 for PFM, 103/104 for
+       Lending), using `fi_type='ALL'` rows and a forced
+       `depositSharePct = 1` per the same 100%-Deposit convention as
+       above — not the generic ALL-vs-known-slab ratio, which isn't
+       reliable for KMBL specifically (most of its sessions aren't
+       literally tagged `DEPOSIT`). This field, like the ones above it,
+       is not editable from the UI — only `scripts/recompute-deposit-
+       rates.js` writes it, and any UI edit to a FIU's Yield & CMGR
+       config (which only ever touches `yield`/`cmgr`/`sucYield`/
+       `sucCliffCmgr`/`sucRecoveryCmgr` — see `toYcRow` in `server.js`)
+       leaves it untouched.
      - **Graceful degradation**: a FIU with no Deposit share/rate on file
        at all contributes 0 from the Deposit side and bills its whole DF
        volume at `sucNonDepositRate` (currently every DPI-eligible FIU has
@@ -642,7 +806,29 @@ rounded).
    header — click again to flip direction) and **searched** (the box above
    each table filters by substring across FIU ID, legal name, and billing
    model). "Total" footer rows always reflect the full dataset, not just
-   what's currently filtered by a search.
+   what's currently filtered by a search. Every table also has a green
+   **Export .xlsx** button next to its search box (added 2026-10-27 — ask:
+   "add an export as .xlsx functionality next to all tables, with a colour
+   filled button for better visibility") — downloads that table's current
+   rows, respecting whatever sort is currently applied *and* whatever the
+   search box is currently filtering to (same rows as what's on screen),
+   as a real `.xlsx` file, via
+   [SheetJS](https://git.sheetjs.com/sheetjs/sheetjs) (the "core" build,
+   vendored locally under `public/vendor/` rather than loaded from a CDN, to
+   match this app's pre-existing zero-external-script-dependency design —
+   see `public/vendor/XLSX-LICENSE.txt` for its Apache-2.0 license). The
+   exported file mirrors the table's own columns and uses each table's
+   underlying raw numeric value, rounded to 2 decimals — not the
+   display-formatted (currency-symbol'd, comma'd) text. "Total"/footer rows
+   are deliberately **excluded** from the export, to avoid silently baking a
+   derived summary number into a file as if it were just another data row.
+   Every table's filename describes what it is (e.g. "By Use-case -
+   Revenue.xlsx", "Top 10 - Lending.xlsx") rather than a generic "export.xlsx".
+   A table can opt out of either the search box or the export button (or
+   both) via `searchable: false` / `exportable: false` in its
+   `renderDataTable()` config — used internally by individual *columns* too
+   (see the search-fix note under "DF Yield Analysis" below for why a column,
+   not just a table, sometimes needs to opt out of search).
 8. FIUs with an unrecognized/blank billing model (excluded from revenue) are
    listed in their own **Unbilled FIUs** section, with a total count and
    their combined AU/DF counts, plus a per-FIU breakdown — so unbilled
@@ -675,31 +861,183 @@ rounded).
     Unlike Revenue, the AU and DF views don't have an FY Total column (same
     convention as their per-FIU counterparts) — just a Total row per month.
     None of these grouped tables (By TSP, By Use-case, By License Type) has
-    a Contribution % column.
+    a Contribution % column. License Type is free text on the FIU Metadata
+    tab (no fixed dropdown of known values), so it's possible for the same
+    license type to end up split across two groups by casing alone — fixed
+    once for "Stock Broker" vs "Stock broker" (2026-10-26 — ask: "Merge
+    values... into one license type called 'Stock Broker'"; 4 FIUs were on
+    the lowercase-b variant, normalized to match the other 56). Worth
+    re-checking the raw data for other casing splits if a License Type
+    grouping ever looks thinner than expected.
 11. **Top 10 - Lending** and **Top 10 - PFM** sections show the same kind of
-    full FY grid, but filtered to just the FIUs flagged **Top 10 = Yes** on
-    the FIU Metadata tab, split by that FIU's Use-case: Top 10 - Lending
-    covers Revenue and DF count for the flagged FIUs with Use-case
-    "Lending"; Top 10 - PFM covers Revenue, AU count, and DF count for the
-    flagged FIUs with Use-case "PFM". A FIU flagged Top 10 with some other
-    Use-case (or a blank one) won't appear in either section — only
-    "Lending" and "PFM" are split out today.
-12. **DF Yield Analysis** — `DF Yield = Total Revenue ÷ Total DF Count` for
-    three fixed points in the FY: the current (as-of) month, Oct 2026, and
-    Mar 2027. Each has an Overall figure plus a By Use-case and By TSP
-    breakdown, and a final **By TSP** table compares all three months side
-    by side for each TSP. Revenue only counts months that are actually
-    billed (same rule used everywhere else); DF Count includes every FIU
-    that reported a DF count that month regardless of billing model — the
-    same broad population the DF count tables use. That means DF Yield
-    reflects revenue earned across the whole Data Fetch footprint, not just
-    the FIUs currently billing on it, so it's normal for it to differ from
-    any single FIU's configured Yield. Every By Use-case / By TSP breakdown
-    sums back exactly to its period's Overall figure. A scope with zero DF
-    volume that month shows "—" instead of a divide-by-zero. If Oct 2026 or
-    Mar 2027 ever falls outside the current fiscal year (only possible with
-    a non-default FY Start Month), that period's tables show an empty
-    state instead of guessing.
+    full FY grid, filtered to the 10 FIUs with the highest **FY Total
+    revenue** within that Use-case — computed dynamically from each FIU's
+    own revenue figures (ask: 2026-10-26, "remove the top 10 setting as a
+    static config and show the top 10 in the tool based on the actual
+    values"; there used to be a manually-set Top 10 flag on the FIU
+    Metadata tab driving this instead, removed the same day): Top 10 -
+    Lending ranks FIUs with Use-case "Lending" this way and shows Revenue
+    and DF count for the top 10; Top 10 - PFM does the same for Use-case
+    "PFM" and also shows AU count. Only "Lending" and "PFM" are split out
+    today — a FIU with some other Use-case (or a blank one) is never
+    eligible for either section, however high its revenue. "FY Total
+    revenue" is the exact same figure the FY Total column shows elsewhere
+    (sum of each billable month's revenue across the fiscal year) — a FIU
+    with no billable revenue all FY sums to 0 and simply won't rank near
+    the top. Ties are broken by whatever order the FIUs happened to come
+    back in, with no further tiebreak rule.
+12. **DF Yield Analysis** — `DF Yield = Revenue ÷ DF Count`. Reworked
+    2026-10-26 (ask: "give me a tab that shows use-case wise Annual Revenue,
+    Yield, Pre-DPI Revenue, Pre-DPI Yield, Post DPI-Revenue, Post-DPI Yield.
+    Replace existing fields under the 'DF Yield' tab with these") — this
+    used to show three fixed-month snapshots (current/Oct 2026/Mar 2027)
+    broken down by Use-case and by TSP, plus a By License Type x Purpose
+    Code filter; all of that is gone, replaced by three full-FY-period
+    tables:
+    - **By Use-case** — one row per (Use-case, License Type) pair (added
+      2026-10-26 — ask: "add a license type column to both these table so
+      we can look at DF yields basis a combination of use-case and license
+      type" — backed by a new `groupedByUseCaseLicense` field in the
+      `/api/compute` response, a compound grouping alongside the existing
+      plain `groupedByUseCase`; summing every License Type row for a given
+      Use-case reconciles exactly with that Use-case's row in the older
+      plain grouping), with **Annual Revenue**/**Yield** (the whole FY),
+      **Pre-DPI Revenue**/**Yield** (April up to, not including, the DPI
+      Pricing Start Date), and **Post-DPI Revenue**/**Yield** (that month
+      through the end of the FY) — same Pre-DPI/Post-DPI boundary as the
+      Summary sub-tab's Pre-DPI/DPI Period Revenue tiles, just broken out
+      by every (Use-case, License Type) combination present instead of
+      hardcoded to Lending/PFM. Annual always equals Pre-DPI + Post-DPI
+      exactly. A row/period with no DF volume shows "—" rather than a
+      divide-by-zero; Post-DPI shows "—" across the board if no DPI Pricing
+      Start Date is set at all. Sortable by any column, footer row totals
+      Revenue/Yield across every row.
+    - **By Purpose Code (added 2026-10-26 — ask: "Add a purpose code wise
+      count of Revenue and Yield to the DF Yield tab, along the lines of
+      the previous update")** — one row per (Purpose Code, License Type)
+      pair (License Type column added same day as the By Use-case one
+      above, same ask), Revenue and Yield, summed across the whole DPI
+      Pricing period (`buildPurposeCodeGroupTotals()` in `server.js` —
+      generalized from the original license-type-collapsing
+      `buildPurposeCodeTotals()` into a `(groupFn, filterFn)` helper so the
+      same core loop over `purposeCodeYieldBreakdown()` per DPI month now
+      also powers the By FIU x Purpose Code table below). Unlike By
+      Use-case, there's no Pre-DPI column here at all — purpose-code
+      attribution only exists once DPI Pricing revenue kicks in (pre-DPI
+      revenue has no FI-type, let alone purpose-code, attribution
+      whatsoever), so a table with an always-zero Pre-DPI column would be
+      noise. Empty ("set a DPI Pricing Start Date to see this") if none is
+      set. See `purposeCodeYieldBreakdown()` in `lib/compute.js` for the
+      per-FIU formula: `dfUsage` for that month is split by the FIU's own
+      fixed `purposeCodeBreakdown` mix (`sharePct`, `depositSharePct`,
+      `slabShares` — see `scripts/recompute-deposit-rates.js`), the
+      Deposit portion priced via `sucDepositRateForMonth()` using the
+      **purpose code's own slab mix** but the **FIU's overall Deposit
+      volume for the discount tier** (tiers are account-level on the real
+      rate card, not purpose-code level), and the non-Deposit portion at
+      the FIU's regular `sucNonDepositRate`. A FIU with no measured volume
+      in a purpose code is excluded from that code's slice entirely (never
+      shown as a 0). Also has 8 **DPU columns** — one per slab on the DPI
+      Utility Rate Card (13 Months, 7 Months, 4 Months, 1 Month, 1 Week,
+      5 Days, 1 Day, Profile &amp; Summary) — showing each DPU's
+      contribution to that row's own DF volume during the DPI period.
+      Replaced an earlier, briefer **% of Traffic** column from the same
+      day (ask: "add a column for each DPU in the DPI rate card and
+      mention each DPU's contribution % to DF during the DPI period.
+      Remove the column titled '% of Traffic'") — the flat "% of Traffic"
+      column turned out not to be what was wanted; the DPU breakdown is
+      more specific and ties directly to the rate card. Each DPU column is
+      `purposeCodeYieldBreakdown()`'s new `slabVolumes` (lib/compute.js —
+      the group's Deposit-type DF volume split across the 8 rate-card
+      slabs, same per-FIU `purposeCodeBreakdown[code].slabShares` mix that
+      already prices Deposit revenue — see
+      `scripts/recompute-deposit-rates.js`) expressed as a % of the row's
+      *whole* `dfCount` (Deposit + non-Deposit). Only the Deposit-type
+      share of a row has a DPU-slab breakdown at all — non-Deposit volume
+      bills at a flat rate with no DPU concept — so **a row's DPU
+      percentages sum to its Deposit share of DF, not to 100%**; the
+      footer total is each slab's overall contribution across the whole
+      table. The 8 slabs and their labels come from `lib/compute.js`'s
+      `DPU_SLAB_ORDER`/`DPU_SLAB_LABELS` (exported alongside
+      `SUC_DEPOSIT_RATE_CARD`) via a new `dpuSlabs` field on
+      `purposeCodeYield` — the frontend never hardcodes the slab list, so
+      a future rate-card change shows up automatically. No `maxHeight` cap
+      on this table (removed same day, ask: "Resize table to avoid
+      scrolling") — unlike the per-FIU table below it, its row count is
+      bounded by (purpose codes x license types), not by FIU count, so it
+      renders at full height without a scrollbar.
+    - **By FIU x Purpose Code (added 2026-10-26 — ask: "Add a table that
+      has FIU x Purpose Code wise Pre-DPI and Post-DPI Yield")** — the same
+      `buildPurposeCodeGroupTotals()` totals as the By Purpose Code table
+      above, but grouped per-FIU instead of per-license-type (the new
+      `purposeCodeYield.byFiu` field — summing its Revenue for a given
+      purpose code reconciles exactly with that code's row in the By
+      Purpose Code table). One row per (FIU, Purpose Code) combination
+      with measured volume: FIU ID, Legal Name, License Type, Purpose
+      Code, and a Post-DPI Yield column. **Pre-DPI Yield always shows
+      "—"** — not missing data, but the same model limitation as the By
+      Purpose Code table's missing Pre-DPI column, just surfaced
+      explicitly here per-FIU instead of omitting the column outright,
+      since the ask was specifically for "Pre-DPI and Post-DPI Yield". No
+      footer/Total row on this table — the aggregate is already the By
+      Purpose Code table directly above it. Searchable by FIU ID, legal
+      name, license type, or purpose code. Empty with the same "set a DPI
+      Pricing Start Date" hint if none is set.
+    - **By Use-case — Yield Only** and **By Purpose Code — Yield Only**
+      (added 2026-10-27 — ask: "add two other tables: 1) shows only purpose
+      code wise yields for DPI period 2) shows only use-case wise yields for
+      pre-DPI and DPI period") — two smaller tables, placed directly under
+      their fuller counterparts above, for a quick read without the License
+      Type breakdown getting in the way. **By Use-case — Yield Only** shows
+      Pre-DPI Yield/Post-DPI Yield per Use-case (collapsed across License
+      Type — backed by the same plain `groupedByUseCase` field the older,
+      pre-rework version of this tab used, not `groupedByUseCaseLicense`).
+      **By Purpose Code — Yield Only** shows Revenue/Yield per Purpose Code
+      for the DPI Pricing period only (collapsed across License Type), built
+      client-side by re-summing the By Purpose Code table's own
+      `purposeCodeYield.totals` rows per purpose code — summation is
+      associative, so this reconciles exactly with the fuller table above it
+      without any new backend computation. Both are empty/"—" under the same
+      conditions as their fuller counterparts (no DPI Pricing Start Date →
+      no Post-DPI/DPI-period figures at all).
+
+    **Search bug fix (2026-10-27)** — searching "103" on the By Purpose Code
+    table was also matching rows with a *different* purpose code, e.g. 104.
+    Root cause: the shared `renderDataTable()` component's search box matches
+    the query substring against every column's raw, full-precision value
+    (not the rounded text actually displayed) unless that column opts out
+    with `searchable: false`. A DPU column's unrounded percentage —
+    something like `9.504183103011428` for the "Profile & Summary" slab —
+    can coincidentally *contain* an unrelated digit sequence like "103"
+    purely by chance, well outside the number's displayed 2-decimal
+    rounding. Fixed by marking every numeric/computed column across all
+    three fuller DF Yield tables (By Use-case, By Purpose Code, By FIU x
+    Purpose Code — including all 8 DPU columns) as `searchable: false`,
+    leaving only genuine text columns (Use-case, License Type, Purpose Code,
+    FIU ID, Legal Name) searchable — matching what each table's search
+    placeholder text already promised. The two new Yield Only tables above
+    were built with the same scoping from the start.
+
+    All three tables apply the same Revenue/DF Count inclusion rules as
+    every other total on this page: Revenue only counts months that are
+    actually billed; DF Count includes every FIU that reported a DF count
+    that month regardless of billing model — the same broad population the
+    DF count tables use. That means DF Yield reflects revenue earned across
+    the whole Data Fetch footprint, not just the FIUs currently billing on
+    it, so it's normal for it to differ from any single FIU's configured
+    Yield.
+
+    Table-sizing note (fixed 2026-10-26, from a live-deployment screenshot
+    review): the shared `renderDataTable()` component's footer/Total rows
+    were rendering their numeric cells left-aligned while body-row numeric
+    cells rendered right-aligned — the CSS only styled `thead th.num` and
+    `tbody td.num`, never `tfoot td.num`, even though footer cells already
+    carried the `num` class. Fixed by adding `tfoot` to that selector.
+    `renderDataTable()` also gained an optional per-column `width` config
+    (applied as an inline style on both the header and body `<td>`/`<th>`),
+    used to pin the new License Type columns to a fixed width on the By
+    Use-case and By Purpose Code tables so they don't crowd out the wider
+    Use-case/Purpose Code and numeric columns.
 
 ## Monthly Revenue tab layout
 
@@ -771,7 +1109,17 @@ the **Monthly Revenue** tab, right where it always was.
   below for the third), with a hover tooltip (crosshair snaps to the
   nearest month) and end-of-line value labels. The month-wise figures table
   (on the Monthly Revenue tab) has the exact numbers for all three, plus
-  variance (Actual − Original Plan, see below) and variance %.
+  variance (Actual − Original Plan, see below) and variance %. A **Total**
+  row (added 2026-10-26) sums Live Projection, Original Plan, and Actual
+  across the FY — a month missing a value (Actual before it's recorded, or
+  Original Plan if no baseline was ever set) just contributes nothing to
+  that column's total, rather than the total showing "—"; Variance and
+  Variance % are left blank in the Total row, since a summed variance or an
+  averaged percentage wouldn't mean what either column means per month.
+  The table itself no longer caps its own height (also 2026-10-26) — it
+  now shows all 12 FY months plus the Total row with no inner scrollbar,
+  falling back to the page's general 70vh table scroll cap instead of its
+  previous, tighter 360px one.
 - Before the first compute of a session, the chart area just says to upload
   a counts file on the Monthly Revenue tab — nothing else on the page is
   blocked by it.
@@ -1148,15 +1496,37 @@ history plus the full currently-computed dataset (whatever `/api/compute`
 last returned) to `POST /api/chat`. The server condenses that into a much
 smaller JSON block (`lib/chat.js`'s `buildChatContext` — per-FIU monthly
 figures as compact `[revenue, auUsage, dfUsage, billable]` arrays, integers
-only, plus the existing TSP/Use-case/License groupings and the DF Yield
-Analysis block) and sends it to the Anthropic Messages API as cached system
-context alongside your question, so Claude answers from the real numbers
-rather than guessing. Chat history is kept client-side only (in the
-browser tab) and resent each turn — closing/refreshing the page clears it;
-the server itself doesn't store any chat state. Each question is a real API
-call and incurs Anthropic's normal per-token cost on your key; prompt
-caching keeps repeated questions in the same session cheaper by reusing the
-cached data block instead of re-sending it at full price.
+only, plus the TSP/Use-case/License/Use-case-x-License groupings and the DF
+Yield Analysis block — see below) and sends it to the Anthropic Messages API
+as cached system context alongside your question, so Claude answers from
+the real numbers rather than guessing. Chat history is kept client-side
+only (in the browser tab) and resent each turn — closing/refreshing the
+page clears it; the server itself doesn't store any chat state. Each
+question is a real API call and incurs Anthropic's normal per-token cost on
+your key; prompt caching keeps repeated questions in the same session
+cheaper by reusing the cached data block instead of re-sending it at full
+price.
+
+**What's in the DF Yield Analysis block** (kept in sync with the DF Yield
+Analysis tab itself — updated 2026-10-27, ask: "ensure that all text notes
+mentioned throughout the UI are consistent with the changes we have been
+making", after the tab had been reworked several times without the chat
+context or its system-prompt glossary being updated to match): alongside
+the older `current`/`oct2026`/`mar2027`/`tspByPeriod` three-single-month
+cut (still computed server-side but no longer shown anywhere in the UI
+since the 2026-10-26 rework — see "DF Yield Analysis" above), the condensed
+block now also carries `purposeCodeYield.totals` (Revenue/Yield/DPU-slab %
+by Purpose Code x License Type, the By Purpose Code table), `.byFiu`
+(the same, by individual FIU, the By FIU x Purpose Code table), and
+`.dpuSlabs` (the 8 DPU rate-card slab key/label pairs), plus a top-level
+`groupedByUseCaseLicense` (Revenue/DF by Use-case x License Type, the By
+Use-case table) alongside the pre-existing `groupedByTsp`/`groupedByUseCase`/
+`groupedByLicense`. The `SYSTEM_PROMPT` domain glossary in `lib/chat.js`
+explains all of this to the model, including the same pre-DPI/DPU-slab
+caveats the UI hints give a person (purpose-code figures only exist from
+the DPI Pricing Start Date onward; a row's `dpuSlabPct` values sum to its
+Deposit share of DF, not to 100%) — so the chat feature doesn't contradict
+what you see on screen, or invent an answer the model has no data for.
 
 ## Login / access control
 
@@ -1578,3 +1948,15 @@ a reason to skip `npm test` for backend/calculation changes.
   than its own file — it's small enough, and it needs to run before almost
   every other route.
 - `render.yaml` — the Render Blueprint used in "Deploying to Render" above.
+- `scripts/recompute-deposit-rates.js` — recomputes `sucDepositSlabShares`/
+  `sucDepositSharePct` and the per-purpose-code `purposeCodeBreakdown` in
+  `data/yield-cmgr.json` from a real DPU SNA report (the actual ₹/fetch
+  blending against the Finfactor DPI Utility Rate Card's AA Fee column,
+  including the month-to-month volume-discount tiering, lives in
+  `lib/compute.js` instead — see
+  `SUC_DEPOSIT_RATE_CARD`/`sucDepositRateForMonth()`/
+  `purposeCodeYieldBreakdown()` there). Run via
+  `node scripts/recompute-deposit-rates.js <report.xlsx>` (or
+  `npm run recompute-deposit-rates -- <report.xlsx>`). See "Deposit vs.
+  non-Deposit split" above for the full methodology, and the script's own
+  header comment for implementation detail.

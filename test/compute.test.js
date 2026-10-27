@@ -14,7 +14,9 @@ const { suite, test, assert, assertEqual, assertClose, assertNaN } = require('./
 const compute = require('../lib/compute');
 const {
   computeRevenue, classifyBillingModel, projectMonthToDate, fyFullMonths,
-  buildActualsByMonth, toNumber
+  buildActualsByMonth, toNumber,
+  SUC_DEPOSIT_RATE_CARD, sucDepositTierDiscount, sucDepositRateForMonth,
+  purposeCodeYieldBreakdown
 } = compute;
 
 function d(year, month1to12, day) {
@@ -372,6 +374,283 @@ suite('DPI period Deposit/non-Deposit rate split (ask: 2026-10-20)', () => {
     // "pureNonDepositFiu" — see the note on the previous test.
     const oct = 1000000 * 1.05 * 1.05;
     assertClose(row.monthly[6].revenue, oct * 0.1, 1, 'revenue = dfUsage x sucNonDepositRate (0.1), not x the Rs/user Yield (5)');
+  });
+});
+
+suite('sucDepositTierDiscount() / sucDepositRateForMonth() — per-month Deposit tiering (ask: 2026-10-26)', () => {
+  // The Finfactor DPI Utility Rate Card's AA Fee isn't one flat ₹/fetch
+  // figure per DPU slab — it's volume-discounted (0/10/15/20% off the
+  // row's higher-end figure), and the discount tier must be read off
+  // EACH MONTH'S OWN projected Deposit-type Data Fetch volume, not locked
+  // to whatever volume a single historical report happened to measure
+  // (ask: "apply the tier discount based on the FIU's projected data
+  // fetch count for deposit FI type for each month. Do not simply apply
+  // discount based on September volumes.").
+  test('tier boundaries: <1M = 0%, 1M-5M = 10%, 5M-10M = 15%, >=10M = 20%', () => {
+    assertEqual(sucDepositTierDiscount(0), 0);
+    assertEqual(sucDepositTierDiscount(999999), 0);
+    assertEqual(sucDepositTierDiscount(1000000), 0.10);
+    assertEqual(sucDepositTierDiscount(4999999), 0.10);
+    assertEqual(sucDepositTierDiscount(5000000), 0.15);
+    assertEqual(sucDepositTierDiscount(9999999), 0.15);
+    assertEqual(sucDepositTierDiscount(10000000), 0.20);
+    assertEqual(sucDepositTierDiscount(50000000), 0.20);
+  });
+
+  test('1-day and Profile-and-summary rows never discount regardless of volume', () => {
+    assertEqual(SUC_DEPOSIT_RATE_CARD['1d'][1], false, '1d row must be marked non-discountable');
+    assertEqual(SUC_DEPOSIT_RATE_CARD['ps'][1], false, 'ps row must be marked non-discountable');
+    const highVolRate = sucDepositRateForMonth({ '1d': 1 }, 50000000);
+    assertClose(highVolRate, 0.08, 0.0001, 'the 1d row stays at its flat ₹0.08 fee even at a 50M-fetch month');
+  });
+
+  test('a FIU split across several slabs blends each slab\'s own (independently discounted) fee by its fixed share — the KMBL-style purpose-code-split pattern', () => {
+    // Mirrors how a FIU's fixed multi-slab mix (e.g. KMBL-FIU-PROD (PFM)'s
+    // 13mo/4mo/1mo/1w/5d/1d split, purpose-code-derived in
+    // scripts/recompute-deposit-rates.js) blends at a given month's volume
+    // — the mix itself is fixed, but every discountable slab's fee moves
+    // together as that month's total Deposit volume crosses a tier.
+    const shares = { '13mo': 0.3, '1mo': 0.5, '1d': 0.2 };
+    const lowVolRate = sucDepositRateForMonth(shares, 500000); // 0% discount
+    const expectedLow = 0.3 * 4.8 + 0.5 * 0.470 + 0.2 * 0.08;
+    assertClose(lowVolRate, expectedLow, 0.0001);
+
+    const highVolRate = sucDepositRateForMonth(shares, 6000000); // 15% discount on discountable rows only
+    const expectedHigh = 0.3 * (4.8 * 0.85) + 0.5 * (0.470 * 0.85) + 0.2 * 0.08; // 1d un-discounted
+    assertClose(highVolRate, expectedHigh, 0.0001);
+    assert(highVolRate < lowVolRate, 'a higher-volume month must land on a lower (or equal) blended rate than a lower-volume month, never higher');
+  });
+
+  test('a slab missing from the shares map contributes nothing (degrades gracefully, same philosophy as the rest of the Deposit/non-Deposit split)', () => {
+    const rate = sucDepositRateForMonth({ '7mo': 1 }, 2000000); // only one of 8 slabs populated
+    assertClose(rate, 3.35 * 0.90, 0.0001);
+  });
+});
+
+suite('Per-month dynamic Deposit tiering inside computeRevenue (ask: 2026-10-26)', () => {
+  // Patch 45 derived one static sucDepositRate per FIU, locked to whatever
+  // discount tier a single historical (September) report's volume happened
+  // to fall into. This correction instead stores each FIU's fixed per-slab
+  // MIX as sucDepositSlabShares, and recomputes the blended rate fresh
+  // every DPI Pricing month from that month's own projected Deposit
+  // volume (dfUsage x sucDepositSharePct) — so a fast-growing FIU can move
+  // into a better (or worse) discount tier partway through the DPI
+  // Pricing period, which a single locked rate could never reflect.
+  test('a FIU whose projected Deposit volume crosses a discount tier mid-DPI-period gets a different blended rate in the month it crosses, not the rate its launch-month volume implied', () => {
+    const { row } = rowFor('FIU-TIERGROW', {
+      metaOver: { billingModel: 'Data Fetch' },
+      ycOver: {
+        sucYield: 9 /* legacy field — must be ignored */,
+        sucCliffCmgr: 0.8, sucRecoveryCmgr: 0.8,
+        sucDepositSharePct: 1,
+        sucDepositSlabShares: { '5d': 1 }, // single discountable slab, AA Fee high-end 0.180
+        sucNonDepositRate: 1.5 // irrelevant here — 100% Deposit share
+      },
+      counts: [{ fiuId: 'FIU-TIERGROW', activeUsers: '', dataFetches: 500000 }], // current-month count only needs to be present (non-blank) to satisfy sucBillable — all SUC-period months below compound off the August historical actual instead, same forward-chain mechanic as every other test in this file
+      hist: [{ fiuId: 'FIU-TIERGROW', month: '2026-08', revenue: 100000, auCount: '', dfCount: 900000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    const sept = 900000 * 1.05;           // regular (pre-SUC) CMGR anchor
+    const oct = sept * 1.8;               // first Cliff month: 945000 * 1.8 = 1,701,000 -> 1M-5M tier (10% off)
+    const nov = oct * 1.8;                // second Cliff month: 3,061,800 -> still 1M-5M tier (10% off)
+    const dec = nov * 1.8;                // third Cliff month: 5,511,240 -> crosses into 5M-10M tier (15% off)
+
+    assertClose(row.monthly[6].dfUsage, oct, 1);
+    assertClose(row.monthly[6].revenue, oct * (0.180 * 0.90), 1, 'October lands in the 1M-5M (10%) tier off its OWN volume, not the 0% tier September\'s lower volume would have locked in');
+    assertClose(row.monthly[7].revenue, nov * (0.180 * 0.90), 1, 'November is still in the same 10% tier as October');
+    assertClose(row.monthly[8].revenue, dec * (0.180 * 0.85), 1, 'December crosses into the 5M-10M (15%) tier purely because its own projected volume grew past 5,000,000 — a locked, September-based rate could never show this');
+    assert(row.monthly[8].revenue / dec < row.monthly[6].revenue / oct, 'the blended per-fetch rate must drop as volume moves into a richer discount tier');
+  });
+
+  test('a FIU with no sucDepositSlabShares on file falls back to its static sucDepositRate, completely unaffected by volume', () => {
+    const { row } = rowFor('FIU-NOSLABS', {
+      metaOver: { billingModel: 'Data Fetch' },
+      ycOver: {
+        sucYield: 9, sucCliffCmgr: 0.8, sucRecoveryCmgr: 0.8,
+        sucDepositSharePct: 1, sucDepositRate: 4 /* static fallback, no sucDepositSlabShares at all */,
+        sucNonDepositRate: 1.5
+      },
+      counts: [{ fiuId: 'FIU-NOSLABS', activeUsers: '', dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-NOSLABS', month: '2026-08', revenue: 100000, auCount: '', dfCount: 900000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    const sept = 900000 * 1.05;
+    const oct = sept * 1.8;
+    const dec = oct * 1.8 * 1.8;
+    // Even though December's volume (>5M) would land in a much richer
+    // rate-card tier if it were slab-based, this FIU has no
+    // sucDepositSlabShares on file, so it must keep billing at its flat,
+    // unconditional static rate (4) in every month regardless of volume.
+    assertClose(row.monthly[6].revenue, oct * 4, 1);
+    assertClose(row.monthly[8].revenue, dec * 4, 1, 'no tiering should apply at all without sucDepositSlabShares — the static rate never varies by volume');
+    assertEqual(row.sucDepositRateIsDynamic, false);
+  });
+
+  test('sucDepositRateIsDynamic reports true for a FIU with sucDepositSlabShares configured', () => {
+    const { row } = rowFor('FIU-DYNFLAG', {
+      metaOver: { billingModel: 'Data Fetch' },
+      ycOver: {
+        sucYield: 9, sucCliffCmgr: 0, sucRecoveryCmgr: 0,
+        sucDepositSharePct: 1, sucDepositSlabShares: { '1mo': 1 },
+        sucNonDepositRate: 1.5
+      },
+      counts: [{ fiuId: 'FIU-DYNFLAG', activeUsers: '', dataFetches: 500000 }],
+      hist: [{ fiuId: 'FIU-DYNFLAG', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }],
+      asOf: d(2026, 9, 9),
+      sucStart: { year: 2026, month: 10 }
+    });
+    assertEqual(row.sucDepositRateIsDynamic, true);
+  });
+});
+
+suite('purposeCodeYieldBreakdown() — (license type x purpose code) yield (ask: 2026-10-26)', () => {
+  // "give me the march 2027 yield for 105 purpose code for the FIUs that
+  // have a stock broker license type... it was (license type x purpose
+  // code) yield" — this attributes just the slice of a FIU's revenue/DF
+  // volume tagged with one purpose code (from its fixed, DPU-report-
+  // derived purposeCodeBreakdown — see scripts/recompute-deposit-rates.js),
+  // grouped by an arbitrary FIU Metadata field (license type here).
+  function multiRowFor(fiuDefs, opts) {
+    const { asOf, fyStart, sucStart, scenarios, dfOptFactor } = opts;
+    const metadataById = metaMap(fiuDefs.map(f => meta(f.fiuId, f.metaOver)));
+    const yieldCmgrById = ycMap(fiuDefs.map(f => yc(f.fiuId, f.ycOver)));
+    const counts = fiuDefs.map(f => f.counts || { fiuId: f.fiuId, activeUsers: '', dataFetches: 500000 });
+    const hist = [];
+    fiuDefs.forEach(f => (f.hist || []).forEach(h => hist.push(h)));
+    const result = computeRevenue(
+      counts, metadataById, yieldCmgrById,
+      asOf || d(2026, 9, 9), fyStart || 4, sucStart || null,
+      histMap(hist), scenarios || {}, dfOptFactor
+    );
+    return { result, yieldCmgrById };
+  }
+
+  test('attributes revenue/DF volume for just the selected purpose code, blending that code\'s own slab mix against the FIU\'s overall Deposit-volume tier', () => {
+    const { result, yieldCmgrById } = multiRowFor([{
+      fiuId: 'FIU-PCY1',
+      metaOver: { billingModel: 'Data Fetch', licenseType: 'Stock Broker' },
+      ycOver: {
+        sucYield: 9, sucCliffCmgr: 0, sucRecoveryCmgr: 0,
+        sucDepositSharePct: 0.5, sucDepositSlabShares: { '5d': 1 },
+        sucNonDepositRate: 2,
+        purposeCodeBreakdown: { '105': { sharePct: 0.4, depositSharePct: 0.5, slabShares: { '5d': 1 } } }
+      },
+      hist: [{ fiuId: 'FIU-PCY1', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }]
+    }], { sucStart: { year: 2026, month: 10 } });
+
+    const octIndex = 6;
+    const sept = 1000000 * 1.05;
+    const oct = sept * 1; // cliffCmgr 0 -> flat
+    const codeDfVolume = oct * 0.4;
+    const codeDepositVolume = codeDfVolume * 0.5;
+    // FIU's total Deposit volume this month = oct x 0.5 = 525000 -> under
+    // the 1,000,000 tier floor, so 0% discount -> 5d row stays at its
+    // full ₹0.180 AA Fee.
+    const codeDepositRevenue = codeDepositVolume * 0.180;
+    const codeNonDepositRevenue = (codeDfVolume - codeDepositVolume) * 2; // sucNonDepositRate
+    const expectedRevenue = codeDepositRevenue + codeNonDepositRevenue;
+
+    const byLicense = purposeCodeYieldBreakdown(result.rows, yieldCmgrById, r => r.licenseType, octIndex, '105');
+    const g = byLicense.find(x => x.label === 'Stock Broker');
+    assert(g, 'Stock Broker group should be present');
+    assertClose(g.dfCount, codeDfVolume, 1);
+    assertClose(g.revenue, expectedRevenue, 1);
+    assertClose(g.yield, expectedRevenue / codeDfVolume, 0.0001);
+  });
+
+  test('slabVolumes breaks the group\'s Deposit-type DF volume into DPU rate-card slabs, summing to the Deposit share of dfCount (not the whole dfCount) (ask: 2026-10-27, "add a column for each DPU in the DPI rate card and mention each DPU\'s contribution % to DF")', () => {
+    const { result, yieldCmgrById } = multiRowFor([{
+      fiuId: 'FIU-PCY-DPU',
+      metaOver: { billingModel: 'Data Fetch', licenseType: 'Stock Broker' },
+      ycOver: {
+        sucYield: 9, sucCliffCmgr: 0, sucRecoveryCmgr: 0,
+        sucDepositSharePct: 0.5, sucDepositSlabShares: { '5d': 1 },
+        sucNonDepositRate: 2,
+        // This code's own Deposit-type DF volume is split 30% into the
+        // 7mo slab and 70% into the 5d slab — deliberately different from
+        // the FIU's overall sucDepositSlabShares above, same as
+        // depositSharePct/sharePct can differ per purpose code.
+        purposeCodeBreakdown: { '105': { sharePct: 0.4, depositSharePct: 0.5, slabShares: { '7mo': 0.3, '5d': 0.7 } } }
+      },
+      hist: [{ fiuId: 'FIU-PCY-DPU', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }]
+    }], { sucStart: { year: 2026, month: 10 } });
+
+    const octIndex = 6;
+    const sept = 1000000 * 1.05;
+    const oct = sept * 1;
+    const codeDfVolume = oct * 0.4;
+    const codeDepositVolume = codeDfVolume * 0.5; // 50% Deposit — the other 50% is non-Deposit, no DPU breakdown
+
+    const byLicense = purposeCodeYieldBreakdown(result.rows, yieldCmgrById, r => r.licenseType, octIndex, '105');
+    const g = byLicense.find(x => x.label === 'Stock Broker');
+    assert(g.slabVolumes, 'expected a slabVolumes object on the group');
+    assertClose(g.slabVolumes['7mo'], codeDepositVolume * 0.3, 1);
+    assertClose(g.slabVolumes['5d'], codeDepositVolume * 0.7, 1);
+    assertEqual(g.slabVolumes['1mo'], undefined, 'a slab with no share for this code should not appear in slabVolumes at all');
+    const slabSum = Object.values(g.slabVolumes).reduce((s, v) => s + v, 0);
+    assertClose(slabSum, codeDepositVolume, 1, 'slabVolumes should sum to the group\'s Deposit-type DF volume');
+    assert(slabSum < g.dfCount, 'slabVolumes should sum to LESS than the group\'s whole dfCount — the non-Deposit half has no DPU breakdown to contribute');
+  });
+
+  test('a FIU with no purposeCodeBreakdown entry for the selected code is excluded entirely, not zeroed', () => {
+    const { result, yieldCmgrById } = multiRowFor([{
+      fiuId: 'FIU-PCY-NOCODE',
+      metaOver: { billingModel: 'Data Fetch', licenseType: 'Stock Broker' },
+      ycOver: {
+        sucYield: 9, sucCliffCmgr: 0, sucRecoveryCmgr: 0,
+        sucDepositSharePct: 0.5, sucDepositSlabShares: { '5d': 1 },
+        sucNonDepositRate: 2
+        // no purposeCodeBreakdown at all
+      },
+      hist: [{ fiuId: 'FIU-PCY-NOCODE', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }]
+    }], { sucStart: { year: 2026, month: 10 } });
+
+    const byLicense = purposeCodeYieldBreakdown(result.rows, yieldCmgrById, r => r.licenseType, 6, '105');
+    assertEqual(byLicense.length, 0, 'a FIU with no measured volume in this purpose code should not even appear as a 0-revenue group');
+  });
+
+  test('a pre-DPI-Pricing month (not yet sucActive) has no purpose-code attribution at all', () => {
+    const { result, yieldCmgrById } = multiRowFor([{
+      fiuId: 'FIU-PCY-PREDPI',
+      metaOver: { billingModel: 'Data Fetch', licenseType: 'Stock Broker' },
+      ycOver: {
+        sucYield: 9, sucCliffCmgr: 0, sucRecoveryCmgr: 0,
+        sucDepositSharePct: 0.5, sucDepositSlabShares: { '5d': 1 },
+        sucNonDepositRate: 2,
+        purposeCodeBreakdown: { '105': { sharePct: 0.4, depositSharePct: 0.5, slabShares: { '5d': 1 } } }
+      },
+      hist: [{ fiuId: 'FIU-PCY-PREDPI', month: '2026-08', revenue: 100000, auCount: '', dfCount: 1000000 }]
+    }], { sucStart: { year: 2026, month: 12 } }); // DPI Pricing doesn't start until December
+
+    const sepIndex = 5; // Sept 2026 — before DPI Pricing starts
+    const byLicense = purposeCodeYieldBreakdown(result.rows, yieldCmgrById, r => r.licenseType, sepIndex, '105');
+    assertEqual(byLicense.length, 0, 'pre-DPI months have no FI-type/purpose-code attribution at all, so this purpose code contributes nothing yet');
+  });
+
+  test('two FIUs of the same license type sum (not average) into one blended group yield', () => {
+    const def = (fiuId, dfCount) => ({
+      fiuId,
+      metaOver: { billingModel: 'Data Fetch', licenseType: 'Stock Broker' },
+      ycOver: {
+        sucYield: 9, sucCliffCmgr: 0, sucRecoveryCmgr: 0,
+        sucDepositSharePct: 0.5, sucDepositSlabShares: { '5d': 1 },
+        sucNonDepositRate: 2,
+        purposeCodeBreakdown: { '105': { sharePct: 0.4, depositSharePct: 0.5, slabShares: { '5d': 1 } } }
+      },
+      hist: [{ fiuId, month: '2026-08', revenue: 100000, auCount: '', dfCount }]
+    });
+    const { result, yieldCmgrById } = multiRowFor(
+      [def('FIU-PCY-A', 1000000), def('FIU-PCY-B', 2000000)],
+      { sucStart: { year: 2026, month: 10 } }
+    );
+    const byLicense = purposeCodeYieldBreakdown(result.rows, yieldCmgrById, r => r.licenseType, 6, '105');
+    const g = byLicense.find(x => x.label === 'Stock Broker');
+    const octA = 1000000 * 1.05;
+    const octB = 2000000 * 1.05;
+    const codeDfA = octA * 0.4, codeDfB = octB * 0.4;
+    assertClose(g.dfCount, codeDfA + codeDfB, 1, 'the group DF count is the sum across both FIUs, not an average');
   });
 });
 
